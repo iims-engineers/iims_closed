@@ -1,106 +1,241 @@
-<mxfile host="app.diagrams.net" modified="2023-07-27T15:49:49.525Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.1.94.2 Safari/537.36" etag="Ze7PwUshlkqvW0x1cx2v" version="21.6.5" type="github">
+<mxfile host="app.diagrams.net" modified="2023-07-28T22:54:07.264Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.1.94.2 Safari/537.36" etag="Y-zeRkgfp06QQNWu7pEr" version="21.6.5" type="github">
   <diagram name="Page-1" id="b520641d-4fe3-3701-9064-5fc419738815">
-    <mxGraphModel dx="212" dy="763" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" background="none" math="0" shadow="0">
+    <mxGraphModel dx="2460" dy="1430" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" background="none" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="ta1Mw_AckL5aWS9Tfeya-1" value="共通ヘッダーメニュー" style="swimlane;html=1;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#e0e0e0;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;swimlaneFillColor=#ffffff;align=center;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12" vertex="1" parent="1">
+        <mxCell id="ta1Mw_AckL5aWS9Tfeya-1" value="共通ヘッダーメニュー" style="swimlane;html=1;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#e0e0e0;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;swimlaneFillColor=#ffffff;align=center;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12" parent="1" vertex="1">
           <mxGeometry x="1221" y="100" width="180" height="270" as="geometry" />
         </mxCell>
-        <mxCell id="ta1Mw_AckL5aWS9Tfeya-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="ta1Mw_AckL5aWS9Tfeya-1" source="ta1Mw_AckL5aWS9Tfeya-3">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="189" y="460" as="targetPoint" />
-            <Array as="points">
-              <mxPoint x="200" y="39" />
-              <mxPoint x="200" y="166" />
-              <mxPoint x="199" y="280" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="ta1Mw_AckL5aWS9Tfeya-3" value="・ロゴ（トップページに戻る）" style="text;html=1;strokeColor=default;fillColor=none;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="ta1Mw_AckL5aWS9Tfeya-1">
+        <mxCell id="ta1Mw_AckL5aWS9Tfeya-3" value="・ロゴ（トップページに戻る）" style="text;html=1;strokeColor=default;fillColor=none;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="ta1Mw_AckL5aWS9Tfeya-1" vertex="1">
           <mxGeometry y="26" width="180" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="ta1Mw_AckL5aWS9Tfeya-4" value="・新規登録ボタン" style="text;html=1;strokeColor=#6c8ebf;fillColor=#dae8fc;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="ta1Mw_AckL5aWS9Tfeya-1">
+        <mxCell id="ta1Mw_AckL5aWS9Tfeya-4" value="・新規登録ボタン" style="text;html=1;strokeColor=#6c8ebf;fillColor=#dae8fc;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="ta1Mw_AckL5aWS9Tfeya-1" vertex="1">
           <mxGeometry y="52" width="180" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="ta1Mw_AckL5aWS9Tfeya-5" value="・ログインボタン" style="text;html=1;strokeColor=#6c8ebf;fillColor=#dae8fc;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="ta1Mw_AckL5aWS9Tfeya-1">
+        <mxCell id="ta1Mw_AckL5aWS9Tfeya-5" value="・ログインボタン" style="text;html=1;strokeColor=#6c8ebf;fillColor=#dae8fc;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="ta1Mw_AckL5aWS9Tfeya-1" vertex="1">
           <mxGeometry y="78" width="180" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="ta1Mw_AckL5aWS9Tfeya-6" value="・ログアウトボタン" style="text;html=1;strokeColor=#b85450;fillColor=#f8cecc;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="ta1Mw_AckL5aWS9Tfeya-1">
+        <mxCell id="ta1Mw_AckL5aWS9Tfeya-6" value="・ログアウトボタン" style="text;html=1;strokeColor=#b85450;fillColor=#f8cecc;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="ta1Mw_AckL5aWS9Tfeya-1" vertex="1">
           <mxGeometry y="104" width="180" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="ta1Mw_AckL5aWS9Tfeya-7" value="・トピック検索" style="text;html=1;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="ta1Mw_AckL5aWS9Tfeya-1">
+        <mxCell id="ta1Mw_AckL5aWS9Tfeya-7" value="・トピック検索" style="text;html=1;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="ta1Mw_AckL5aWS9Tfeya-1" vertex="1">
           <mxGeometry y="130" width="180" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="ta1Mw_AckL5aWS9Tfeya-8" value="・トピック作成" style="text;html=1;strokeColor=#b85450;fillColor=#f8cecc;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="ta1Mw_AckL5aWS9Tfeya-1">
+        <mxCell id="ta1Mw_AckL5aWS9Tfeya-8" value="・トピック作成" style="text;html=1;strokeColor=#b85450;fillColor=#f8cecc;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="ta1Mw_AckL5aWS9Tfeya-1" vertex="1">
           <mxGeometry y="156" width="180" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="ta1Mw_AckL5aWS9Tfeya-9" value="・ユーザ情報編集" style="text;html=1;strokeColor=#b85450;fillColor=#f8cecc;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="ta1Mw_AckL5aWS9Tfeya-1">
+        <mxCell id="ta1Mw_AckL5aWS9Tfeya-9" value="・ユーザ情報編集" style="text;html=1;strokeColor=#b85450;fillColor=#f8cecc;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="ta1Mw_AckL5aWS9Tfeya-1" vertex="1">
           <mxGeometry y="182" width="180" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="ta1Mw_AckL5aWS9Tfeya-10" value="" style="text;html=1;strokeColor=default;fillColor=none;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="ta1Mw_AckL5aWS9Tfeya-1">
+        <mxCell id="ta1Mw_AckL5aWS9Tfeya-10" value="" style="text;html=1;strokeColor=default;fillColor=none;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="ta1Mw_AckL5aWS9Tfeya-1" vertex="1">
           <mxGeometry y="208" width="180" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="ta1Mw_AckL5aWS9Tfeya-11" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;クローズドコンテンツの画面フロー（ユーザ側）&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+        <mxCell id="ta1Mw_AckL5aWS9Tfeya-11" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;クローズドコンテンツの画面フロー（ユーザ側）&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
           <mxGeometry x="1110" y="30" width="460" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="ta1Mw_AckL5aWS9Tfeya-12" value="非ログイン時" style="whiteSpace=wrap;html=1;fillColor=#cce5ff;strokeColor=#36393d;" vertex="1" parent="1">
+        <mxCell id="ta1Mw_AckL5aWS9Tfeya-12" value="非ログイン時" style="whiteSpace=wrap;html=1;fillColor=#cce5ff;strokeColor=#36393d;" parent="1" vertex="1">
           <mxGeometry x="1110" y="100" width="90" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="ta1Mw_AckL5aWS9Tfeya-13" value="ログイン時" style="whiteSpace=wrap;html=1;fillColor=#ffcccc;strokeColor=#36393d;" vertex="1" parent="1">
+        <mxCell id="ta1Mw_AckL5aWS9Tfeya-13" value="ログイン時" style="whiteSpace=wrap;html=1;fillColor=#ffcccc;strokeColor=#36393d;" parent="1" vertex="1">
           <mxGeometry x="1110" y="125" width="90" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="ta1Mw_AckL5aWS9Tfeya-14" value="トップページ" style="swimlane;html=1;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#e0e0e0;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;swimlaneFillColor=#ffffff;align=center;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;swimlaneLine=1;glass=0;" vertex="1" parent="1">
+        <mxCell id="ta1Mw_AckL5aWS9Tfeya-14" value="非ログイン時トップページ" style="swimlane;html=1;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#dae8fc;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;swimlaneFillColor=#ffffff;align=center;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;swimlaneLine=1;glass=0;strokeColor=#6c8ebf;" parent="1" vertex="1">
           <mxGeometry x="1221" y="540" width="179" height="336" as="geometry">
             <mxRectangle x="131" y="1840" width="110" height="30" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="ta1Mw_AckL5aWS9Tfeya-15" value="&lt;font style=&quot;font-size: 12px;&quot;&gt;・公開トピック一覧&lt;/font&gt;" style="text;html=1;strokeColor=default;fillColor=none;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="ta1Mw_AckL5aWS9Tfeya-14">
+        <mxCell id="ta1Mw_AckL5aWS9Tfeya-15" value="&lt;font style=&quot;font-size: 12px;&quot;&gt;・公開トピック一覧&lt;/font&gt;" style="text;html=1;strokeColor=default;fillColor=none;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="ta1Mw_AckL5aWS9Tfeya-14" vertex="1">
           <mxGeometry y="26" width="179" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="ta1Mw_AckL5aWS9Tfeya-18" value="&lt;font style=&quot;font-size: 12px;&quot;&gt;・トピック作成&lt;/font&gt;" style="text;html=1;strokeColor=#b85450;fillColor=#f8cecc;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="ta1Mw_AckL5aWS9Tfeya-14">
+        <mxCell id="fPP35ivrp7rbnJJ9JGup-25" value="・新規登録ボタン" style="text;html=1;strokeColor=#6c8ebf;fillColor=#dae8fc;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="ta1Mw_AckL5aWS9Tfeya-14">
           <mxGeometry y="52" width="179" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="ta1Mw_AckL5aWS9Tfeya-20" value="ログイン" style="swimlane;html=1;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#dae8fc;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;swimlaneFillColor=#ffffff;align=center;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;strokeColor=#6c8ebf;" vertex="1" parent="1">
+        <mxCell id="ta1Mw_AckL5aWS9Tfeya-20" value="ログイン" style="swimlane;html=1;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#dae8fc;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;swimlaneFillColor=#ffffff;align=center;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;strokeColor=#6c8ebf;" parent="1" vertex="1">
           <mxGeometry x="1520" y="360" width="180" height="220" as="geometry" />
         </mxCell>
-        <mxCell id="ta1Mw_AckL5aWS9Tfeya-21" value="・IDまたはメールアドレス" style="text;html=1;strokeColor=default;fillColor=none;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="ta1Mw_AckL5aWS9Tfeya-20">
+        <mxCell id="ta1Mw_AckL5aWS9Tfeya-21" value="・IDまたはメールアドレス" style="text;html=1;strokeColor=default;fillColor=none;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="ta1Mw_AckL5aWS9Tfeya-20" vertex="1">
           <mxGeometry y="26" width="180" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="ta1Mw_AckL5aWS9Tfeya-22" value="・パスワード" style="text;html=1;strokeColor=default;fillColor=none;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="ta1Mw_AckL5aWS9Tfeya-20">
+        <mxCell id="ta1Mw_AckL5aWS9Tfeya-22" value="・パスワード" style="text;html=1;strokeColor=default;fillColor=none;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="ta1Mw_AckL5aWS9Tfeya-20" vertex="1">
           <mxGeometry y="52" width="180" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="ta1Mw_AckL5aWS9Tfeya-23" value="・パスワードを忘れた場合" style="text;html=1;strokeColor=default;fillColor=none;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="ta1Mw_AckL5aWS9Tfeya-20">
+        <mxCell id="ta1Mw_AckL5aWS9Tfeya-23" value="・パスワードを忘れた場合" style="text;html=1;strokeColor=default;fillColor=none;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="ta1Mw_AckL5aWS9Tfeya-20" vertex="1">
           <mxGeometry y="78" width="180" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="ta1Mw_AckL5aWS9Tfeya-24" value="" style="text;html=1;strokeColor=default;fillColor=none;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="ta1Mw_AckL5aWS9Tfeya-20">
+        <mxCell id="ta1Mw_AckL5aWS9Tfeya-24" value="" style="text;html=1;strokeColor=default;fillColor=none;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="ta1Mw_AckL5aWS9Tfeya-20" vertex="1">
           <mxGeometry y="104" width="180" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="ta1Mw_AckL5aWS9Tfeya-25" value="新規登録" style="swimlane;html=1;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#dae8fc;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;swimlaneFillColor=#ffffff;align=center;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;strokeColor=#6c8ebf;" vertex="1" parent="1">
+        <mxCell id="ta1Mw_AckL5aWS9Tfeya-25" value="新規登録" style="swimlane;html=1;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#dae8fc;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;swimlaneFillColor=#ffffff;align=center;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;strokeColor=#6c8ebf;" parent="1" vertex="1">
           <mxGeometry x="1520" y="100" width="180" height="220" as="geometry" />
         </mxCell>
-        <mxCell id="ta1Mw_AckL5aWS9Tfeya-26" value="・ID入力欄" style="text;html=1;strokeColor=default;fillColor=none;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="ta1Mw_AckL5aWS9Tfeya-25">
+        <mxCell id="ta1Mw_AckL5aWS9Tfeya-26" value="・ID入力欄" style="text;html=1;strokeColor=default;fillColor=none;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="ta1Mw_AckL5aWS9Tfeya-25" vertex="1">
           <mxGeometry y="26" width="180" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="ta1Mw_AckL5aWS9Tfeya-27" value="・メールアドレス" style="text;html=1;strokeColor=default;fillColor=none;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="ta1Mw_AckL5aWS9Tfeya-25">
+        <mxCell id="ta1Mw_AckL5aWS9Tfeya-27" value="・メールアドレス" style="text;html=1;strokeColor=default;fillColor=none;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="ta1Mw_AckL5aWS9Tfeya-25" vertex="1">
           <mxGeometry y="52" width="180" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="ta1Mw_AckL5aWS9Tfeya-28" value="・パスワード" style="text;html=1;strokeColor=default;fillColor=none;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="ta1Mw_AckL5aWS9Tfeya-25">
+        <mxCell id="ta1Mw_AckL5aWS9Tfeya-28" value="・パスワード" style="text;html=1;strokeColor=default;fillColor=none;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="ta1Mw_AckL5aWS9Tfeya-25" vertex="1">
           <mxGeometry y="78" width="180" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="ta1Mw_AckL5aWS9Tfeya-29" value="・ログインページへのリンク" style="text;html=1;strokeColor=default;fillColor=none;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="ta1Mw_AckL5aWS9Tfeya-25">
+        <mxCell id="ta1Mw_AckL5aWS9Tfeya-29" value="・ログインページへのリンク" style="text;html=1;strokeColor=default;fillColor=none;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="ta1Mw_AckL5aWS9Tfeya-25" vertex="1">
           <mxGeometry y="104" width="180" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="ta1Mw_AckL5aWS9Tfeya-30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=-0.007;entryY=0.069;entryDx=0;entryDy=0;entryPerimeter=0;fillColor=#dae8fc;strokeColor=#6c8ebf;" edge="1" parent="1" source="ta1Mw_AckL5aWS9Tfeya-4" target="ta1Mw_AckL5aWS9Tfeya-25">
+        <mxCell id="ta1Mw_AckL5aWS9Tfeya-30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=-0.007;entryY=0.069;entryDx=0;entryDy=0;entryPerimeter=0;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" source="ta1Mw_AckL5aWS9Tfeya-4" target="ta1Mw_AckL5aWS9Tfeya-25" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="ta1Mw_AckL5aWS9Tfeya-31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.058;entryDx=0;entryDy=0;entryPerimeter=0;fillColor=#dae8fc;strokeColor=#6c8ebf;" edge="1" parent="1" source="ta1Mw_AckL5aWS9Tfeya-5" target="ta1Mw_AckL5aWS9Tfeya-20">
+        <mxCell id="ta1Mw_AckL5aWS9Tfeya-31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.058;entryDx=0;entryDy=0;entryPerimeter=0;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" source="ta1Mw_AckL5aWS9Tfeya-5" target="ta1Mw_AckL5aWS9Tfeya-20" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="ta1Mw_AckL5aWS9Tfeya-32" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1.007;entryY=-0.231;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="ta1Mw_AckL5aWS9Tfeya-6">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="1401.2530000000002" y="574.906" as="targetPoint" />
+        <mxCell id="fPP35ivrp7rbnJJ9JGup-1" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;クローズドコンテンツの操作フロー（ユーザ側）&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="20" y="30" width="460" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="fPP35ivrp7rbnJJ9JGup-2" value="対外コンテンツからリンク遷移" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="130" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="fPP35ivrp7rbnJJ9JGup-3" value="" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="100" relative="1" as="geometry">
+            <mxPoint x="140" y="160" as="sourcePoint" />
+            <mxPoint x="180" y="160" as="targetPoint" />
+            <Array as="points" />
           </mxGeometry>
+        </mxCell>
+        <mxCell id="fPP35ivrp7rbnJJ9JGup-4" value="ログイン判定" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="180" y="130" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="fPP35ivrp7rbnJJ9JGup-7" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;クローズドコンテンツの操作フロー（管理者側）&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="20" y="770" width="460" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="fPP35ivrp7rbnJJ9JGup-8" value="ログイン" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="870" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="fPP35ivrp7rbnJJ9JGup-9" value="" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="100" relative="1" as="geometry">
+            <mxPoint x="140" y="899.62" as="sourcePoint" />
+            <mxPoint x="180" y="900" as="targetPoint" />
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fPP35ivrp7rbnJJ9JGup-10" value="ユーザ一覧取得" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="180" y="870" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="fPP35ivrp7rbnJJ9JGup-13" value="直リンク" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="205" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="fPP35ivrp7rbnJJ9JGup-14" value="" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" target="fPP35ivrp7rbnJJ9JGup-4">
+          <mxGeometry width="100" relative="1" as="geometry">
+            <mxPoint x="140" y="234.62" as="sourcePoint" />
+            <mxPoint x="180" y="235" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="160" y="235" />
+              <mxPoint x="160" y="160" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fPP35ivrp7rbnJJ9JGup-17" value="トップページ&lt;br&gt;（非ログイン）&lt;br&gt;表示" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="340" y="130" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="fPP35ivrp7rbnJJ9JGup-18" value="&lt;font style=&quot;font-size: 10px;&quot;&gt;初めてだと&lt;br&gt;何ができるかわからない&lt;br&gt;&lt;/font&gt;" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="350" y="85" width="170" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="fPP35ivrp7rbnJJ9JGup-19" value="&lt;font style=&quot;font-size: 9px;&quot;&gt;チュートリアル&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="470" y="85" width="80" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="fPP35ivrp7rbnJJ9JGup-20" value="" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="100" relative="1" as="geometry">
+            <mxPoint x="300" y="159.86" as="sourcePoint" />
+            <mxPoint x="340" y="159.86" as="targetPoint" />
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fPP35ivrp7rbnJJ9JGup-21" value="トップページ&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;（ログイン）&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;表示" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="340" y="370" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="fPP35ivrp7rbnJJ9JGup-22" value="" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="100" relative="1" as="geometry">
+            <mxPoint x="300" y="160" as="sourcePoint" />
+            <mxPoint x="340" y="399.86" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="320" y="160" />
+              <mxPoint x="320" y="400" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fPP35ivrp7rbnJJ9JGup-23" value="アプリの説明が&lt;br&gt;読める" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="500" y="130" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="fPP35ivrp7rbnJJ9JGup-24" value="" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="100" relative="1" as="geometry">
+            <mxPoint x="460" y="159.86" as="sourcePoint" />
+            <mxPoint x="500" y="159.86" as="targetPoint" />
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fPP35ivrp7rbnJJ9JGup-26" value="ログイン時トップページ" style="swimlane;html=1;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#f8cecc;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;swimlaneFillColor=#ffffff;align=center;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;swimlaneLine=1;glass=0;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="1221" y="910" width="179" height="336" as="geometry">
+            <mxRectangle x="131" y="1840" width="110" height="30" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fPP35ivrp7rbnJJ9JGup-27" value="&lt;font style=&quot;font-size: 12px;&quot;&gt;・公開トピック一覧&lt;/font&gt;" style="text;html=1;strokeColor=default;fillColor=none;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="fPP35ivrp7rbnJJ9JGup-26">
+          <mxGeometry y="26" width="179" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="fPP35ivrp7rbnJJ9JGup-28" value="&lt;font style=&quot;font-size: 12px;&quot;&gt;・トピック作成&lt;/font&gt;" style="text;html=1;strokeColor=#b85450;fillColor=#f8cecc;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="fPP35ivrp7rbnJJ9JGup-26">
+          <mxGeometry y="52" width="179" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="ta1Mw_AckL5aWS9Tfeya-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1.002;entryY=0.047;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" edge="1" target="ta1Mw_AckL5aWS9Tfeya-14">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1401.0010000000002" y="565.824" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="1424" y="145" />
+              <mxPoint x="1424" y="272" />
+              <mxPoint x="1423" y="272" />
+              <mxPoint x="1423" y="556" />
+              <mxPoint x="1400" y="556" />
+            </Array>
+            <mxPoint x="1403.97" y="145" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fPP35ivrp7rbnJJ9JGup-30" value="" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="100" relative="1" as="geometry">
+            <mxPoint x="300" y="899.62" as="sourcePoint" />
+            <mxPoint x="340" y="900" as="targetPoint" />
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fPP35ivrp7rbnJJ9JGup-31" value="ユーザ追加" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="340" y="870" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="fPP35ivrp7rbnJJ9JGup-32" value="" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="fPP35ivrp7rbnJJ9JGup-10">
+          <mxGeometry width="100" relative="1" as="geometry">
+            <mxPoint x="300" y="979.62" as="sourcePoint" />
+            <mxPoint x="340" y="980" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="320" y="900" />
+              <mxPoint x="320" y="980" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fPP35ivrp7rbnJJ9JGup-33" value="ユーザ更新" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="340" y="950" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="fPP35ivrp7rbnJJ9JGup-34" value="" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="fPP35ivrp7rbnJJ9JGup-10">
+          <mxGeometry width="100" relative="1" as="geometry">
+            <mxPoint x="300" y="980" as="sourcePoint" />
+            <mxPoint x="340" y="1060" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="320" y="900" />
+              <mxPoint x="320" y="1060" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fPP35ivrp7rbnJJ9JGup-35" value="ユーザ削除" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="340" y="1030" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="fPP35ivrp7rbnJJ9JGup-36" value="&lt;font style=&quot;font-size: 9px;&quot;&gt;操作よくわからないっていう人のかわりに&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="440" y="940" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="fPP35ivrp7rbnJJ9JGup-37" value="&lt;font style=&quot;font-size: 9px;&quot;&gt;ユーザ登録がよくわからないっていう人のため&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="440" y="860" width="120" height="40" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

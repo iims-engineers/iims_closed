@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// デフォルト TOP画面
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+// テストファイル
+Route::get('/index', fn () => view('index'));
+
+// Userコントローラー
+Route::get('/user', [UserController::class, 'show']);

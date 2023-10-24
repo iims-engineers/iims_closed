@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->increments('id')->comment('ID');
+            $table->id()->comment('ID');
             $table->string('last_name', 50)->comment('姓');
             $table->string('first_name', 50)->comment('名');
             $table->string('last_name_kana', 50)->comment('姓(カナ)');
@@ -27,7 +27,7 @@ return new class extends Migration
             $table->datetime('created_at')->useCurrent()->comment('作成日時');
             $table->datetime('updated_at')->useCurrentOnUpdate()->comment('更新日時');
             $table->datetime('last_login_at')->comment('最終ログイン日時');
-            $table->boolean('is_deleted')->default(false)->comment('論理削除フラグ true:論理削除');
+            $table->softDeletes()->comment('論理削除日時');
         });
     }
 

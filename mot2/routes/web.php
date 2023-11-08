@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\TopicsController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,14 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// デフォルト TOP画面
-Route::get('/', function () {
-    return view('welcome');
-});
+// トピック一覧画面 (トップ)
+Route::get('/', [TopicsController::class, 'index']);
 
-
-// テストファイル
-Route::get('/index', fn () => view('index'));
-
-// Userコントローラー
-Route::get('/user', [UserController::class, 'show']);
+// ユーザー一覧

@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class TopicController extends Controller
+class TopicsController extends Controller
 {
     /**
+     * トピック一覧
      * Display a listing of the resource.
      */
     public function index()
@@ -15,6 +16,7 @@ class TopicController extends Controller
     }
 
     /**
+     * トピック新規作成
      * Show the form for creating a new resource.
      */
     public function create()
@@ -23,6 +25,7 @@ class TopicController extends Controller
     }
 
     /**
+     * 新規トピック保存
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
@@ -31,6 +34,7 @@ class TopicController extends Controller
     }
 
     /**
+     * トピック詳細
      * Display the specified resource.
      */
     public function show(string $id)
@@ -39,6 +43,7 @@ class TopicController extends Controller
     }
 
     /**
+     * トピック編集
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
@@ -47,6 +52,7 @@ class TopicController extends Controller
     }
 
     /**
+     * トピック編集の保存
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
@@ -55,6 +61,7 @@ class TopicController extends Controller
     }
 
     /**
+     * トピック削除
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)

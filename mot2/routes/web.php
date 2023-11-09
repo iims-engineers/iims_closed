@@ -15,7 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// トピック一覧画面 (トップ)
-Route::get('/', [TopicsController::class, 'index']);
+// トピック
+Route::resource('topics', 'TopicsController');
+
 
 // ユーザー一覧

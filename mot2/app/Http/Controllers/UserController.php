@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class TopicsController extends Controller
+class UserController extends Controller
 {
     /**
-     * トピック一覧
+     * ユーザー一覧
      * Display a listing of the resource.
      */
     public function index()
@@ -16,7 +17,7 @@ class TopicsController extends Controller
     }
 
     /**
-     * トピック新規作成
+     * ユーザー新規作成
      * Show the form for creating a new resource.
      */
     public function create()
@@ -25,7 +26,7 @@ class TopicsController extends Controller
     }
 
     /**
-     * 新規トピック保存
+     * ユーザー新規作成 - 保存
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
@@ -34,37 +35,37 @@ class TopicsController extends Controller
     }
 
     /**
-     * トピック詳細
+     * ユーザー詳細
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(User $user)
     {
         //
     }
 
     /**
-     * トピック編集
+     * ユーザー詳細
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(User $user)
     {
         //
     }
 
     /**
-     * トピック編集の保存
+     * ユーザー詳細 - 保存
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, User $user)
     {
         //
     }
 
     /**
-     * トピック削除
+     * ユーザー削除
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
         //
     }

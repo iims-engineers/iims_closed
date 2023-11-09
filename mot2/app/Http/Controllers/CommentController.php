@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use Illuminate\Http\Request;
 
-class UsersController extends Controller
+class CommentController extends Controller
 {
     /**
-     * ユーザー一覧
      * Display a listing of the resource.
      */
     public function index()
@@ -16,7 +16,6 @@ class UsersController extends Controller
     }
 
     /**
-     * ユーザー新規登録
      * Show the form for creating a new resource.
      */
     public function create()
@@ -25,7 +24,6 @@ class UsersController extends Controller
     }
 
     /**
-     * 新規ユーザー保存
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
@@ -34,37 +32,33 @@ class UsersController extends Controller
     }
 
     /**
-     * ユーザー詳細
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Comment $comment)
     {
         //
     }
 
     /**
-     * ユーザー編集
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Comment $comment)
     {
         //
     }
 
     /**
-     * ユーザー編集の保存
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Comment $comment)
     {
         //
     }
 
     /**
-     * ユーザー削除
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Comment $comment)
     {
         //
     }

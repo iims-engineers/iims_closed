@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\TopicsController;
-use App\Http\Controllers\UsersController;
+use App\Http\Controllers\TopicController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,7 +17,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 // トピック
-Route::resource('topics', 'TopicsController');
-
-
-// ユーザー一覧
+Route::controller(TopicController::class)->group(function () {
+    Route::get('/topic', 'index'); // 一覧
+    // Route::get('/topic', 'index'); // 新規作成
+    // Route::get('/topic', 'index'); // 編集
+    // Route::get('/topic', 'index'); // 削除
+});

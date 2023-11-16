@@ -13,7 +13,8 @@ class TopicController extends Controller
      */
     public function index()
     {
-        //
+        // テストコード
+        echo "ユーザー一覧です";
     }
 
     /**
@@ -22,7 +23,8 @@ class TopicController extends Controller
      */
     public function create()
     {
-        //
+        /// テストコード
+        echo "ユーザー新規作成です";
     }
 
     /**
@@ -49,7 +51,7 @@ class TopicController extends Controller
      */
     public function edit(Topic $topic)
     {
-        //
+        // 
     }
 
     /**

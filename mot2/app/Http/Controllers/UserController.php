@@ -14,6 +14,8 @@ class UserController extends Controller
     public function index()
     {
         //
+        $a = User::all();
+        echo $a;
     }
 
     /**

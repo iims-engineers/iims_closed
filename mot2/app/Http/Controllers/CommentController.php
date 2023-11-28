@@ -13,6 +13,8 @@ class CommentController extends Controller
     public function index()
     {
         //
+        $a = Comment::all();
+        echo $a;
     }
 
     /**

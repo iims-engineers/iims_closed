@@ -1,8 +1,6 @@
 <?php
 
-use App\Http\Controllers\TopicController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,10 +14,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// トピック
-Route::controller(TopicController::class)->group(function () {
-    Route::get('/topic', 'index'); // 一覧
-    // Route::get('/topic', 'index'); // 新規作成
-    // Route::get('/topic', 'index'); // 編集
-    // Route::get('/topic', 'index'); // 削除
+Route::get('/', function () {
+    return view('welcome');
 });
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';

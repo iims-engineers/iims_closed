@@ -14,7 +14,8 @@ class TopicController extends Controller
     public function index()
     {
         // テストコード
-        echo "ユーザー一覧です";
+        $a = Topic::all();
+        echo $a;
     }
 
     /**

@@ -18,10 +18,5 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-
-        // commentsテーブルへのダミーデータ登録用
-        $this->call([
-            CommentSeeder::class
-        ]);
     }
 }

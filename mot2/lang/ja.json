@@ -137,5 +137,11 @@
     "per page": "毎ページ",
     "results": "件",
     "to": "から",
-    "Showing": "表示中："
+    "Showing": "表示中：",
+    "Name_kana": "カナ",
+    "Initial": "イニシャル",
+    "Birthday": "生年月日",
+    "Nationality": "国籍",
+    "Introduction_text": "自己紹介"
+
 }

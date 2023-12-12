@@ -22,18 +22,25 @@ class ProfileController extends Controller
     }
 
     /**
+     * ユーザー基本情報の更新(パスワードを除く)
      * Update the user's profile information.
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
+        // 送信情報をバリデートしてセットし直す
         $request->user()->fill($request->validated());
 
         if ($request->user()->isDirty('email')) {
+            /* メールアドレスの更新がある場合 */
+
+            // email_verified_atカラムにnullをセット
             $request->user()->email_verified_at = null;
         }
 
+        // 更新実行
         $request->user()->save();
 
+        // 編集画面に更新完了メッセージを表示
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
 

@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+/*
+ * ユーザー新規登録
+ */
 
 class RegisteredUserController extends Controller
 {
@@ -42,8 +45,10 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+        // ※設定しないとイベント(メール送信など)は発火しない
         event(new Registered($user));
 
+        // ログイン実行
         Auth::login($user);
 
         return redirect(RouteServiceProvider::HOME);

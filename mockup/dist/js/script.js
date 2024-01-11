@@ -1,0 +1,1 @@
+$(function(){"use strict";function n(){const n=$(".l-header__info-btn"),i=$(".l-header__info");n.on("click",function(){i.slideToggle(200)})}n()});

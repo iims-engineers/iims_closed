@@ -1,0 +1,25 @@
+@charset "utf-8";
+
+/*
+@include sp($point-sp) {}
+@include tb($point-tb) {}
+@include pc01($point-pc01) {}
+@include pc02($point-pc02) {}
+*/
+
+.p-sub {
+  &__head01 {
+    padding: 0 0 8px;
+    margin: 0 0 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    border-bottom: 1px solid #fff;
+  }
+
+  &__inner {
+    padding: 14px 16px;
+    background-color: #fff;
+    border-radius: 10px;
+  }
+}

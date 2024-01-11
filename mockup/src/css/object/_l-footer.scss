@@ -1,0 +1,40 @@
+@charset "utf-8";
+
+.l-footer {
+  &__btn {
+    width: 100%;
+    height: 82px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: stretch;
+    border-top: 2px solid #fbc05e;
+    background-color: #f86a40;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    &-item {
+      width: 25%;
+      a {
+        height: 100%;
+        padding: 0 8px;
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        img {
+          justify-self: flex-end;
+        }
+        span {
+          display: block;
+          margin: 8px 0 0;
+          color: #fff;
+          font-size: 12px;
+          font-weight: bold;
+          line-height: 1;
+        }
+      }
+    }
+  }
+}

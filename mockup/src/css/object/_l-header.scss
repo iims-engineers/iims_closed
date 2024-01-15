@@ -1,11 +1,33 @@
 @charset "utf-8";
 
 .l-header {
-  padding: 32px 16px;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
+  @include sp($point-sp) {
+    padding: 32px 16px;
+  }
+  @include tb($point-tb) {
+    padding: 32px 24px;
+  }
+  @include pc01($point-pc01) {
+    padding: 32px;
+  }
+
+  body.is-top & {
+    .l-header__btn-item {
+      a,
+      button {
+        span {
+          color: #f86a40;
+        }
+      }
+    }
+  }
 
   &__logo {
     a {
@@ -64,8 +86,9 @@
 
   &__info {
     display: none;
-    width: 50vw;
-    min-width: 160px;
+    width: 30vw;
+    min-width: 200px;
+    max-width: 320px;
     // background-color: #fff;
     // box-shadow: 0 0 10px #ddd;
     position: absolute;
@@ -98,7 +121,12 @@
           border-bottom: 1px solid #f9733d;
         }
         &.unread {
-          background-color: #fff;
+          color: #f9733d;
+          font-weight: bold;
+          background-color: #fff7ed;
+          a {
+            color: #f9733d;
+          }
         }
         a {
           display: block;

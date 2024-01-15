@@ -10,5 +10,15 @@ $(function(){
     })
 	}
 
+  function topicAccordionToggle() {
+    const $btn = $('.js-accordion-topic');
+
+    $btn.on('click', function() {
+      $(this).next('.p-sub__inner').slideToggle(200);
+      return false;
+    })
+  }
+
 	infoAccordionToggle();
+	topicAccordionToggle();
 });

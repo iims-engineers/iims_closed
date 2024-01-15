@@ -8,6 +8,11 @@
 */
 
 .p-sub {
+  &__section {
+    &:not(:last-child) {
+      margin: 0 0 50px;
+    }
+  }
   &__head01 {
     padding: 0 0 8px;
     margin: 0 0 20px;
@@ -16,10 +21,26 @@
     color: #fff;
     border-bottom: 1px solid #fff;
   }
+  &__head02 {
+    padding: 8px 0 8px 8px;
+    margin: 0 0 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    border-left: 1px solid #fff;
+  }
 
   &__inner {
-    padding: 14px 16px;
+    padding: 16px;
     background-color: #fff;
     border-radius: 10px;
+  }
+
+  &__btns {
+    > .c-button--large {
+      &:not(:last-child) {
+        margin: 0 0 15px;
+      }
+    }
   }
 }

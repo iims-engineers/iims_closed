@@ -9,8 +9,20 @@ body {
   letter-spacing: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(180deg, #f9733d, #fa9947, #fbae4a);
   min-height: 100vh;
+  background-color: #fff8f2;
+  &.is-subpage {
+    &::before {
+      content: '';
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, #f9733d, #fa9947, #fbae4a);
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+  }
 }
 
 html>body {
@@ -136,5 +148,16 @@ textarea {
 }
 
 .l-main {
-  padding: 0 16px 114px;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  @include sp($point-sp) {
+    padding: 0 16px 114px;
+  }
+  @include tb($point-tb) {
+    padding: 0 24px 114px;
+  }
+  @include pc01($point-pc01) {
+    padding: 0 32px 114px;
+  }
 }

@@ -3,7 +3,7 @@
 
 <head>
 <meta charset="utf-8">
-<title>ログイン</title>
+<title>パスワードの設定</title>
 @@include('head.html')
 </head>
 
@@ -17,27 +17,26 @@
 <div class="l-contents">
 <main class="l-main">
 <section class="p-sub__section">
-	<h1 class="p-sub__head01">ログイン</h1>
+	<h1 class="p-sub__head01">パスワードの設定</h1>
+  <div class="p-sub__lead">
+    <p>
+      MOT2へようこそ！
+      まず、MOT2へログインするためのパスワードを設定してください。
+    </p>
+  </div>
   <form action="/home/" class="c-form">
-    <div class="c-form-item">
-      <label for="email" class="c-form-item-title">登録メールアドレス</label>
-      <input type="email" name="topic-title" id="email">
-    </div>
     <div class="c-form-item">
       <label for="password" class="c-form-item-title">パスワード</label>
       <input type="password" name="topic-title" id="password">
     </div>
+    <div class="c-form-item">
+      <label for="password-check" class="c-form-item-title">パスワードを再度入力してください</label>
+      <input type="password" name="topic-title" id="password-check">
+    </div>
     <div class="c-form-submit c-button-wrap">
-      <button type="submit" class="c-button">ログイン</button>
+      <button type="submit" class="c-button">設定する</button>
     </div>
   </form>
-</section>
-<section class="p-sub__section">
-	<h2 class="p-sub__head02">お困りですか？</h2>
-  <div class="c-form-link">
-    <a href="/password/mail-check/">パスワードを忘れた方はこちら</a>
-    <a href="/apply/">ユーザー登録の申請はこちら</a>
-  </div>
 </section>
 </main>
 <!-- l-footer START -->

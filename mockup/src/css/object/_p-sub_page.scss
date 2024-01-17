@@ -43,4 +43,18 @@
       }
     }
   }
+
+  &__lead {
+    margin: 0 0 25px;
+    p {
+      &:not(:last-child) {
+        margin: 0 0 1em;
+      }
+    }
+    a {
+      color: #f86a40;
+      font-weight: bold;
+      text-decoration: underline;
+    }
+  }
 }

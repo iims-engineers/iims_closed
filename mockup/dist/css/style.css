@@ -77,8 +77,6 @@ body {
 @media screen and (min-width: 769px) {
   a {
     opacity: 1;
-    -moz-transition: opacity .2s ease-in-out;
-    -webkit-transition: opacity .2s ease-in-out;
     transition: opacity .2s ease-in-out; } }
 
 @media screen and (min-width: 769px) {
@@ -165,10 +163,14 @@ textarea {
 .l-footer__btn {
   width: 100%;
   height: 82px;
+  display: -ms-flexbox;
   display: flex;
-  flex-flow: row nowrap;
-  justify-content: center;
-  align-items: stretch;
+  -ms-flex-flow: row nowrap;
+      flex-flow: row nowrap;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: stretch;
+      align-items: stretch;
   border-top: 2px solid #fbc05e;
   background-color: #f86a40;
   position: fixed;
@@ -180,10 +182,14 @@ textarea {
     .l-footer__btn-item a {
       height: 100%;
       padding: 0 8px;
+      display: -ms-flexbox;
       display: flex;
-      flex-flow: column nowrap;
-      justify-content: center;
-      align-items: center;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+      -ms-flex-pack: center;
+          justify-content: center;
+      -ms-flex-align: center;
+          align-items: center;
       text-align: center; }
       .l-footer__btn-item a img {
         width: 32px;
@@ -207,10 +213,14 @@ textarea {
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
+  display: -ms-flexbox;
   display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
-  align-items: center; }
+  -ms-flex-flow: row nowrap;
+      flex-flow: row nowrap;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+  -ms-flex-align: center;
+      align-items: center; }
   @media screen and (max-width: 481px) {
     .l-header {
       padding: 32px 16px; } }
@@ -226,10 +236,14 @@ textarea {
   .l-header__logo a {
     display: block; }
   .l-header__btn {
+    display: -ms-flexbox;
     display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
-    align-items: center; }
+    -ms-flex-flow: row nowrap;
+        flex-flow: row nowrap;
+    -ms-flex-pack: justify;
+        justify-content: space-between;
+    -ms-flex-align: center;
+        align-items: center; }
     .l-header__btn-item {
       min-width: 60px;
       position: relative; }
@@ -250,10 +264,14 @@ textarea {
       .l-header__btn-item button {
         border: none; }
       .l-header__btn-item .attention-num {
+        display: -ms-flexbox;
         display: flex;
-        flex-flow: row wrap;
-        justify-content: center;
-        align-items: center;
+        -ms-flex-flow: row wrap;
+            flex-flow: row wrap;
+        -ms-flex-pack: center;
+            justify-content: center;
+        -ms-flex-align: center;
+            align-items: center;
         min-width: 20px;
         min-height: 20px;
         padding: 0 2px;
@@ -328,10 +346,14 @@ textarea {
 /* Component
    ----------------------------------------------------------------- */
 .c-button {
+  display: -ms-inline-flexbox;
   display: inline-flex;
-  flex-flow: row nowrap;
-  justify-content: center;
-  align-items: center;
+  -ms-flex-flow: row nowrap;
+      flex-flow: row nowrap;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center;
   min-width: 240px;
   padding: 10px;
   color: #fff;
@@ -345,10 +367,14 @@ textarea {
   .c-button img {
     margin: 0 8px 0 0; }
   .c-button--large {
+    display: -ms-flexbox;
     display: flex;
-    flex-flow: row nowrap;
-    justify-content: center;
-    align-items: center;
+    -ms-flex-flow: row nowrap;
+        flex-flow: row nowrap;
+    -ms-flex-pack: center;
+        justify-content: center;
+    -ms-flex-align: center;
+        align-items: center;
     width: 100%;
     min-height: 56px;
     padding: 12px;
@@ -369,10 +395,14 @@ textarea {
 
 .c-user {
   width: 100%;
+  display: -ms-flexbox;
   display: flex;
-  flex-flow: row nowrap;
-  justify-content: flex-start;
-  align-items: center;
+  -ms-flex-flow: row nowrap;
+      flex-flow: row nowrap;
+  -ms-flex-pack: start;
+      justify-content: flex-start;
+  -ms-flex-align: center;
+      align-items: center;
   margin: 0 0 10px; }
   .c-user-icon {
     width: 40px;
@@ -448,10 +478,14 @@ textarea {
   margin: 0 0 40px; }
 
 .c-topic-title {
+  display: -ms-flexbox;
   display: flex;
-  flex-flow: row nowrap;
-  justify-content: center;
-  align-items: center;
+  -ms-flex-flow: row nowrap;
+      flex-flow: row nowrap;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center;
   width: 100%;
   padding: 16px;
   margin: 0 0 24px;
@@ -487,10 +521,14 @@ textarea {
 
 .c-reply {
   width: 100%;
+  display: -ms-flexbox;
   display: flex;
-  flex-flow: row nowrap;
-  justify-content: center;
-  align-items: flex-start; }
+  -ms-flex-flow: row nowrap;
+      flex-flow: row nowrap;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: start;
+      align-items: flex-start; }
   .c-reply:not(:last-child) {
     margin: 0 0 20px; }
   .c-reply-wrap {
@@ -506,7 +544,8 @@ textarea {
     color: #6e989f;
     font-size: 10px; }
   .c-reply--has-detail {
-    flex-flow: row wrap;
+    -ms-flex-flow: row wrap;
+        flex-flow: row wrap;
     padding: 0 0 25px;
     border-bottom: 1px dotted #6e989f; }
     .c-reply--has-detail:last-child {
@@ -542,74 +581,25 @@ textarea {
   border-color: #f86a40; }
 
 .p-top-mv {
+  display: -ms-flexbox;
   display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  align-items: center;
-  margin: 0 0 24px; }
+  -ms-flex-flow: row wrap;
+      flex-flow: row wrap;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center; }
+  @media screen and (max-width: 481px) {
+    .p-top-mv {
+      margin: 0 0 24px; } }
+  @media print, screen and (min-width: 482px) and (max-width: 768px) {
+    .p-top-mv {
+      margin: 0 0 48px; } }
+  @media screen and (min-width: 769px) {
+    .p-top-mv {
+      margin: 0 0 48px; } }
   .p-top-mv-logo {
     text-align: center; }
-  .p-top-mv-text {
-    margin: 24px 2em;
-    font-size: 24px;
-    font-weight: bold;
-    line-height: 1.5;
-    text-align: center; }
-
-.p-top-lead {
-  margin: 0 0 48px; }
-  .p-top-lead p:not(:last-child) {
-    margin: 0 0 2em; }
-
-.p-top-btn {
-  margin: 0 0 48px; }
-
-/*
-@include sp($point-sp) {}
-@include tb($point-tb) {}
-@include pc01($point-pc01) {}
-@include pc02($point-pc02) {}
-*/
-.p-sub__section:not(:last-child) {
-  margin: 0 0 50px; }
-
-.p-sub__head01 {
-  padding: 0 0 8px;
-  margin: 0 0 20px;
-  font-size: 18px;
-  font-weight: bold;
-  color: #fff;
-  border-bottom: 1px solid #fff; }
-
-.p-sub__head02 {
-  padding: 8px 0 8px 8px;
-  margin: 0 0 20px;
-  font-size: 16px;
-  font-weight: bold;
-  color: #fff;
-  border-left: 1px solid #fff; }
-
-.p-sub__inner {
-  padding: 16px;
-  background-color: #fff;
-  border-radius: 10px; }
-
-.p-sub__btns > .c-button--large:not(:last-child) {
-  margin: 0 0 15px; }
-
-.p-sub__lead {
-  margin: 0 0 25px; }
-  .p-sub__lead p:not(:last-child) {
-    margin: 0 0 1em; }
-  .p-sub__lead a {
-    color: #f86a40;
-    font-weight: bold;
-    text-decoration: underline; }
-
-/* ==========================================================================
-   print
-   ========================================================================== */
-lign: center; }
   .p-top-mv-text {
     margin: 24px 2em;
     font-size: 24px;

@@ -29,7 +29,15 @@
     flex-flow: row wrap;
     justify-content: center;
     align-items: center;
-    margin: 0 0 24px;
+    @include sp($point-sp) {
+      margin: 0 0 24px;
+    }
+    @include tb($point-tb) {
+      margin: 0 0 48px;
+    }
+    @include pc01($point-pc01) {
+      margin: 0 0 48px;
+    }
     &-logo {
       text-align: center;
     }

@@ -394,16 +394,17 @@ textarea {
       margin: 25px 0 16px; }
 
 .c-user {
-  width: 100%;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-flow: row nowrap;
-      flex-flow: row nowrap;
-  -ms-flex-pack: start;
-      justify-content: flex-start;
-  -ms-flex-align: center;
-      align-items: center;
   margin: 0 0 10px; }
+  .c-user a {
+    width: 100%;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: row nowrap;
+        flex-flow: row nowrap;
+    -ms-flex-pack: start;
+        justify-content: flex-start;
+    -ms-flex-align: center;
+        align-items: center; }
   .c-user-icon {
     width: 40px;
     margin: 0 10px 0 0; }

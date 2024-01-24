@@ -1,12 +1,14 @@
 @charset "utf-8";
 
 .c-user {
-  width: 100%;
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: flex-start;
-  align-items: center;
   margin: 0 0 10px;
+  a {
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center;  
+  }
   &-icon {
     width: 40px;
     margin: 0 10px 0 0;

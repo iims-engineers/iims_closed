@@ -20,7 +20,7 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="">
 
-<link rel="stylesheet" href="/css/style.css" media="all">
+<link rel="stylesheet" href="{{ asset('/css/style.css') }}" media="all">
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css" media="all">
 
 <!-- CSSを非同期ロードさせたい時に使ってください。

@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <title>title</title>
-  @@include('head.html')
+  @include('components.head')
 </head>
 
 <body class="page">
@@ -12,7 +12,7 @@
   <div class="l-container">
 
     <!-- l-header START -->
-    @@include('l-header.html')
+    @include('components.l-header')
     <!-- l-header END -->
 
     <div class="l-contents">
@@ -34,11 +34,11 @@
         </section>
       </main>
       <!-- l-footer START -->
-      @@include('l-footer.html')
+      @include('components.l-footer')
       <!-- l-footer END -->
     </div>
   </div>
-  @@include('javascript.html')
+  @include('components.javascript')
 </body>
 
 </html>

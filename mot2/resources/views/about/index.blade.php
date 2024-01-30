@@ -19,7 +19,7 @@
         <section>
           <div class="p-top-mv">
             <h1 class="p-top-mv-logo">
-              <img src="/img/common/mot2_logo.png" width="330" height="332" alt="mot2ロゴ">
+              <img src="{{ ('/img/common/mot2_logo.png') }}" width="330" height="332" alt="mot2ロゴ">
             </h1>
             <h2 class="p-top-mv-text">
               繋がりを、<br>もっともっと。
@@ -48,8 +48,8 @@
             </p>
           </div>
           <div class="p-top-btn">
-            <a href="/login/" class="c-button--large">
-              <img src="/img/common/icon-enter-white.svg" alt="">
+            <a href="/login" class="c-button--large">
+              <img src="{{ ('/img/common/icon-enter-white.svg') }}" alt="">
               <span>MOT2にログインする</span>
             </a>
           </div>

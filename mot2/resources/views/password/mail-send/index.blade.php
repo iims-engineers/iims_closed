@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="utf-8">
+  <!-- ↓「メールを送信しました」のほうがいいかも -->
   <title>パスワードのリセットが完了しました</title>
   @include('components.head')
 </head>

@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>MOT2 ー 繋がりを、もっともっと。</title>
+  <title>{{ config('app.name') }} ー 繋がりを、もっともっと。</title>
   @include('components.head')
 </head>
 
@@ -41,16 +41,16 @@
             </p>
             <p>
               Webという場を通して、<strong>住む場所が離れていても、またあの時のようにコミュニケーションが取れないだろうか？</strong><br>
-              それがこのMOT2が生まれた背景です。
+              それがこの{{ config('app.name') }}が生まれた背景です。
             </p>
             <p>
-              MOT2を通して、多文化交流で生まれた絆が、もっともっと大きくなることを、私たちは願ってやみません。
+              {{ config('app.name') }}を通して、多文化交流で生まれた絆が、もっともっと大きくなることを、私たちは願ってやみません。
             </p>
           </div>
           <div class="p-top-btn">
             <a href="/login" class="c-button--large">
               <img src="{{ ('/img/common/icon-enter-white.svg') }}" alt="">
-              <span>MOT2にログインする</span>
+              <span>{{ config('app.name') }}にログインする</span>
             </a>
           </div>
         </section>

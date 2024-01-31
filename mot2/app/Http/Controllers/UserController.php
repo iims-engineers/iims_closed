@@ -72,4 +72,37 @@ class UserController extends Controller
         // ログインしていればホームへ遷移 していなければログイン画面を表示
         return view('login/index');
     }
+
+    /**
+     * ログイン実行
+     */
+    public function login(Request $request)
+    {
+        $user_info = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+
+        // ログインに成功したとき
+        if (Auth::attempt($user_info)) {
+            $request->session()->regenerate();
+            echo "ログイン成功しました。";
+            exit;
+        } else {
+            echo "ログイン失敗しました。";
+            exit;
+        }
+
+        // 上記のif文でログインに成功した人以外(=ログインに失敗した人)がここに来る
+        // return redirect()->back();
+    }
+
+    /**
+     * ログアウト
+     */
+    public function logout()
+    {
+        Auth::logout();
+        return view('about/index');
+    }
 }

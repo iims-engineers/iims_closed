@@ -18,8 +18,9 @@
       <main class="l-main">
         <section class="p-sub__section">
           <h1 class="p-sub__head01">ログイン</h1>
-          <form action="/home/" class="c-form">
+          <form action="" method='post' class="c-form">
             <div class="c-form-item">
+              @csrf
               <label for="email" class="c-form-item-title">登録メールアドレス</label>
               <input type="email" name="email" id="email">
             </div>

@@ -22,7 +22,8 @@ Route::get('/', function () {
 // ログイン画面の表示
 Route::get('/login', [UserController::class, 'showLogin'])->name('showLogin');
 
-
+// ログイン実行
+Route::post('/login', [UserController::class, 'login'])->name('login');
 
 
 

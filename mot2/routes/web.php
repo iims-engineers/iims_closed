@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,12 +19,14 @@ Route::get('/', function () {
     return view('about/index');
 });
 
-Route::get('/login', function () {
-    return view('login/index');
-});
+// ログイン画面の表示
+Route::get('/login', [LoginController::class, 'showLogin']);
 
 
 
+
+
+/* -----------多分使わない-------------- */
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');

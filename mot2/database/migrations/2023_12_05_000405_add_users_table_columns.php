@@ -20,6 +20,7 @@ return new class extends Migration
             // $table->string('password', 50)->nullable(false)->comment('パスワード');
             // $table->string('email', 255)->nullable(false)->comment('メールアドレス');
             $table->boolean('is_admin')->default(false)->after('remember_token')->comment('管理者権限 true:管理者');
+            $table->boolean('is_approved')->default(false)->after('is_admin')->comment('承認ステータス true:承認済');
             // $table->datetime('created_at')->useCurrent()->comment('作成日時');
             // $table->datetime('updated_at')->useCurrentOnUpdate()->comment('更新日時');
             $table->timestamp('last_login_at')->after('updated_at')->comment('最終ログイン日時');
@@ -49,6 +50,9 @@ return new class extends Migration
         });
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('is_admin');
+        });
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('is_approved');
         });
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('last_login_at');

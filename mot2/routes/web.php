@@ -1,8 +1,7 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use \App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,26 +15,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('about/index');
+    return view('welcome');
 });
 
-// ログイン画面の表示
-Route::get('/login', [UserController::class, 'showLogin'])->name('showLogin');
+Route::get('/register', [UserController::class, 'showRegister']);
 
-// ログイン実行
-Route::post('/login', [UserController::class, 'login'])->name('login');
+Route::post('/register', [UserController::class, 'register']);
 
-
-
-/* -----------多分使わない-------------- */
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
-// Route::middleware('auth')->group(function () {
-//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-// });
-
-// require __DIR__ . '/auth.php';
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [UserController::class, 'profile'])->name('profile');
+});

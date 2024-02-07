@@ -1,1 +1,0 @@
-$(function(){"use strict";function n(){const n=$(".l-header__info-btn"),i=$(".l-header__info");n.on("click",function(){i.slideToggle(200)})}function i(){const n=$(".js-accordion-topic");n.on("click",function(){return $(this).next(".p-sub__inner").slideToggle(200),!1})}n(),i()});

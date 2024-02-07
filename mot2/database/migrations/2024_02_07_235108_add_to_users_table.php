@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
+
             $table->string('name_kana')->after('name')->comment('カナ');
             $table->string('initial')->after('name_kana')->comment('イニシャル');
             $table->date('birthday')->after('initial')->comment('生年月日');

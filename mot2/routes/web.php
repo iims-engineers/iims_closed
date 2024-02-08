@@ -18,10 +18,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/register', [UserController::class, 'showRegister']);
-
-Route::post('/register', [UserController::class, 'register']);
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [UserController::class, 'profile'])->name('profile');
-});
+/* ユーザー登録関連 */
+// 新規登録申請画面の表示
+Route::get('/apply', [UserController::class, 'showApply']);
+// 入力データのバリデーション
+Route::post('/apply/register', [UserController::class, 'apply'])->name('apply');
+// 確認画面の表示
+Route::get('apply/confirm', [UserController::class, 'applyConfirm'])->name('apply.confirm');

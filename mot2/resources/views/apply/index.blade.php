@@ -35,16 +35,25 @@
             @csrf
             <div class="c-form-item c-form-item--register">
               <label for="name" class="c-form-item-title">お名前<span class="c-form-require">必須</span></label>
-              <input type="text" name="name" id="name">
+              <input type="text" name="name" id="name" class="@error('name') is-invalid @enderror" value="{{ old('name') }}">
+              @error('name')
+              <p class="error">※{{ $message }}</p>
+              @enderror
             </div>
             <div class="c-form-item c-form-item--register">
               <label for="email" class="c-form-item-title">メールアドレス<span class="c-form-require">必須</span></label>
-              <input type="email" name="email" id="email">
+              <input type="email" name="email" id="email" class="@error('email') is-invalid @enderror" value="{{ old('email') }}">
               <span class="c-form-note">※ユーザー登録後、このメールアドレスをログイン時に使用します。</span>
+              @error('email')
+              <p class="error">※{{ $message }}</p>
+              @enderror
             </div>
             <div class="c-form-item c-form-item--register">
-              <label for="past-join" class="c-form-item-title">過去に参加された多文化交流</label>
-              <textarea name="past-join" id="past-join" cols="30" rows="3"></textarea>
+              <label for="past-join" class="c-form-item-title">過去のIIMS活動参加歴</label>
+              <textarea name="past-join" class="@error('past-join') is-invalid @enderror" id="past-join" cols="30" rows="3" value="{{ old('past-join') }}"></textarea>
+              @error('past-join')
+              <p class="error">※{{ $message }}</p>
+              @enderror
             </div>
             <div class="c-form-submit c-button-wrap">
               <button type="submit" class="c-button">確認画面へ</button>

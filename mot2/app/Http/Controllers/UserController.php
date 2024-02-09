@@ -23,8 +23,8 @@ class UserController extends Controller
     {
         // 入力データのバリデート
         $data = $request->validate([
-            'name' => ['required', 'string', 'max:50'],  // 氏名:50文字以内
-            'email' => ['required', 'email', 'max:255'], // メールアドレス:255文字以内
+            'name' => ['required', 'string', 'max:50'],  // 氏名:必須,50文字以内
+            'email' => ['required', 'unique:users', 'email', 'max:255'], // メールアドレス:必須,ユニーク,255文字以内
             'past-join' => ['string', 'max:255'],        // 過去の活動参加歴:255文字以内
         ]);
 

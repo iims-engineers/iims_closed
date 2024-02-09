@@ -658,6 +658,17 @@ textarea {
     font-weight: bold;
     text-decoration: underline; }
 
+
+/* エラー関連 */
+.error {
+  color: red;
+  font-weight: bold;
+}
+
+.is-invalid {
+  outline:solid 1.2px red;
+}
+
 /* ==========================================================================
    print
    ========================================================================== */

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\UserRequest;
 
 class UserController extends Controller
 {
@@ -19,14 +20,10 @@ class UserController extends Controller
     /*
      * ユーザー新規登録処理
      */
-    public function apply(Request $request)
+    public function apply(UserRequest $request)
     {
         // 入力データのバリデート
-        $data = $request->validate([
-            'name' => ['required', 'string', 'max:50'],  // 氏名:必須,50文字以内
-            'email' => ['required', 'unique:users', 'email', 'max:255'], // メールアドレス:必須,ユニーク,255文字以内
-            'past-join' => ['string', 'max:255'],        // 過去の活動参加歴:255文字以内
-        ]);
+        $validated = $request->validate();
 
         // バリデートにエラーがエラーが無い場合のみ確認画面に遷移
         return to_route('apply.confirm');

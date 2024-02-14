@@ -9,6 +9,13 @@ use App\Http\Requests\UserRequest;
 
 class UserController extends Controller
 {
+    // ユーザー新規登録申請時のデータ
+    private $formApply = [
+        'name',       // 氏名
+        'email',      // メールアドレス
+        'past-join',  // 活動参加歴
+    ];
+
     /*
      * ユーザー新規登録画面の表示
      */
@@ -24,6 +31,9 @@ class UserController extends Controller
     {
         // 入力データのバリデート
         $validated = $request->validated();
+        $input = $request->only($this->formApply);
+        // 入力データをセッションに保存
+        session($input);
 
         // バリデートにエラーがエラーが無い場合のみ確認画面に遷移
         return to_route('apply.confirm');
@@ -34,6 +44,14 @@ class UserController extends Controller
      */
     public function applyConfirm()
     {
-        return view('apply/confirm/index');
+        // セッションから入力データを取得
+        $form_input = session()->all();
+        if (!isset($form_input['name']) || !isset($form_input['email'])) {
+            // 404 or 入力画面に戻す？
+        }
+
+        return view('apply/confirm/index', [
+            'form_input' => $form_input,
+        ]);
     }
 }

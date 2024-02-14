@@ -24,18 +24,19 @@
             </p>
           </div>
           <form action="/apply/complete/" class="c-form">
+            @csrf
             <div class="c-form-item c-form-item--register">
               <label for="name" class="c-form-item-title">お名前<span class="c-form-require">必須</span></label>
-              テスト・middlename・太郎
+              <p>{{ Arr::get($form_input, 'name', '') }}</p>
             </div>
             <div class="c-form-item c-form-item--register">
               <label for="email" class="c-form-item-title">メールアドレス<span class="c-form-require">必須</span></label>
-              test@test.com
+              <p>{{ Arr::get($form_input, 'email', '') }}</p>
               <span class="c-form-note">※ユーザー登録後、このメールアドレスをログイン時に使用します。</span>
             </div>
             <div class="c-form-item c-form-item--register">
               <label for="past-join" class="c-form-item-title">過去に参加された多文化交流</label>
-              2014年の大雪ぐんま
+              <p>{{ Arr::get($form_input, 'past-join', '') }}</p>
             </div>
             <div class="c-form-submit c-button-wrap">
               <button type="submit" class="c-button">申請する</button>

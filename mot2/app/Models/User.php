@@ -18,9 +18,16 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'name',                // 氏名
+        'name_kana',           // 氏名かな
+        'initial',             // イニシャル
+        'birthday',            // 生年月日
+        'nationality',         // 国籍
+        'introduction_text',   // 自己紹介テキスト
+        'past-join',           // 活動参加歴
+        'password',            // パスワード
+        'is_admin',            // 管理者権限
+        'is_approve',          // 承認ステータス
     ];
 
     /**

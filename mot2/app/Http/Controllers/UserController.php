@@ -23,7 +23,7 @@ class UserController extends Controller
     public function apply(UserRequest $request)
     {
         // 入力データのバリデート
-        $validated = $request->validate();
+        $validated = $request->validated();
 
         // バリデートにエラーがエラーが無い場合のみ確認画面に遷移
         return to_route('apply.confirm');
@@ -32,7 +32,7 @@ class UserController extends Controller
     /*
      * ユーザー新規登録 確認画面
      */
-    public function applyConfirm(Request $request)
+    public function applyConfirm()
     {
         return view('apply/confirm/index');
     }

@@ -22,9 +22,9 @@ class UserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:50'],  // 氏名:必須,50文字以内
+            'name' => ['required', 'max:50'],  // 氏名:必須,50文字以内
             'email' => ['required', 'unique:users', 'email', 'max:255'], // メールアドレス:必須,ユニーク,255文字以内
-            'past-join' => ['string', 'max:255'],        // 過去の活動参加歴:255文字以内
+            'past-join' => ['required', 'max:255'],        // 過去の活動参加歴:255文字以内
         ];
     }
 }

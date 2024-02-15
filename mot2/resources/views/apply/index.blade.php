@@ -31,7 +31,7 @@
               運営が申請内容を確認でき次第、メールにてお知らせいたしますので、しばらくお待ちください。
             </p>
           </div>
-          <form action="{{ route('apply') }}" method="post" class="c-form">
+          <form action="{{ route('apply') }}" method="POST" class="c-form">
             @csrf
             <div class="c-form-item c-form-item--register">
               <label for="name" class="c-form-item-title">お名前<span class="c-form-require">必須</span></label>

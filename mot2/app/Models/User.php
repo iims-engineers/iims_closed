@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Arr;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -24,7 +25,7 @@ class User extends Authenticatable
         'birthday',            // 生年月日
         'nationality',         // 国籍
         'introduction_text',   // 自己紹介テキスト
-        'past-join',           // 活動参加歴
+        'past_join',           // 活動参加歴
         'password',            // パスワード
         'is_admin',            // 管理者権限
         'is_approve',          // 承認ステータス

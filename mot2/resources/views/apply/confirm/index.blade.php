@@ -23,19 +23,20 @@
               申請内容にお間違いがないか、ご確認ください。
             </p>
           </div>
-          <form action="/apply/complete/" class="c-form">
+          <form action="{{ route('apply.store') }}" method="POST" class="c-form">
             @csrf
             <div class="c-form-item c-form-item--register">
               <label for="name" class="c-form-item-title">お名前<span class="c-form-require">必須</span></label>
-              <p>{{ Arr::get($form_input, 'name', '') }}</p>
+              <input type="hidden" name="name" required value="{{ $form_input['name'] }}">{{ Arr::get($form_input, 'name', '') }}
             </div>
             <div class="c-form-item c-form-item--register">
               <label for="email" class="c-form-item-title">メールアドレス<span class="c-form-require">必須</span></label>
-              <p>{{ Arr::get($form_input, 'email', '') }}</p>
+              <input type="hidden" name="email" required value="{{ $form_input['email'] }}">{{ Arr::get($form_input, 'email', '') }}
               <span class="c-form-note">※ユーザー登録後、このメールアドレスをログイン時に使用します。</span>
             </div>
             <div class="c-form-item c-form-item--register">
               <label for="past-join" class="c-form-item-title">過去に参加された多文化交流</label>
+              <input type="hidden" name="past-join" required value="{{ Arr::get($form_input, 'past-join', '') }}">{{ Arr::get($form_input, 'past-join', '未入力') }}
               <p>{{ Arr::get($form_input, 'past-join', '') }}</p>
             </div>
             <div class="c-form-submit c-button-wrap">

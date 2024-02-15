@@ -24,4 +24,16 @@ Route::get('/apply', [UserController::class, 'showApply']);
 // 入力データのバリデーション
 Route::post('/apply/register', [UserController::class, 'apply'])->name('apply');
 // 確認画面の表示
-Route::get('apply/confirm', [UserController::class, 'applyConfirm'])->name('apply.confirm');
+Route::get('/apply/confirm', [UserController::class, 'applyConfirm'])->name('apply.confirm');
+// 登録処理
+Route::post('/apply/store', [UserController::class, 'store'])->name('apply.store');
+// 登録完了後ホーム画面に遷移
+Route::get('/home', function () {
+    return view('home/index');
+})->name('home');
+
+
+/* 404エラー */
+Route::get('/error', function () {
+    return view('errors/404');
+})->name('404');

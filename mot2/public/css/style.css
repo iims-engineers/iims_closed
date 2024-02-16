@@ -666,7 +666,7 @@ textarea {
 }
 
 .is-invalid {
-  outline:solid 1.2px red;
+  outline:solid 1px red;
 }
 
 /* ==========================================================================

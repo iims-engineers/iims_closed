@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\UserController;
+use \App\Http\Controllers\AboutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +15,12 @@ use \App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+// TOP
+Route::get('/', [AboutController::class, 'index'])->name('top');
 
 /* ユーザー登録関連 */
 // 新規登録申請画面の表示
@@ -27,10 +31,10 @@ Route::post('/apply/register', [UserController::class, 'apply'])->name('apply');
 Route::get('/apply/confirm', [UserController::class, 'applyConfirm'])->name('apply.confirm');
 // 登録処理
 Route::post('/apply/store', [UserController::class, 'store'])->name('apply.store');
-// 登録完了後ホーム画面に遷移
-Route::get('/home', function () {
-    return view('home/index');
-})->name('home');
+// 登録完了後のユーザー登録申請完了画面
+Route::get('/apply/complete', function () {
+    return view('apply/complete/index');
+})->name('apply.complete');
 
 
 /* 404エラー */

@@ -42,7 +42,7 @@ class UserController extends Controller
             // データベースに保存
             $user->save();
             // ホーム画面に遷移
-            return to_route('home')->with('message', '登録が完了しました！');
+            return to_route('apply.complete');
         } catch (\Exception $e) {
             // 登録失敗したら404を表示
             return to_route('404');

@@ -36,7 +36,7 @@
             </div>
             <div class="c-form-item c-form-item--register">
               <label for="past-join" class="c-form-item-title">過去に参加された多文化交流</label>
-              <input type="hidden" name="past-join" required value="{{ Arr::get($form_input, 'past-join', '') }}">{{ Arr::get($form_input, 'past-join', '未入力') }}
+              <input type="hidden" name="past-join" required value="{{ Arr::get($form_input, 'past-join', '') }}">{{ Arr::get($form_input, 'past-join', '') }}
               <p>{{ Arr::get($form_input, 'past-join', '') }}</p>
             </div>
             <div class="c-form-submit c-button-wrap">

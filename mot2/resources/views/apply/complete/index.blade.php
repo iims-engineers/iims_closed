@@ -26,7 +26,7 @@
             </p>
           </div>
           <div class="p-top-btn">
-            <a href="/about/" class="c-button--large">
+            <a href="{{ route('top') }}" class="c-button--large">
               <img src="/img/common/icon-earth.svg" alt="">
               <span>トップページへ</span>
             </a>

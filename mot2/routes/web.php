@@ -1,9 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use \App\Http\Controllers\UserController;
-use \App\Http\Controllers\ApplyController;
 use \App\Http\Controllers\AboutController;
+use \App\Http\Controllers\ApplyController;
+use \App\Http\Controllers\LoginController;
+use \App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,9 @@ Route::post('/apply/store', [ApplyController::class, 'applyStore'])->name('apply
 // 登録申請完了画面の表示
 Route::get('/apply/complete', [ApplyController::class, 'showComplete'])->name('apply.complete');
 
+/* ログイン */
+// ログインフォームの表示
+Route::get('/login', [LoginController::class, 'index'])->name('login.index');
 
 /* 404エラー */
 Route::get('/error', function () {

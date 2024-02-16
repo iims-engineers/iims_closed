@@ -19,6 +19,7 @@
 | 生年月日           | birthday          | date         |      |                  |                                                              |
 | 国籍               | nationality       | varchar(255) |      |                  | 入力式                                                       |
 | 自己紹介           | introduction_text | varchar(500) |      |                  | 自由記述型の自己紹介文                                       |
+| 活動参加歴         | past-join         | varchar(500) |      | 空文字           | IIMSの過去の活動参加歴                                       |
 | メールアドレス     | email             | varchar(255) |      |                  | メールアドレス。ログインに使用                               |
 | メールアドレス？   | email_verified_at | timestamp    |      |                  | ※要確認                                                      |
 | パスワード         | password          | varchar(255) |      |                  | パスワード。ログインに使用                                   |

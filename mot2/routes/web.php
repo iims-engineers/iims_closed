@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\UserController;
+use \App\Http\Controllers\ApplyController;
 use \App\Http\Controllers\AboutController;
 
 /*
@@ -22,19 +23,17 @@ use \App\Http\Controllers\AboutController;
 // TOP
 Route::get('/', [AboutController::class, 'index'])->name('top');
 
-/* ユーザー登録関連 */
+/* ユーザー登録申請 */
 // 新規登録申請画面の表示
-Route::get('/apply', [UserController::class, 'showApply']);
+Route::get('/apply', [ApplyController::class, 'index'])->name('apply.index');
 // 入力データのバリデーション
-Route::post('/apply/register', [UserController::class, 'apply'])->name('apply');
+Route::post('/apply/register', [ApplyController::class, 'apply'])->name('apply');
 // 確認画面の表示
-Route::get('/apply/confirm', [UserController::class, 'applyConfirm'])->name('apply.confirm');
+Route::get('/apply/confirm', [ApplyController::class, 'applyConfirm'])->name('apply.confirm');
 // 登録処理
-Route::post('/apply/store', [UserController::class, 'store'])->name('apply.store');
-// 登録完了後のユーザー登録申請完了画面
-Route::get('/apply/complete', function () {
-    return view('apply/complete/index');
-})->name('apply.complete');
+Route::post('/apply/store', [ApplyController::class, 'applyStore'])->name('apply.store');
+// 登録申請完了画面の表示
+Route::get('/apply/complete', [ApplyController::class, 'showComplete'])->name('apply.complete');
 
 
 /* 404エラー */

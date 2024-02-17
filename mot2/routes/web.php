@@ -5,6 +5,7 @@ use \App\Http\Controllers\AboutController;
 use \App\Http\Controllers\ApplyController;
 use \App\Http\Controllers\LoginController;
 use \App\Http\Controllers\UserController;
+use \App\Http\Controllers\Admin\AdminUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,12 @@ Route::get('/apply/complete', [ApplyController::class, 'showComplete'])->name('a
 /* ログイン */
 // ログインフォームの表示
 Route::get('/login', [LoginController::class, 'index'])->name('login.index');
+
+/* 
+ * 管理者側
+ */
+// 承認待ちユーザー一覧
+Route::get('/admin/user/unapproved', [AdminUserController::class, 'showUnapprovedUserList'])->name('admin.user.unapproved');
 
 /* 404エラー */
 Route::get('/error', function () {

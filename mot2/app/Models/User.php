@@ -8,27 +8,23 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Arr;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    // テーブル名の定義
+    protected $table = 'users';
+
     /**
-     * The attributes that are mass assignable.
+     * 登録や更新を許可しないカラムを設定
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',                // 氏名
-        'name_kana',           // 氏名かな
-        'initial',             // イニシャル
-        'birthday',            // 生年月日
-        'nationality',         // 国籍
-        'introduction_text',   // 自己紹介テキスト
-        'past_join',           // 活動参加歴
-        'password',            // パスワード
-        'is_admin',            // 管理者権限
-        'is_approve',          // 承認ステータス
+    protected $guarded = [
+        'id',
+
     ];
 
     /**
@@ -42,12 +38,43 @@ class User extends Authenticatable
     ];
 
     /**
-     * The attributes that should be cast.
+     * カラムの型定義(データ取得時に指定の型で取得する)
      *
      * @var array<string, string>
      */
     protected $casts = [
+        'id' => 'integer',
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'is_admin' => 'integer',
+        'is_approved' => 'integer',
     ];
+
+    /*
+     * ユーザー情報一括取得
+     */
+    public function getAllUser()
+    {
+        // 削除されていない全ユーザーをid順に取得
+        $all_users = DB::table($this->table)
+            ->whereNull('deleted_at')
+            ->orderBy('id', 'asc')
+            ->get();
+
+        return $all_users;
+    }
+
+    /*
+     * 承認待ちユーザーの取得
+     */
+    public function getUnapprovedUser()
+    {
+        // 承認待ちユーザーを取得
+        $unapproved_users = DB::table($this->table)
+            ->where('is_approved', 0)
+            ->whereNull('deleted_at')
+            ->get();
+
+        return $unapproved_users;
+    }
 }

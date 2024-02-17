@@ -11,7 +11,11 @@ use Illuminate\Mail\Mailables\Address;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Mail;
 
-class SendMail extends Mailable
+/*
+ * ユーザー会員登録申請完了時のメール送信 - ユーザーへの送信
+ */
+
+class MailApplyUser extends Mailable
 {
     use Queueable, SerializesModels;
 

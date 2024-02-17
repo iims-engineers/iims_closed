@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ApplyRequest;
-use App\Mail\SendMail;
+use App\Mail\MailApplyUser;
+use App\Mail\MailApplyAdmin;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Mail;
 use App\Models\User;
@@ -95,9 +96,10 @@ class ApplyController extends Controller
             $user->save();
 
             // 完了メール送信(ユーザー側)
-            Mail::to('user@test.test')->send(new SendMail());
+            Mail::to('user@test.test')->send(new MailApplyUser());
 
             // 完了メール送信(管理者側)
+            Mail::to('admin@test.test')->send(new MailApplyAdmin());
 
 
             // 申請完了画面に遷移

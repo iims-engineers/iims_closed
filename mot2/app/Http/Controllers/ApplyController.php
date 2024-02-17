@@ -12,6 +12,10 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Mail;
 use App\Models\User;
 
+/*
+ * ユーザー会員登録申請
+ */
+
 class ApplyController extends Controller
 {
 
@@ -39,10 +43,10 @@ class ApplyController extends Controller
         $validated = $request->validated();
         $input = $request->only($this->formApply);
 
-        // 活動参加歴が未入力の場合は空文字をセット
         if (!isset($input['past-join'])) {
             $input['past-join'] = '';
         }
+
         // 入力データをセッションに保存
         $request->session()->put(['form_input' => [
             'name' => Arr::get($input, 'name'),
@@ -97,10 +101,8 @@ class ApplyController extends Controller
 
             // 完了メール送信(ユーザー側)
             Mail::to('user@test.test')->send(new MailApplyUser());
-
             // 完了メール送信(管理者側)
             Mail::to('admin@test.test')->send(new MailApplyAdmin());
-
 
             // 申請完了画面に遷移
             return to_route('apply.complete');

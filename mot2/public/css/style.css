@@ -660,13 +660,14 @@ textarea {
 
 
 /* エラー関連 */
-.error {
-  color: red;
-  font-weight: bold;
+.form-error {
+  padding: 20px 0;
+  background-color: #ffe8ec;
+  border: 2px solid rgb(233, 69, 69);
+  border-radius: 10px;
 }
-
-.is-invalid {
-  outline:solid 1px red;
+.error-text {
+  color: red;
 }
 
 /* ==========================================================================

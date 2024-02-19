@@ -10,6 +10,7 @@ use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Mail\Mailables\Address;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Mail;
+use App\Models\User;
 
 /*
  * ユーザー会員登録申請完了時のメール送信 - 管理者への送信
@@ -19,12 +20,14 @@ class MailApplyAdmin extends Mailable
 {
     use Queueable, SerializesModels;
 
+    private $user = [];
+
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct(array $user_data)
     {
-        //
+        $this->user = $user_data;
     }
 
     /**
@@ -35,7 +38,7 @@ class MailApplyAdmin extends Mailable
     {
         return new Envelope(
             from: 'admin@test.test',
-            subject: '会員登録の申請がありました。',
+            subject: __('mails.apply.admin.subject'),
         );
     }
 
@@ -47,6 +50,9 @@ class MailApplyAdmin extends Mailable
     {
         return new Content(
             text: 'mails.apply.admin',
+            with: [
+                'user' => $this->user,
+            ],
         );
     }
 

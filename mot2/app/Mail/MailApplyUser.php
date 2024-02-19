@@ -10,6 +10,7 @@ use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Mail\Mailables\Address;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Mail;
+use App\Models\User;
 
 /*
  * ユーザー会員登録申請完了時のメール送信 - ユーザーへの送信
@@ -19,12 +20,14 @@ class MailApplyUser extends Mailable
 {
     use Queueable, SerializesModels;
 
+    private $user = [];
+
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct(array $user_data)
     {
-        //
+        $this->user = $user_data;
     }
 
     /**
@@ -35,7 +38,7 @@ class MailApplyUser extends Mailable
     {
         return new Envelope(
             from: 'admin@test.test',
-            subject: '会員登録申請を承りました。',
+            subject: __('mails.apply.user.subject'),
         );
     }
 
@@ -48,6 +51,9 @@ class MailApplyUser extends Mailable
         // テキストメールなので 'text': 'メールviewファイルのパス' の形式で設定
         return new Content(
             text: 'mails.apply.user',
+            with: [
+                'user' => $this->user,
+            ],
         );
     }
 

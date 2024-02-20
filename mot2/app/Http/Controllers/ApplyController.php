@@ -103,6 +103,8 @@ class ApplyController extends Controller
             Mail::to($user->email)->send(new MailApplyUser($form_input));
             // 完了メール送信(管理者側)
             Mail::to('admin@test.test')->send(new MailApplyAdmin($form_input));
+            // セッションのユーザー情報を削除
+            $request->session()->forget('form_input');
 
             // 申請完了画面に遷移
             return to_route('apply.complete');

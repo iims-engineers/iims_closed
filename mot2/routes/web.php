@@ -44,8 +44,12 @@ Route::get('/login', [LoginController::class, 'index'])->name('login.index');
 /* 
  * 管理者側
  */
-// 承認待ちユーザー一覧
-Route::get('/admin/user/unapproved', [AdminUserController::class, 'showUnapprovedUserList'])->name('admin.user.unapproved');
+// 承認待ちユーザー 一覧画面の表示
+Route::get('/admin/user/unapproved', [AdminUserController::class, 'showUnapprovedUserList'])->name('admin.unapprovedUser.list');
+// 承認待ちユーザー 詳細画面の表示
+Route::get('/admin/user/unapproved/{id}', [AdminUserController::class, 'showUnapprovedUserDetail'])->name('admin.unapprovedUser.detail');
+// 承認処理
+Route::post('/admin/user/approve', [AdminUserController::class, 'approve'])->name('admin.unapprovedUser.approve');
 
 /* 404エラー */
 Route::get('/error', function () {

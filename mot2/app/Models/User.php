@@ -77,4 +77,18 @@ class User extends Authenticatable
 
         return $unapproved_users;
     }
+
+    /*
+     * ユーザーの承認処理
+     * 
+     * @param int $id  承認するユーザーのID
+     * @return bool
+     */
+    public function approveUser(int $id): bool
+    {
+        // 承認待ちユーザーを取得
+
+
+        return true;
+    }
 }

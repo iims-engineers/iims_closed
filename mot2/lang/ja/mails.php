@@ -11,6 +11,9 @@ return [
         ],
         'admin' => [
             'subject' => '【MOT2】会員登録申請が届いています。'
+        ],
+        'approved' => [
+            'subject' => '【MOT2】会員登録申請が承認されました。'
         ]
     ],
 ];

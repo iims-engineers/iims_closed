@@ -7,8 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ApplyRequest;
-use App\Mail\MailApplyUser;
-use App\Mail\MailApplyAdmin;
+use App\Mail\MailApprovedUser;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Mail;
 use App\Models\User;
@@ -69,6 +68,7 @@ class AdminUserController extends Controller
                     'is_approved' => 1,
                 ]);
                 // ユーザーに承認完了通知を送信
+                Mail::to($user->email)->send(new MailApprovedUser($user));
 
                 // 処理が完了したら承認待ちユーザー一覧画面に遷移
                 return to_route('admin.unapprovedUser.list');

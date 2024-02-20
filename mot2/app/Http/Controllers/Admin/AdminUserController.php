@@ -58,6 +58,7 @@ class AdminUserController extends Controller
      */
     public function approve(Request $request)
     {
+        // IDをもとにユーザー情報を取得
         $id = $request->post('id');
         $user = $this->m_user::where('id', $id)->first();
 
@@ -76,6 +77,9 @@ class AdminUserController extends Controller
                 // 登録失敗したら元の画面に戻る
                 return back();
             }
+        } else {
+            /* ユーザー情報が取得できなかった場合は元の画面に戻す */
+            return to_route('admin.unapprovedUser.list');
         }
     }
 }

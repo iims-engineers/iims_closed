@@ -24,14 +24,18 @@
               まず、MOT2へログインするためのパスワードを設定してください。
             </p>
           </div>
-          <form action="/home/" class="c-form">
+          <form action="{{ route('password.store') }}" method="POST" class="c-form">
+            @csrf
             <div class="c-form-item">
               <label for="password" class="c-form-item-title">パスワード</label>
               <input type="password" name="password" id="password">
             </div>
             <div class="c-form-item">
               <label for="password-check" class="c-form-item-title">パスワードを再度入力してください</label>
-              <input type="password" name="password-check" id="password-check">
+              <input type="password" name="password_confirmation" id="password-check">
+            </div>
+            <div class="c-form-item">
+              <input type="hidden" name="user-id" id="user-id" value="{{ $id }}">
             </div>
             <div class="c-form-submit c-button-wrap">
               <button type="submit" class="c-button">設定する</button>

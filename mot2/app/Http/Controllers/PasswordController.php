@@ -2,36 +2,60 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
+use App\Http\Requests\PasswordNewRequest;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Mail;
+use App\Models\User;
 
 class PasswordController extends Controller
 {
 
     // userモデルのインスタンス格納用
-    private $user;
+    private $m_user;
 
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function __construct()
     {
-        //
+        $this->m_user = new User();
+        return $this->m_user;
     }
 
     /**
-     * Show the form for creating a new resource.
+     * パスワード新規登録画面の表示
+     * 
+     * @param int $id ユーザーID
      */
-    public function create()
+    public function indexNew(int $id)
     {
-        //
+        if (empty($id)) {
+            /* パラメータにユーザーIDがなかったら404 */
+            return to_route('404');
+        }
+
+        return view('password/new/index', [
+            'id' => $id,
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(PasswordNewRequest $request)
     {
-        //
+        // 入力データのバリデート
+        $validated = $request->validated();
+        // 入力データを取得
+        $input = $request->only([
+            'password',
+            'password_confirmation',
+            'user-id',
+        ]);
+
+        dump($input);
+        exit;
     }
 
     /**

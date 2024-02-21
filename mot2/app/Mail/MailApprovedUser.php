@@ -47,7 +47,7 @@ class MailApprovedUser extends Mailable
             text: 'mails.apply.approved',
             with: [
                 'user' => $this->user,
-                // 'url' => 
+                // 'url' => route('password/new/index', ['id', $this->user->id]),
             ],
         );
     }

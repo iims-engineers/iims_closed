@@ -6,7 +6,7 @@ use \App\Http\Controllers\ApplyController;
 use \App\Http\Controllers\LoginController;
 use \App\Http\Controllers\PasswordController;
 use \App\Http\Controllers\UserController;
-use \App\Http\Controllers\Admin\AdminUserController;
+use \App\Http\Controllers\Admin\user\ApproveController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +22,10 @@ use \App\Http\Controllers\Admin\AdminUserController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+
+Route::get('/home', function () {
+    return view('home/index');
+})->name('home');
 
 // TOP
 Route::get('/', [AboutController::class, 'index'])->name('top');
@@ -40,24 +44,23 @@ Route::get('/apply/complete', [ApplyController::class, 'showComplete'])->name('a
 
 /* パスワード関連 */
 // パスワード新規登録画面の表示
-// Route::get('/apply', [ApplyController::class, 'index'])->name('apply.index');
-Route::get('/password/new', function () {
-    return view('password/new/index');
-});
+Route::get('/password/new/{id}', [PasswordController::class, 'indexNew'])->name('password.index.new');
+// パスワード新規登録処理
+Route::post('/password/new/store', [PasswordController::class, 'store'])->name('password.store');
 
 /* ログイン */
 // ログインフォームの表示
-Route::get('/login', [PasswordController::class, 'index'])->name('password.new');
+// Route::get('/login', [PasswordController::class, 'index'])->name('password.new');
 
 /* 
  * 管理者側
  */
 // 承認待ちユーザー 一覧画面の表示
-Route::get('/admin/user/unapproved', [AdminUserController::class, 'showUnapprovedUserList'])->name('admin.unapprovedUser.list');
+Route::get('/admin/user/unapproved', [ApproveController::class, 'showList'])->name('admin.show.list');
 // 承認待ちユーザー 詳細画面の表示
-Route::get('/admin/user/unapproved/{id}', [AdminUserController::class, 'showUnapprovedUserDetail'])->name('admin.unapprovedUser.detail');
+Route::get('/admin/user/unapproved/{id}', [ApproveController::class, 'showDetail'])->name('admin.show.detail');
 // 承認処理
-Route::post('/admin/user/approve', [AdminUserController::class, 'approve'])->name('admin.unapprovedUser.approve');
+Route::post('/admin/user/approve', [ApproveController::class, 'approve'])->name('admin.unapprovedUser.approve');
 
 /* 404エラー */
 Route::get('/error', function () {

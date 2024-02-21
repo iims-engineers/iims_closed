@@ -58,12 +58,27 @@ class User extends Authenticatable implements MustVerifyEmail
     public function getAllUser()
     {
         // 削除されていない全ユーザーをid順に取得
-        $all_users = DB::table($this->table)
-            ->whereNull('deleted_at')
+        $all_users = $this->whereNull('deleted_at')
             ->orderBy('id', 'asc')
             ->get();
 
         return $all_users;
+    }
+
+    /*
+     * ユーザーの情報を取得
+     * 
+     * @param int $id  ユーザーID
+     * @return
+     */
+    public function getUser(int $id)
+    {
+        // IDを元にユーザー情報を取得
+        $user = $this->where('is_approved', 0)
+            ->whereNull('deleted_at')
+            ->first();
+
+        return $user;
     }
 
     /*
@@ -86,7 +101,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @param int $id  承認するユーザーのID
      * @return void
      */
-    public function approveUser(int $id)
+    public function approveUser($id)
     {
         // 承認待ちユーザーを取得
         $user = $this->where('id', $id)->first();

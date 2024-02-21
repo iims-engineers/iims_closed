@@ -26,7 +26,7 @@ class ApplyController extends Controller
         'past-join',  // 活動参加歴
     ];
 
-    /*
+    /**
      * ユーザー登録申請 - 入力画面表示
      */
     public function index()
@@ -34,8 +34,10 @@ class ApplyController extends Controller
         return view('apply/index');
     }
 
-    /*
+    /**
      * ユーザー登録申請 - 入力内容のバリデートから確認画面への遷移
+     * 
+     * @param ApplyRequest $request 入力データ
      */
     public function apply(ApplyRequest $request)
     {
@@ -58,8 +60,10 @@ class ApplyController extends Controller
         return to_route('apply.confirm');
     }
 
-    /*
+    /**
      * ユーザー登録申請 - 確認画面の表示
+     * 
+     * @param Request $request 
      */
     public function applyConfirm(Request $request)
     {
@@ -75,8 +79,10 @@ class ApplyController extends Controller
         ]);
     }
 
-    /*
+    /**
      * ユーザー登録申請 - 登録処理
+     * 
+     * @param Request $request 
      */
     public function applyStore(Request $request)
     {

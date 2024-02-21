@@ -29,7 +29,7 @@
                                 <!-- <div class="c-user-id">@username</div> -->
                             </div>
                             <div>
-                                <button type="submit" onclick="location.href='{{ route('admin.unapprovedUser.detail', ['id' => $user->id]) }}'">確認する</button>
+                                <button type="submit" onclick="location.href='{{ route('admin.show.detail', ['id' => $user->id]) }}'">確認する</button>
                             </div>
                         </div>
                         @empty

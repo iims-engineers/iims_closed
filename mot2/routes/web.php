@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\AboutController;
 use \App\Http\Controllers\ApplyController;
 use \App\Http\Controllers\LoginController;
+use \App\Http\Controllers\PasswordController;
 use \App\Http\Controllers\UserController;
 use \App\Http\Controllers\Admin\AdminUserController;
 
@@ -37,9 +38,16 @@ Route::post('/apply/store', [ApplyController::class, 'applyStore'])->name('apply
 // 登録申請完了画面の表示
 Route::get('/apply/complete', [ApplyController::class, 'showComplete'])->name('apply.complete');
 
+/* パスワード関連 */
+// パスワード新規登録画面の表示
+// Route::get('/apply', [ApplyController::class, 'index'])->name('apply.index');
+Route::get('/password/new', function () {
+    return view('password/new/index');
+});
+
 /* ログイン */
 // ログインフォームの表示
-Route::get('/login', [LoginController::class, 'index'])->name('login.index');
+Route::get('/login', [PasswordController::class, 'index'])->name('password.new');
 
 /* 
  * 管理者側

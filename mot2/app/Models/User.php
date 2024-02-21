@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -10,7 +12,7 @@ use Illuminate\Support\Arr;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\DB;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -65,9 +67,9 @@ class User extends Authenticatable
     }
 
     /*
-     * 承認待ちユーザーの取得
+     * 承認待ちユーザーを全て取得
      */
-    public function getUnapprovedUser()
+    public function getUnapprovedUsers()
     {
         // 承認待ちユーザーを取得
         $unapproved_users = DB::table($this->table)
@@ -82,13 +84,34 @@ class User extends Authenticatable
      * ユーザーの承認処理
      * 
      * @param int $id  承認するユーザーのID
-     * @return bool
+     * @return void
      */
-    public function approveUser(int $id): bool
+    public function approveUser(int $id)
     {
         // 承認待ちユーザーを取得
+        $user = $this->where('id', $id)->first();
+        // 承認ステータスを1(承認済)に設定
+        $user->is_approved = 1;
+        // 変更を保存
+        $user->save();
+    }
 
+    /*
+     * 承認待ちユーザーの情報を取得
+     * 
+     * @param int $id  確認するユーザーのID
+     * @return         未承認の場合true, 承認済みの場合false
+     */
+    public function getUnapprovedUser(int $id)
+    {
+        $res = null;
+        // IDと承認ステータスを元にユーザー情報を取得
+        $res = $this->where([
+            ['id', '=', $id],
+            ['is_approved', '=', 0],
+        ])->whereNull('deleted_at')
+            ->first();
 
-        return true;
+        return $res;
     }
 }

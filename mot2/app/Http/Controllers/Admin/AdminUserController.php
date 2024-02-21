@@ -28,7 +28,7 @@ class AdminUserController extends Controller
     public function showUnapprovedUserList()
     {
         // 承認待ちのユーザー情報を取得
-        $unapproved_users = $this->m_user->getUnapprovedUser();
+        $unapproved_users = $this->m_user->getUnapprovedUsers();
 
         return view('admin/user/unapproved/list', [
             'users' => $unapproved_users,
@@ -36,15 +36,16 @@ class AdminUserController extends Controller
     }
 
     /*
-     * 承認待ちユーザー - 一覧表示
+     * 承認待ちユーザー - 詳細表示
      * 
      * @param int $id ユーザーID
      */
     public function showUnapprovedUserDetail(int $id)
     {
-        $unapproved_user = $this->m_user::where('id', $id)->first();
+        // IDを元にユーザー情報を取得
+        $unapproved_user = $this->m_user->getUnapprovedUser($id);
 
-        if (!empty($unapproved_user)) {
+        if ($unapproved_user->exists()) {
             return view('admin/user/unapproved/detail', [
                 'user' => $unapproved_user,
             ]);
@@ -60,14 +61,13 @@ class AdminUserController extends Controller
     {
         // IDをもとにユーザー情報を取得
         $id = $request->post('id');
-        $user = $this->m_user::where('id', $id)->first();
+        $user = $this->m_user->getUnapprovedUser($id);
 
-        if (!empty($user)) {
+        if ($user->exists()) {
             try {
                 // 承認ステータスを更新
-                $user->update([
-                    'is_approved' => 1,
-                ]);
+                $this->m_user->approveUser($user->id);
+
                 // ユーザーに承認完了通知を送信
                 Mail::to($user->email)->send(new MailApprovedUser($user));
 

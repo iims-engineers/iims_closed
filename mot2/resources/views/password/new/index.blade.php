@@ -20,7 +20,7 @@
           <h1 class="p-sub__head01">パスワードの設定</h1>
           <div class="p-sub__lead">
             <p>
-              MOT2へようこそ！
+              {{ $user->name }}さん、MOT2へようこそ！
               まず、MOT2へログインするためのパスワードを設定してください。
             </p>
           </div>
@@ -33,9 +33,6 @@
             <div class="c-form-item">
               <label for="password-check" class="c-form-item-title">パスワードを再度入力してください</label>
               <input type="password" name="password_confirmation" id="password-check">
-            </div>
-            <div class="c-form-item">
-              <input type="hidden" name="user-id" id="user-id" value="{{ $id }}">
             </div>
             <div class="c-form-submit c-button-wrap">
               <button type="submit" class="c-button">設定する</button>

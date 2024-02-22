@@ -26,17 +26,23 @@ class PasswordController extends Controller
     /**
      * パスワード新規登録画面の表示
      * 
-     * @param int $id ユーザーID
+     * @param string $token usersテーブルの認証用トークン
      */
-    public function indexNew(int $id)
+    public function indexNew(string $token)
     {
-        if (empty($id)) {
-            /* パラメータにユーザーIDがなかったら404 */
-            return to_route('404');
+        if (empty($token)) {
+            /* 万が一認証トークンが無いURLだった場合はトップ画面に戻す */
+            return to_route('top');
+        }
+        // 認証トークンからユーザー情報を取得
+        $user = $this->m_user->getUserFromToken($token);
+        if (!$user) {
+            /* ユーザー情報が取得できなければトップに戻す */
+            return to_route('top');
         }
 
         return view('password/new/index', [
-            'id' => $id,
+            'user' => $user,
         ]);
     }
 

@@ -93,12 +93,16 @@ class ApplyController extends Controller
             return to_route('404');
         }
 
+        // メールアドレスから認証用トークンを生成
+        $token = base64_encode($form_input['email']);
+
         // Userモデルのインスタンスを生成
         $user = new User();
         // 入力データをUserモデルのインスタンスにセット
         $user->name = Arr::get($form_input, 'name');
         $user->email = Arr::get($form_input, 'email');
         $user->past_join = Arr::get($form_input, 'past-join');
+        $user->verify_token = $token;
 
         // 登録実行
         try {
@@ -123,8 +127,12 @@ class ApplyController extends Controller
     /**
      * ユーザー登録申請 - 申請完了画面の表示
      */
-    public function showComplete()
+    public function showComplete(Request $request)
     {
+        if (!$request->session()->has('form_input')) {
+            /* URL直打ちや完了後の再読み込みなどはトップに戻す */
+            return to_route('top');
+        }
         return view('apply/complete/index');
     }
 }

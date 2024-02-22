@@ -44,10 +44,9 @@ class MailApprovedUser extends Mailable
     public function content(): Content
     {
         return new Content(
-            text: 'mails.apply.approved',
+            view: 'mails.apply.approved',
             with: [
                 'user' => $this->user,
-                // 'url' => route('password/new/index', ['id', $this->user->id]),
             ],
         );
     }

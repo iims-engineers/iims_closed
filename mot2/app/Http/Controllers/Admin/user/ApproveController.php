@@ -69,13 +69,14 @@ class ApproveController extends Controller
             try {
                 // 承認ステータスを更新
                 $this->m_user->approveUser($user->id);
+
                 // ユーザーに承認完了通知を送信
                 Mail::to($user->email)->send(new MailApprovedUser($user));
 
                 // 処理が完了したら承認待ちユーザー一覧画面に遷移
                 return to_route('admin.show.list');
             } catch (\Exception $e) {
-                // 登録失敗したら元の画面に戻る
+                // 登録失敗したら404
                 return to_route('404');
             }
         } else {

@@ -44,7 +44,7 @@ Route::get('/apply/complete', [ApplyController::class, 'showComplete'])->name('a
 
 /* パスワード関連 */
 // パスワード新規登録画面の表示
-Route::get('/password/new/{id}', [PasswordController::class, 'indexNew'])->name('password.index.new');
+Route::get('/password/new/{token}', [PasswordController::class, 'indexNew'])->name('password.index.new');
 // パスワード新規登録処理
 Route::post('/password/new/store', [PasswordController::class, 'store'])->name('password.store');
 

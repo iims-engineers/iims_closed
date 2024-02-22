@@ -48,11 +48,12 @@ class User extends Authenticatable implements MustVerifyEmail
         'id' => 'integer',
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'verify_token' => 'string',
         'is_admin' => 'integer',
         'is_approved' => 'integer',
     ];
 
-    /*
+    /**
      * ユーザー情報一括取得
      */
     public function getAllUser()
@@ -65,11 +66,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $all_users;
     }
 
-    /*
+    /**
      * ユーザーの情報を取得
      * 
      * @param int $id  ユーザーID
-     * @return
+     * @return $user
      */
     public function getUser(int $id)
     {
@@ -81,8 +82,10 @@ class User extends Authenticatable implements MustVerifyEmail
         return $user;
     }
 
-    /*
+    /**
      * 承認待ちユーザーを全て取得
+     * 
+     * @return void
      */
     public function getUnapprovedUsers()
     {
@@ -95,7 +98,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return $unapproved_users;
     }
 
-    /*
+    /**
      * ユーザーの承認処理
      * 
      * @param int $id  承認するユーザーのID
@@ -111,11 +114,10 @@ class User extends Authenticatable implements MustVerifyEmail
         $user->save();
     }
 
-    /*
+    /**
      * 承認待ちユーザーの情報を取得
      * 
      * @param int $id  確認するユーザーのID
-     * @return         未承認の場合true, 承認済みの場合false
      */
     public function getUnapprovedUser(int $id)
     {
@@ -128,5 +130,29 @@ class User extends Authenticatable implements MustVerifyEmail
             ->first();
 
         return $res;
+    }
+
+    /**
+     * 認証用トークンからユーザー情報を取得する
+     * 
+     * @param string $token  認証用トークン
+     */
+    public function getUserFromToken(string $token)
+    {
+        $user = $this->where([
+            'verify_token' => $token,
+        ])->whereNull('deleted_at')
+            ->first();
+
+        if (!empty($user)) {
+            // 認証トークンをデコードしてメールアドレスとの一致確認
+            $decoded_token = base64_decode($token);
+            if ($decoded_token === $user->email) {
+                /* 一致したらユーザー情報を返す */
+                return $user;
+            }
+        }
+        // ユーザー情報が取得できないかメールアドレスと一致しない場合はfalseを返す
+        return false;
     }
 }

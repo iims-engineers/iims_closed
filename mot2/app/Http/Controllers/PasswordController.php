@@ -34,12 +34,18 @@ class PasswordController extends Controller
             /* 万が一認証トークンが無いURLだった場合はトップ画面に戻す */
             return to_route('top');
         }
-        // 認証トークンからユーザー情報を取得
+        // 認証トークンからユーザー情報を取得できなければトップ画面に戻す
         $user = $this->m_user->getUserFromToken($token);
         if (!$user) {
-            /* ユーザー情報が取得できなければトップに戻す */
             return to_route('top');
         }
+
+        // セッションにユーザー情報をセット
+        if (session()->has('user_data')) {
+            /* すでにセッションにユーザー情報がある場合は削除してから保存する */
+            session()->forget('user_data');
+        }
+        session()->put(['user_data' => $user]);
 
         return view('password/new/index', [
             'user' => $user,
@@ -57,10 +63,20 @@ class PasswordController extends Controller
         $input = $request->only([
             'password',
             'password_confirmation',
-            'user-id',
         ]);
+        // セッションから該当ユーザーの情報を取得
+        $user = session()->get('user_data');
+        // 登録実行
+        try {
+            $user->password = Arr::get($input, 'password');
+            $user->save();
 
-        dump($input);
+            // home画面に遷移
+            return to_route('top');
+        } catch (\Exception $e) {
+            // 登録失敗したら404を表示
+            return to_route('404');
+        }
         exit;
     }
 

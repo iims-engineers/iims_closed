@@ -22,8 +22,19 @@ class PasswordNewRequest extends FormRequest
      */
     public function rules(): array
     {
+        // 半角英数(a-z,1-9)の混合で8〜50文字
         return [
-            'password' => [Password::min(8)->letters()->mixedCase()->numbers(), 'confirmed'],
+            'password' => ['max:50', Password::min(8)->letters()->numbers(), 'confirmed'],
+        ];
+    }
+
+    /**
+     * エラーメッセージのカスタム
+     */
+    public function messages()
+    {
+        return [
+            'password.confirmed' => 'パスワードが一致しません。',
         ];
     }
 }

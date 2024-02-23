@@ -28,11 +28,17 @@
             @csrf
             <div class="c-form-item">
               <label for="password" class="c-form-item-title">パスワード</label>
-              <input type="password" name="password" id="password">
+              <input type="password" name="password" id="password" required>
+              @error('password')
+              <p class="error-text">※{{ $message }}</p>
+              @enderror
             </div>
             <div class="c-form-item">
               <label for="password-check" class="c-form-item-title">パスワードを再度入力してください</label>
-              <input type="password" name="password_confirmation" id="password-check">
+              <input type="password" name="password_confirmation" id="password-check" required>
+              @error('password_confirmation')
+              <p class="error-text">※{{ $message }}</p>
+              @enderror
             </div>
             <div class="c-form-submit c-button-wrap">
               <button type="submit" class="c-button">設定する</button>

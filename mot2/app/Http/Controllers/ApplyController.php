@@ -45,6 +45,7 @@ class ApplyController extends Controller
         $validated = $request->validated();
         $input = $request->only($this->formApply);
 
+        // 活動参加歴が未入力の場合は空文字を登録する
         if (!isset($input['past-join'])) {
             $input['past-join'] = '';
         }

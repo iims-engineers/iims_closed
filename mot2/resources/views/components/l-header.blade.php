@@ -30,7 +30,7 @@
       </div>
     </div>
     <div class="l-header__btn-item">
-      <a href="/about/">
+      <a href="{{ route('top') }}">
         <img src="{{ asset('/img/common/icon-exit.svg') }}" alt="">
         <span>ログアウト</span>
       </a>

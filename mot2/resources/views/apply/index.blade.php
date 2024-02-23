@@ -40,7 +40,7 @@
             </ul>
           </div>
           @endif
-          <form action="{{ route('apply') }}" method="POST" class="c-form">
+          <form action="{{ route('apply.check') }}" method="POST" class="c-form">
             @csrf
             <div class="c-form-item c-form-item--register">
               <label for="name" class="c-form-item-title">お名前<span class="c-form-require">必須</span></label>

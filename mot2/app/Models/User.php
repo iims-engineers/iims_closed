@@ -47,7 +47,6 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'id' => 'integer',
         'email_verified_at' => 'datetime',
-        'password' => 'hashed', // 登録時に自動でハッシュ化してくれる
         'verify_token' => 'string',
         'is_admin' => 'integer',
         'is_approved' => 'integer',

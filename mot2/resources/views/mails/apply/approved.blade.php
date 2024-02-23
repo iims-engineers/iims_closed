@@ -4,7 +4,7 @@
 <p>以下URLより、ログイン用パスワードのご登録をお願いいたします。</p>
 <br>
 <p>============================</p>
-<a href="{{ route('password.index.new', ['token' => $user->verify_token]) }}">パスワードのご登録はこちら</a>
+<a href="{{ route('password.new.form', ['token' => $user->verify_token]) }}">パスワードのご登録はこちら</a>
 <p>============================</p>
 <br>
 <p>※本メールは配信専用のアドレスで配信されています。</p>

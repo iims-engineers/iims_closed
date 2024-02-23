@@ -29,7 +29,7 @@ class ApplyController extends Controller
     /**
      * ユーザー登録申請 - 入力画面表示
      */
-    public function index()
+    public function showForm()
     {
         return view('apply/index');
     }
@@ -39,7 +39,7 @@ class ApplyController extends Controller
      * 
      * @param ApplyRequest $request 入力データ
      */
-    public function apply(ApplyRequest $request)
+    public function applyCheck(ApplyRequest $request)
     {
         // 入力データのバリデート
         $validated = $request->validated();
@@ -114,8 +114,6 @@ class ApplyController extends Controller
             Mail::to($user->email)->send(new MailApplyUser($form_input));
             // 完了メール送信(管理者側)
             Mail::to('admin@test.test')->send(new MailApplyAdmin($form_input));
-            // セッションのユーザー情報を削除
-            $request->session()->forget('form_input');
 
             // 申請完了画面に遷移
             return to_route('apply.complete');
@@ -133,7 +131,11 @@ class ApplyController extends Controller
         if (!$request->session()->has('form_input')) {
             /* URL直打ちや完了後の再読み込みなどはトップに戻す */
             return to_route('top');
+        } else {
+            // 登録が完了したユーザー情報をセッションから削除
+            $request->session()->forget('form_input');
+
+            return view('apply/complete/index');
         }
-        return view('apply/complete/index');
     }
 }

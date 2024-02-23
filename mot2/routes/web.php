@@ -23,35 +23,53 @@ use \App\Http\Controllers\Admin\user\ApproveController;
 //     return view('welcome');
 // });
 
-Route::get('/home', function () {
-    return view('home/index');
-})->name('home');
+/* ------------------------------------------------------------------------------------------------ */
+/* 未ログイン時もアクセス可能 */
 
-// TOP
+// TOP(MOT2紹介ページ)の表示
 Route::get('/', [AboutController::class, 'index'])->name('top');
 
 /* ユーザー登録申請 */
-// 新規登録申請画面の表示
-Route::get('/apply', [ApplyController::class, 'index'])->name('apply.index');
-// 入力データのバリデーション
-Route::post('/apply/register', [ApplyController::class, 'apply'])->name('apply');
-// 確認画面の表示
-Route::get('/apply/confirm', [ApplyController::class, 'applyConfirm'])->name('apply.confirm');
-// 登録処理
-Route::post('/apply/store', [ApplyController::class, 'applyStore'])->name('apply.store');
-// 登録申請完了画面の表示
-Route::get('/apply/complete', [ApplyController::class, 'showComplete'])->name('apply.complete');
+Route::prefix('/apply')
+    ->name('apply.')
+    ->group(function () {
+        // 新規登録申請画面の表示
+        Route::get('', [ApplyController::class, 'showForm'])->name('form');
+        // 入力データのバリデーション
+        Route::post('/register', [ApplyController::class, 'applyCheck'])->name('check');
+        // 確認画面の表示
+        Route::get('/confirm', [ApplyController::class, 'applyConfirm'])->name('confirm');
+        // 登録処理
+        Route::post('/store', [ApplyController::class, 'applyStore'])->name('store');
+        // 登録申請完了画面の表示
+        Route::get('/complete', [ApplyController::class, 'showComplete'])->name('complete');
+    });
+
+
 
 /* パスワード関連 */
 // パスワード新規登録画面の表示
-Route::get('/password/new/{token}', [PasswordController::class, 'indexNew'])->name('password.index.new');
+Route::get('/password/new/{token}', [PasswordController::class, 'showFormNew'])->name('password.new.form');
 // パスワード新規登録処理
-Route::post('/password/new/store', [PasswordController::class, 'store'])->name('password.store');
+Route::post('/password/new/store', [PasswordController::class, 'storeNew'])->name('password.new.store');
 
 /* ログイン */
 // ログインフォームの表示
-// Route::get('/login', [PasswordController::class, 'index'])->name('password.new');
+Route::get('/login', [LoginController::class, 'showForm'])->name('login.form')->middleware('guest');
+// ログイン処理
+Route::post('/login', [LoginController::class, 'login'])->name('login')->middleware('guest');
 
+/* ------------------------------------------------------------------------------------------------ */
+
+/* ------------------------------------------------------------------------------------------------ */
+/* ログイン時のみアクセス可能 */
+
+// ホーム画面の表示
+Route::get('/home', function () {
+    return view('home/index');
+})->name('home')->middleware('auth');
+
+/* ------------------------------------------------------------------------------------------------ */
 /* 
  * 管理者側
  */

@@ -24,7 +24,21 @@
               まず、MOT2へログインするためのパスワードを設定してください。
             </p>
           </div>
-          <form action="{{ route('password.store') }}" method="POST" class="c-form">
+          @if($errors->any())
+          <div class="form-error">
+            <ul>
+              @foreach ($errors->all() as $error)
+              <li class="error-text">・{{ $error }}</li>
+              @endforeach
+            </ul>
+          </div>
+          @endif
+          @if(session('flash_message'))
+          <div class="form-error">
+            <p class="error-text">{{ session('flash_message') }}</p>
+          </div>
+          @endif
+          <form action="{{ route('password.new.store') }}" method="POST" class="c-form">
             @csrf
             <div class="c-form-item">
               <label for="password" class="c-form-item-title">パスワード</label>

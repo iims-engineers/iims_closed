@@ -7,6 +7,7 @@ use App\Http\Requests\PasswordNewRequest;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Mail;
 use App\Models\User;
@@ -28,7 +29,7 @@ class PasswordController extends Controller
      * 
      * @param string $token usersテーブルの認証用トークン
      */
-    public function indexNew(string $token)
+    public function showFormNew(string $token)
     {
         if (empty($token)) {
             /* 万が一認証トークンが無いURLだった場合はトップ画面に戻す */
@@ -55,7 +56,7 @@ class PasswordController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(PasswordNewRequest $request)
+    public function storeNew(PasswordNewRequest $request)
     {
         // 入力データのバリデート
         $validated = $request->validated();
@@ -66,16 +67,19 @@ class PasswordController extends Controller
         ]);
         // セッションから該当ユーザーの情報を取得
         $user = session()->get('user_data');
+        session()->flash('flash_message', __('passwords.regist_error'));
+        return back();
         // 登録実行
         try {
-            $user->password = Arr::get($input, 'password');
+            $user->password = Hash::make($input['password']);
             $user->save();
 
-            // home画面に遷移
-            return to_route('top');
+            // 登録成功したらログインフォームに遷移
+            return to_route('login.form');
         } catch (\Exception $e) {
-            // 登録失敗したら404を表示
-            return to_route('404');
+            // 登録失敗したら再度入力フォームに戻してやり直させる
+            session()->flash('flash_message', __('passwords.regist_error'));
+            return back();
         }
         exit;
     }

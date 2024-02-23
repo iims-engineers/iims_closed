@@ -18,15 +18,30 @@
       <main class="l-main">
         <section class="p-sub__section">
           <h1 class="p-sub__head01">ログイン</h1>
-          <form action="" method='post' class="c-form">
+          @if($errors->any())
+          <div class="form-error">
+            <ul>
+              @foreach ($errors->all() as $error)
+              <li class="error-text">・{{ $error }}</li>
+              @endforeach
+            </ul>
+          </div>
+          @endif
+          <form action="{{ route('login') }}" method='POST' class="c-form">
+            @csrf
             <div class="c-form-item">
-              @csrf
               <label for="email" class="c-form-item-title">登録メールアドレス</label>
-              <input type="email" name="email" id="email">
+              <input type="email" name="email" id="email" value="{{ old('email') }}">
+              @error('email')
+              <p class="error-text">※{{ $message }}</p>
+              @enderror
             </div>
             <div class="c-form-item">
               <label for="password" class="c-form-item-title">パスワード</label>
               <input type="password" name="password" id="password">
+              @error('password')
+              <p class="error-text">※{{ $message }}</p>
+              @enderror
             </div>
             <div class="c-form-submit c-button-wrap">
               <button type="submit" class="c-button">ログイン</button>

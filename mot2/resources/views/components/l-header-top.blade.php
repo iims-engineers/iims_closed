@@ -7,7 +7,7 @@
   </div>
   <div class="l-header__btn">
     <div class="l-header__btn-item">
-      <a href="">
+      <a href="{{ route('login.form') }}">
         <img src="{{ asset('/img/common/icon-enter.svg') }}" alt="">
         <span>ログイン</span>
       </a>

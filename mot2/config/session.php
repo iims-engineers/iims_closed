@@ -17,7 +17,7 @@ return [
     |            "memcached", "redis", "dynamodb", "array"
     |
     */
-
+    // セッションの保存方法
     'driver' => env('SESSION_DRIVER', 'file'),
 
     /*
@@ -30,9 +30,9 @@ return [
     | to immediately expire on the browser closing, set that option.
     |
     */
-
+    // Cookie(session)の有効期限(分)
     'lifetime' => env('SESSION_LIFETIME', 120),
-
+    // true:セッション有効期限が「ブラウザのタブを閉じるまで」になる
     'expire_on_close' => false,
 
     /*
@@ -45,7 +45,7 @@ return [
     | automatically by Laravel and you can use the Session like normal.
     |
     */
-
+    // Cookieの暗号化
     'encrypt' => false,
 
     /*
@@ -58,7 +58,7 @@ return [
     | location may be specified. This is only needed for file sessions.
     |
     */
-
+    // （fileに保存する場合）保存先パス
     'files' => storage_path('framework/sessions'),
 
     /*
@@ -71,7 +71,7 @@ return [
     | correspond to a connection in your database configuration options.
     |
     */
-
+    // （database,redisに保存する場合）接続先
     'connection' => env('SESSION_CONNECTION'),
 
     /*
@@ -84,7 +84,7 @@ return [
     | provided for you; however, you are free to change this as needed.
     |
     */
-
+    // (databaseに保存する場合）保存先テーブル
     'table' => 'sessions',
 
     /*
@@ -99,7 +99,7 @@ return [
     | Affects: "apc", "dynamodb", "memcached", "redis"
     |
     */
-
+    // （apc,memcashedに保存する場合）キャッシュストア
     'store' => env('SESSION_STORE'),
 
     /*
@@ -112,7 +112,7 @@ return [
     | happen on a given request. By default, the odds are 2 out of 100.
     |
     */
-
+    // ガベージコレクションの発生確率（2/100 = 2%）
     'lottery' => [2, 100],
 
     /*
@@ -125,10 +125,10 @@ return [
     | new session cookie is created by the framework for every driver.
     |
     */
-
+    // Cookieのキー名
     'cookie' => env(
         'SESSION_COOKIE',
-        Str::slug(env('APP_NAME', 'laravel'), '_').'_session'
+        Str::slug(env('APP_NAME', 'laravel'), '_') . '_session'
     ),
 
     /*
@@ -141,7 +141,7 @@ return [
     | your application but you are free to change this when necessary.
     |
     */
-
+    // 有効なパス（'/' = サイト全体）
     'path' => '/',
 
     /*

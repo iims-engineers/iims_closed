@@ -18,6 +18,17 @@ class User extends Authenticatable implements MustVerifyEmail
 
     // テーブル名の定義
     protected $table = 'users';
+    // 取得するユーザー情報のカラム
+    public $columns = [
+        'id',
+        'name',
+        'name_kana',
+        'initial',
+        'birthday',
+        'nationality',
+        'introduction_text',
+        'past_join',
+    ];
 
     /**
      * 登録や更新を許可しないカラムを設定
@@ -60,8 +71,9 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function getAllUsers(bool $except = false, int $id = null)
     {
-        // 削除されていないユーザーをid順に取得
-        $query = $this->whereNull('deleted_at');
+        // 削除されていない承認済みのユーザーをid順に取得
+        $query = $this->where('is_approved', 1)
+            ->whereNull('deleted_at');
         if ($except) {
             /* 特定のユーザーを取得対象から外す場合 */
             $query = $query->where('id', '!=', $id);
@@ -80,8 +92,12 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function getUser(int $id)
     {
-        // IDを元にユーザー情報を取得
-        $user = $this->where('is_approved', 0)
+        // IDを元に承認済みのユーザー情報を取得
+        $user = $this->select($this->columns)
+            ->where([
+                ['id', '=', $id],
+                ['is_approved', '=', 1],
+            ])
             ->whereNull('deleted_at')
             ->first();
 

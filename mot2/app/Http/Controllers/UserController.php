@@ -34,4 +34,29 @@ class UserController extends Controller
             'users' => $this->all_users,
         ]);
     }
+
+    /**
+     * ユーザー情報 - 詳細画面の表示
+     * 
+     * @param string $id  ユーザーID
+     */
+    public function detail(string $id)
+    {
+        $user = '';
+        // IDを元にユーザー情報を取得
+        if (!empty($id)) {
+            // ユーザーIDをstring→intにキャスト
+            $id = intval($id);
+            $tmp_user = $this->m_user->getUser($id);
+            // 扱いやすいようにobject→arrayに変換
+            $user = $tmp_user->attributesToArray();
+        } else {
+            /* URLにユーザーIDが含まれない場合は前の画面に戻す */
+            return to_route('user.index');
+        }
+
+        return view('user/detail', [
+            'user' => $user,
+        ]);
+    }
 }

@@ -29,12 +29,12 @@
               <div class="c-user-icon">
                 <img src="{{ ('/img/common/dummy_icon.png') }}" alt="">
               </div>
-              <div class="c-user-info">
-                <div class="c-user-name">{{ $user->name }}</div>
-                <div></div>
+              <div class="c-user-info user-detail">
+                <a href="{{ route('user.detail', ['id' => $user->id]) }}" class="c-user-name user-detail-link">{{ $user->name }}</a>
               </div>
             </div>
             @endforeach
+            </form>
             @endif
           </div>
     </div>

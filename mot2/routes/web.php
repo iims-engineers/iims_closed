@@ -65,6 +65,8 @@ Route::middleware('auth')
         /* ユーザー情報 */
         // 一覧画面の表示
         Route::get('/user', [UserController::class, 'index'])->name('user.index');
+        // 詳細画面の表示
+        Route::get('/user/{id}', [UserController::class, 'detail'])->name('user.detail');
     });
 
 

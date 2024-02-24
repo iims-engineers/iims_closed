@@ -429,7 +429,14 @@ textarea {
     min-height: 17px;
     overflow: hidden;
     font-size: 12px;
-    line-height: 1; }
+    line-height: 1;
+  }
+  .user-detail-link{
+    padding: 5px 0 0 0;
+  }
+  .user-detail-link:hover {
+    color: rgb(189, 76, 0);
+  }
 
 .c-form {
   margin: 20px 0 0; }

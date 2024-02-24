@@ -49,7 +49,7 @@ class MailApplyAdmin extends Mailable
     public function content(): Content
     {
         return new Content(
-            text: 'mails.apply.admin',
+            view: 'mails.apply.admin',
             with: [
                 'user' => $this->user,
             ],

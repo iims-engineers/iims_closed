@@ -50,7 +50,7 @@ class MailApplyUser extends Mailable
     {
         // テキストメールなので 'text': 'メールviewファイルのパス' の形式で設定
         return new Content(
-            text: 'mails.apply.user',
+            view: 'mails.apply.user',
             with: [
                 'user' => $this->user,
             ],

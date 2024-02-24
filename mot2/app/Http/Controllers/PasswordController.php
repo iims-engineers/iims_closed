@@ -25,7 +25,7 @@ class PasswordController extends Controller
     }
 
     /**
-     * パスワード新規登録画面の表示
+     * 新規パスワード登録 - 入力画面の表示
      * 
      * @param string $token usersテーブルの認証用トークン
      */
@@ -54,7 +54,7 @@ class PasswordController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * 新規パスワード登録 - 登録実行
      */
     public function storeNew(PasswordNewRequest $request)
     {
@@ -67,22 +67,30 @@ class PasswordController extends Controller
         ]);
         // セッションから該当ユーザーの情報を取得
         $user = session()->get('user_data');
-        session()->flash('flash_message', __('passwords.regist_error'));
-        return back();
+
         // 登録実行
         try {
             $user->password = Hash::make($input['password']);
             $user->save();
 
             // 登録成功したらログインフォームに遷移
-            return to_route('login.form');
+            // ※なぜか「to_route('password.new.complete');」が正常動作しないので、直接viewを返却しておく
+            // return to_route('password.new.complete');
+            return view('password/new/complete');
         } catch (\Exception $e) {
             // 登録失敗したら再度入力フォームに戻してやり直させる
             session()->flash('flash_message', __('passwords.regist_error'));
             return back();
         }
-        exit;
     }
+
+    /**
+     * 新規パスワード登録 - 完了画面の表示
+     */
+    // public function completeNew()
+    // {
+    //     return view('password/new/complete');
+    // }
 
     /**
      * Display the specified resource.

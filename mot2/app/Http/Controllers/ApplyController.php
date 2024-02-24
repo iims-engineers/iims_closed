@@ -72,7 +72,7 @@ class ApplyController extends Controller
         $form_input = $request->session()->get('form_input');
         if (empty($form_input)) {
             // セッションに値がなければ入力画面に戻す
-            return to_route('apply.index');
+            return to_route('apply.form');
         }
 
         return view('apply/confirm/index', [

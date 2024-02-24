@@ -5,6 +5,7 @@ use \App\Http\Controllers\AboutController;
 use \App\Http\Controllers\ApplyController;
 use \App\Http\Controllers\LoginController;
 use \App\Http\Controllers\PasswordController;
+use \App\Http\Controllers\HomeController;
 use \App\Http\Controllers\UserController;
 use \App\Http\Controllers\Admin\user\ApproveController;
 
@@ -45,13 +46,13 @@ Route::prefix('/apply')
         Route::get('/complete', [ApplyController::class, 'showComplete'])->name('complete');
     });
 
-
-
 /* パスワード関連 */
 // パスワード新規登録画面の表示
 Route::get('/password/new/{token}', [PasswordController::class, 'showFormNew'])->name('password.new.form');
 // パスワード新規登録処理
 Route::post('/password/new/store', [PasswordController::class, 'storeNew'])->name('password.new.store');
+// パスワード新規登録完了画面の表示 ※なぜか「to_route('password.new.complete');」が動作しないので、一旦viewファイルを直接返却させる
+// Route::get('/password/new/complete', [PasswordController::class, 'completeNew'])->name('password.new.complete');
 
 /* ログイン */
 // ログインフォームの表示
@@ -59,17 +60,24 @@ Route::get('/login', [LoginController::class, 'showForm'])->name('login.form')->
 // ログイン処理
 Route::post('/login', [LoginController::class, 'login'])->name('login')->middleware('guest');
 
+
 /* ------------------------------------------------------------------------------------------------ */
 
 /* ------------------------------------------------------------------------------------------------ */
 /* ログイン時のみアクセス可能 */
+Route::middleware('auth')
+    ->group(function () {
 
-// ホーム画面の表示
-Route::get('/home', function () {
-    return view('home/index');
-})->name('home')->middleware('auth');
+        // ホーム画面の表示
+        Route::get('/home', [HomeController::class, 'index'])->name('home.index');
+
+        // ログアウト処理
+        Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+    });
 
 /* ------------------------------------------------------------------------------------------------ */
+
+
 /* 
  * 管理者側
  */

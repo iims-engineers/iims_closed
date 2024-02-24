@@ -1,7 +1,7 @@
 <!--include START-->
 <header class="l-header">
   <div class="l-header__logo">
-    <a href="/home/">
+    <a href="{{ route('home.index') }}">
       <img src="{{ asset('/img/common/mot2_simple_logo.svg') }}" alt="">
     </a>
   </div>
@@ -29,12 +29,15 @@
         </div>
       </div>
     </div>
-    <div class="l-header__btn-item">
-      <a href="{{ route('top') }}">
-        <img src="{{ asset('/img/common/icon-exit.svg') }}" alt="">
-        <span>ログアウト</span>
-      </a>
-    </div>
+    <form action="{{ route('logout') }}" method="POST" name="a_form_logout">
+      @csrf
+      <div class="l-header__btn-item">
+        <a href="#" onclick="document.a_form_logout.submit();">
+          <img src="{{ asset('/img/common/icon-exit.svg') }}" alt="">
+          <span>ログアウト</span>
+        </a>
+      </div>
+    </form>
   </div>
 </header>
 <!--include END-->

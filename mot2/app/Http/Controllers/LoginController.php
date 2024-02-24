@@ -25,7 +25,7 @@ class LoginController extends Controller
     /*
      * ログイン処理
      */
-    public function login(LoginRequest $request)
+    public function login(LoginRequest $request): RedirectResponse
     {
         // 入力データをバリデーション
         $credentials = $request->validated();
@@ -36,7 +36,23 @@ class LoginController extends Controller
             /* ログイン成功 */
             // セッションを再生成(セキュリティ対策)
             $request->session()->regenerate();
-            return to_route('top');
+            return to_route('home');
         }
+    }
+
+    /*
+     * ログアウト処理
+     */
+    public function logout(Request $request): RedirectResponse
+    {
+        // ログアウト処理
+        Auth::logout();
+
+        // 現在のセッションを削除し、再生成する(セキュリティ対策)
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        // TOPにリダイレクト
+        return to_route('top');
     }
 }

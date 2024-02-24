@@ -54,15 +54,22 @@ class User extends Authenticatable implements MustVerifyEmail
 
     /**
      * ユーザー情報一括取得
+     * 
+     * @param bool $except true→特定のユーザー(自分)を取得対象から外す
+     * @param int  $id     取得対象から外すユーザーのID
      */
-    public function getAllUser()
+    public function getAllUsers(bool $except = false, int $id = null)
     {
-        // 削除されていない全ユーザーをid順に取得
-        $all_users = $this->whereNull('deleted_at')
-            ->orderBy('id', 'asc')
+        // 削除されていないユーザーをid順に取得
+        $query = $this->whereNull('deleted_at');
+        if ($except) {
+            /* 特定のユーザーを取得対象から外す場合 */
+            $query = $query->where('id', '!=', $id);
+        }
+        $users = $query->orderBy('id', 'asc')
             ->get();
 
-        return $all_users;
+        return $users;
     }
 
     /**

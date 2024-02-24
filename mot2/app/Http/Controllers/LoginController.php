@@ -36,7 +36,11 @@ class LoginController extends Controller
             /* ログイン成功 */
             // セッションを再生成(セキュリティ対策)
             $request->session()->regenerate();
-            return to_route('home.index');
+            return redirect()->intended('home');
+        } else {
+            return back()->withErrors([
+                'failed_login' => __('auth.failed_login'),
+            ]);
         }
     }
 

@@ -31,14 +31,14 @@
             @csrf
             <div class="c-form-item">
               <label for="email" class="c-form-item-title">登録メールアドレス</label>
-              <input type="email" name="email" id="email" value="{{ old('email') }}">
+              <input type="email" name="email" id="email" value="{{ old('email') }}" required>
               @error('email')
               <p class="error-text">※{{ $message }}</p>
               @enderror
             </div>
             <div class="c-form-item">
               <label for="password" class="c-form-item-title">パスワード</label>
-              <input type="password" name="password" id="password">
+              <input type="password" name="password" id="password" required>
               @error('password')
               <p class="error-text">※{{ $message }}</p>
               @enderror

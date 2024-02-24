@@ -16,7 +16,7 @@
       </a>
     </div>
     <div class="l-footer__btn-item">
-      <a href="/user/">
+      <a href="{{ route('user.index') }}">
         <img src="{{ asset('/img/common/icon-users.svg') }}" width="32" height="32" alt="">
         <span>メンバー</span>
       </a>

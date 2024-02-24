@@ -9,19 +9,8 @@ use \App\Http\Controllers\HomeController;
 use \App\Http\Controllers\UserController;
 use \App\Http\Controllers\Admin\user\ApproveController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
-// Route::get('/', function () {
-//     return view('welcome');
+// Route::get('/1', function () {
+//     return view('user/index');
 // });
 
 /* ------------------------------------------------------------------------------------------------ */
@@ -60,7 +49,6 @@ Route::get('/login', [LoginController::class, 'showForm'])->name('login.form')->
 // ログイン処理
 Route::post('/login', [LoginController::class, 'login'])->name('login')->middleware('guest');
 
-
 /* ------------------------------------------------------------------------------------------------ */
 
 /* ------------------------------------------------------------------------------------------------ */
@@ -73,7 +61,12 @@ Route::middleware('auth')
 
         // ログアウト処理
         Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+        /* ユーザー情報 */
+        // 一覧画面の表示
+        Route::get('/user', [UserController::class, 'index'])->name('user.index');
     });
+
 
 /* ------------------------------------------------------------------------------------------------ */
 
@@ -81,14 +74,18 @@ Route::middleware('auth')
 /* 
  * 管理者側
  */
-// 承認待ちユーザー 一覧画面の表示
-Route::get('/admin/user/unapproved', [ApproveController::class, 'showList'])->name('admin.show.list');
-// 承認待ちユーザー 詳細画面の表示
-Route::get('/admin/user/unapproved/{id}', [ApproveController::class, 'showDetail'])->name('admin.show.detail');
-// 承認処理
-Route::post('/admin/user/approve', [ApproveController::class, 'approve'])->name('admin.unapprovedUser.approve');
+Route::prefix('/admin')
+    ->name('admin.')
+    ->group(function () {
+        // 承認待ちユーザー 一覧画面の表示
+        Route::get('/user/unapproved', [ApproveController::class, 'showList'])->name('show.list');
+        // 承認待ちユーザー 詳細画面の表示
+        Route::get('/user/unapproved/{id}', [ApproveController::class, 'showDetail'])->name('show.detail');
+        // 承認処理
+        Route::post('/user/approve', [ApproveController::class, 'approve'])->name('unapprovedUser.approve');
 
-/* 404エラー */
-Route::get('/error', function () {
-    return view('errors/404');
-})->name('404');
+        /* 404エラー */
+        Route::get('/error', function () {
+            return view('errors/404');
+        })->name('404');
+    });

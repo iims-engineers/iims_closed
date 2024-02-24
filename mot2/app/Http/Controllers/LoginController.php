@@ -36,7 +36,7 @@ class LoginController extends Controller
             /* ログイン成功 */
             // セッションを再生成(セキュリティ対策)
             $request->session()->regenerate();
-            return to_route('home');
+            return to_route('home.index');
         }
     }
 

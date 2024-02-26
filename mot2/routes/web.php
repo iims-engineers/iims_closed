@@ -10,7 +10,7 @@ use \App\Http\Controllers\UserController;
 use \App\Http\Controllers\Admin\user\ApproveController;
 
 // Route::get('/1', function () {
-//     return view('user/index');
+//     return view('password/complete/index');
 // });
 
 /* ------------------------------------------------------------------------------------------------ */
@@ -36,12 +36,19 @@ Route::prefix('/apply')
     });
 
 /* パスワード関連 */
-// パスワード新規登録画面の表示
+// パスワード新規登録 - 入力画面の表示
 Route::get('/password/new/{token}', [PasswordController::class, 'showFormNew'])->name('password.new.form');
-// パスワード新規登録処理
+// パスワード新規登録 - 登録実行
 Route::post('/password/new/store', [PasswordController::class, 'storeNew'])->name('password.new.store');
-// パスワード新規登録完了画面の表示 ※なぜか「to_route('password.new.complete');」が動作しないので、一旦viewファイルを直接返却させる
+// パスワード新規登録 - 完了画面の表示 ※なぜか「to_route('password.new.complete');」が動作しないので、一旦viewファイルを直接返却させる
 // Route::get('/password/new/complete', [PasswordController::class, 'completeNew'])->name('password.new.complete');
+// パスワードリセット - 入力画面の表示
+Route::get('/password/reset', [PasswordController::class, 'showFormReset'])->name('password.reset');
+// パスワードリセット - 登録実行
+Route::post('/password/reset/store', [PasswordController::class, 'storeReset'])->name('password.reset.store');
+// パスワードリセット - 完了画面の表示
+Route::get('/password/reset/complete', [PasswordController::class, 'showCompleteReset'])->name('password.reset.complete');
+
 
 /* ログイン */
 // ログインフォームの表示

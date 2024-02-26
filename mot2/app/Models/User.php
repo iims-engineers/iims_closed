@@ -28,6 +28,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'nationality',
         'introduction_text',
         'past_join',
+        'is_admin',
     ];
 
     /**
@@ -85,17 +86,37 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
-     * ユーザーの情報を取得
+     * IDからユーザーの情報を取得
      * 
      * @param int $id  ユーザーID
      * @return $user
      */
-    public function getUser(int $id)
+    public function getUserFromId(int $id)
     {
         // IDを元に承認済みのユーザー情報を取得
         $user = $this->select($this->columns)
             ->where([
                 ['id', '=', $id],
+                ['is_approved', '=', 1],
+            ])
+            ->whereNull('deleted_at')
+            ->first();
+
+        return $user;
+    }
+
+    /**
+     * メールアドレスからユーザーの情報を取得
+     * 
+     * @param string $email  メールアドレス
+     * @return $user
+     */
+    public function getUserFromEmail(string $email)
+    {
+        // メールアドレスを元に承認済みのユーザー情報を取得
+        $user = $this->select($this->columns)
+            ->where([
+                ['email', '=', $email],
                 ['is_approved', '=', 1],
             ])
             ->whereNull('deleted_at')

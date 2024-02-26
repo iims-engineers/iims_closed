@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PasswordNewRequest;
+use App\Http\Requests\PasswordResetRequest;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
@@ -93,11 +94,57 @@ class PasswordController extends Controller
     // }
 
     /**
-     * Display the specified resource.
+     * パスワードリセット - 入力画面の表示
+     * 
      */
-    public function show(string $id)
+    public function showFormReset()
     {
-        //
+        return view('password/reset/index');
+    }
+
+    /**
+     * パスワードリセット - 更新実行
+     */
+    public function storeReset(PasswordResetRequest $request)
+    {
+        // 入力データのバリデート
+        $validated = $request->validated();
+        // 入力データを取得
+        $input = $request->only([
+            'email',
+            'password',
+            'password_confirmation',
+        ]);
+
+        // 入力されたメールアドレスからユーザー情報を特定
+        $user = $this->m_user->getUserFromEmail($input['email']);
+
+        if (empty($user)) {
+            // メールアドレスが間違っている場合、エラーメッセージを表示する
+            session()->flash('flash_message', __('passwords.user'));
+            return back();
+        } else {
+            // 登録実行
+            try {
+                $user->password = Hash::make($input['password']);
+                $user->save();
+
+                // 登録成功したら完了画面に遷移
+                return to_route('password.reset.complete');
+            } catch (\Exception $e) {
+                // 登録失敗したら再度入力フォームに戻してやり直させる
+                session()->flash('flash_message', __('passwords.regist_error'));
+                return back();
+            }
+        }
+    }
+
+    /**
+     * パスワードリセット - 入力画面の表示
+     */
+    public function showCompleteReset()
+    {
+        return view('password/complete/index');
     }
 
     /**

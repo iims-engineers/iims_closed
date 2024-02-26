@@ -47,7 +47,7 @@ class UserController extends Controller
         if (!empty($id)) {
             // ユーザーIDをstring→intにキャスト
             $id = intval($id);
-            $tmp_user = $this->m_user->getUser($id);
+            $tmp_user = $this->m_user->getUserFromId($id);
             // 扱いやすいようにobject→arrayに変換
             $user = $tmp_user->attributesToArray();
         } else {

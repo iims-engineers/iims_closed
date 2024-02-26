@@ -18,19 +18,52 @@
       <main class="l-main">
         <section class="p-sub__section">
           <h1 class="p-sub__head01">パスワードの再設定</h1>
-          <div class="p-sub__lead">
-            <p>
-              新しいパスワードを設定してください。
-            </p>
+          @if($errors->any())
+          <div class="form-error">
+            <ul>
+              @foreach ($errors->all() as $error)
+              <li class="error-text">・{{ $error }}</li>
+              @endforeach
+            </ul>
           </div>
-          <form action="/home/" class="c-form">
+          @endif
+          @if(session('flash_message'))
+          <div class="form-error">
+            <p class="error-text">{{ session('flash_message') }}</p>
+          </div>
+          @endif
+          <form action="{{ route('password.reset.store') }}" method="POST" class="c-form">
+            @csrf
+            <div class="p-sub__lead">
+              <p>
+                ご登録のメールアドレスをご入力ください。
+              </p>
+            </div>
+            <div class="c-form-item">
+              <label for="email" class="c-form-item-title">メールアドレス</label>
+              <input type="email" name="email" id="email" value="{{ old('email') }}">
+              @error('email')
+              <p class="error-text">※{{ $message }}</p>
+              @enderror
+            </div>
+            <div class="p-sub__lead">
+              <p>
+                新しいパスワードを設定してください。
+              </p>
+            </div>
             <div class="c-form-item">
               <label for="password" class="c-form-item-title">新しいパスワード</label>
               <input type="password" name="password" id="password">
+              @error('password')
+              <p class="error-text">※{{ $message }}</p>
+              @enderror
             </div>
             <div class="c-form-item">
-              <label for="password-check" class="c-form-item-title">パスワードを再度入力してください</label>
-              <input type="password" name="password-check" id="password-check">
+              <label for="password_confirmation" class="c-form-item-title">パスワードを再度入力してください</label>
+              <input type="password" name="password_confirmation" id="password_confirmation">
+              @error('password_confirmation')
+              <p class="error-text">※{{ $message }}</p>
+              @enderror
             </div>
             <div class="c-form-submit c-button-wrap">
               <button type="submit" class="c-button">設定する</button>

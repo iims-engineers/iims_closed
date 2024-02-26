@@ -51,7 +51,7 @@
         <section class="p-sub__section">
           <h2 class="p-sub__head02">お困りですか？</h2>
           <div class="c-form-link">
-            <a href="/password/mail-check/">パスワードを忘れた方はこちら</a>
+            <a href="{{ route('password.reset') }}">パスワードを忘れた方はこちら</a>
             <a href="{{ route('apply.form') }}">ユーザー登録の申請はこちら</a>
           </div>
         </section>

@@ -48,8 +48,8 @@
               @enderror
             </div>
             <div class="c-form-item">
-              <label for="password-check" class="c-form-item-title">パスワードを再度入力してください</label>
-              <input type="password" name="password_confirmation" id="password-check" required>
+              <label for="password_confirmation" class="c-form-item-title">パスワードを再度入力してください</label>
+              <input type="password" name="password_confirmation" id="password_confirmation" required>
               @error('password_confirmation')
               <p class="error-text">※{{ $message }}</p>
               @enderror

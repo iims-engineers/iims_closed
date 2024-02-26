@@ -4,7 +4,7 @@
   <!-- <div class="copyright-wrap">Copyright &copy; ○○○○○○○○○○○○. All rights reserved.</div> -->
   <div class="l-footer__btn">
     <div class="l-footer__btn-item">
-      <a href="/home/">
+      <a href="{{ route('home.index') }}">
         <img src="{{ asset('/img/common/icon-earth.svg') }}" width="32" height="32" alt="">
         <span>HOME</span>
       </a>
@@ -12,7 +12,7 @@
     <div class="l-footer__btn-item">
       <a href="">
         <img src="{{ asset('/img/common/icon-search.svg') }}" width="32" height="32" alt="">
-        <span>検索</span>
+        <span>トピック一覧</span>
       </a>
     </div>
     <div class="l-footer__btn-item">

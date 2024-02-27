@@ -206,7 +206,6 @@ class User extends Authenticatable implements MustVerifyEmail
             ->whereNull('deleted_at')
             ->first();
 
-        // ユーザー情報が取得できないかメールアドレスと一致しない場合はfalseを返す
         return $user;
     }
 }

@@ -36,18 +36,6 @@
             @csrf
             <div class="p-sub__lead">
               <p>
-                ご登録のメールアドレスをご入力ください。
-              </p>
-            </div>
-            <div class="c-form-item">
-              <label for="email" class="c-form-item-title">メールアドレス</label>
-              <input type="email" name="email" id="email" value="{{ old('email') }}">
-              @error('email')
-              <p class="error-text">※{{ $message }}</p>
-              @enderror
-            </div>
-            <div class="p-sub__lead">
-              <p>
                 新しいパスワードを設定してください。
               </p>
             </div>

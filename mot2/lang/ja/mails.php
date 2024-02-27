@@ -17,4 +17,8 @@ return [
             'subject' => '【MOT2】会員登録申請が承認されました。'
         ]
     ],
+    /* パスワードリセット(非ログイン時) */
+    'password_reset_mail_check' => [
+        'subject' => '【MOT2】パスワードの再設定をお願いします。'
+    ],
 ];

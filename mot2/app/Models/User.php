@@ -94,11 +94,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function getUserFromId(int $id)
     {
         // IDを元に承認済みのユーザー情報を取得
-        $user = $this->select($this->columns)
-            ->where([
-                ['id', '=', $id],
-                ['is_approved', '=', 1],
-            ])
+        $user = $this->where([
+            ['id', '=', $id],
+            ['is_approved', '=', 1],
+        ])
             ->whereNull('deleted_at')
             ->first();
 
@@ -114,11 +113,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function getUserFromEmail(string $email)
     {
         // メールアドレスを元に承認済みのユーザー情報を取得
-        $user = $this->select($this->columns)
-            ->where([
-                ['email', '=', $email],
-                ['is_approved', '=', 1],
-            ])
+        $user = $this->where([
+            ['email', '=', $email],
+            ['is_approved', '=', 1],
+        ])
             ->whereNull('deleted_at')
             ->first();
 
@@ -127,14 +125,11 @@ class User extends Authenticatable implements MustVerifyEmail
 
     /**
      * 承認待ちユーザーを全て取得
-     * 
-     * @return void
      */
     public function getUnapprovedUsers()
     {
         // 承認待ちユーザーを取得
-        $unapproved_users = DB::table($this->table)
-            ->where('is_approved', 0)
+        $unapproved_users = $this->where('is_approved', 0)
             ->whereNull('deleted_at')
             ->get();
 
@@ -150,7 +145,8 @@ class User extends Authenticatable implements MustVerifyEmail
     public function approveUser($id)
     {
         // 承認待ちユーザーを取得
-        $user = $this->where('id', $id)->first();
+        $user = $this->where('id', $id)
+            ->first();
         // 承認ステータスを1(承認済)に設定
         $user->is_approved = 1;
         // 変更を保存
@@ -197,5 +193,20 @@ class User extends Authenticatable implements MustVerifyEmail
         }
         // ユーザー情報が取得できないかメールアドレスと一致しない場合はfalseを返す
         return false;
+    }
+
+    /**
+     * パスワード再設定キーからユーザー情報を取得
+     * 
+     * @param string $reset_token パスワード再設定キー
+     */
+    public function getUserFromResetPasswordAccessKey(string $reset_token)
+    {
+        $user = $this->where('reset_password_access_key', $reset_token)
+            ->whereNull('deleted_at')
+            ->first();
+
+        // ユーザー情報が取得できないかメールアドレスと一致しない場合はfalseを返す
+        return $user;
     }
 }

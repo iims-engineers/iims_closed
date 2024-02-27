@@ -27,10 +27,28 @@
               メールが届かない場合は、該当のメールアドレスで登録がされていない可能性がございます。お手数ですが<a href="/apply/">こちら</a>よりユーザー登録の申請をし直してください。
             </p>
           </div>
-          <form action="/password/mail-send/" class="c-form">
+          @if($errors->any())
+          <div class="form-error">
+            <ul>
+              @foreach ($errors->all() as $error)
+              <li class="error-text">・{{ $error }}</li>
+              @endforeach
+            </ul>
+          </div>
+          @endif
+          @if(session('flash_message'))
+          <div class="form-error">
+            <p class="error-text">{{ session('flash_message') }}</p>
+          </div>
+          @endif
+          <form action="{{ route('password.reset.check') }}" method="POST" class="c-form">
+            @csrf
             <div class="c-form-item">
               <label for="email" class="c-form-item-title">登録メールアドレス</label>
               <input type="email" name="email" id="email">
+              @error('email')
+              <p class="error-text">※{{ $message }}</p>
+              @enderror
             </div>
             <div class="c-form-submit c-button-wrap">
               <button type="submit" class="c-button">送信する</button>

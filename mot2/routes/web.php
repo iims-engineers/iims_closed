@@ -9,9 +9,9 @@ use \App\Http\Controllers\HomeController;
 use \App\Http\Controllers\UserController;
 use \App\Http\Controllers\Admin\user\ApproveController;
 
-// Route::get('/1', function () {
-//     return view('password/complete/index');
-// });
+Route::get('/1', function () {
+    return view('password/mail-check/index');
+});
 
 /* ------------------------------------------------------------------------------------------------ */
 /* 未ログイン時もアクセス可能 */
@@ -42,12 +42,18 @@ Route::get('/password/new/{token}', [PasswordController::class, 'showFormNew'])-
 Route::post('/password/new/store', [PasswordController::class, 'storeNew'])->name('password.new.store');
 // パスワード新規登録 - 完了画面の表示 ※なぜか「to_route('password.new.complete');」が動作しないので、一旦viewファイルを直接返却させる
 // Route::get('/password/new/complete', [PasswordController::class, 'completeNew'])->name('password.new.complete');
-// パスワードリセット - 入力画面の表示
-Route::get('/password/reset', [PasswordController::class, 'showFormReset'])->name('password.reset');
-// パスワードリセット - 登録実行
-Route::post('/password/reset/store', [PasswordController::class, 'storeReset'])->name('password.reset.store');
-// パスワードリセット - 完了画面の表示
-Route::get('/password/reset/complete', [PasswordController::class, 'showCompleteReset'])->name('password.reset.complete');
+// パスワードリセット(非ログイン時) - 入力画面の表示
+Route::get('/password/reset/mail-check', [PasswordController::class, 'resetShowMailForm'])->name('password.reset.form-mail');
+// パスワードリセット(非ログイン時) - メール送信実行
+Route::post('/password/reset/mail-check', [PasswordController::class, 'resetSendMail'])->name('password.reset.check');
+// パスワードリセット(非ログイン時) - メール送信完了画面の表示
+Route::get('/password/reset/mail-check/send', [PasswordController::class, 'resetShowSendMail'])->name('password.reset.send');
+// パスワードリセット(非ログイン時) - パスワード入力画面の表示
+Route::get('/password/reset/form', [PasswordController::class, 'resetShowPasswordForm'])->name('password.reset.form-password');
+// パスワードリセット(非ログイン時) - パスワード変更実行
+Route::post('/password/reset/store', [PasswordController::class, 'resetStorePassword'])->name('password.reset.store');
+// パスワードリセット(非ログイン時) - パスワード変更完了画面の表示
+Route::get('/password/reset/complete', [PasswordController::class, 'resetShowComplete'])->name('password.reset.complete');
 
 
 /* ログイン */

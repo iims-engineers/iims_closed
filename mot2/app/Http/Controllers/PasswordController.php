@@ -5,12 +5,16 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PasswordNewRequest;
 use App\Http\Requests\PasswordResetRequest;
+use App\Http\Requests\PasswordResetMailCheckRequest;
+use App\Http\Requests\PasswordResetStoreRequest;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\MailPasswordResetMailCheck;
+use Carbon\Carbon;
 use App\Models\User;
 
 class PasswordController extends Controller
@@ -80,94 +84,129 @@ class PasswordController extends Controller
             return view('password/new/complete');
         } catch (\Exception $e) {
             // 登録失敗したら再度入力フォームに戻してやり直させる
-            session()->flash('flash_message', __('passwords.regist_error'));
+            session()->flash('flash_message', __('passwords.failed_regist_reset'));
             return back();
         }
     }
 
     /**
-     * 新規パスワード登録 - 完了画面の表示
-     */
-    // public function completeNew()
-    // {
-    //     return view('password/new/complete');
-    // }
-
-    /**
-     * パスワードリセット - 入力画面の表示
+     * パスワードリセット(非ログイン時) - メールアドレス入力画面の表示
      * 
      */
-    public function showFormReset()
+    public function resetShowMailForm()
     {
-        return view('password/reset/index');
+        return view('password/mail-check/index');
     }
 
     /**
-     * パスワードリセット - 更新実行
+     * パスワードリセット(非ログイン時) - メール送信
      */
-    public function storeReset(PasswordResetRequest $request)
+    public function resetSendMail(PasswordResetMailCheckRequest $request)
     {
         // 入力データのバリデート
         $validated = $request->validated();
         // 入力データを取得
-        $input = $request->only([
-            'email',
-            'password',
-            'password_confirmation',
-        ]);
+        $email = $request->input('email');
 
         // 入力されたメールアドレスからユーザー情報を特定
-        $user = $this->m_user->getUserFromEmail($input['email']);
+        $user = $this->m_user->getUserFromEmail($email);
 
         if (empty($user)) {
-            // メールアドレスが間違っている場合、エラーメッセージを表示する
-            session()->flash('flash_message', __('passwords.user'));
-            return back();
+            // メールアドレスが間違っている場合、メールは送信せずに完了画面を表示する
+            return to_route('password.reset.send');
         } else {
-            // 登録実行
+            // アクセスキーの生成
+            $hashed_id = hash('sha256', $user->id);
+            // アクセスキーの有効期限は現在時刻から24時間に設定
+            $now = Carbon::now();
+
+            $user->reset_password_access_key = uniqid(rand(), $hashed_id);
+            $user->reset_password_expire_at = $now->addHours(24)->toDateTimeString();
+
             try {
-                $user->password = Hash::make($input['password']);
+                // 保存実行
                 $user->save();
 
-                // 登録成功したら完了画面に遷移
-                return to_route('password.reset.complete');
+                // メール送信
+                Mail::to($user->email)->send(new MailPasswordResetMailCheck($user));
+                // 送信完了画面に遷移
+                return to_route('password.reset.send');
             } catch (\Exception $e) {
-                // 登録失敗したら再度入力フォームに戻してやり直させる
-                session()->flash('flash_message', __('passwords.regist_error'));
+                // 処理に失敗したらエラーメッセージを表示
+                session()->flash('flash_message', __('passwords.failed_send'));
                 return back();
             }
         }
     }
 
     /**
-     * パスワードリセット - 入力画面の表示
+     * パスワードリセット(非ログイン時) - 確認用メール送信完了画面の表示
      */
-    public function showCompleteReset()
+    public function resetShowSendMail()
+    {
+        return view('password/mail-send/index');
+    }
+
+    /**
+     * パスワードリセット(非ログイン時) - 確認用メール送信完了画面の表示
+     */
+    public function resetShowPasswordForm(Request $request)
+    {
+        // 署名付きURLではない場合
+        if (!$request->hasValidSignature()) {
+            abort(403, __('passwords.expired'));
+        }
+
+        // 再設定キーと有効期限をセッションに保存
+        $request->session()->put([
+            'reset_token' => $request->reset_token,
+            'expired_at' => $request->expires,
+        ]);
+
+        return view('password/reset/index');
+    }
+
+    /**
+     * パスワードリセット(非ログイン時) - 確認用メール送信完了画面の表示
+     */
+    public function resetStorePassword(PasswordResetStoreRequest $request)
+    {
+        // 入力データのバリデート
+        $validated = $request->validated();
+        // 入力データを取得
+        $password = $request->input('password');
+        // セッションから再設定キーと有効期限を取得
+        $reset_token = $request->session()->get('reset_token');
+        $expired_at = $request->session()->get('expired_at');
+
+        // 入力されたメールアドレスからユーザー情報を特定
+        $user = $this->m_user->getUserFromResetPasswordAccessKey($reset_token);
+
+        if (empty($user)) {
+            // ユーザー情報が間違っている場合は404にしておく
+            return to_route('404');
+        } else {
+
+            $user->password = Hash::make($password);
+
+            try {
+                // 保存実行
+                $user->save();
+                // 送信完了画面に遷移
+                return to_route('password.reset.complete');
+            } catch (\Exception $e) {
+                // 処理に失敗したらエラーメッセージを表示
+                session()->flash('flash_message', __('passwords.failed_send'));
+                return back();
+            }
+        }
+    }
+
+    /**
+     * パスワードリセット(非ログイン時) - 確認用メール送信完了画面の表示
+     */
+    public function resetShowComplete()
     {
         return view('password/complete/index');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }

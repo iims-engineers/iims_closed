@@ -5,13 +5,14 @@ use \App\Http\Controllers\AboutController;
 use \App\Http\Controllers\ApplyController;
 use \App\Http\Controllers\LoginController;
 use \App\Http\Controllers\PasswordController;
+use \App\Http\Controllers\TopicController;
 use \App\Http\Controllers\HomeController;
 use \App\Http\Controllers\UserController;
 use \App\Http\Controllers\Admin\user\ApproveController;
 
-Route::get('/1', function () {
-    return view('password/mail-check/index');
-});
+// Route::get('/1', function () {
+//     return view('topic/show/index');
+// });
 
 /* ------------------------------------------------------------------------------------------------ */
 /* 未ログイン時もアクセス可能 */
@@ -36,24 +37,32 @@ Route::prefix('/apply')
     });
 
 /* パスワード関連 */
-// パスワード新規登録 - 入力画面の表示
-Route::get('/password/new/{token}', [PasswordController::class, 'showFormNew'])->name('password.new.form');
-// パスワード新規登録 - 登録実行
-Route::post('/password/new/store', [PasswordController::class, 'storeNew'])->name('password.new.store');
-// パスワード新規登録 - 完了画面の表示 ※なぜか「to_route('password.new.complete');」が動作しないので、一旦viewファイルを直接返却させる
-// Route::get('/password/new/complete', [PasswordController::class, 'completeNew'])->name('password.new.complete');
-// パスワードリセット(非ログイン時) - 入力画面の表示
-Route::get('/password/reset/mail-check', [PasswordController::class, 'resetShowMailForm'])->name('password.reset.form-mail');
-// パスワードリセット(非ログイン時) - メール送信実行
-Route::post('/password/reset/mail-check', [PasswordController::class, 'resetSendMail'])->name('password.reset.check');
-// パスワードリセット(非ログイン時) - メール送信完了画面の表示
-Route::get('/password/reset/mail-check/send', [PasswordController::class, 'resetShowSendMail'])->name('password.reset.send');
-// パスワードリセット(非ログイン時) - パスワード入力画面の表示
-Route::get('/password/reset/form', [PasswordController::class, 'resetShowPasswordForm'])->name('password.reset.form-password');
-// パスワードリセット(非ログイン時) - パスワード変更実行
-Route::post('/password/reset/store', [PasswordController::class, 'resetStorePassword'])->name('password.reset.store');
-// パスワードリセット(非ログイン時) - パスワード変更完了画面の表示
-Route::get('/password/reset/complete', [PasswordController::class, 'resetShowComplete'])->name('password.reset.complete');
+Route::prefix('/password')
+    ->name('password.')
+    ->group(function () {
+
+        /* 新規登録関連 */
+        // パスワード新規登録 - 入力画面の表示
+        Route::get('/new/{token}', [PasswordController::class, 'showFormNew'])->name('new.form');
+        // パスワード新規登録 - 登録実行
+        Route::post('/new/store', [PasswordController::class, 'storeNew'])->name('new.store');
+        // パスワード新規登録 - 完了画面の表示 ※なぜか「to_route('password.new.complete');」が動作しないので、一旦viewファイルを直接返却させる
+        // Route::get('/new/complete', [PasswordController::class, 'completeNew'])->name('ew.complete');
+
+        /* リセット関連 */
+        // パスワードリセット(非ログイン時) - 入力画面の表示
+        Route::get('/reset/mail-check', [PasswordController::class, 'resetShowMailForm'])->name('reset.form-mail');
+        // パスワードリセット(非ログイン時) - メール送信実行
+        Route::post('/reset/mail-check', [PasswordController::class, 'resetSendMail'])->name('reset.check');
+        // パスワードリセット(非ログイン時) - メール送信完了画面の表示
+        Route::get('/reset/mail-check/send', [PasswordController::class, 'resetShowSendMail'])->name('reset.send');
+        // パスワードリセット(非ログイン時) - パスワード入力画面の表示
+        Route::get('/reset/form', [PasswordController::class, 'resetShowPasswordForm'])->name('reset.form-password');
+        // パスワードリセット(非ログイン時) - パスワード変更実行
+        Route::post('/reset/store', [PasswordController::class, 'resetStorePassword'])->name('reset.store');
+        // パスワードリセット(非ログイン時) - パスワード変更完了画面の表示
+        Route::get('/reset/complete', [PasswordController::class, 'resetShowComplete'])->name('reset.complete');
+    });
 
 
 /* ログイン */
@@ -77,9 +86,19 @@ Route::middleware('auth')
 
         /* ユーザー情報 */
         // 一覧画面の表示
-        Route::get('/user', [UserController::class, 'index'])->name('user.index');
+        Route::get('/user/list', [UserController::class, 'showList'])->name('user.list');
         // 詳細画面の表示
-        Route::get('/user/{id}', [UserController::class, 'detail'])->name('user.detail');
+        Route::get('/user/detail/{id}', [UserController::class, 'detail'])->name('user.detail');
+
+        /* トピック関連 */
+        // トピック - 一覧画面の表示
+        Route::get('/topic/list', [TopicController::class, 'showList'])->name('topic.show.list');
+        // トピック - 詳細画面の表示
+        // Route::get('/topic/{id}', [TopicController::class, 'showDetail'])->name('topic.show.detail');
+        // トピック - 新規作成画面の表示
+        Route::get('/topic/new', [TopicController::class, 'showForm'])->name('topic.show.create');
+        // トピック - 新規作成画面の表示
+        Route::post('/topic/new', [TopicController::class, 'newCheck'])->name('topic.new.check');
     });
 
 

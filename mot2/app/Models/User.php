@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Arr;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -38,7 +39,8 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $guarded = [
         'id',
-
+        'created_at',
+        'updated_at',
     ];
 
     /**
@@ -91,7 +93,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @param int $id  ユーザーID
      * @return $user
      */
-    public function getUserFromId(int $id)
+    public function getUserById(int $id)
     {
         // IDを元に承認済みのユーザー情報を取得
         $user = $this->where([
@@ -110,7 +112,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @param string $email  メールアドレス
      * @return $user
      */
-    public function getUserFromEmail(string $email)
+    public function getUserByEmail(string $email)
     {
         // メールアドレスを元に承認済みのユーザー情報を取得
         $user = $this->where([
@@ -176,7 +178,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * 
      * @param string $token  認証用トークン
      */
-    public function getUserFromToken(string $token)
+    public function getUserByToken(string $token)
     {
         $user = $this->where([
             'verify_token' => $token,
@@ -200,7 +202,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * 
      * @param string $reset_token パスワード再設定キー
      */
-    public function getUserFromResetPasswordAccessKey(string $reset_token)
+    public function getUserByResetPasswordAccessKey(string $reset_token)
     {
         $user = $this->where('reset_password_access_key', $reset_token)
             ->whereNull('deleted_at')

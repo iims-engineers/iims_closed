@@ -10,13 +10,13 @@
       </a>
     </div>
     <div class="l-footer__btn-item">
-      <a href="">
+      <a href="{{ route('topic.show.list') }}">
         <img src="{{ asset('/img/common/icon-search.svg') }}" width="32" height="32" alt="">
         <span>トピック一覧</span>
       </a>
     </div>
     <div class="l-footer__btn-item">
-      <a href="{{ route('user.index') }}">
+      <a href="{{ route('user.list') }}">
         <img src="{{ asset('/img/common/icon-users.svg') }}" width="32" height="32" alt="">
         <span>メンバー</span>
       </a>

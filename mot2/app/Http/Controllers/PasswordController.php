@@ -41,7 +41,7 @@ class PasswordController extends Controller
             return to_route('top');
         }
         // 認証トークンからユーザー情報を取得できなければトップ画面に戻す
-        $user = $this->m_user->getUserFromToken($token);
+        $user = $this->m_user->getUserByToken($token);
         if (!$user) {
             return to_route('top');
         }
@@ -109,7 +109,7 @@ class PasswordController extends Controller
         $email = $request->input('email');
 
         // 入力されたメールアドレスからユーザー情報を特定
-        $user = $this->m_user->getUserFromEmail($email);
+        $user = $this->m_user->getUserByEmail($email);
 
         if (empty($user)) {
             // メールアドレスが間違っている場合、メールは送信せずに完了画面を表示する
@@ -180,7 +180,7 @@ class PasswordController extends Controller
         $expired_at = $request->session()->get('expired_at');
 
         // 入力されたメールアドレスからユーザー情報を特定
-        $user = $this->m_user->getUserFromResetPasswordAccessKey($reset_token);
+        $user = $this->m_user->getUserByResetPasswordAccessKey($reset_token);
 
         if (empty($user)) {
             // ユーザー情報が間違っている場合は404にしておく

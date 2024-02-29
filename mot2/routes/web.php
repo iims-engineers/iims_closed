@@ -94,11 +94,13 @@ Route::middleware('auth')
         // トピック - 一覧画面の表示
         Route::get('/topic/list', [TopicController::class, 'showList'])->name('topic.show.list');
         // トピック - 詳細画面の表示
-        // Route::get('/topic/{id}', [TopicController::class, 'showDetail'])->name('topic.show.detail');
-        // トピック - 新規作成画面の表示
-        Route::get('/topic/new', [TopicController::class, 'showForm'])->name('topic.show.create');
-        // トピック - 新規作成画面の表示
-        Route::post('/topic/new', [TopicController::class, 'newCheck'])->name('topic.new.check');
+        Route::get('/topic/{id}', [TopicController::class, 'showDetail'])->name('topic.show.detail');
+        // トピック新規作成 - 入力画面の表示
+        Route::get('/topic/new', [TopicController::class, 'showCreate'])->name('topic.show.create');
+        // トピック編集 - 編集画面の表示
+        Route::get('/topic/edit/{id}', [TopicController::class, 'showEdit'])->name('topic.show.edit');
+        // トピック - 保存実行
+        Route::post('/topic/store', [TopicController::class, 'store'])->name('topic.store');
     });
 
 
@@ -117,9 +119,9 @@ Route::prefix('/admin')
         Route::get('/user/unapproved/{id}', [ApproveController::class, 'showDetail'])->name('show.detail');
         // 承認処理
         Route::post('/user/approve', [ApproveController::class, 'approve'])->name('unapprovedUser.approve');
-
-        /* 404エラー */
-        Route::get('/error', function () {
-            return view('errors/404');
-        })->name('404');
     });
+
+/* 404エラー */
+Route::get('/error', function () {
+    return view('errors/404');
+})->name('404');

@@ -34,7 +34,6 @@
               </div>
             </div>
             @endforeach
-            </form>
             @endif
           </div>
     </div>

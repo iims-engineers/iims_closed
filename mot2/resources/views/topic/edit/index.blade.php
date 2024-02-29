@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>トピックの新規作成</title>
+  <title>トピックの編集</title>
   @include('components.head')
 </head>
 
@@ -17,7 +17,7 @@
     <div class="l-contents">
       <main class="l-main">
         <section class="p-sub__section">
-          <h1 class="p-sub__head01">トピックの新規作成</h1>
+          <h1 class="p-sub__head01">トピックの編集</h1>
           @if($errors->any())
           <div class="form-error">
             <ul>
@@ -41,22 +41,23 @@
             </div>
             <form action="{{ route('topic.store') }}" method="POST" class="c-form">
               @csrf
+              <input type="hidden" name="id" value="{{ $topic->id }}">
               <div class="c-form-item">
                 <label for="topic-title" class="c-form-item-title">トピックのタイトル</label>
-                <input type="text" name="topic-title" id="topic-title" value="{{ old('topic-title') }}">
+                <input type="text" name="topic-title" id="topic-title" value="{{ $topic->title }}">
                 @error('topic-title')
                 <p class="error-text">※{{ $message }}</p>
                 @enderror
               </div>
               <div class="c-form-item">
                 <label for="topic-detail" class="c-form-item-title">トピックの本文</label>
-                <textarea name="topic-detail" id="topic-detail" cols="30" rows="10" value="{{ old('topic-detail') }}"></textarea>
+                <textarea name="topic-detail" id="topic-detail" cols="30" rows="10" value="{{ old('topic-detail') }}">{{ $topic->content }}</textarea>
                 @error('topic-detail')
                 <p class="error-text">※{{ $message }}</p>
                 @enderror
               </div>
               <div class="c-form-submit c-button-wrap">
-                <button type="submit" class="c-button">新規作成する</button>
+                <button type="submit" class="c-button">編集完了</button>
               </div>
             </form>
           </div>

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Topic;
 use Illuminate\Http\Request;
-use App\Http\Requests\TopicNewRequest;
+use App\Http\Requests\TopicRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
@@ -42,6 +42,8 @@ class TopicController extends Controller
     {
         // トピック情報を投稿日時が新しい順で取得
         $topics = $this->m_topic->getAllTopics();
+        // dd($topics);
+        // $topics = $this->m_topic::paginate(5);
 
         return view('topic/show/index', [
             'topics' => $topics,
@@ -53,18 +55,25 @@ class TopicController extends Controller
      * 
      * @param int $id  トピックID
      */
-    // public function showDetail(int $id)
-    // {
-    //     // IDを元にトピックの詳細を取得
-    //     $topic = $this->m_topic->getTopicById($id);
+    public function showDetail(int $id = 0)
+    {
+        if (empty($id)) {
+            /* IDが無い場合は一覧に戻す */
+            return to_route('topic.show.list');
+        }
 
-    //     return view('topic/show/detail');
-    // }
+        // IDを元にトピックの詳細を取得
+        $topic = $this->m_topic->getTopicById($id);
+
+        return view('topic/show/detail', [
+            '$topic' => $topic,
+        ]);
+    }
 
     /**
      * トピック新規作成 - 入力画面の表示
      */
-    public function showForm()
+    public function showCreate()
     {
         // ユーザー情報(投稿者)を取得
         $user = Auth::user();
@@ -75,18 +84,55 @@ class TopicController extends Controller
     }
 
     /**
-     * トピック新規作成 - 入力内容の確認、保存実行
+     * トピック編集 - 編集画面の表示
+     * 
+     * @param int $topic_id  編集するトピックのトピックID
      */
-    public function newCheck(TopicNewRequest $request)
+    public function showEdit(int $topic_id = 0)
+    {
+        if (empty($topic_id)) {
+            /* IDが無い場合は一覧に戻す */
+            return to_route('topic.show.list');
+        }
+
+        // ログインしているユーザー情報を取得
+        $user = Auth::user();
+        // トピックIDを元にトピック情報を取得
+        $topic = $this->m_topic->getTopicById($topic_id);
+
+        if (empty($topic) || $user->id !== $topic->user_id) {
+            /* IDが不正、トピック削除済みの場合や、投稿者以外が編集しようとした場合などは404 */
+            return to_route('404');
+        }
+
+        if ($user->id !== $topic->user_id) {
+            /* 投稿者以外は編集できないため一覧に戻す */
+            return back();
+        }
+
+        return view('topic/edit/index', [
+            'topic' => $topic,
+            'user' => $user,
+        ]);
+    }
+
+    /**
+     * トピック - 入力内容の確認、保存実行
+     */
+    public function store(TopicRequest $request)
     {
         // 入力データのバリデート
         $validated = $request->validated();
         // バリデートOKの場合、取得
-        $input = $request->only($this->form_topic);
+        $input = $request->all();
 
         // 投稿者(ログインしているユーザー)の情報を取得
         $user = Auth::user();
 
+        if (isset($input['id'])) {
+        }
+
+        exit;
         /* topicテーブルに保存する内容を設定 */
         // タイトル
         $this->m_topic->title = Arr::get($input, 'topic-title');

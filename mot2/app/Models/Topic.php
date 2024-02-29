@@ -10,6 +10,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Arr;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\DB;
+use App\Models\User;
 
 class Topic extends Model
 {
@@ -41,6 +42,16 @@ class Topic extends Model
         'user_id' => 'integer',
     ];
 
+    private $columns = [
+        'topics.id',
+        'topics.title',
+        'topics.content',
+        'topics.user_id',
+        'topics.created_at',
+        'topics.updated_at',
+        'users.name',
+    ];
+
     /**
      * トピック情報一括取得(投稿日時が新しい順)
      * 
@@ -48,8 +59,11 @@ class Topic extends Model
     public function getAllTopics()
     {
         // 削除されていない承認済みのユーザーをid順に取得
-        $topics = $this->whereNull('deleted_at')
-            ->orderBy('created_at', 'desc')
+        $topics = DB::table('topics')
+            ->join('users', 'topics.user_id', '=', 'users.id')
+            ->select($this->columns)
+            ->whereNull('topics.deleted_at')
+            ->orderBy('topics.created_at', 'desc')
             ->get();
 
         return $topics;
@@ -60,10 +74,13 @@ class Topic extends Model
      * 
      * @param int $id  トピックID
      */
-    public function getTopicById(int $id)
+    public function getTopicById(int $topic_id)
     {
-        $topic = $this->where('id', $id)
-            ->whereNull('deleted_at')
+        $topic = DB::table('topics')
+            ->join('users', 'topics.user_id', '=', 'users.id')
+            ->select($this->columns)
+            ->where('topics.id', $topic_id)
+            ->whereNull('topics.deleted_at')
             ->first();
 
         return $topic;

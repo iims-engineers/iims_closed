@@ -46,7 +46,7 @@
                   <span>このトピックを見る</span>
                 </a>
                 @if(Auth::user()->id === $topic->user_id)
-                <a href="{{ route('topic.show.edit', ['id' => $topic->id]) }}" class="c-button">
+                <a href="{{ route('topic.show.edit', ['id' => (int)$topic->id]) }}" class="c-button">
                   <img src="{{ ('/img/common/icon-pencil.svg') }}" alt="">
                   <span>このトピックを編集する</span>
                 </a>

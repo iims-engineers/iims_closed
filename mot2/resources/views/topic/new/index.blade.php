@@ -50,7 +50,7 @@
               </div>
               <div class="c-form-item">
                 <label for="topic-detail" class="c-form-item-title">トピックの本文</label>
-                <textarea name="topic-detail" id="topic-detail" cols="30" rows="10" value="{{ old('topic-detail') }}"></textarea>
+                <textarea name="topic-detail" id="topic-detail" cols="30" rows="10">{{ old('topic-detail') }}</textarea>
                 @error('topic-detail')
                 <p class="error-text">※{{ $message }}</p>
                 @enderror

@@ -42,8 +42,6 @@ class TopicController extends Controller
     {
         // トピック情報を投稿日時が新しい順で取得
         $topics = $this->m_topic->getAllTopics();
-        // dd($topics);
-        // $topics = $this->m_topic::paginate(5);
 
         return view('topic/show/index', [
             'topics' => $topics,
@@ -53,9 +51,9 @@ class TopicController extends Controller
     /**
      * トピック - 詳細画面の表示
      * 
-     * @param int $id  トピックID
+     * @param string|null $id  トピックID
      */
-    public function showDetail(int $id = 0)
+    public function showDetail(string|null $id = null)
     {
         if (empty($id)) {
             /* IDが無い場合は一覧に戻す */
@@ -63,7 +61,7 @@ class TopicController extends Controller
         }
 
         // IDを元にトピックの詳細を取得
-        $topic = $this->m_topic->getTopicById($id);
+        $topic = $this->m_topic->getTopicById((int)$id);
 
         return view('topic/show/detail', [
             '$topic' => $topic,
@@ -86,9 +84,9 @@ class TopicController extends Controller
     /**
      * トピック編集 - 編集画面の表示
      * 
-     * @param int $topic_id  編集するトピックのトピックID
+     * @param string|null $topic_id  編集するトピックのトピックID
      */
-    public function showEdit(int $topic_id = 0)
+    public function showEdit(string|null $topic_id = null)
     {
         if (empty($topic_id)) {
             /* IDが無い場合は一覧に戻す */
@@ -98,7 +96,7 @@ class TopicController extends Controller
         // ログインしているユーザー情報を取得
         $user = Auth::user();
         // トピックIDを元にトピック情報を取得
-        $topic = $this->m_topic->getTopicById($topic_id);
+        $topic = $this->m_topic::find((int)$topic_id);
 
         if (empty($topic) || $user->id !== $topic->user_id) {
             /* IDが不正、トピック削除済みの場合や、投稿者以外が編集しようとした場合などは404 */
@@ -129,23 +127,27 @@ class TopicController extends Controller
         // 投稿者(ログインしているユーザー)の情報を取得
         $user = Auth::user();
 
-        if (isset($input['id'])) {
-        }
-
-        exit;
-        /* topicテーブルに保存する内容を設定 */
-        // タイトル
-        $this->m_topic->title = Arr::get($input, 'topic-title');
-        // 本文
-        $this->m_topic->content = Arr::get($input, 'topic-detail');
-        // 投稿者
-        $this->m_topic->user_id = $user->id;
-
         try {
-            // 保存実行
-            $this->m_topic->save();
 
-            // 投稿完了したらトピック一覧画面に遷移する
+            if (isset($input['id'])) {
+                /* 編集の場合はトピック情報を取得 */
+                $topic = $this->m_topic::find((int)$input['id']);
+            } else {
+                /* 新規作成の場合は投稿者のユーザーIDも保存する */
+                $topic = $this->m_topic;
+                // 投稿者
+                $topic->user_id = $user->id;
+            }
+            // タイトル
+            $topic->title = Arr::get($input, 'topic-title');
+            // 本文
+            $topic->content = Arr::get($input, 'topic-detail');
+
+
+            // 保存実行
+            $topic->save();
+
+            // 保存完了したらトピック一覧画面に遷移する
             return to_route('topic.show.list');
         } catch (\Exception $e) {
             // 失敗したら入力画面に戻す

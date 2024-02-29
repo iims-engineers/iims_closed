@@ -93,10 +93,10 @@ Route::middleware('auth')
         /* トピック関連 */
         // トピック - 一覧画面の表示
         Route::get('/topic/list', [TopicController::class, 'showList'])->name('topic.show.list');
-        // トピック - 詳細画面の表示
-        Route::get('/topic/{id}', [TopicController::class, 'showDetail'])->name('topic.show.detail');
         // トピック新規作成 - 入力画面の表示
         Route::get('/topic/new', [TopicController::class, 'showCreate'])->name('topic.show.create');
+        // トピック - 詳細画面の表示
+        Route::get('/topic/detail/{id}', [TopicController::class, 'showDetail'])->name('topic.show.detail');
         // トピック編集 - 編集画面の表示
         Route::get('/topic/edit/{id}', [TopicController::class, 'showEdit'])->name('topic.show.edit');
         // トピック - 保存実行

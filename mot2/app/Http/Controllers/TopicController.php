@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Topic;
 use Illuminate\Http\Request;
 use App\Http\Requests\TopicRequest;
 use App\Http\Controllers\Controller;
@@ -11,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Mail;
 use App\Models\User;
+use App\Models\Topic;
+use App\Models\Comment;
 
 class TopicController extends Controller
 {
@@ -19,6 +20,8 @@ class TopicController extends Controller
     private $m_topic;
     // userモデルのインスタンス格納用
     private $m_user;
+    // commentモデルのインスタンス格納用
+    private $m_comment;
     // 全ユーザー情報
     private $all_topics;
     // 新規作成・編集の入力項目
@@ -33,6 +36,8 @@ class TopicController extends Controller
         $this->m_topic = new Topic();
         // userモデルのインスタンス生成
         $this->m_user = new User();
+        // commentモデルのインスタンス生成
+        $this->m_comment = new Comment();
     }
 
     /**

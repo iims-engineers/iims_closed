@@ -11,6 +11,7 @@ use Illuminate\Support\Arr;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use App\Models\Comment;
 
 class Topic extends Model
 {
@@ -42,6 +43,7 @@ class Topic extends Model
         'user_id' => 'integer',
     ];
 
+    // 一覧表示に使用するデータカラム
     private $columns = [
         'topics.id',
         'topics.title',

@@ -15,7 +15,7 @@ use \App\Http\Controllers\Admin\user\ApproveController;
 // });
 
 /* ------------------------------------------------------------------------------------------------ */
-/* 未ログイン時もアクセス可能 */
+/* ログイン状態に関わらずアクセス可能 */
 
 // TOP(MOT2紹介ページ)の表示
 Route::get('/', [AboutController::class, 'index'])->name('top');
@@ -42,39 +42,59 @@ Route::prefix('/password')
     ->group(function () {
 
         /* 新規登録関連 */
-        // パスワード新規登録 - 入力画面の表示
-        Route::get('/new/{token}', [PasswordController::class, 'showFormNew'])->name('new.form');
-        // パスワード新規登録 - 登録実行
-        Route::post('/new/store', [PasswordController::class, 'storeNew'])->name('new.store');
-        // パスワード新規登録 - 完了画面の表示 ※なぜか「to_route('password.new.complete');」が動作しないので、一旦viewファイルを直接返却させる
-        // Route::get('/new/complete', [PasswordController::class, 'completeNew'])->name('ew.complete');
+        Route::prefix('/new')
+            ->name('new.')
+            ->group(function () {
+                // パスワード新規登録 - 入力画面の表示
+                Route::get('/{token}', [PasswordController::class, 'showFormNew'])->name('form');
+                // パスワード新規登録 - 登録実行
+                Route::post('/store', [PasswordController::class, 'storeNew'])->name('store');
+                // パスワード新規登録 - 完了画面の表示 ※なぜか「to_route('password.new.complete');」が動作しないので、一旦viewファイルを直接返却させる
+                // Route::get('/complete', [PasswordController::class, 'completeNew'])->name('complete');
+            });
 
         /* リセット関連 */
-        // パスワードリセット(非ログイン時) - 入力画面の表示
-        Route::get('/reset/mail-check', [PasswordController::class, 'resetShowMailForm'])->name('reset.form-mail');
-        // パスワードリセット(非ログイン時) - メール送信実行
-        Route::post('/reset/mail-check', [PasswordController::class, 'resetSendMail'])->name('reset.check');
-        // パスワードリセット(非ログイン時) - メール送信完了画面の表示
-        Route::get('/reset/mail-check/send', [PasswordController::class, 'resetShowSendMail'])->name('reset.send');
-        // パスワードリセット(非ログイン時) - パスワード入力画面の表示
-        Route::get('/reset/form', [PasswordController::class, 'resetShowPasswordForm'])->name('reset.form-password');
-        // パスワードリセット(非ログイン時) - パスワード変更実行
-        Route::post('/reset/store', [PasswordController::class, 'resetStorePassword'])->name('reset.store');
-        // パスワードリセット(非ログイン時) - パスワード変更完了画面の表示
-        Route::get('/reset/complete', [PasswordController::class, 'resetShowComplete'])->name('reset.complete');
+        Route::prefix('/reset')
+            ->name('reset.')
+            ->group(function () {
+                // パスワードリセット(非ログイン時) - 入力画面の表示
+                Route::get('/mail-check', [PasswordController::class, 'resetShowMailForm'])->name('form-mail');
+                // パスワードリセット(非ログイン時) - メール送信実行
+                Route::post('/mail-check', [PasswordController::class, 'resetSendMail'])->name('check');
+                // パスワードリセット(非ログイン時) - メール送信完了画面の表示
+                Route::get('/mail-check/send', [PasswordController::class, 'resetShowSendMail'])->name('send');
+                // パスワードリセット(非ログイン時) - パスワード入力画面の表示
+                Route::get('/form', [PasswordController::class, 'resetShowPasswordForm'])->name('form-password');
+                // パスワードリセット(非ログイン時) - パスワード変更実行
+                Route::post('/store', [PasswordController::class, 'resetStorePassword'])->name('store');
+                // パスワードリセット(非ログイン時) - パスワード変更完了画面の表示
+                Route::get('/complete', [PasswordController::class, 'resetShowComplete'])->name('complete');
+            });
     });
+/* ------------------------------------------------------------------------------------------------ */
 
 
-/* ログイン */
-// ログインフォームの表示
-Route::get('/login', [LoginController::class, 'showForm'])->name('login.form')->middleware('guest');
-// ログイン処理
-Route::post('/login', [LoginController::class, 'login'])->name('login')->middleware('guest');
+/* ------------------------------------------------------------------------------------------------ */
+/**
+ * 未ログイン時のみアクセス可能
+ */
+Route::middleware('guest')
+    ->group(
+        function () {
 
+            /* ログイン */
+            // ログインフォームの表示
+            Route::get('/login', [LoginController::class, 'showForm'])->name('login.form');
+            // ログイン処理
+            Route::post('/login', [LoginController::class, 'login'])->name('login');
+        }
+    );
 /* ------------------------------------------------------------------------------------------------ */
 
 /* ------------------------------------------------------------------------------------------------ */
-/* ログイン時のみアクセス可能 */
+/**
+ * ログイン時のみアクセス可能
+ */
 Route::middleware('auth')
     ->group(function () {
 
@@ -85,25 +105,31 @@ Route::middleware('auth')
         Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
         /* ユーザー情報 */
-        // 一覧画面の表示
-        Route::get('/user/list', [UserController::class, 'showList'])->name('user.list');
-        // 詳細画面の表示
-        Route::get('/user/detail/{id}', [UserController::class, 'detail'])->name('user.detail');
+        Route::prefix('/user')
+            ->name('user.')
+            ->group(function () {
+                // 一覧画面の表示
+                Route::get('/list', [UserController::class, 'showList'])->name('list');
+                // 詳細画面の表示
+                Route::get('/detail/{id}', [UserController::class, 'detail'])->name('detail');
+            });
 
         /* トピック関連 */
-        // トピック - 一覧画面の表示
-        Route::get('/topic/list', [TopicController::class, 'showList'])->name('topic.show.list');
-        // トピック新規作成 - 入力画面の表示
-        Route::get('/topic/new', [TopicController::class, 'showCreate'])->name('topic.show.create');
-        // トピック - 詳細画面の表示
-        Route::get('/topic/detail/{id}', [TopicController::class, 'showDetail'])->name('topic.show.detail');
-        // トピック編集 - 編集画面の表示
-        Route::get('/topic/edit/{id}', [TopicController::class, 'showEdit'])->name('topic.show.edit');
-        // トピック - 保存実行
-        Route::post('/topic/store', [TopicController::class, 'store'])->name('topic.store');
+        Route::prefix('/topic')
+            ->name('topic.')
+            ->group(function () {
+                // トピック - 一覧画面の表示
+                Route::get('/list', [TopicController::class, 'showList'])->name('show.list');
+                // トピック新規作成 - 入力画面の表示
+                Route::get('/new', [TopicController::class, 'showCreate'])->name('show.create');
+                // トピック - 詳細画面の表示
+                Route::get('/detail/{id}', [TopicController::class, 'showDetail'])->name('show.detail');
+                // トピック編集 - 編集画面の表示
+                Route::get('/edit/{id}', [TopicController::class, 'showEdit'])->name('show.edit');
+                // トピック - 保存実行
+                Route::post('/store', [TopicController::class, 'store'])->name('store');
+            });
     });
-
-
 /* ------------------------------------------------------------------------------------------------ */
 
 

@@ -129,9 +129,6 @@ class TopicController extends Controller
         // バリデートOKの場合、取得
         $input = $request->all();
 
-        // 投稿者(ログインしているユーザー)の情報を取得
-        $user = Auth::user();
-
         try {
 
             if (isset($input['id'])) {
@@ -140,15 +137,14 @@ class TopicController extends Controller
             } else {
                 /* 新規作成の場合は投稿者のユーザーIDも保存する */
                 $topic = $this->m_topic;
-                // 投稿者
+                // 投稿者(ログインしているユーザー)の情報を取得
+                $user = Auth::user();
                 $topic->user_id = $user->id;
             }
             // タイトル
             $topic->title = Arr::get($input, 'topic-title');
             // 本文
             $topic->content = Arr::get($input, 'topic-detail');
-
-
             // 保存実行
             $topic->save();
 

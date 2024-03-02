@@ -57,16 +57,22 @@ class Topic extends Model
     /**
      * トピック情報一括取得(投稿日時が新しい順)
      * 
+     * @param int|null $limit  取得件数
      */
-    public function getAllTopics()
+    public function getAllTopics(int|null $limit = null)
     {
-        // 削除されていない承認済みのユーザーをid順に取得
+        // 削除されていないトピックを作成日時が新しい順に取得
         $topics = DB::table('topics')
             ->join('users', 'topics.user_id', '=', 'users.id')
             ->select($this->columns)
             ->whereNull('topics.deleted_at')
-            ->orderBy('topics.created_at', 'desc')
-            ->get();
+            ->orderBy('topics.created_at', 'desc');
+
+        if (!empty($limit)) {
+            $topics = $topics->limit($limit);
+        }
+
+        $topics = $topics->get();
 
         return $topics;
     }

@@ -39,18 +39,33 @@
               <div class="c-button-wrap">
                 <a href="" class="c-button">
                   <img src="{{ ('/img/common/icon-reply.svg') }}" alt="">
-                  <span>このトピックに回答する</span>
-                </a>
-                <a href="{{ route('topic.show.detail', ['id' => $topic->id]) }}" class="c-button">
-                  <img src="{{ ('/img/common/icon-show-topic.svg') }}" alt="">
-                  <span>このトピックを見る</span>
+                  <span>このトピックにコメントする</span>
                 </a>
                 @if(Auth::user()->id === $topic->user_id)
                 <a href="{{ route('topic.show.edit', ['id' => (int)$topic->id]) }}" class="c-button">
                   <img src="{{ ('/img/common/icon-pencil.svg') }}" alt="">
                   <span>このトピックを編集する</span>
                 </a>
-                @endif
+              </div>
+              @endif
+              <div class="c-reply-wrap">
+                <div class="c-reply">
+                  <div class="c-user-icon">
+                    <img src="{{ ('/img/common/dummy_icon.png') }}" alt="">
+                  </div>
+                  <div class="c-reply-detail">
+                    <p>
+                      まじで俺もビックリだわ〜笑<br>
+                      username終電までいる予定だって！
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="c-button-wrap">
+                <a href="{{ route('topic.show.detail', ['id' => $topic->id]) }}" class="c-button">
+                  <img src="{{ ('/img/common/icon-show-topic.svg') }}" alt="">
+                  <span>このトピックを見る</span>
+                </a>
               </div>
             </div>
           </div>

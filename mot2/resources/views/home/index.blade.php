@@ -55,7 +55,7 @@
               <div class="c-button-wrap">
                 <a href="" class="c-button">
                   <img src="{{ ('/img/common/icon-reply.svg') }}" alt="">
-                  <span>このトピックに回答する</span>
+                  <span>このトピックにコメントする</span>
                 </a>
                 <a href="" class="c-button">
                   <img src="{{ ('/img/common/icon-pencil.svg') }}" alt="">

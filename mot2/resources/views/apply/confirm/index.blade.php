@@ -36,7 +36,7 @@
             </div>
             <div class="c-form-item c-form-item--register">
               <p class="c-form-item-title">過去に参加された多文化交流</p>
-              <p>{{ Arr::get($form_input, 'past-join', '') }}</p>
+              <p>{!! nl2br(htmlspecialchars(Arr::get($form_input, 'past-join', ''))) !!}</p>
             </div>
             <div class="c-form-submit c-button-wrap">
               <button type="submit" class="c-button">申請する</button>

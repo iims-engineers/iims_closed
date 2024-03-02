@@ -18,7 +18,10 @@
       <main class="l-main">
         <section class="p-sub__section">
           <h1 class="p-sub__head01">トピックの一覧</h1>
-          @forelse($topics as $topic)
+          @if($topics->isEmpty())
+          <p>現在表示できるトピックはありません。</p>
+          @else
+          @foreach($topics as $topic)
           <div class="c-topic-wrap">
             <a href="" class="c-topic-title js-accordion-topic">{{ $topic->title }}</a>
             <div class="p-sub__inner">
@@ -69,9 +72,8 @@
               </div>
             </div>
           </div>
-          @empty
-          <p>現在表示できるトピックはありません。</p>
-          @endforelse
+          @endforeach
+          @endif
         </section>
       </main>
       <!-- l-footer START -->

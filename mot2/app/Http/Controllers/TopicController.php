@@ -69,7 +69,7 @@ class TopicController extends Controller
         $topic = $this->m_topic->getTopicById((int)$id);
 
         return view('topic/show/detail', [
-            '$topic' => $topic,
+            'topic' => $topic,
         ]);
     }
 
@@ -157,6 +157,31 @@ class TopicController extends Controller
         } catch (\Exception $e) {
             // 失敗したら入力画面に戻す
             session()->flash('flash_message', __('topics.failed'));
+            return back();
+        }
+    }
+
+    /**
+     * トピック - 入力内容の確認、保存実行
+     * 
+     * @param int $topic_id 削除対象のトピックID
+     */
+    public function delete(int $topic_id)
+    {
+        if (empty($topic_id)) {
+            /* IDがない場合は詳細画面に戻す */
+            return back();
+        }
+
+        // 削除実行
+        $failed = $this->m_topic->deleteTopic($topic_id);
+
+        if ($failed) {
+            /* 削除完了したらトピック一覧画面に遷移する */
+            return to_route('topic.show.list');
+        } else {
+            /* 失敗したら詳細画面に戻す */
+            session()->flash('flash_message', __('topics.failed_delete'));
             return back();
         }
     }

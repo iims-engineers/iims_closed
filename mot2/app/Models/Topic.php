@@ -87,4 +87,33 @@ class Topic extends Model
 
         return $topic;
     }
+
+    /**
+     * IDをもとにトピック情報を論理削除
+     * ※物理削除はせず`deleted_at`カラムに削除日時を保存する処理
+     * 
+     * @param int $id  トピックID
+     */
+    public function deleteTopic(int $topic_id)
+    {
+        $topic = $this->where('id', $topic_id)
+            ->whereNull('deleted_at')
+            ->first();
+
+        if (empty($topic)) {
+            /* 存在しないIDまたは削除済み */
+            return false;
+        }
+
+        try {
+            // 削除日時
+            $topic->deleted_at = now();
+            // 論理削除実行
+            $topic->save();
+
+            return true;
+        } catch (\Exception $e) {
+            return false;
+        }
+    }
 }

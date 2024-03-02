@@ -22,8 +22,6 @@ class TopicController extends Controller
     private $m_user;
     // commentモデルのインスタンス格納用
     private $m_comment;
-    // 全ユーザー情報
-    private $all_topics;
     // 新規作成・編集の入力項目
     private $form_topic = [
         'topic-title',
@@ -158,7 +156,7 @@ class TopicController extends Controller
     }
 
     /**
-     * トピック - 入力内容の確認、保存実行
+     * トピック - 削除実行
      * 
      * @param int $topic_id 削除対象のトピックID
      */

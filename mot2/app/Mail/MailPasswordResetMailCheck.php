@@ -34,7 +34,7 @@ class MailPasswordResetMailCheck extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: 'admin@test.test',
+            from: env('MAIL_FROM_ADDRESS'),
             subject: __('mails.password_reset_mail_check.subject'),
         );
     }

@@ -110,7 +110,6 @@ class Topic extends Model
             $topic->deleted_at = now();
             // 論理削除実行
             $topic->save();
-
             return true;
         } catch (\Exception $e) {
             return false;

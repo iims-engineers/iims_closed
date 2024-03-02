@@ -209,10 +209,16 @@
                 MOT2を使っていただいてお気付きの点、改善してほしい点などございましたら以下より送信ください。<br>
                 MOT2は無償のプロジェクトです。あなたからのご感想や応援のメッセージがとても励みになります！<br>
               </p>
+              @if(session('flash_message'))
+              <div class="form-error">
+                <p class="error-text">{{ session('flash_message') }}</p>
+              </div>
+              @endif
             </div>
-            <form action="" class="c-form">
+            <form action="" method="POST" class="c-form">
+              @csrf
               <div class="c-form-item">
-                <textarea name="message" id="message" cols="30" rows="10"></textarea>
+                <textarea name="message" id="message" required cols="30" rows="10"></textarea>
               </div>
               <div class="c-form-submit c-button-wrap">
                 <button type="submit" class="c-button">送信する</button>

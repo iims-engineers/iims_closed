@@ -37,7 +37,7 @@ class MailApplyAdmin extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: 'admin@test.test',
+            from: env('MAIL_FROM_ADDRESS'),
             subject: __('mails.apply.admin.subject'),
         );
     }

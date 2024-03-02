@@ -9,7 +9,7 @@
     <a href="{{ $url }}">パスワードのご登録はこちら</a><br>
     ※上記URLの有効期限は24時間です。<br>
     ※有効期限が過ぎてしまった場合はお手数ですが再度お手続きをお願いします。<br>
-    <a href="{{ route('password.reset.form-mail') }}">パスワードの再手続きはこちら</a><br>
+    <a href="{{ route('password.reset.show.form-mail') }}">パスワードの再手続きはこちら</a><br>
     ============================
 </p>
 <br>

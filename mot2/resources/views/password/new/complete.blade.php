@@ -22,7 +22,7 @@
                         <p>パスワードの設定が完了しました。以下よりログインできます。</p>
                     </div>
                     <div class="p-top-btn">
-                        <a href="{{ route('login.form') }}" class="c-button--large">
+                        <a href="{{ route('login.show.form') }}" class="c-button--large">
                             <img src="{{ ('/img/common/icon-enter-white.svg') }}" alt="">
                             <span>{{ config('app.name') }}にログインする</span>
                         </a>

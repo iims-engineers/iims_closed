@@ -58,7 +58,7 @@ class ApplyController extends Controller
         ]]);
 
         // バリデートにエラーがエラーが無い場合のみ確認画面に遷移
-        return to_route('apply.confirm');
+        return to_route('apply.show.confirm');
     }
 
     /**
@@ -66,7 +66,7 @@ class ApplyController extends Controller
      * 
      * @param Request $request 
      */
-    public function applyConfirm(Request $request)
+    public function showConfirm(Request $request)
     {
         // セッションから入力データを取得
         $form_input = $request->session()->get('form_input');
@@ -85,7 +85,7 @@ class ApplyController extends Controller
      * 
      * @param Request $request 
      */
-    public function applyStore(Request $request)
+    public function store(Request $request)
     {
         // 確認画面から渡った入力データをセッションから取得
         $form_input = $request->session()->get('form_input');
@@ -116,7 +116,7 @@ class ApplyController extends Controller
             Mail::to('admin@test.test')->send(new MailApplyAdmin($form_input));
 
             // 申請完了画面に遷移
-            return to_route('apply.complete');
+            return to_route('apply.show.complete');
         } catch (\Exception $e) {
             // 登録失敗したら404を表示
             return to_route('404');

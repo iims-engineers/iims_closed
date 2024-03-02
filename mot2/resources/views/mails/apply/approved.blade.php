@@ -6,7 +6,7 @@
 </p>
 <p>
     ============================<br>
-    <a href="{{ route('password.new.form', ['token' => $user->verify_token]) }}">パスワードのご登録はこちら</a><br>
+    <a href="{{ route('password.new.show.form', ['token' => $user->verify_token]) }}">パスワードのご登録はこちら</a><br>
     ============================
 </p>
 <br>

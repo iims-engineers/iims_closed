@@ -16,7 +16,7 @@
       </a>
     </div>
     <div class="l-footer__btn-item">
-      <a href="{{ route('user.list') }}">
+      <a href="{{ route('user.show.list') }}">
         <img src="{{ asset('/img/common/icon-users.svg') }}" width="32" height="32" alt="">
         <span>メンバー</span>
       </a>

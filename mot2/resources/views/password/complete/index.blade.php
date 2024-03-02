@@ -25,7 +25,7 @@
             </p>
           </div>
           <div class="p-top-btn">
-            <a href="{{ route('login.form') }}" class="c-button--large">
+            <a href="{{ route('login.show.form') }}" class="c-button--large">
               <img src="/img/common/icon-enter-white.svg" alt="">
               <span>ログインする</span>
             </a>

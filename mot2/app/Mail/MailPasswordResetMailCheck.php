@@ -48,7 +48,7 @@ class MailPasswordResetMailCheck extends Mailable
         $token_param = ['reset_token' => $this->user->reset_password_access_key];
         // 有効期限24時間のURLを生成
         $now = Carbon::now();
-        $url = URL::temporarySignedRoute('password.reset.form-password', $now->addHours(24), $token_param);
+        $url = URL::temporarySignedRoute('password.reset.show.form-password', $now->addHours(24), $token_param);
 
         return new Content(
             view: 'mails.password.reset',

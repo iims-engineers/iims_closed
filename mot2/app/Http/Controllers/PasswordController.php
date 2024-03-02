@@ -80,7 +80,7 @@ class PasswordController extends Controller
 
             // 登録成功したらログインフォームに遷移
             // ※なぜか「to_route('password.new.complete');」が正常動作しないので、直接viewを返却しておく
-            // return to_route('password.new.complete');
+            // return to_route('password.new.show.complete');
             return view('password/new/complete');
         } catch (\Exception $e) {
             // 登録失敗したら再度入力フォームに戻してやり直させる
@@ -93,7 +93,7 @@ class PasswordController extends Controller
      * パスワードリセット(非ログイン時) - メールアドレス入力画面の表示
      * 
      */
-    public function resetShowMailForm()
+    public function showMailFormReset()
     {
         return view('password/mail-check/index');
     }
@@ -113,7 +113,7 @@ class PasswordController extends Controller
 
         if (empty($user)) {
             // メールアドレスが間違っている場合、メールは送信せずに完了画面を表示する
-            return to_route('password.reset.send');
+            return to_route('password.reset.show.send');
         } else {
             // アクセスキーの生成
             $hashed_id = hash('sha256', $user->id);
@@ -130,7 +130,7 @@ class PasswordController extends Controller
                 // メール送信
                 Mail::to($user->email)->send(new MailPasswordResetMailCheck($user));
                 // 送信完了画面に遷移
-                return to_route('password.reset.send');
+                return to_route('password.reset.show.send');
             } catch (\Exception $e) {
                 // 処理に失敗したらエラーメッセージを表示
                 session()->flash('flash_message', __('passwords.failed_send'));
@@ -142,7 +142,7 @@ class PasswordController extends Controller
     /**
      * パスワードリセット(非ログイン時) - 確認用メール送信完了画面の表示
      */
-    public function resetShowSendMail()
+    public function showSendMailReset()
     {
         return view('password/mail-send/index');
     }
@@ -150,7 +150,7 @@ class PasswordController extends Controller
     /**
      * パスワードリセット(非ログイン時) - 確認用メール送信完了画面の表示
      */
-    public function resetShowPasswordForm(Request $request)
+    public function showPasswordFormReset(Request $request)
     {
         // 署名付きURLではない場合
         if (!$request->hasValidSignature()) {
@@ -169,7 +169,7 @@ class PasswordController extends Controller
     /**
      * パスワードリセット(非ログイン時) - 確認用メール送信完了画面の表示
      */
-    public function resetStorePassword(PasswordResetStoreRequest $request)
+    public function storeReset(PasswordResetStoreRequest $request)
     {
         // 入力データのバリデート
         $validated = $request->validated();
@@ -193,7 +193,7 @@ class PasswordController extends Controller
                 // 保存実行
                 $user->save();
                 // 送信完了画面に遷移
-                return to_route('password.reset.complete');
+                return to_route('password.reset.show.complete');
             } catch (\Exception $e) {
                 // 処理に失敗したらエラーメッセージを表示
                 session()->flash('flash_message', __('passwords.failed_send'));
@@ -205,7 +205,7 @@ class PasswordController extends Controller
     /**
      * パスワードリセット(非ログイン時) - 確認用メール送信完了画面の表示
      */
-    public function resetShowComplete()
+    public function showCompleteReset()
     {
         return view('password/complete/index');
     }

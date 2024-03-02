@@ -41,7 +41,7 @@
             <p class="error-text">{{ session('flash_message') }}</p>
           </div>
           @endif
-          <form action="{{ route('password.reset.check') }}" method="POST" class="c-form">
+          <form action="{{ route('password.reset.send') }}" method="POST" class="c-form">
             @csrf
             <div class="c-form-item">
               <label for="email" class="c-form-item-title">登録メールアドレス</label>

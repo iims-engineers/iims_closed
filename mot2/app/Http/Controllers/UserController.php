@@ -40,7 +40,7 @@ class UserController extends Controller
      * 
      * @param string $id  ユーザーID
      */
-    public function detail(string $id)
+    public function showDetail(string $id)
     {
         $user = '';
         // IDを元にユーザー情報を取得
@@ -52,7 +52,7 @@ class UserController extends Controller
             $user = $tmp_user->attributesToArray();
         } else {
             /* URLにユーザーIDが含まれない場合は前の画面に戻す */
-            return to_route('user.list');
+            return to_route('user.show.list');
         }
 
         return view('user/detail', [

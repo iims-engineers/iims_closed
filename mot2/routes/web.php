@@ -27,13 +27,13 @@ Route::prefix('/apply')
         // 新規登録申請画面の表示
         Route::get('', [ApplyController::class, 'showForm'])->name('form');
         // 入力データのバリデーション
-        Route::post('/register', [ApplyController::class, 'applyCheck'])->name('check');
+        Route::post('/check', [ApplyController::class, 'applyCheck'])->name('check');
         // 確認画面の表示
-        Route::get('/confirm', [ApplyController::class, 'applyConfirm'])->name('confirm');
+        Route::get('/confirm', [ApplyController::class, 'showConfirm'])->name('show.confirm');
         // 登録処理
-        Route::post('/store', [ApplyController::class, 'applyStore'])->name('store');
+        Route::post('/store', [ApplyController::class, 'store'])->name('store');
         // 登録申請完了画面の表示
-        Route::get('/complete', [ApplyController::class, 'showComplete'])->name('complete');
+        Route::get('/complete', [ApplyController::class, 'showComplete'])->name('show.complete');
     });
 
 /* パスワード関連 */
@@ -46,11 +46,11 @@ Route::prefix('/password')
             ->name('new.')
             ->group(function () {
                 // パスワード新規登録 - 入力画面の表示
-                Route::get('/{token}', [PasswordController::class, 'showFormNew'])->name('form');
+                Route::get('/{token}', [PasswordController::class, 'showFormNew'])->name('show.form');
                 // パスワード新規登録 - 登録実行
                 Route::post('/store', [PasswordController::class, 'storeNew'])->name('store');
                 // パスワード新規登録 - 完了画面の表示 ※なぜか「to_route('password.new.complete');」が動作しないので、一旦viewファイルを直接返却させる
-                // Route::get('/complete', [PasswordController::class, 'completeNew'])->name('complete');
+                // Route::get('/complete', [PasswordController::class, 'showCompleteNew'])->name('show.complete');
             });
 
         /* リセット関連 */
@@ -58,17 +58,17 @@ Route::prefix('/password')
             ->name('reset.')
             ->group(function () {
                 // パスワードリセット(非ログイン時) - 入力画面の表示
-                Route::get('/mail-check', [PasswordController::class, 'resetShowMailForm'])->name('form-mail');
+                Route::get('/mail-check', [PasswordController::class, 'showMailFormReset'])->name('show.form-mail');
                 // パスワードリセット(非ログイン時) - メール送信実行
-                Route::post('/mail-check', [PasswordController::class, 'resetSendMail'])->name('check');
+                Route::post('/mail-check', [PasswordController::class, 'resetSendMail'])->name('send');
                 // パスワードリセット(非ログイン時) - メール送信完了画面の表示
-                Route::get('/mail-check/send', [PasswordController::class, 'resetShowSendMail'])->name('send');
+                Route::get('/mail-check/send', [PasswordController::class, 'showSendMailReset'])->name('show.send');
                 // パスワードリセット(非ログイン時) - パスワード入力画面の表示
-                Route::get('/form', [PasswordController::class, 'resetShowPasswordForm'])->name('form-password');
+                Route::get('/form', [PasswordController::class, 'showPasswordFormReset'])->name('show.form-password');
                 // パスワードリセット(非ログイン時) - パスワード変更実行
-                Route::post('/store', [PasswordController::class, 'resetStorePassword'])->name('store');
+                Route::post('/store', [PasswordController::class, 'storeReset'])->name('store');
                 // パスワードリセット(非ログイン時) - パスワード変更完了画面の表示
-                Route::get('/complete', [PasswordController::class, 'resetShowComplete'])->name('complete');
+                Route::get('/complete', [PasswordController::class, 'showCompleteReset'])->name('show.complete');
             });
     });
 /* ------------------------------------------------------------------------------------------------ */
@@ -84,7 +84,7 @@ Route::middleware('guest')
 
             /* ログイン */
             // ログインフォームの表示
-            Route::get('/login', [LoginController::class, 'showForm'])->name('login.form');
+            Route::get('/login', [LoginController::class, 'showForm'])->name('login.show.form');
             // ログイン処理
             Route::post('/login', [LoginController::class, 'login'])->name('login');
         }
@@ -109,9 +109,9 @@ Route::middleware('auth')
             ->name('user.')
             ->group(function () {
                 // 一覧画面の表示
-                Route::get('/list', [UserController::class, 'showList'])->name('list');
+                Route::get('/list', [UserController::class, 'showList'])->name('show.list');
                 // 詳細画面の表示
-                Route::get('/detail/{id}', [UserController::class, 'detail'])->name('detail');
+                Route::get('/detail/{id}', [UserController::class, 'showDetail'])->name('show.detail');
             });
 
         /* トピック関連 */

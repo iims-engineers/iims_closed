@@ -22,10 +22,11 @@
                         <div>
                             <p>氏名：{{ Arr::get($user, 'name') }}</p>
                             <p>カナ：{{ Arr::get($user, 'name_kana') }}</p>
-                            <p>生年月日：{{ Arr::get($user, 'birthday') }} ※表示設定がある場合のみ</p>
+                            <p>イニシャル：{{ Arr::get($user, 'initial') }} ※非公開アカウントは氏名ではなくイニシャルを表示</p>
+                            <p>生年月日：{{ Arr::get($user, 'birthday') }} ※表示設定がある場合のみ(年齢に変換して表示する?)</p>
                             <p>国籍：{{ Arr::get($user, 'nationality') }}</p>
-                            <p>自己紹介テキスト：{{ Arr::get($user, 'introduction_text') }}</p>
-                            <p>過去の活動参加歴：{{ Arr::get($user, 'past_join') }}</p>
+                            <p>自己紹介テキスト：{!! nl2br(htmlspecialchars(Arr::get($user, 'introduction_text'))) !!}</p>
+                            <p>過去の活動参加歴：{!! nl2br(htmlspecialchars(Arr::get($user, 'past_join'))) !!}</p>
                         </div>
                     </div>
         </div>

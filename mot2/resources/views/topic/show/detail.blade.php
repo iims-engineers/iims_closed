@@ -33,7 +33,7 @@
               </div>
             </div>
             <div class="c-topic-detail">
-              <p>{{ $topic->content }}</p>
+              <p>{!! nl2br(htmlspecialchars($topic->content)) !!}</p>
               <time class="c-topic-date" datetime="{{ $topic->created_at }}">{{ $topic->created_at }}</time>
             </div>
             <div class="c-button-wrap">

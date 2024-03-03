@@ -115,15 +115,14 @@ class PasswordController extends Controller
         $user = $this->m_user->getUserByEmail($email);
 
         if (empty($user)) {
-            // メールアドレスが間違っている場合、メールは送信せずに完了画面を表示する
+            // 入力されたアドレスで会員情報が取得できない場合、メールは送信せずに完了画面を表示する
             return to_route('password.reset.show.send');
         } else {
             // アクセスキーの生成
             $hashed_id = hash('sha256', $user->id);
+            $user->reset_password_access_key = uniqid(rand(), $hashed_id);
             // アクセスキーの有効期限は現在時刻から24時間に設定
             $now = Carbon::now();
-
-            $user->reset_password_access_key = uniqid(rand(), $hashed_id);
             $user->reset_password_expire_at = $now->addHours(24)->toDateTimeString();
 
             try {

@@ -92,7 +92,7 @@ class TopicController extends Controller
      * 
      * @param string|null $topic_id  編集するトピックのトピックID
      */
-    public function showEdit(string|null $topic_id = null)
+    public function showEdit(?string $topic_id = null)
     {
         if (empty($topic_id)) {
             /* IDが無い場合は一覧に戻す */

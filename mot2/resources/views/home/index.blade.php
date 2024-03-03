@@ -30,7 +30,7 @@
           </div>
         </section>
         <section class="p-sub__section">
-          <h2 class="p-sub__head02">最新のトピック</h2>
+          <h2 class="p-sub__head02">今盛り上がっているおすすめトピック</h2>
           <div class="c-topic-wrap">
             <a href="/topic/show/topicID/" class="c-topic-title">高崎に集まれる人募集！</a>
             <div class="p-sub__inner">
@@ -145,9 +145,13 @@
                 MOT2を使っていただいてお気付きの点、改善してほしい点などございましたら以下より送信ください。<br>
                 MOT2は無償のプロジェクトです。あなたからのご感想や応援のメッセージがとても励みになります！<br>
               </p>
-              @if(session('flash_message'))
+              @if($errors->any())
               <div class="form-error">
-                <p class="error-text">{{ session('flash_message') }}</p>
+                <ul>
+                  @foreach ($errors->all() as $error)
+                  <li class="error-text">・{{ $error }}</li>
+                  @endforeach
+                </ul>
               </div>
               @endif
             </div>

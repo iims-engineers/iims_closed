@@ -12,6 +12,10 @@ use App\Models\Comment;
 use App\Models\User;
 use App\Models\Topic;
 
+
+/**
+ * トピックへのコメント関連のコントローラ
+ */
 class CommentController extends Controller
 {
 

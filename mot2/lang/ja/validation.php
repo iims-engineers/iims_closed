@@ -153,7 +153,7 @@ return [
         'email'     => 'メールアドレス',
         'past-join' => '過去の活動参加歴',
         'password'  => 'パスワード',
-        'topic-title'   => 'タイトル',
-        'topic-detail'  => '本文',
+        'topic-title'   => 'トピックのタイトル',
+        'topic-detail'  => 'トピックの本文',
     ]
 ];

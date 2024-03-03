@@ -10,6 +10,9 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Mail;
 use App\Models\User;
 
+/**
+ * ユーザー情報関連のコントローラ
+ */
 class UserController extends Controller
 {
     // userモデルのインスタンス格納用

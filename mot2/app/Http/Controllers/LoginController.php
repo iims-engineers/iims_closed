@@ -11,6 +11,9 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Mail;
 use App\Models\User;
 
+/**
+ * ログイン用コントローラ
+ */
 class LoginController extends Controller
 {
     /*

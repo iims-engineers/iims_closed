@@ -17,6 +17,9 @@ use App\Mail\MailPasswordResetMailCheck;
 use Carbon\Carbon;
 use App\Models\User;
 
+/**
+ * パスワード関連のコントローラ
+ */
 class PasswordController extends Controller
 {
 

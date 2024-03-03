@@ -16,6 +16,9 @@ use App\Models\User;
 use App\Models\Topic;
 use App\Models\Comment;
 
+/**
+ * 運営へのメッセージ関連のコントローラ
+ */
 class SupportController extends Controller
 {
     /**

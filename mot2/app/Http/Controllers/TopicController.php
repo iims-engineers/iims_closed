@@ -13,6 +13,9 @@ use App\Models\User;
 use App\Models\Topic;
 use App\Models\Comment;
 
+/**
+ * トピック関連のコントローラ
+ */
 class TopicController extends Controller
 {
 

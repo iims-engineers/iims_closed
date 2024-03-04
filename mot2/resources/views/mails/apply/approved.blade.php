@@ -12,5 +12,6 @@
 <br>
 <br>
 <p>
-    {{ __('mails.only_send') }}
+    {{ __('mails.only_send_first') }}<br>
+    {{ __('mails.only_send_second') }}
 </p>

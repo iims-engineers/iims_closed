@@ -12,13 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('comments', function (Blueprint $table) {
-            $table->id();
-            $table->string('comment')->nullable(false)->comment('コメント');
+            $table->id()->comment('コメントID');
+            $table->string('comment')->default('')->nullable(false)->comment('コメント');
             $table->unsignedBigInteger('topic_id')->nullable(false)->comment('コメント先のトピック(topics.id)');
             $table->foreign('topic_id')->references('id')->on('topics'); // topicsテーブルのidカラムに外部キー制約
             $table->unsignedBigInteger('user_id')->nullable(false)->comment('コメント主(users.id)');
             $table->foreign('user_id')->references('id')->on('users'); // usersテーブルのidカラムに外部キー制約
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent()->comment('作成日時');
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate()->comment('更新日時');
+            $table->softDeletes()->default(null)->nullable()->comment('論理削除日時');
         });
     }
 

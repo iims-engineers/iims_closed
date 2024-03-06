@@ -12,12 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('topics', function (Blueprint $table) {
-            $table->id();
-            $table->string('title')->nullable()->comment('タイトル');
-            $table->string('content')->nullable(false)->comment('コンテンツ');
+            $table->id()->comment('トピックID');
+            $table->string('title')->default('')->nullable(false)->comment('タイトル');
+            $table->string('content', 500)->default('')->nullable(false)->comment('本文');
             $table->unsignedBigInteger('user_id')->nullable(false)->comment('投稿者(users.id)');
             $table->foreign('user_id')->references('id')->on('users'); // usersテーブルのidカラムに外部キー制約
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent()->comment('作成日時');
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate()->comment('更新日時');
+            $table->softDeletes()->default(null)->nullable()->comment('論理削除日時');
         });
     }
 

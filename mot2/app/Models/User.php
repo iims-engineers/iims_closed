@@ -19,18 +19,6 @@ class User extends Authenticatable implements MustVerifyEmail
 
     // テーブル名の定義
     protected $table = 'users';
-    // 取得するユーザー情報のカラム
-    public $columns = [
-        'id',
-        'name',
-        'name_kana',
-        'initial',
-        'birthday',
-        'nationality',
-        'introduction_text',
-        'past_join',
-        'is_admin',
-    ];
 
     /**
      * 登録や更新を許可しないカラムを設定
@@ -39,8 +27,6 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $guarded = [
         'id',
-        'created_at',
-        'updated_at',
     ];
 
     /**

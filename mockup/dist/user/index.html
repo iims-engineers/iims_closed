@@ -91,25 +91,101 @@
 <section class="p-sub__section">
 	<h1 class="p-sub__head01">ユーザー一覧</h1>
 	<div class="p-sub__inner">
-    <div class="c-user">
-      <div class="c-user-icon">
-        <img src="/img/common/dummy_icon.png" alt="">
+    <div class="c-user__list">
+      <div class="c-user has-button">
+        <a href="/user/show/user-id/">
+          <div class="c-user-icon">
+            <img src="/img/common/dummy_icon.png" alt="">
+          </div>
+          <div class="c-user-info">
+            <div class="c-user-name">もっと太郎</div>
+            <div class="c-user-id">@username</div>
+          </div> 
+          <div class="c-user-detail">
+            多文化交流inぐんま2014冬に参加しました。多文化交流inぐんま2014冬に参加しました。...
+          </div>
+        </a>
+        <div class="c-user-follow-wrap">
+          <a class="c-user-follow not-follow" href="/user/show/user-id/">もっと見る</a>
+        </div>
+        <!-- <div class="c-user-follow-wrap">
+          <span class="c-user-follow follow">フォロー中</span>
+        </div> -->
       </div>
-      <div class="c-user-info">
-        <div class="c-user-name">もっと太郎</div>
-        <div class="c-user-id">@username</div>
+      <div class="c-user has-button">
+        <a href="/user/show/user-id/">
+          <div class="c-user-icon">
+            <img src="/img/common/dummy_icon.png" alt="">
+          </div>
+          <div class="c-user-info">
+            <div class="c-user-name">もっと太郎</div>
+            <div class="c-user-id">@username</div>
+          </div> 
+          <div class="c-user-detail">
+            多文化交流inぐんま2014冬に参加しました。多文化交流inぐんま2014冬に参加しました。...
+          </div>  
+        </a>
+        <div class="c-user-follow-wrap">
+          <a class="c-user-follow not-follow" href="/user/show/user-id/">もっと見る</a>
+        </div>
+      </div>
+      <div class="c-user has-button">
+        <a href="/user/show/user-id/">
+          <div class="c-user-icon">
+            <img src="/img/common/dummy_icon.png" alt="">
+          </div>
+          <div class="c-user-info">
+            <div class="c-user-name">もっと太郎</div>
+            <div class="c-user-id">@username</div>
+          </div> 
+          <div class="c-user-detail">
+            多文化交流inぐんま2014冬に参加しました。多文化交流inぐんま2014冬に参加しました。...
+          </div>  
+        </a>
+        <div class="c-user-follow-wrap">
+          <a class="c-user-follow not-follow" href="/user/show/user-id/">もっと見る</a>
+        </div>
+      </div>
+      <div class="c-user has-button">
+        <a href="/user/show/user-id/">
+          <div class="c-user-icon">
+            <img src="/img/common/dummy_icon.png" alt="">
+          </div>
+          <div class="c-user-info">
+            <div class="c-user-name">もっと太郎</div>
+            <div class="c-user-id">@username</div>
+          </div> 
+          <div class="c-user-detail">
+            多文化交流inぐんま2014冬に参加しました。多文化交流inぐんま2014冬に参加しました。...
+          </div>  
+        </a>
+        <div class="c-user-follow-wrap">
+          <a class="c-user-follow not-follow" href="/user/show/user-id/">もっと見る</a>
+        </div>
+      </div>
+      <div class="c-user has-button">
+        <a href="/user/show/user-id/">
+          <div class="c-user-icon">
+            <img src="/img/common/dummy_icon.png" alt="">
+          </div>
+          <div class="c-user-info">
+            <div class="c-user-name">もっと太郎</div>
+            <div class="c-user-id">@username</div>
+          </div> 
+          <div class="c-user-detail">
+            多文化交流inぐんま2014冬に参加しました。多文化交流inぐんま2014冬に参加しました。...
+          </div>  
+        </a>
+        <div class="c-user-follow-wrap">
+          <a class="c-user-follow not-follow" href="/user/show/user-id/">もっと見る</a>
+        </div>
       </div>
     </div>
-    <div class="c-user">
-      <div class="c-user-icon">
-        <img src="/img/common/dummy_icon.png" alt="">
-      </div>
-      <div class="c-user-info">
-        <div class="c-user-name">もっと太郎</div>
-        <div class="c-user-id">@username</div>
-      </div>
+    <div class="c-pagenation">
+      <a href="" class="c-pagenation-item">＜ 前のページ</a>
+      <a href="" class="c-pagenation-item">次のページ ＞</a>
     </div>
-	</div>
+  </div>
 </section>
 </main>
 <!-- l-footer START -->
@@ -125,7 +201,7 @@
       </a>
     </div>
     <div class="l-footer__btn-item">
-      <a href="">
+      <a href="/topic/">
         <img src="/img/common/icon-search.svg" width="32" height="32" alt="">
         <span>検索</span>
       </a>
@@ -138,7 +214,9 @@
     </div>
     <div class="l-footer__btn-item">
       <a href="/user/edit/user-id/">
-        <img src="/img/common/dummy_icon.png" alt="">
+        <span class="l-footer__user-icon">
+          <img src="/img/common/dummy.png" alt="">
+        </span>
         <!-- <img src="/img/common/icon-accessibility.svg" alt=""> -->
         <span>個人設定</span>
       </a>

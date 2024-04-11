@@ -38,6 +38,25 @@
             margin: 0 16px 0 0;
         }
     }
+    &--mini {
+        display: inline-flex;
+        flex-flow: row nowrap;
+        justify-content: center;
+        align-items: center;      
+        // width: 100%;
+        padding: 0 16px;
+        min-height: 30px;
+        line-height: 1;
+        background-color: #f86a40;
+        border-radius: 40px;
+        font-size: 12px;
+        font-weight: bold;
+        color: #fff;
+        text-align: center;
+        img {
+            margin: 0 8px 0 0;
+        }
+    }
     &-wrap {
         margin: 25px 0;
         text-align: center;

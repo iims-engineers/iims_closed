@@ -42,7 +42,6 @@
     align-items: center;
 
     &-item {
-      min-width: 60px;
       position: relative;
       &:not(:last-child) {
         margin: 0 10px 0 0;
@@ -50,6 +49,7 @@
       a,
       button {
         display: block;
+        min-width: 60px;
         text-align: center;
         span {
           display: block;

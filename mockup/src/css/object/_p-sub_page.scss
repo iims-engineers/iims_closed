@@ -34,6 +34,10 @@
     padding: 16px;
     background-color: #fff;
     border-radius: 10px;
+    overflow: hidden;
+    &.is-user-info {
+      padding: 0 0 16px;
+    }
   }
 
   &__btns {

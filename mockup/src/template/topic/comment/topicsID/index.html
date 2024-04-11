@@ -3,7 +3,7 @@
 
 <head>
 <meta charset="utf-8">
-<title>このトピックの詳細</title>
+<title>このトピックに回答</title>
 @@include('head.html')
 </head>
 
@@ -17,7 +17,7 @@
 <div class="l-contents">
 <main class="l-main">
 <section class="p-sub__section">
-	<h1 class="p-sub__head01">このトピックの詳細</h1>
+	<h1 class="p-sub__head01">このトピックに回答</h1>
 	<div class="p-sub__inner">
 		<div class="c-user no-link">
 			<div class="c-user-icon">
@@ -34,6 +34,7 @@
         めっちゃ急なんですけど誰か集まれる人いませんか〜？一緒に飲みに行きましょ！
       </p>
       <time class="c-topic-date" datetime="2024-11-11T15:00:33">2024/11/11 15:00:33</time>
+      <time class="c-reply-date" datetime="2024-11-11T15:00:33">（更新：2024/11/11 15:00:44）</time>
     </div>
     <div class="c-reply-wrap">
       <div class="c-reply c-reply--has-detail">
@@ -57,7 +58,7 @@
       <div class="c-reply c-reply--has-detail">
         <div class="c-user no-link">
           <div class="c-user-icon">
-            <img src="/img/common/dummy_icon.png" alt="">
+            <img src="/img/common/dummy.png" alt="">
           </div>
           <div class="c-user-info">
             <div class="c-user-name">もっと太郎</div>
@@ -69,6 +70,13 @@
             まじで俺もビックリだわ〜笑<br>
             username終電までいる予定だって！
           </p>
+          <time class="c-reply-date" datetime="2024-11-11T15:00:33">2024/11/11 15:00:33</time>
+          <div class="c-reply-edit">
+            <a href="/comment/edit/commentID/" class="c-button--mini">
+              <img src="/img/common/icon-pencil.svg" alt="">
+              <span>回答を編集</span>
+            </a>
+          </div>      
         </div>
       </div>
       <div class="c-reply c-reply--has-detail">
@@ -86,15 +94,52 @@
             まじで俺もビックリだわ〜笑<br>
             username終電までいる予定だって！
           </p>
+          <time class="c-reply-date" datetime="2024-11-11T15:00:33">2024/11/11 15:00:33</time>
+          <div class="c-reply-edit">
+            <a href="/comment/edit/commentID/" class="c-button--mini">
+              <img src="/img/common/icon-pencil.svg" alt="">
+              <span>回答を編集</span>
+            </a>
+          </div>      
+        </div>
+      </div>
+      <div class="c-reply c-reply--has-detail">
+        <div class="c-user no-link">
+          <div class="c-user-icon">
+            <img src="/img/common/dummy_icon.png" alt="">
+          </div>
+          <div class="c-user-info">
+            <div class="c-user-name">もっと太郎</div>
+            <div class="c-user-id">@username</div>
+          </div>
+        </div>
+        <div class="c-reply-detail">
+          <p>
+            まじで俺もビックリだわ〜笑<br>
+            username終電までいる予定だって！
+          </p>
+          <time class="c-reply-date" datetime="2024-11-11T15:00:33">2024/11/11 15:00:33</time>
+          <time class="c-reply-date" datetime="2024-11-11T15:00:33">（更新：2024/11/11 15:00:33）</time>
         </div>
       </div>
     </div>
-    <div class="c-button-wrap">
-      <a href="/topic/comment/topicsID/" class="c-button">
-        <img src="/img/common/icon-reply.svg" alt="">
-        <span>このトピックに回答する</span>
-      </a>
-    </div>
+    <form action="" class="c-form" style="margin: 40px 0 0;">
+      <div class="c-form-item">
+        <div class="c-user no-link">
+          <div class="c-user-icon">
+            <img src="/img/common/dummy.png" alt="">
+          </div>
+          <div class="c-user-info">
+            <div class="c-user-name">もっと太郎</div>
+            <div class="c-user-id">@username</div>
+          </div>
+        </div>
+        <textarea name="comment" id="comment" cols="30" rows="10"></textarea>
+      </div>
+      <div class="c-form-submit c-button-wrap">
+        <button type="submit" class="c-button">回答する</button>
+      </div>
+    </form>
 	</div>
 </section>
 </main>

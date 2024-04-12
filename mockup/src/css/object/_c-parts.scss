@@ -167,8 +167,9 @@
       font-weight: normal;
     }
     input[type=file] {
-      border: none;
       padding: 0;
+      border: none;
+      border-radius: 0;
     }
     &--register {
       padding: 20px 0 0;
@@ -221,6 +222,10 @@
     }
   }
   &__cover {
+    img {
+      width: 100%;
+      height: auto;
+    }
     &-preview {
       margin: 0 0 10px;
     }

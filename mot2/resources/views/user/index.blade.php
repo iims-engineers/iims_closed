@@ -18,31 +18,46 @@
       <main class="l-main">
         <section class="p-sub__section">
           <h1 class="p-sub__head01">ユーザー一覧</h1>
+          @if($users->isEmpty())
+          <p>現在表示できるトピックはありません。</p>
+          @else
+          @foreach($users as $user)
           <div class="p-sub__inner">
-            @if($users->isEmpty())
-            <div class="c-user">
-              <p>現在表示できるユーザーは存在しません。</p>
-            </div>
-            @else
-            @foreach($users as $user)
-            <div class="c-user">
-              <div class="c-user-icon">
-                <img src="{{ ('/img/common/dummy_icon.png') }}" alt="">
-              </div>
-              <div class="c-user-info user-detail">
-                <a href="{{ route('user.show.detail', ['id' => $user->id]) }}" class="c-user-name user-detail-link">{{ $user->name }}</a>
+            <div class="c-user__list">
+              <div class="c-user has-button">
+                <a href="/user/show/user-id/">
+                  <div class="c-user-icon">
+                    <img src="/img/common/dummy_icon.png" alt="">
+                  </div>
+                  <div class="c-user-info">
+                    <div class="c-user-name">{{ Arr::get($user, 'name') }}</div>
+                    <div class="c-user-id">{{ Arr::get($user, 'user_id') }}</div>
+                  </div>
+                  <div class="c-user-detail">
+                    {!! nl2br(htmlspecialchars(Arr::get($user, 'introduction_text'))) !!}
+                  </div>
+                </a>
+                <div class="c-user-follow-wrap">
+                  <a class="c-user-follow not-follow" href="{{ route('user.show.detail', ['id' => $user->id]) }}">もっと見る</a>
+                </div>
+                <!-- <div class="c-user-follow-wrap">
+                  <span class="c-user-follow follow">フォロー中</span>
+                </div> -->
               </div>
             </div>
             @endforeach
             @endif
+            <div class="c-pagenation">
+              <a href="" class="c-pagenation-item">＜ 前のページ</a>
+              <a href="" class="c-pagenation-item">次のページ ＞</a>
+            </div>
           </div>
+        </section>
+      </main>
+      <!-- l-footer START -->
+      @include('components.l-footer')
+      <!-- l-footer END -->
     </div>
-    </section>
-    </main>
-    <!-- l-footer START -->
-    @include('components.l-footer')
-    <!-- l-footer END -->
-  </div>
   </div>
   @include('components.javascript')
 </body>

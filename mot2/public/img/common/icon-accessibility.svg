@@ -1,1 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"><defs><clipPath id="a"><path data-name="長方形 17" transform="translate(2115 1240)" fill="#6f6f6f" stroke="#707070" d="M0 0h32v32H0z"/></clipPath></defs><g data-name="マスクグループ 6" transform="translate(-2115 -1240)" clip-path="url(#a)"><g fill="#fff"><path data-name="パス 1" d="M2128 1243a3 3 0 113 3 3 3 0 01-3-3z"/><path data-name="パス 2" d="M2135 1250.005l10.3-4.446-.743-1.859L2132 1248h-2l-12.557-4.3-.743 1.859 10.3 4.446v8.007l-4.1 13.278 1.87.71 5.8-12.988h.857l5.806 12.988 1.87-.71-4.103-13.278z"/></g></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="長方形_17" data-name="長方形 17" width="32" height="32" transform="translate(2115 1240)" fill="#6f6f6f" stroke="#707070" stroke-width="1"/>
+    </clipPath>
+  </defs>
+  <g id="マスクグループ_6" data-name="マスクグループ 6" transform="translate(-2115 -1240)" clip-path="url(#clip-path)">
+    <g id="accessibility" transform="translate(2115 1240)">
+      <path id="パス_1" data-name="パス 1" d="M13,3a3,3,0,1,1,3,3,3,3,0,0,1-3-3Z" fill="#fff"/>
+      <path id="パス_2" data-name="パス 2" d="M20,10.005,30.3,5.559,29.557,3.7,17,8H15L2.443,3.7,1.7,5.559,12,10.005v8.007L7.9,31.29,9.77,32l5.8-12.988h.857L22.233,32l1.87-.71L20,18.012Z" fill="#fff"/>
+    </g>
+  </g>
+</svg>

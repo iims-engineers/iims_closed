@@ -66,7 +66,7 @@ class UserController extends Controller
         /* ユーザーIDをもとにそのユーザーが作成したトピックを取得 */
         $topics = $this->m_topic->getTopicByUser($user_id);
 
-        return view('user/detail', [
+        return view('user/show/index', [
             'user' => $user,
             'topics' => $topics,
         ]);

@@ -52,6 +52,7 @@ class Topic extends Model
         'topics.created_at',
         'topics.updated_at',
         'users.name',
+        'users.user_id',
     ];
 
     /**

@@ -95,6 +95,23 @@ class Topic extends Model
     }
 
     /**
+     * ユーザーIDをもとにそのユーザーが作成したトピックを取得
+     * 
+     * @param int $user_id  ユーザーID
+     */
+    public function getTopicByUser(int $user_id)
+    {
+        $topic = DB::table('topics')
+            ->join('users', 'topics.user_id', '=', 'users.id')
+            ->select($this->columns)
+            ->where('topics.user_id', $user_id)
+            ->whereNull('topics.deleted_at')
+            ->get();
+
+        return $topic;
+    }
+
+    /**
      * IDをもとにトピック情報を論理削除
      * ※物理削除はせず`deleted_at`カラムに削除日時を保存する処理
      * 

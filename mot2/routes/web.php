@@ -109,9 +109,11 @@ Route::middleware('auth')
             ->name('user.')
             ->group(function () {
                 // 一覧画面の表示
-                Route::get('/list', [UserController::class, 'showList'])->name('show.list');
+                Route::get('/', [UserController::class, 'showList'])->name('show.list');
                 // 詳細画面の表示
                 Route::get('/detail/{id}', [UserController::class, 'showDetail'])->name('show.detail');
+                // 編集画面の表示
+                Route::get('/list', [UserController::class, 'showList'])->name('show.list');
             });
 
         /* トピック関連 */

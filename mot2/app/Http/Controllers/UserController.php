@@ -83,16 +83,14 @@ class UserController extends Controller
         // IDを元にユーザー情報を取得
         if (!empty($id)) {
             // ユーザーIDをstring→intにキャスト
-            $id = intval($id);
-            $tmp_user = $this->m_user->getUserById($id);
-            // 扱いやすいようにobject→arrayに変換
-            $user = $tmp_user->attributesToArray();
+            $user_id = intval($id);
+            $user = $this->m_user->getUserById($user_id);
         } else {
             /* URLにユーザーIDが含まれない場合は前の画面に戻す */
             return to_route('user.show.list');
         }
 
-        return view('user/detail', [
+        return view('user/edit/index', [
             'user' => $user,
         ]);
     }

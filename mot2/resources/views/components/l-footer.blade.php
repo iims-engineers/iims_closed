@@ -22,7 +22,7 @@
       </a>
     </div>
     <div class="l-footer__btn-item">
-      <a href="/user/edit/user-id/">
+      <a href="{{ route('user.show.edit', ['id' => Auth::user()->id]) }}">
         <img src="{{ asset('/img/common/dummy_icon.png') }}" alt="">
         <!-- <img src="/img/common/icon-accessibility.svg" alt=""> -->
         <span>個人設定</span>

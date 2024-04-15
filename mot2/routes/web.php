@@ -113,7 +113,7 @@ Route::middleware('auth')
                 // 詳細画面の表示
                 Route::get('/detail/{id}', [UserController::class, 'showDetail'])->name('show.detail');
                 // 編集画面の表示
-                Route::get('/edit/{id}', [UserController::class, 'showList'])->name('show.edit');
+                Route::get('/edit/{id}', [UserController::class, 'showEdit'])->name('show.edit');
             });
 
         /* トピック関連 */

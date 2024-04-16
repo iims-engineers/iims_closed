@@ -31,7 +31,7 @@
                   </div>
                   <div class="c-user-info">
                     <div class="c-user-name">{{ Arr::get($user, 'name') }}</div>
-                    <div class="c-user-id">@ {{ Arr::get($user, 'user_id') }}</div>
+                    <div class="c-user-id">@ {{ Arr::get($user, 'user_identifier') }}</div>
                   </div>
                   <div class="c-user-detail">
                     {!! nl2br(htmlspecialchars(Arr::get($user, 'introduction_text'))) !!}

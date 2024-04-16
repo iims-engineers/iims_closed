@@ -43,7 +43,7 @@ class Topic extends Model
         'user_id' => 'integer',
     ];
 
-    // 一覧表示に使用するデータカラム
+    // 表示用カラム
     private $columns = [
         'topics.id',
         'topics.title',
@@ -52,7 +52,8 @@ class Topic extends Model
         'topics.created_at',
         'topics.updated_at',
         'users.name',
-        'users.user_id',
+        'users.user_icon',
+        'users.user_identifier',
     ];
 
     /**

@@ -28,6 +28,7 @@
               <div class="c-user">
                 <a href="/user/show/user-id/">
                   <div class="c-user-icon">
+                    <!-- <img src="{{ $topic->user_icon }}" alt=""> -->
                     <img src="/img/common/dummy_icon.png" alt="">
                   </div>
                   <div class="c-user-info">
@@ -51,7 +52,7 @@
                   <img src="/img/common/icon-show-topic.svg" alt="">
                   <span>このトピックを見る</span>
                 </a>
-                <a href="/topic/edit/topicsID/" class="c-button">
+                <a href="{{ route('topic.show.edit', ['id' => $topic->id]) }}" class="c-button">
                   <img src="/img/common/icon-pencil.svg" alt="">
                   <span>このトピックを編集する</span>
                 </a>

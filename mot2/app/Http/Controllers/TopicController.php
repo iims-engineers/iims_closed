@@ -92,23 +92,23 @@ class TopicController extends Controller
      * 
      * @param string|null $topic_id  編集するトピックのトピックID
      */
-    public function showEdit(?string $topic_id = null)
+    public function showEdit(string $topic_id = null)
     {
         if (empty($topic_id)) {
-            /* IDが無い場合は一覧に戻す */
+            /* トピックIDが無い場合は一覧に戻す */
             return to_route('topic.show.list');
         }
 
         // ログインしているユーザー情報を取得
         $user = Auth::user();
         // トピックIDを元にトピック情報を取得
-        $topic = $this->m_topic::find((int)$topic_id);
-
-        if (empty($topic) || $user->id !== $topic->user_id) {
-            /* IDが不正、トピック削除済みの場合や、投稿者以外が編集しようとした場合などは404 */
+        $topic = $this->m_topic->getTopicById((int)$topic_id);
+        dd($topic);
+        /* 不正アクセス対策 */
+        if (empty($topic)) {
+            /* IDが不正の場合は404 */
             return to_route('404');
         }
-
         if ($user->id !== $topic->user_id) {
             /* 投稿者以外は編集できないため一覧に戻す */
             return back();

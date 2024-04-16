@@ -28,7 +28,7 @@
               </div>
               <div class="c-user-info">
                 <div class="c-user-name">{{ Arr::get($user, 'name') }}</div>
-                <div class="c-user-id">{{ Arr::get($user, 'user_id') }}</div>
+                <div class="c-user-id">{{ Arr::get($user, 'user_identifier') }}</div>
               </div>
             </div>
             <div class="c-user-info__body">

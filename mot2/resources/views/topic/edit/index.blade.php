@@ -28,12 +28,10 @@
                   </div>
                   <div class="c-user-info">
                     <div class="c-user-name">{{ $topic->name }}</div>
-                    <div class="c-user-id">@ {{ $topic->user_id }}</div>
+                    <div class="c-user-id">@ {{ $topic->user_identifier }}</div>
                   </div>
                 </div>
-                <textarea name="comment" id="comment" cols="30" rows="10">
-                {{ $topic->content }}
-                </textarea>
+                <textarea name="comment" id="comment" cols="30" rows="10">{!! nl2br(htmlspecialchars($topic->content)) !!}</textarea>
               </div>
               <div class="c-form-submit c-button-wrap">
                 <button type="submit" class="c-button">更新する</button>

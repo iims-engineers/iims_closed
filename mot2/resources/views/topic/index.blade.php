@@ -33,7 +33,7 @@
                   </div>
                   <div class="c-user-info">
                     <div class="c-user-name">{{ $topic->name }}</div>
-                    <div class="c-user-id">@ {{ $topic->user_id }}</div>
+                    <div class="c-user-id">@ {{ $topic->user_identifier }}</div>
                   </div>
                 </a>
               </div>

@@ -49,7 +49,7 @@ class TopicController extends Controller
         // トピック情報を投稿日時が新しい順で取得
         $topics = $this->m_topic->getAllTopics();
 
-        return view('topic/show/index', [
+        return view('topic/index', [
             'topics' => $topics,
         ]);
     }

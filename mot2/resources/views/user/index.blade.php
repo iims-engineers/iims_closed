@@ -19,19 +19,19 @@
         <section class="p-sub__section">
           <h1 class="p-sub__head01">ユーザー一覧</h1>
           @if($users->isEmpty())
-          <p>現在表示できるトピックはありません。</p>
+          <p>現在表示できるユーザー情報はありません。</p>
           @else
           @foreach($users as $user)
           <div class="p-sub__inner">
             <div class="c-user__list">
               <div class="c-user has-button">
-                <a href="/user/show/user-id/">
+                <a href="{{ route('user.show.detail', ['id' => $user->id]) }}">
                   <div class="c-user-icon">
                     <img src="/img/common/dummy_icon.png" alt="">
                   </div>
                   <div class="c-user-info">
                     <div class="c-user-name">{{ Arr::get($user, 'name') }}</div>
-                    <div class="c-user-id">{{ Arr::get($user, 'user_id') }}</div>
+                    <div class="c-user-id">@ {{ Arr::get($user, 'user_id') }}</div>
                   </div>
                   <div class="c-user-detail">
                     {!! nl2br(htmlspecialchars(Arr::get($user, 'introduction_text'))) !!}

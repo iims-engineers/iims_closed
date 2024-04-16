@@ -69,7 +69,7 @@ class TopicController extends Controller
         // IDを元にトピックの詳細を取得
         $topic = $this->m_topic->getTopicById((int)$id);
 
-        return view('topic/show/detail', [
+        return view('topic/show/index', [
             'topic' => $topic,
         ]);
     }

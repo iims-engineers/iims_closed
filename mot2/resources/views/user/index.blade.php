@@ -25,20 +25,21 @@
           <div class="p-sub__inner">
             <div class="c-user__list">
               <div class="c-user has-button">
-                <a href="{{ route('user.show.detail', ['id' => $user->id]) }}">
+                <a href="{{ route('user.show.detail', ['id' => data_get($user, 'id')]) }}">
                   <div class="c-user-icon">
+                    <!-- <img src="{{ data_get($user, 'user_icon', '') }}" alt=""> -->
                     <img src="/img/common/dummy_icon.png" alt="">
                   </div>
                   <div class="c-user-info">
-                    <div class="c-user-name">{{ Arr::get($user, 'name') }}</div>
-                    <div class="c-user-id">@ {{ Arr::get($user, 'user_identifier') }}</div>
+                    <div class="c-user-name">{{ data_get($user, 'name') }}</div>
+                    <div class="c-user-id">@ {{ data_get($user, 'user_identifier', '') }}</div>
                   </div>
                   <div class="c-user-detail">
-                    {!! nl2br(htmlspecialchars(Arr::get($user, 'introduction_text'))) !!}
+                    {!! nl2br(htmlspecialchars(data_get($user, 'introduction_text', ''))) !!}
                   </div>
                 </a>
                 <div class="c-user-follow-wrap">
-                  <a class="c-user-follow not-follow" href="{{ route('user.show.detail', ['id' => $user->id]) }}">もっと見る</a>
+                  <a class="c-user-follow not-follow" href="{{ route('user.show.detail', ['id' => data_get($user, 'id')]) }}">もっと見る</a>
                 </div>
                 <!-- <div class="c-user-follow-wrap">
                   <span class="c-user-follow follow">フォロー中</span>

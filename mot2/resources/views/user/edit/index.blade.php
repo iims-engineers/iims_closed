@@ -19,7 +19,7 @@
         <section class="p-sub__section">
           <h1 class="p-sub__head01">ユーザー情報編集</h1>
           <div class="p-sub__btns" style="margin: 0 0 20px;">
-            <a href="{{ route('user.show.detail', ['id' => $user->id]) }}" class="c-button--large">
+            <a href="{{ route('user.show.detail', ['id' => data_get($user, 'id')]) }}" class="c-button--large">
               <span>自分のプロフィールを見る</span>
             </a>
           </div>
@@ -29,40 +29,42 @@
               <div class="c-form-item">
                 <label for="user-icon" class="c-form-item-title">アイコン画像</label>
                 <div class="c-form__icon-preview">
+                  <!-- <img src="{{ data_get($user, 'user_icon', '') }}" alt=""> -->
                   <img src="/img/common/dummy.png" alt="">
                 </div>
                 <input type="file" name="user-icon" id="user-icon">
               </div>
               <div class="c-form-item">
                 <label for="user-name" class="c-form-item-title">ユーザー名</label>
-                <input type="text" name="user-name" id="user-name" value="もっと太郎">
+                <input type="text" name="user-name" id="user-name" value="{{ data_get($user, 'name') }}">
               </div>
               <div class="c-form-item">
                 <label for="user-id" class="c-form-item-title">ユーザーID</label>
-                <input type="text" name="user-id" id="user-id" value="username">
+                <input type="text" name="user-id" id="user-id" value="{{ data_get($user, 'user_identifier', '') }}">
               </div>
               <div class="c-form-item">
                 <label for="user-cover-image" class="c-form-item-title">プロフィールカバー画像</label>
                 <div class="c-form__cover-preview">
+                  <!-- <img src="{{ data_get($user, 'user_cover_image', '') }}" alt=""> -->
                   <img src="/img/common/dummy.png" alt="">
                 </div>
                 <input type="file" name="user-cover-image" id="user-cover-image">
               </div>
               <div class="c-form-item">
                 <label for="user-twitter" class="c-form-item-title">X（Twitter）アカウント</label>
-                <input type="text" name="user-twitter" id="user-twitter" value="" placeholder="https://twitter.com/username">
+                <input type="text" name="user-twitter" id="user-twitter" value="{{ data_get($user, 'sns_x', '') }}" placeholder="https://twitter.com/username">
               </div>
               <div class="c-form-item">
                 <label for="user-fb" class="c-form-item-title">Facebookアカウント</label>
-                <input type="text" name="user-fb" id="user-fb" value="" placeholder="https://www.facebook.com/username/">
+                <input type="text" name="user-fb" id="user-fb" value="{{ data_get($user, 'sns_facebook', '') }}" placeholder="https://www.facebook.com/username/">
               </div>
               <div class="c-form-item">
                 <label for="user-insta" class="c-form-item-title">Instagramアカウント</label>
-                <input type="text" name="user-insta" id="user-insta" value="" placeholder="https://www.instagram.com/username/">
+                <input type="text" name="user-insta" id="user-insta" value="{{ data_get($user, 'sns_instagram', '') }}" placeholder="https://www.instagram.com/username/">
               </div>
               <div class="c-form-item">
                 <label for="user-intro" class="c-form-item-title">自己紹介文</label>
-                <textarea name="user-intro" id="user-intro" cols="30" rows="10"></textarea>
+                <textarea name="user-intro" id="user-intro" cols="30" rows="10">{{ data_get($user, 'introduction_text', '') }}</textarea>
               </div>
               <div class="c-form-submit c-button-wrap">
                 <button type="submit" class="c-button">更新する</button>

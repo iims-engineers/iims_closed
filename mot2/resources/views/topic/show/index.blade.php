@@ -21,19 +21,19 @@
           <div class="p-sub__inner">
             <div class="c-user no-link">
               <div class="c-user-icon">
-                <!-- <img src="{{ $topic->user_icon }}" alt=""> -->
+                <!-- <img src="{{ data_get($topic, 'user_icon') }}" alt=""> -->
                 <img src="/img/common/dummy_icon.png" alt="">
               </div>
               <div class="c-user-info">
-                <div class="c-user-name">{{ $topic->name }}</div>
-                <div class="c-user-id">@ {{ $topic->user_identifier }}</div>
+                <div class="c-user-name">{{ data_get($topic, 'name') }}</div>
+                <div class="c-user-id">@ {{ data_get($topic, 'user_identifier') }}</div>
               </div>
             </div>
             <div class="c-topic-detail">
               <p>
-                {!! nl2br(htmlspecialchars($topic->content)) !!}
+                {!! nl2br(htmlspecialchars(data_get($topic, 'content'))) !!}
               </p>
-              <time class="c-topic-date" datetime="{{ $topic->created_at }}">{{ $topic->created_at }}</time>
+              <time class="c-topic-date" datetime="{{ data_get($topic, 'created_at') }}">{{ data_get($topic, 'created_at') }}</time>
             </div>
 
             <?php // ここからコメント 

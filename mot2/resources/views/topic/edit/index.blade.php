@@ -24,14 +24,15 @@
               <div class="c-form-item">
                 <div class="c-user no-link">
                   <div class="c-user-icon">
+                    <!-- <img src="{{ data_get($topic, 'user_icon') }}" alt=""> -->
                     <img src="/img/common/dummy_icon.png" alt="">
                   </div>
                   <div class="c-user-info">
-                    <div class="c-user-name">{{ $topic->name }}</div>
-                    <div class="c-user-id">@ {{ $topic->user_identifier }}</div>
+                    <div class="c-user-name">{{ data_get($topic, 'name') }}</div>
+                    <div class="c-user-id">@ {{ data_get($topic, 'user_identifier') }}</div>
                   </div>
                 </div>
-                <textarea name="comment" id="comment" cols="30" rows="10">{!! nl2br(htmlspecialchars($topic->content)) !!}</textarea>
+                <textarea name="comment" id="comment" cols="30" rows="10">{!! nl2br(htmlspecialchars(data_get($topic, 'content'))) !!}</textarea>
               </div>
               <div class="c-form-submit c-button-wrap">
                 <button type="submit" class="c-button">更新する</button>

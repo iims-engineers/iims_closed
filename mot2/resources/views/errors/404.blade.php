@@ -34,7 +34,7 @@
         </section>
       </main>
       <!-- l-footer START -->
-      @include('components.l-footer')
+      @include('components.l-footer-top')
       <!-- l-footer END -->
     </div>
   </div>

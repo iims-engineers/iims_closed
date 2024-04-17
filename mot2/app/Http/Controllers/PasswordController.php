@@ -81,10 +81,8 @@ class PasswordController extends Controller
             $user->password = Hash::make($input['password']);
             $user->save();
 
-            // 登録成功したらログインフォームに遷移
-            // ※なぜか「to_route('password.new.complete');」が正常動作しないので、直接viewを返却しておく
-            // return to_route('password.new.show.complete');
-            return view('password/new/complete');
+            // 登録成功したらユーザーID設定画面に遷移
+            return to_route('identifier.show.form', ['token' => $user->verify_token]);
         } catch (\Exception $e) {
             // 登録失敗したら再度入力フォームに戻してやり直させる
             session()->flash('flash_message', __('passwords.failed_regist_reset'));

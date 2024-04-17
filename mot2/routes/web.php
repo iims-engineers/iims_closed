@@ -5,6 +5,7 @@ use \App\Http\Controllers\AboutController;
 use \App\Http\Controllers\ApplyController;
 use \App\Http\Controllers\LoginController;
 use \App\Http\Controllers\PasswordController;
+use \App\Http\Controllers\UserIdentifierController;
 use \App\Http\Controllers\TopicController;
 use \App\Http\Controllers\HomeController;
 use \App\Http\Controllers\UserController;
@@ -71,6 +72,14 @@ Route::prefix('/password')
                 Route::get('/complete', [PasswordController::class, 'showCompleteReset'])->name('show.complete');
             });
     });
+
+/* ユーザーIDの設定 */
+// 入力画面の表示
+Route::get('/identifier/{token}', [UserIdentifierController::class, 'showForm'])->name('identifier.show.form');
+// 登録実行
+Route::post('/identifier/store', [UserIdentifierController::class, 'store'])->name('identifier.store');
+// 登録完了画面の表示
+Route::post('/identifier/complete', [UserIdentifierController::class, 'showComplete'])->name('identifier.show.complete');
 /* ------------------------------------------------------------------------------------------------ */
 
 

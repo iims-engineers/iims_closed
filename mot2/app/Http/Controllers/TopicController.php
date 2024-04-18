@@ -178,29 +178,4 @@ class TopicController extends Controller
             }
         }
     }
-
-    /**
-     * トピック - 削除実行
-     * 
-     * @param int $topic_id 削除対象のトピックID
-     */
-    public function delete(int $topic_id)
-    {
-        if (empty($topic_id)) {
-            /* IDがない場合は詳細画面に戻す */
-            return back();
-        }
-
-        // 削除実行
-        $failed = $this->m_topic->deleteTopic($topic_id);
-
-        if ($failed) {
-            /* 削除完了したらトピック一覧画面に遷移する */
-            return to_route('topic.show.list');
-        } else {
-            /* 失敗したら詳細画面に戻す */
-            session()->flash('flash_message', __('topics.failed_delete'));
-            return back();
-        }
-    }
 }

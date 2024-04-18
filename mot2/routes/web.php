@@ -137,10 +137,8 @@ Route::middleware('auth')
                 Route::get('/detail/{id}', [TopicController::class, 'showDetail'])->name('show.detail');
                 // トピック編集 - 編集画面の表示
                 Route::get('/edit/{id}', [TopicController::class, 'showEdit'])->name('show.edit');
-                // トピック - 保存実行
+                // トピック - 作成・更新・削除実行
                 Route::post('/store', [TopicController::class, 'store'])->name('store');
-                // トピック - 削除実行
-                Route::get('/delete/{id}', [TopicController::class, 'delete'])->name('delete');
             });
     });
 /* ------------------------------------------------------------------------------------------------ */

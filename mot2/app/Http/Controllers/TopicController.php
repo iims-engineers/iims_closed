@@ -133,18 +133,12 @@ class TopicController extends Controller
         if (isset($post['delete'])) {
             /* 削除 */
 
-            // 削除対象のトピックを取得
-            $topic = $this->m_topic::find((int)$post['topic-id']);
-            // 削除日時を取得
-            $now = Carbon::now();
-            $topic->deleted_at = $now->format('Y-m-d H:i:s');
-
-            try {
-                // 削除実行
-                $topic->save();
+            // 削除実行
+            $result = $this->m_topic->deleteTopic((int)$post['topic-id']);
+            if ($result) {
                 // 完了したらトピック一覧画面に遷移する
                 return to_route('topic.show.list');
-            } catch (\Exception $e) {
+            } else {
                 // 失敗したらエラーメッセージ
                 session()->flash('flash_message', __('topics.failed_delete'));
                 return back();

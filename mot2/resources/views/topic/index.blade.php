@@ -52,10 +52,13 @@
                   <img src="/img/common/icon-show-topic.svg" alt="">
                   <span>このトピックを見る</span>
                 </a>
+                {{-- 編集できるのは作成者のみ --}}
+                @if($topic->user_id === $user_id)
                 <a href="{{ route('topic.show.edit', ['id' => data_get($topic, 'id')]) }}" class="c-button">
                   <img src="/img/common/icon-pencil.svg" alt="">
                   <span>このトピックを編集する</span>
                 </a>
+                @endif
               </div>
             </div>
           </div>

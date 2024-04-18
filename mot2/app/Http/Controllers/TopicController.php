@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Models\User;
 use App\Models\Topic;
 use App\Models\Comment;
+use Carbon\Carbon;
 
 /**
  * トピック関連のコントローラ
@@ -48,9 +49,12 @@ class TopicController extends Controller
     {
         // トピック情報を投稿日時が新しい順で取得
         $topics = $this->m_topic->getAllTopics();
+        // ログインしているユーザーIDを取得(トピック編集ボタンの表示/非表示に使用)
+        $user_id = Auth::id();
 
         return view('topic/index', [
             'topics' => $topics,
+            'user_id' => $user_id,
         ]);
     }
 
@@ -125,36 +129,59 @@ class TopicController extends Controller
      */
     public function store(TopicRequest $request)
     {
-        // 入力データのバリデート
-        $validated = $request->validated();
-        // バリデートOKの場合、取得
-        $input = $request->all();
+        $post = $request->post();
+        if (isset($post['delete'])) {
+            /* 削除 */
 
-        try {
+            // 削除対象のトピックを取得
+            $topic = $this->m_topic::find((int)$post['topic-id']);
+            // 削除日時を取得
+            $now = Carbon::now();
+            $topic->deleted_at = $now->format('Y-m-d H:i:s');
 
-            if (isset($input['topic-id'])) {
-                /* 編集の場合はトピック情報を取得 */
-                $topic = $this->m_topic::find((int)$input['topic-id']);
-            } else {
-                /* 新規作成の場合は投稿者のユーザーIDも保存する */
-                $topic = $this->m_topic;
-                // 投稿者(ログインしているユーザー)の情報を取得
-                $user = Auth::user();
-                $topic->user_id = $user->id;
-                // タイトル
-                $topic->title = Arr::get($input, 'topic-title');
+            try {
+                // 削除実行
+                $topic->save();
+                // 完了したらトピック一覧画面に遷移する
+                return to_route('topic.show.list');
+            } catch (\Exception $e) {
+                // 失敗したらエラーメッセージ
+                session()->flash('flash_message', __('topics.failed_delete'));
+                return back();
             }
-            // 本文
-            $topic->content = Arr::get($input, 'topic-detail');
-            // 保存実行
-            $topic->save();
+        } else {
+            /* 新規作成・更新 */
 
-            // 保存完了したらトピック一覧画面に遷移する
-            return to_route('topic.show.list');
-        } catch (\Exception $e) {
-            // 失敗したら入力画面に戻す
-            session()->flash('flash_message', __('topics.failed'));
-            return back();
+            // 入力データのバリデート
+            $validated = $request->validated();
+            // バリデートOKの場合、取得
+            $input = $request->all();
+
+            try {
+                if (isset($input['topic-id'])) {
+                    /* 編集の場合はトピック情報を取得 */
+                    $topic = $this->m_topic::find((int)$input['topic-id']);
+                } else {
+                    /* 新規作成の場合は投稿者のユーザーIDも保存する */
+                    $topic = $this->m_topic;
+                    // 投稿者(ログインしているユーザー)の情報を取得
+                    $user = Auth::user();
+                    $topic->user_id = $user->id;
+                    // タイトル
+                    $topic->title = Arr::get($input, 'topic-title');
+                }
+                // 本文
+                $topic->content = Arr::get($input, 'topic-detail');
+                // 保存実行
+                $topic->save();
+
+                // 保存完了したらトピック一覧画面に遷移する
+                return to_route('topic.show.list');
+            } catch (\Exception $e) {
+                // 失敗したら入力画面に戻す
+                session()->flash('flash_message', __('topics.failed'));
+                return back();
+            }
         }
     }
 

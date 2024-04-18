@@ -132,18 +132,18 @@ class TopicController extends Controller
 
         try {
 
-            if (isset($input['id'])) {
+            if (isset($input['topic-id'])) {
                 /* 編集の場合はトピック情報を取得 */
-                $topic = $this->m_topic::find((int)$input['id']);
+                $topic = $this->m_topic::find((int)$input['topic-id']);
             } else {
                 /* 新規作成の場合は投稿者のユーザーIDも保存する */
                 $topic = $this->m_topic;
                 // 投稿者(ログインしているユーザー)の情報を取得
                 $user = Auth::user();
                 $topic->user_id = $user->id;
+                // タイトル
+                $topic->title = Arr::get($input, 'topic-title');
             }
-            // タイトル
-            $topic->title = Arr::get($input, 'topic-title');
             // 本文
             $topic->content = Arr::get($input, 'topic-detail');
             // 保存実行

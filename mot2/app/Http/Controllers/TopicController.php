@@ -20,6 +20,9 @@ use Carbon\Carbon;
 class TopicController extends Controller
 {
 
+    // 一覧のデフォルト表示件数
+    const DEFAULT_SHOW_CNT = 5;
+
     // topicモデルのインスタンス格納用
     private $m_topic;
     // userモデルのインスタンス格納用
@@ -45,16 +48,49 @@ class TopicController extends Controller
     /**
      * トピック - 一覧画面の表示
      */
-    public function showList()
+    public function showList($page = 1)
     {
-        // トピック情報を投稿日時が新しい順で取得
-        $topics = $this->m_topic->getAllTopics();
+        /* 表示するトピックの取得 */
+        // ページ番号
+        $page = (int)$page;
+        if ($page <= 0) {
+            /* 不正なページ番号(0以下)の場合は1ページに設定 */
+            $page = 1;
+        }
+        // 表示件数
+        $limit = self::DEFAULT_SHOW_CNT;
+        // 何件目から取得するか設定
+        $offset = ($page - 1) * $limit;
+        // トピック情報(新しい順)と総件数を取得
+        $topic_info = $this->m_topic->getTopicsList($limit, $offset);
+        // 取得したトピック情報をトピックと総件数に分ける
+        $topics = [];
+        $total_cnt = '';
+        if (!empty($topic_info)) {
+            $topics = data_get($topic_info, 'topics');
+            $total_cnt = data_get($topic_info, 'cnt');
+        }
+
+        /* ページネーション */
+        // 次のページ番号
+        $page_next = '';
+        if ($total_cnt > (self::DEFAULT_SHOW_CNT * $page)) {
+            $page_next = $page + 1;
+        }
+        // 前のページ番号
+        $page_previous = $page - 1;
+
+
         // ログインしているユーザーIDを取得(トピック編集ボタンの表示/非表示に使用)
         $user_id = Auth::id();
 
         return view('topic/index', [
             'topics' => $topics,
+            'total_cnt' => $total_cnt,
             'user_id' => $user_id,
+            'page' => $page,
+            'page_next' => $page_next,
+            'page_previous' => $page_previous,
         ]);
     }
 

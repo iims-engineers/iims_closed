@@ -19,6 +19,8 @@ use App\Models\Support;
  */
 class HomeController extends Controller
 {
+    // ホーム画面に表示するトピック数
+    const CNT_SHOW_TOPIC = 5;
     // userモデルのインスタンス
     private $m_user;
     // topicモデルのインスタンス
@@ -45,8 +47,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        /* 最新のトピックを5件取得 */
-        $topics = $this->m_topic->getAllTopics(5);
+        /* 最新のトピックを取得 */
+        $topics = $this->m_topic->getTopics(self::CNT_SHOW_TOPIC);
 
         return view('home/index', [
             'topics' => $topics,

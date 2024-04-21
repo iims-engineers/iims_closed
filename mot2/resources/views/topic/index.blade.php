@@ -17,8 +17,8 @@
     <div class="l-contents">
       <main class="l-main">
         <section class="p-sub__section">
-          <h1 class="p-sub__head01">トピック一覧</h1>
-          @if($topics->isEmpty())
+          <h1 class="p-sub__head01">トピック一覧　(全{{ $total_cnt }}件)</h1>
+          @if(empty($topics))
           <p>現在表示できるトピックはありません。</p>
           @else
           @foreach($topics as $topic)
@@ -53,7 +53,7 @@
                   <span>このトピックを見る</span>
                 </a>
                 {{-- 編集できるのは作成者のみ --}}
-                @if($topic->user_id === $user_id)
+                @if(data_get($topic, 'user_id') === $user_id)
                 <a href="{{ route('topic.show.edit', ['id' => data_get($topic, 'id')]) }}" class="c-button">
                   <img src="/img/common/icon-pencil.svg" alt="">
                   <span>このトピックを編集する</span>
@@ -65,8 +65,12 @@
           @endforeach
           @endif
           <div class="c-pagenation">
-            <a href="" class="c-pagenation-item">＜ 前のページ</a>
-            <a href="" class="c-pagenation-item">次のページ ＞</a>
+            @if($page > 1)
+            <a href="{{ route('topic.show.list', ['page' => $page_previous]) }}" class="c-pagenation-item">＜ 前のページ</a>
+            @endif
+            @if(!empty($page_next))
+            <a href="{{ route('topic.show.list', ['page' => $page_next]) }}" class="c-pagenation-item">次のページ ＞</a>
+            @endif
           </div>
         </section>
       </main>

@@ -130,7 +130,7 @@ Route::middleware('auth')
             ->name('topic.')
             ->group(function () {
                 // トピック - 一覧画面の表示
-                Route::get('/list', [TopicController::class, 'showList'])->name('show.list');
+                Route::get('/list/{page?}', [TopicController::class, 'showList'])->name('show.list');
                 // トピック新規作成 - 入力画面の表示
                 Route::get('/new', [TopicController::class, 'showCreate'])->name('show.create');
                 // トピック - 詳細画面の表示

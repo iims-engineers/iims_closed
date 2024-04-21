@@ -59,24 +59,60 @@ class Topic extends Model
     /**
      * トピック情報一括取得(投稿日時が新しい順)
      * 
-     * @param int|null $limit  取得件数
+     * @param int|null $limit   取得件数
+     * @param int|null $offset  取得開始レコード数
+     * @param bool|null $flg_cnt    全件数を取得するかのフラグ
      */
-    public function getAllTopics(int|null $limit = null)
+    public function getTopics(int|null $limit = null)
     {
         // 削除されていないトピックを作成日時が新しい順に取得
-        $topics = DB::table('topics')
+        $query = DB::table('topics')
             ->join('users', 'topics.user_id', '=', 'users.id')
             ->select($this->columns)
             ->whereNull('topics.deleted_at')
             ->orderBy('topics.created_at', 'desc');
-
         if (!empty($limit)) {
-            $topics = $topics->limit($limit);
+            /* 取得件数の設定 */
+            $query = $query->limit($limit);
         }
 
-        $topics = $topics->get();
+        $topics = $query->get();
 
         return $topics;
+    }
+
+    /**
+     * トピック一覧画面表示用(投稿日時が新しい順)
+     * 
+     * @param int|null $limit   取得件数
+     * @param int|null $offset  取得開始レコード数
+     */
+    public function getTopicsList(int|null $limit = null, int|null $offset = null): array
+    {
+        // 削除されていないトピックを作成日時が新しい順に取得
+        $topic_info = [];
+        $query = DB::table('topics')
+            ->join('users', 'topics.user_id', '=', 'users.id')
+            ->select($this->columns)
+            ->whereNull('topics.deleted_at')
+            ->orderBy('topics.created_at', 'desc');
+        if (!empty($limit)) {
+            /* 取得件数の設定 */
+            $query = $query->limit($limit);
+        }
+        if (!empty($offset)) {
+            /* 何件目から取得するか設定 */
+            $query = $query->offset($offset);
+        }
+        $topic_info['topics'] = $query->get()->toArray();
+        // 件数取得
+        $topic_info['cnt'] = DB::table('topics')
+            ->join('users', 'topics.user_id', '=', 'users.id')
+            ->select('topics.id')
+            ->whereNull('topics.deleted_at')
+            ->count();
+
+        return $topic_info;
     }
 
     /**

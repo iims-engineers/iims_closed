@@ -21,7 +21,7 @@ class TopicController extends Controller
 {
 
     // 一覧のデフォルト表示件数
-    const DEFAULT_SHOW_CNT = 5;
+    const SHOW_CNT_TOPICS = 20;
 
     // topicモデルのインスタンス格納用
     private $m_topic;
@@ -58,14 +58,14 @@ class TopicController extends Controller
             $page = 1;
         }
         // 表示件数
-        $limit = self::DEFAULT_SHOW_CNT;
+        $limit = self::SHOW_CNT_TOPICS;
         // 何件目から取得するか設定
         $offset = ($page - 1) * $limit;
         // トピック情報(新しい順)と総件数を取得
         $topic_info = $this->m_topic->getTopicsList($limit, $offset);
         // 取得したトピック情報をトピックと総件数に分ける
         $topics = [];
-        $total_cnt = '';
+        $total_cnt = 0;
         if (!empty($topic_info)) {
             $topics = data_get($topic_info, 'topics');
             $total_cnt = data_get($topic_info, 'cnt');
@@ -74,7 +74,7 @@ class TopicController extends Controller
         /* ページネーション */
         // 次のページ番号
         $page_next = '';
-        if ($total_cnt > (self::DEFAULT_SHOW_CNT * $page)) {
+        if ($total_cnt > (self::SHOW_CNT_TOPICS * $page)) {
             $page_next = $page + 1;
         }
         // 前のページ番号

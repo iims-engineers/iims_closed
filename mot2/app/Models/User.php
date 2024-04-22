@@ -74,6 +74,35 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+     * ユーザー一覧に表示する情報を取得
+     * 
+     * @param int|null $limit   取得件数
+     * @param int|null $offset  取得開始レコード数
+     */
+    public function getUsersList(int|null $limit = null, int|null $offset = null): array
+    {
+        $user_info = [];
+        $query = DB::table('users')
+            ->whereNull('users.deleted_at')
+            ->orderBy('users.created_at', 'desc');
+        if (!empty($limit)) {
+            /* 取得件数の設定 */
+            $query = $query->limit($limit);
+        }
+        if (!empty($offset)) {
+            /* 何件目から取得するか設定 */
+            $query = $query->offset($offset);
+        }
+        $user_info['users'] = $query->get()->toArray();
+        // 件数取得
+        $user_info['cnt'] = DB::table('users')
+            ->whereNull('users.deleted_at')
+            ->count();
+
+        return $user_info;
+    }
+
+    /**
      * IDからユーザーの情報を取得
      * 
      * @param int $id  ユーザーID

@@ -16,6 +16,9 @@ use App\Models\Topic;
  */
 class UserController extends Controller
 {
+    // 一覧のデフォルト表示件数
+    const SHOW_CNT_USERS = 20;
+
     // userモデルのインスタンス格納用
     private $m_user;
     // topicモデルのインスタンス格納用
@@ -35,11 +38,49 @@ class UserController extends Controller
 
     /**
      * ユーザー情報 - 一覧画面の表示
+     * 
+     * string $page  一覧のページ番号
      */
-    public function showList()
+    public function showList(string $page = null)
     {
+        // ページ番号
+        $page = (int)$page;
+        if ($page <= 0) {
+            /* 不正なページ番号(0以下)の場合は1ページに設定 */
+            $page = 1;
+        }
+
+        // 表示件数
+        $limit = self::SHOW_CNT_USERS;
+        // 何件目から取得するか設定
+        $offset = ($page - 1) * $limit;
+        // トピック情報(新しい順)と総件数を取得
+        $user_info = $this->m_user->getUsersList($limit, $offset);
+        // 取得したトピック情報をトピックと総件数に分ける
+        $users = [];
+        $total_cnt = 0;
+        if (!empty($user_info)) {
+            $users = data_get($user_info, 'users');
+            $total_cnt = data_get($user_info, 'cnt');
+        }
+
+        /* ページネーション */
+        // 次のページ番号
+        $page_next = '';
+        if ($total_cnt > (self::SHOW_CNT_USERS * $page)) {
+            $page_next = $page + 1;
+        }
+        // 前のページ番号
+        $page_previous = $page - 1;
+
+        // ログインしているユーザーIDを取得(トピック編集ボタンの表示/非表示に使用)
+        $user_id = Auth::id();
         return view('user/index', [
-            'users' => $this->all_users,
+            'users' => $users,
+            'total_cnt' => $total_cnt,
+            'page' => $page,
+            'page_next' => $page_next,
+            'page_previous' => $page_previous,
         ]);
     }
 

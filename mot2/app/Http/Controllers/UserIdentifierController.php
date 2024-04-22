@@ -7,10 +7,8 @@ use App\Http\Requests\UserIdentifierRequest;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\MailPasswordResetMailCheck;
 use Carbon\Carbon;
 use App\Models\User;
 
@@ -36,10 +34,13 @@ class UserIdentifierController extends Controller
             /* 万が一認証トークンが無いURLだった場合はトップ画面に戻す */
             return to_route('top');
         }
-        // 認証トークンからユーザー情報を取得できなければトップ画面に戻す
         $user = $this->m_user->getUserByToken($token);
         if (!$user) {
+            /* 認証トークンからユーザー情報を取得できなければトップ画面に戻す */
             return to_route('top');
+        } else {
+            /* ユーザー情報をセッションに保存 */
+            session(['user' => $user]);
         }
 
         return view('identifier/index', [
@@ -52,25 +53,30 @@ class UserIdentifierController extends Controller
      */
     public function store(UserIdentifierRequest $request)
     {
+        // 入力画面から渡されたユーザー情報をセッションから取得
+        $user = session('user');
+        // 既にユーザーIDが登録されている場合は完了画面に遷移
+        $identifier = data_get($user, 'user_identifier');
+        if (!empty($identifier)) {
+            return to_route('login.show.form')->with('flash_message', 'ユーザーIDは既に登録されています。以下よりログインしてください。');
+        }
+
         // 入力データのバリデート
         $validated = $request->validated();
         // 入力データを取得
-        $input = $request->only([
-            'id',
-            'user_identifier'
-        ]);
-        // セッションから該当ユーザーの情報を取得
-        $user = $this->m_user->getUserById((int)$input['id']);
+        $input = $request->only('user_identifier');
 
         // 登録実行
         try {
-            $user->user_identifier = Arr::get($input, 'user_identifier');
+            $user->user_identifier = data_get($input, 'user_identifier');
             $user->save();
 
             // 登録成功したら完了画面に遷移
-            return to_route('identifier.show.complete');
-        } catch (\Exception $e) {
-            return back();
+            return view('identifier/complete/index');
+        } catch (\Exception $e) {;
+            return back()->withErrors([
+                'failed_store_identifier' => __('auth.failed_store_identifier'),
+            ]);
         }
     }
 
@@ -79,6 +85,7 @@ class UserIdentifierController extends Controller
      */
     public function showComplete()
     {
+
         return view('identifier.complete.index');
     }
 }

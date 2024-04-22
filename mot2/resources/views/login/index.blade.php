@@ -27,6 +27,12 @@
             </ul>
           </div>
           @endif
+          @if(session('flash_message'))
+          {{-- ユーザーIDが登録だった場合、フラッシュメッセージを表示する --}}
+          <div class="form-error">
+            <p class="error-text">{{ session('flash_message') }}</p>
+          </div>
+          @endif
           <form action="{{ route('login') }}" method='POST' class="c-form">
             @csrf
             <div class="c-form-item">

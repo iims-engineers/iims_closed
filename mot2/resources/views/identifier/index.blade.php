@@ -45,7 +45,6 @@
                             <p class="error-text">※{{ $message }}</p>
                             @enderror
                         </div>
-                        <input type="hidden" name="id" value="{{ data_get($user, 'id') }}">
                         <div class="c-form-submit c-button-wrap">
                             <button type="submit" class="c-button">設定する</button>
                         </div>

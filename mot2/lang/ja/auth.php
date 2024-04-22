@@ -7,4 +7,5 @@ return [
     'failed_login' => 'メールアドレスまたはパスワードが正しくありません。',
     'password'     => 'パスワードが正しくありません。',
     'throttle'     => 'ログインの試行回数が多すぎます。:seconds 秒後にお試しください。',
+    'failed_store_identifier'     => 'ユーザーIDの登録に失敗しました。',
 ];

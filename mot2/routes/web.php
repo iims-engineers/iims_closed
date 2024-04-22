@@ -79,7 +79,7 @@ Route::get('/identifier/{token}', [UserIdentifierController::class, 'showForm'])
 // 登録実行
 Route::post('/identifier/store', [UserIdentifierController::class, 'store'])->name('identifier.store');
 // 登録完了画面の表示
-Route::post('/identifier/complete', [UserIdentifierController::class, 'showComplete'])->name('identifier.show.complete');
+Route::get('/identifier/complete', [UserIdentifierController::class, 'showComplete'])->name('identifier.show.complete');
 /* ------------------------------------------------------------------------------------------------ */
 
 

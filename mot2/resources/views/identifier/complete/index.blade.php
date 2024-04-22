@@ -21,6 +21,20 @@
                     <div class="p-sub__lead">
                         <p>ユーザーIDの設定が完了しました。以下よりログインできます。</p>
                     </div>
+                    @if($errors->any())
+                    <div class="form-error">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                            <li class="error-text">・{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
+                    @if(session('flash_message'))
+                    <div class="form-error">
+                        <p class="error-text">{{ session('flash_message') }}</p>
+                    </div>
+                    @endif
                     <div class="p-top-btn">
                         <a href="{{ route('login.show.form') }}" class="c-button--large">
                             <img src="{{ ('/img/common/icon-enter-white.svg') }}" alt="">

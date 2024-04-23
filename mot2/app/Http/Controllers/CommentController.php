@@ -60,7 +60,6 @@ class CommentController extends Controller
         // コメント主の情報
         $user = Auth::user();
 
-
         return view('topic/comment/index', [
             'topic' => $topic,
             'comments' => $comments,

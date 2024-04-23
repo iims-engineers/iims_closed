@@ -42,4 +42,35 @@ class Comment extends Model
         'topic_id' => 'integer',
         'user_id' => 'integer',
     ];
+
+    // 表示用カラム
+    private $columns = [
+        'comments.id',
+        'comments.comment',
+        'comments.created_at',
+        'topics.id as topic_id',
+        'users.id as user_id',
+        'users.name as username',
+        'users.user_icon',
+        'users.user_identifier',
+    ];
+
+    /**
+     * トピックに紐づくコメントを取得
+     * 
+     * @param int|string $topic_id  トピックID
+     */
+    public function getCommentsByTopicID(int|string $topic_id)
+    {
+        // 古いコメントを上位に表示するため作成日時順に取得
+        $comments = DB::table($this->table)
+            ->join('users', 'comments.user_id', '=', 'users.id')
+            ->join('topics', 'comments.topic_id', '=', 'topics.id')
+            ->select($this->columns)
+            ->whereNull('comments.deleted_at')
+            ->orderBy('comments.created_at', 'asc')
+            ->get();
+
+        return $comments;
+    }
 }

@@ -9,6 +9,7 @@ use \App\Http\Controllers\UserIdentifierController;
 use \App\Http\Controllers\TopicController;
 use \App\Http\Controllers\HomeController;
 use \App\Http\Controllers\UserController;
+use \App\Http\Controllers\CommentController;
 use \App\Http\Controllers\Admin\user\ApproveController;
 
 // Route::get('/1', function () {
@@ -96,8 +97,23 @@ Route::middleware('guest')
             Route::get('/login', [LoginController::class, 'showForm'])->name('login.show.form');
             // ログイン処理
             Route::post('/login', [LoginController::class, 'login'])->name('login');
+
+            /* ユーザーIDの設定 */
+            Route::prefix('/identifier')
+                ->name('identifier.')
+                ->group(
+                    function () {
+                        // 入力画面の表示
+                        Route::get('/{token}', [UserIdentifierController::class, 'showForm'])->name('show.form');
+                        // 登録実行
+                        Route::post('/store', [UserIdentifierController::class, 'store'])->name('store');
+                        // 登録完了/
+                        Route::get('/complete', [UserIdentifierController::class, 'showComplete'])->name('show.complete');
+                    }
+                );
         }
     );
+
 /* ------------------------------------------------------------------------------------------------ */
 
 /* ------------------------------------------------------------------------------------------------ */
@@ -139,6 +155,8 @@ Route::middleware('auth')
                 Route::get('/edit/{id}', [TopicController::class, 'showEdit'])->name('show.edit');
                 // トピック - 作成・更新・削除実行
                 Route::post('/store', [TopicController::class, 'store'])->name('store');
+                // コメント - 入力画面の表示
+                Route::get('/comment/{topic_id}', [CommentController::class, 'showForm'])->name('show.create.comment');
             });
     });
 /* ------------------------------------------------------------------------------------------------ */

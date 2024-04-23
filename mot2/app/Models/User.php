@@ -81,8 +81,9 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function getUsersList(int|null $limit = null, int|null $offset = null): array
     {
+        /* トピック取得 */
         $user_info = [];
-        $query = DB::table('users')
+        $query = DB::table($this->table)
             ->whereNull('users.deleted_at')
             ->orderBy('users.created_at', 'desc');
         if (!empty($limit)) {
@@ -94,8 +95,9 @@ class User extends Authenticatable implements MustVerifyEmail
             $query = $query->offset($offset);
         }
         $user_info['users'] = $query->get()->toArray();
-        // 件数取得
-        $user_info['cnt'] = DB::table('users')
+
+        /* トータル件数取得 */
+        $user_info['cnt'] = DB::table($this->table)
             ->whereNull('users.deleted_at')
             ->count();
 

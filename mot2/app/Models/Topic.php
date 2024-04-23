@@ -66,7 +66,7 @@ class Topic extends Model
     public function getTopics(int|null $limit = null)
     {
         // 削除されていないトピックを作成日時が新しい順に取得
-        $query = DB::table('topics')
+        $query = DB::table($this->table)
             ->join('users', 'topics.user_id', '=', 'users.id')
             ->select($this->columns)
             ->whereNull('topics.deleted_at')
@@ -91,7 +91,7 @@ class Topic extends Model
     {
         // 削除されていないトピックを作成日時が新しい順に取得
         $topic_info = [];
-        $query = DB::table('topics')
+        $query = DB::table($this->table)
             ->join('users', 'topics.user_id', '=', 'users.id')
             ->select($this->columns)
             ->whereNull('topics.deleted_at')
@@ -122,7 +122,7 @@ class Topic extends Model
      */
     public function getTopicById(int $topic_id)
     {
-        $topic = DB::table('topics')
+        $topic = DB::table($this->table)
             ->join('users', 'topics.user_id', '=', 'users.id')
             ->select($this->columns)
             ->where('topics.id', $topic_id)
@@ -139,7 +139,7 @@ class Topic extends Model
      */
     public function getTopicByUser(int $user_id)
     {
-        $topic = DB::table('topics')
+        $topic = DB::table($this->table)
             ->join('users', 'topics.user_id', '=', 'users.id')
             ->select($this->columns)
             ->where('topics.user_id', $user_id)

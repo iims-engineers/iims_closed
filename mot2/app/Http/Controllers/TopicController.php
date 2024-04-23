@@ -99,7 +99,7 @@ class TopicController extends Controller
      * 
      * @param string|null $id  トピックID
      */
-    public function showDetail(string|null $id = null)
+    public function showDetail(string|null $id)
     {
         if (empty($id)) {
             /* IDが無い場合は一覧に戻す */
@@ -108,6 +108,10 @@ class TopicController extends Controller
 
         // IDを元にトピックの詳細を取得
         $topic = $this->m_topic->getTopicById((int)$id);
+        if (empty($topic)) {
+            /* 存在しないIDもしくは削除済みの場合は404 */
+            return to_route('404');
+        }
 
         return view('topic/show/index', [
             'topic' => $topic,

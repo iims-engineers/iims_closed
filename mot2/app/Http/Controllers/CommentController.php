@@ -37,11 +37,35 @@ class CommentController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * コメント入力画面の表示
+     * 
+     * @param int|string $topic_id  コメントするトピックのID
      */
-    public function index()
+    public function showForm(int|string $topic_id = null)
     {
-        //
+        // URLにトピックIDがなかったら404
+        if (empty($topic_id)) {
+            return to_route('404');
+        }
+        // IDをもとにトピック情報を取得
+        $topic = $this->m_topic->getTopicById((int)$topic_id);
+        if (empty($topic)) {
+            /* 存在しないIDもしくは削除済みの場合は404 */
+            return to_route('404');
+        }
+
+        // トピックIDから紐づくコメントを取得
+        $comments = $this->m_comment->getCommentsByTopicID($topic_id);
+
+        // コメント主の情報
+        $user = Auth::user();
+
+
+        return view('topic/comment/index', [
+            'topic' => $topic,
+            'comments' => $comments,
+            'user' => $user,
+        ]);
     }
 
     /**

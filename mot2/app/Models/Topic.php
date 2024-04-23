@@ -157,6 +157,7 @@ class Topic extends Model
      */
     public function deleteTopic(int $topic_id)
     {
+        /* IDをもとにトピック取得 */
         $topic = $this->where('id', $topic_id)
             ->whereNull('deleted_at')
             ->first();
@@ -166,14 +167,39 @@ class Topic extends Model
             return false;
         }
 
+        /* 紐づくコメントも削除する */
+        $comments = DB::table('comments')
+            ->where('topic_id', $topic_id)
+            ->whereNull('deleted_at')
+            ->get();
+
+        // 削除日時を取得しておく
+        $deleted_time = now();
+
+        /* トピック削除実行 */
         try {
             // 削除日時
-            $topic->deleted_at = now();
+            $topic->deleted_at = $deleted_time;
             // 論理削除実行
             $topic->save();
-            return true;
         } catch (\Exception $e) {
             return false;
         }
+
+        if ($comments->isNotEmpty()) {
+            /* コメント削除実行 */
+            foreach ($comments as $comment) {
+                try {
+                    // 削除日時
+                    $comment->deleted_at = $deleted_time;
+                    // 論理削除実行
+                    $comment->save();
+                } catch (\Exception $e) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 }

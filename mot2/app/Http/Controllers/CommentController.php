@@ -77,10 +77,7 @@ class CommentController extends Controller
     {
         // 入力内容チェック
         $validated = $request->validated();
-        $input = $request->only([
-            'comment',
-            'topic_id',
-        ]);
+        $input = $request->all();
 
         /* トピックの存在確認 */
         $topic = $this->m_topic->getTopicById(data_get($input, 'topic_id'));
@@ -94,14 +91,13 @@ class CommentController extends Controller
         $user_id = Auth::id();
         // コメント本文
         $comment = data_get($input, 'comment');
-
-        if (isset($post['comment_id'])) {
+        if (isset($input['comment_id'])) {
             /* 編集 */
             // コメントの存在チェック
             $m_comment = $this->m_comment::whereNull('deleted_at')
-                ->where('id', $post['comment_id'])
+                ->where('id', $input['comment_id'])
                 ->first();
-            if ($comment->isNotEmpty()) {
+            if (isset($comment)) {
                 $m_comment->comment = $comment;
 
                 try {
@@ -141,11 +137,48 @@ class CommentController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * コメント編集画面の表示
+     *
+     * @param int|string $comment_id 編集するコメントID
      */
-    public function show(Comment $comment)
+    public function showEdit(int|string $comment_id)
     {
-        //
+        // 編集するコメント情報を取得
+        $target_comment = $this->m_comment::where('id', $comment_id)
+            ->whereNull('deleted_at')
+            ->first();
+        if (!isset($target_comment)) {
+            /* 編集するコメントが存在しない場合は404 */
+            return to_route('404');
+        }
+
+        // トピックを取得
+        $topic = $this->m_topic->getTopicById((int)$target_comment->topic_id);
+        if (!isset($topic)) {
+            /* トピックが存在しない場合は一覧に戻す */
+            session()->flash('flash_message', 'トピックが存在しません。');
+            return to_route('topic.show.list');
+        }
+
+
+        // コメント主以外のアクセスの場合は不正
+        $user_id = Auth::id();
+
+
+        if (data_get($target_comment, 'user_id') !== $user_id) {
+            /* コメント主以外のアクセスの場合はトピック詳細画面に戻す */
+            return to_route('topic.show.detail', ['id' => $topic->id]);
+        }
+
+        // トピックIDから紐づくコメントを取得
+        $comments = $this->m_comment->getCommentsByTopicID($topic->id);
+
+        return view('comment/edit/index', [
+            'topic' => $topic,
+            'comments' => $comments,
+            'target_comment' => $target_comment,
+            'user_id' => $user_id,
+        ]);
     }
 
     /**

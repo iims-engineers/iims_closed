@@ -57,6 +57,14 @@
                     {!! nl2br(htmlspecialchars(data_get($comment, 'comment'))) !!}
                   </p>
                   <time class="c-reply-date" datetime="{{ data_get($comment, 'created_at') }}">{{ data_get($comment, 'created_at') }}</time>
+                  @if(data_get($comment, 'user_id') === $user_id)
+                  <div class="c-reply-edit">
+                    <a href="{{ route('comment.show.edit', ['comment_id' => data_get($comment, 'id')]) }}" class="c-button--mini">
+                      <img src="/img/common/icon-pencil.svg" alt="">
+                      <span>回答を編集</span>
+                    </a>
+                  </div>
+                  @endif
                 </div>
               </div>
               @endforeach

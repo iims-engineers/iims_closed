@@ -116,9 +116,13 @@ class TopicController extends Controller
         // トピックIDをもとに紐づくコメントを取得
         $comments = $this->m_comment->getCommentsByTopicID((int)$id);
 
+        // コメント編集権限があるかどうかの確認用(投稿主か否か)
+        $user_id = Auth::id();
+
         return view('topic/show/index', [
             'topic' => $topic,
             'comments' => $comments,
+            'user_id' => $user_id,
         ]);
     }
 

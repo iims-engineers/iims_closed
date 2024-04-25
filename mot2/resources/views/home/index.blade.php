@@ -95,6 +95,7 @@
             </div>
           </div>
         </section>
+        {{-- 最新のトピックを5件表示 --}}
         <section class="p-sub__section">
           <h2 class="p-sub__head02">トピック一覧</h2>
           @forelse($topics as $topic)

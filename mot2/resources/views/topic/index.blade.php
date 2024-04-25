@@ -18,6 +18,12 @@
       <main class="l-main">
         <section class="p-sub__section">
           <h1 class="p-sub__head01">トピック一覧　(全{{ $total_cnt }}件)</h1>
+          @if(session('flash_message'))
+          {{-- ユーザーIDが登録だった場合、フラッシュメッセージを表示する --}}
+          <div class="form-error">
+            <p class="error-text">{{ session('flash_message') }}</p>
+          </div>
+          @endif
           @if(empty($topics))
           <p>現在表示できるトピックはありません。</p>
           @else

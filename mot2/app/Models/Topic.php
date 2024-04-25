@@ -118,9 +118,9 @@ class Topic extends Model
     /**
      * IDをもとにトピック情報を取得
      * 
-     * @param int $id  トピックID
+     * @param int|string $id  トピックID
      */
-    public function getTopicById(int $topic_id)
+    public function getTopicById(int|string $topic_id)
     {
         $topic = DB::table($this->table)
             ->join('users', 'topics.user_id', '=', 'users.id')

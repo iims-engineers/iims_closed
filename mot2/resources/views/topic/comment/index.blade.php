@@ -63,7 +63,8 @@
                             @endforeach
                             @endif
                         </div>
-                        <form action="" class="c-form" style="margin: 40px 0 0;">
+                        <form action="{{ route('comment.store') }}" method="POST" class="c-form" style="margin: 40px 0 0;">
+                            @csrf
                             <div class="c-form-item">
                                 <div class="c-user no-link">
                                     <div class="c-user-icon">
@@ -76,6 +77,10 @@
                                     </div>
                                 </div>
                                 <textarea name="comment" id="comment" cols="30" rows="10"></textarea>
+                                @error('comment')
+                                <p class="error-text">※{{ $message }}</p>
+                                @enderror
+                                <input type="hidden" name="topic_id" value="{{ data_get($topic, 'id') }}">
                             </div>
                             <div class="c-form-submit c-button-wrap">
                                 <button type="submit" class="c-button">回答する</button>

@@ -158,6 +158,14 @@ Route::middleware('auth')
                 // コメント - 入力画面の表示
                 Route::get('/comment/{topic_id}', [CommentController::class, 'showForm'])->name('show.create.comment');
             });
+
+        /* コメント関連 */
+        Route::prefix('/comment')
+            ->name('comment.')
+            ->group(function () {
+                // トピック - 一覧画面の表示
+                Route::post('/store', [CommentController::class, 'store'])->name('store');
+            });
     });
 /* ------------------------------------------------------------------------------------------------ */
 

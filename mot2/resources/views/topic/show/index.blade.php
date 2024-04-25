@@ -39,58 +39,28 @@
             <?php // ここからコメント 
             ?>
             <div class="c-reply-wrap">
+              @if($comments->isNotEmpty())
+              @foreach($comments as $comment)
               <div class="c-reply c-reply--has-detail">
                 <div class="c-user no-link">
                   <div class="c-user-icon">
+                    <!-- <img src="{{ data_get($comment, 'user_icon', '') }}" alt=""> -->
                     <img src="/img/common/dummy_icon.png" alt="">
                   </div>
                   <div class="c-user-info">
-                    <div class="c-user-name">もっと太郎</div>
-                    <div class="c-user-id">@username</div>
+                    <div class="c-user-name">{{ data_get($comment, 'username') }}</div>
+                    <div class="c-user-id">@ {{ data_get($comment, 'user_identifier') }}</div>
                   </div>
                 </div>
                 <div class="c-reply-detail">
                   <p>
-                    まじで俺もビックリだわ〜笑<br>
-                    username終電までいる予定だって！
+                    {!! nl2br(htmlspecialchars(data_get($comment, 'comment'))) !!}
                   </p>
-                  <time class="c-reply-date" datetime="2024-11-11T15:00:33">2024/11/11 15:00:33</time>
+                  <time class="c-reply-date" datetime="{{ data_get($comment, 'created_at') }}">{{ data_get($comment, 'created_at') }}</time>
                 </div>
               </div>
-              <div class="c-reply c-reply--has-detail">
-                <div class="c-user no-link">
-                  <div class="c-user-icon">
-                    <img src="/img/common/dummy_icon.png" alt="">
-                  </div>
-                  <div class="c-user-info">
-                    <div class="c-user-name">もっと太郎</div>
-                    <div class="c-user-id">@username</div>
-                  </div>
-                </div>
-                <div class="c-reply-detail">
-                  <p>
-                    まじで俺もビックリだわ〜笑<br>
-                    username終電までいる予定だって！
-                  </p>
-                </div>
-              </div>
-              <div class="c-reply c-reply--has-detail">
-                <div class="c-user no-link">
-                  <div class="c-user-icon">
-                    <img src="/img/common/dummy.png" alt="">
-                  </div>
-                  <div class="c-user-info">
-                    <div class="c-user-name">もっと太郎</div>
-                    <div class="c-user-id">@username</div>
-                  </div>
-                </div>
-                <div class="c-reply-detail">
-                  <p>
-                    まじで俺もビックリだわ〜笑<br>
-                    username終電までいる予定だって！
-                  </p>
-                </div>
-              </div>
+              @endforeach
+              @endif
             </div>
             <div class="c-button-wrap">
               <a href="{{ route('topic.show.create.comment', ['topic_id' => data_get($topic, 'id')]) }}" class="c-button">

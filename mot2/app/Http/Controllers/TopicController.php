@@ -113,8 +113,13 @@ class TopicController extends Controller
             return to_route('404');
         }
 
+        // トピックIDをもとに紐づくコメントを取得
+        $comments = $this->m_comment->getCommentsByTopicID((int)$id);
+
+
         return view('topic/show/index', [
             'topic' => $topic,
+            'comments' => $comments,
         ]);
     }
 

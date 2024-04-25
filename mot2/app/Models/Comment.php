@@ -67,6 +67,7 @@ class Comment extends Model
             ->join('users', 'comments.user_id', '=', 'users.id')
             ->join('topics', 'comments.topic_id', '=', 'topics.id')
             ->select($this->columns)
+            ->where('comments.topic_id', $topic_id)
             ->whereNull('comments.deleted_at')
             ->orderBy('comments.created_at', 'asc')
             ->get();

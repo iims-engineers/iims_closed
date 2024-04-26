@@ -12,10 +12,6 @@ use \App\Http\Controllers\UserController;
 use \App\Http\Controllers\CommentController;
 use \App\Http\Controllers\Admin\user\ApproveController;
 
-// Route::get('/1', function () {
-//     return view('topic/show/index');
-// });
-
 /* ------------------------------------------------------------------------------------------------ */
 /* ログイン状態に関わらずアクセス可能 */
 
@@ -74,13 +70,6 @@ Route::prefix('/password')
             });
     });
 
-/* ユーザーIDの設定 */
-// 入力画面の表示
-Route::get('/identifier/{token}', [UserIdentifierController::class, 'showForm'])->name('identifier.show.form');
-// 登録実行
-Route::post('/identifier/store', [UserIdentifierController::class, 'store'])->name('identifier.store');
-// 登録完了画面の表示
-Route::get('/identifier/complete', [UserIdentifierController::class, 'showComplete'])->name('identifier.show.complete');
 /* ------------------------------------------------------------------------------------------------ */
 
 
@@ -93,10 +82,16 @@ Route::middleware('guest')
         function () {
 
             /* ログイン */
-            // ログインフォームの表示
-            Route::get('/login', [LoginController::class, 'showForm'])->name('login.show.form');
-            // ログイン処理
-            Route::post('/login', [LoginController::class, 'login'])->name('login');
+            Route::prefix('/login')
+                ->name('login')
+                ->group(
+                    function () {
+                        // ログインフォームの表示
+                        Route::get('/', [LoginController::class, 'showForm'])->name('.show.form');
+                        // ログイン処理
+                        Route::post('/', [LoginController::class, 'login'])->name('');
+                    }
+                );
 
             /* ユーザーIDの設定 */
             Route::prefix('/identifier')

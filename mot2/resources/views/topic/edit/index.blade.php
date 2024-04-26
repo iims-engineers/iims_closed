@@ -33,6 +33,9 @@
                   </div>
                 </div>
                 <textarea name="topic-detail" id="topic-detail" cols="30" rows="10">{!! nl2br(htmlspecialchars(data_get($topic, 'content'))) !!}</textarea>
+                @error('topic-detail')
+                <p class="error-text">※{{ $message }}</p>
+                @enderror
                 <input type="hidden" name="topic-id" value="{{ data_get($topic, 'id') }}">
                 <input type="hidden" name="topic-title" value="{{ data_get($topic, 'title') }}">
               </div>

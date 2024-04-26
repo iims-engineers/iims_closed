@@ -66,11 +66,11 @@
 
         <section class="p-sub__section">
           <h2 class="p-sub__head02">{{ data_get($user, 'name') }}さんのトピック一覧</h2>
-          @if($topics->isEmpty())
-          <p>現在表示できるトピックはありません。</p>
-          @else
-          @foreach($topics as $topic)
           <div class="c-topic-wrap">
+            @if($topics->isEmpty())
+            <p>現在表示できるトピックはありません。</p>
+            @else
+            @foreach($topics as $topic)
             <a href="/topic/show/topicID/" class="c-topic-title js-accordion-topic">{{ data_get($topic, 'title') }}</a>
             <div class="p-sub__inner">
               <div class="c-user">
@@ -106,9 +106,9 @@
                 </a>
               </div>
             </div>
+            @endforeach
+            @endif
           </div>
-          @endforeach
-          @endif
         </section>
       </main>
       <!-- l-footer START -->

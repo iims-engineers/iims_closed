@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Arr;
@@ -17,7 +18,7 @@ use App\Models\Topic;
 class UserController extends Controller
 {
     // 一覧のデフォルト表示件数
-    const SHOW_CNT_USERS = 20;
+    const SHOW_CNT_USERS = 40;
 
     // userモデルのインスタンス格納用
     private $m_user;
@@ -114,7 +115,7 @@ class UserController extends Controller
     }
 
     /**
-     * ユーザー情報 - 詳細画面の表示
+     * ユーザー情報 - 編集画面の表示
      * 
      * @param string $id  ユーザーID
      */
@@ -124,7 +125,7 @@ class UserController extends Controller
         // IDを元にユーザー情報を取得
         if (!empty($id)) {
             // ユーザーIDをstring→intにキャスト
-            $user_id = intval($id);
+            $user_id = (int)$id;
             $user = $this->m_user->getUserById($user_id);
         } else {
             /* URLにユーザーIDが含まれない場合は前の画面に戻す */
@@ -134,5 +135,74 @@ class UserController extends Controller
         return view('user/edit/index', [
             'user' => $user,
         ]);
+    }
+
+    /**
+     * ユーザー情報 - 更新実行
+     * 
+     * @param UserRequest $request
+     */
+    public function store(UserRequest $request)
+    {
+        // 入力内容をバリデート
+        $validated = $request->validated();
+
+        $input = $request->all();
+        if (empty($input)) {
+            /* 入力情報が無い場合 ※張デートがあるため通常操作ではこの処理は通らない想定 */
+            return back();
+        } else {
+            // 更新対象のユーザーを取得
+            $target_user = $this->m_user->getUserById(data_get($input, 'user_id'));
+            if (empty($target_user)) {
+                /* ユーザーが取得できなければ404(基本ここは通らない想定) */
+                return to_route('404');
+            }
+
+            /* 更新情報をセット */
+            // ユーザー氏名
+            if (!empty($input['name'])) {
+                $target_user->name = data_get($input, 'name');
+            }
+            // ユーザーID
+            if (!empty($input['user_identifier'])) {
+                $target_user->user_identifier = data_get($input, 'user_identifier');
+            }
+            // X(twitter)のURL
+            if (!empty($input['sns_x'])) {
+                $target_user->sns_x = data_get($input, 'sns_x');
+            }
+            // FacebookのURL
+            if (!empty($input['sns_facebook'])) {
+                $target_user->sns_facebook = data_get($input, 'sns_facebook');
+            }
+            // InstagramのURL
+            if (!empty($input['sns_instagram'])) {
+                $target_user->sns_instagram = data_get($input, 'sns_instagram');
+            }
+            // 自己紹介テキスト
+            if (!empty($input['introduction_text'])) {
+                $target_user->introduction_text = data_get($input, 'introduction_text');
+            }
+            /* 画像は`/storage/app/public/profiles`に保存する */
+            // ユーザーアイコン(プロフィール画像)
+            if (!empty($input['user_icon'])) {
+                $target_user->user_icon = data_get($input, 'user_icon')->store('public/profiles');
+            }
+            if (!empty($input['user_cover_image'])) {
+                $target_user->user_cover_image = data_get($input, 'user_cover_image')->store('public/profiles');
+            }
+
+            // 登録実行
+            // try {
+            // データベースに保存
+            $target_user->save();
+            // 詳細画面に遷移
+            return to_route('user.show.detail', ['id' => data_get($target_user, 'id')]);
+            // } catch (\Exception $e) {
+            //     // 登録失敗したら404を表示
+            //     return to_route('404');
+            // }
+        }
     }
 }

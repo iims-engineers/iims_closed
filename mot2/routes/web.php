@@ -134,6 +134,8 @@ Route::middleware('auth')
                 Route::get('/detail/{id}', [UserController::class, 'showDetail'])->name('show.detail');
                 // 編集画面の表示
                 Route::get('/edit/{id}', [UserController::class, 'showEdit'])->name('show.edit');
+                // 更新実行
+                Route::post('/store', [UserController::class, 'store'])->name('store');
             });
 
         /* トピック関連 */

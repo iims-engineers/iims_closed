@@ -27,7 +27,7 @@ class UserRequest extends FormRequest
             // 名前 → 必須, 50文字以内
             'name' => ['required', 'max:50'],
             // 表示用のユーザーID → 必須, 半角英(大小)数アンダーバーのみ
-            'user_identifier' => ['required', 'unique:users', 'regex:/^[a-zA-Z0-9_]+$/', 'min:8', 'max:24'],
+            'user_identifier' => ['required', 'regex:/^[a-zA-Z0-9_]+$/', 'min:8', 'max:24'],
             // カバー画像 → ファイルサイズ:2MB, 拡張子:jpg,jpeg,png
             'user_cover_image' => ['max:2048', 'mimes:jpg,jpeg,png'],
             // Xリンク → URL形式
@@ -48,7 +48,6 @@ class UserRequest extends FormRequest
             'user_icon.mimes' => 'アイコン画像はjpg,jpeg,pngのいずれかの形式で登録してください。',
             'name.required' => 'ユーザー名は必ず入力してください。',
             'user_identifier.required' => 'ユーザーIDは必ず入力してください。',
-            'user_identifier.unique' => 'このユーザーIDは既に使用されています。別のユーザーIDを入力してください。',
             'user_identifier.regex' => '使用できない文字が含まれています。',
             'user_identifier.min' => 'ユーザーIDは8文字以上24文字以内で入力してください。',
             'user_identifier.max' => 'ユーザーIDは8文字以上24文字以内で入力してください。',

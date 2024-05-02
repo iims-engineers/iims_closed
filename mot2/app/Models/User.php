@@ -143,6 +143,31 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+     * ユーザーID(user_identifier)の重複チェック
+     * 指定のユーザーIDが別のユーザーに登録されていたらfalseを返す
+     * 
+     * @param int|string $user_id usersテーブルのid
+     * @param string $user_identifier usersテーブルのuser_identifier
+     * @return bool
+     */
+    public function checkUserIdentifier(int|string $user_id, string $user_identifier)
+    {
+        $res = false;
+        $ret = DB::table('users')
+            ->whereNot('id', $user_id)
+            ->where('user_identifier', $user_identifier)
+            ->whereNull('deleted_at')
+            ->first();
+
+        if (empty($ret)) {
+            /* ユーザーIDが別のユーザーに登録されていなければtrueを返却 */
+            $res = true;
+        }
+
+        return $res;
+    }
+
+    /**
      * 承認待ちユーザーを全て取得
      */
     public function getUnapprovedUsers()

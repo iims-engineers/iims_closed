@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Mail;
@@ -159,13 +160,20 @@ class UserController extends Controller
                 return to_route('404');
             }
 
-            /* 更新情報をセット */
+            /* 更新された情報をセット */
             // ユーザー氏名
             if (!empty($input['name'])) {
                 $target_user->name = data_get($input, 'name');
             }
             // ユーザーID
             if (!empty($input['user_identifier'])) {
+                // 指定されたユーザーIDが別のユーザーに登録されていないかをチェック
+                $flg_pass = $this->m_user->checkUserIdentifier($target_user->id, $input['user_identifier']);
+                if (!$flg_pass) {
+                    /* 別のユーザーに登録されている場合はエラーメッセージを表示 */
+                    session()->flash('flash_message', 'このユーザーIDは既に使用されています。別のユーザーIDを入力してください。');
+                    return back();
+                }
                 $target_user->user_identifier = data_get($input, 'user_identifier');
             }
             // X(twitter)のURL
@@ -184,13 +192,21 @@ class UserController extends Controller
             if (!empty($input['introduction_text'])) {
                 $target_user->introduction_text = data_get($input, 'introduction_text');
             }
-            /* 画像は`/storage/app/public/profiles`に保存する */
+            /* 画像は更新がある場合のみ`/storage/app/public/profiles`に保存する */
             // ユーザーアイコン(プロフィール画像)
             if (!empty($input['user_icon'])) {
-                $target_user->user_icon = data_get($input, 'user_icon')->store('public/profiles');
+                // 現在の画像を削除する処理
+                $old_icon_path = $target_user->user_icon;
+                Storage::disk('public')->delete('icon/', $old_icon_path);
+                // 新しい画像を保存
+                $target_user->user_icon = data_get($input, 'user_icon')->store('public/icon');
             }
             if (!empty($input['user_cover_image'])) {
-                $target_user->user_cover_image = data_get($input, 'user_cover_image')->store('public/profiles');
+                // 現在の画像を削除する処理
+                $old_cover_path = $target_user->user_cover_image;
+                Storage::disk('public')->delete('cover/', $old_cover_path);
+                // 新しい画像を保存
+                $target_user->user_cover_image = data_get($input, 'user_cover_image')->store('public/cover');
             }
 
             // 登録実行

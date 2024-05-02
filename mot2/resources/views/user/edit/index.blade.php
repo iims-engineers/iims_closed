@@ -50,6 +50,9 @@
                 @error('user_identifier')
                 <p class="error-text">※{{ $message }}</p>
                 @enderror
+                @if(session('flash_message'))
+                <p class="error-text">※{{ session('flash_message') }}</p>
+                @endif
               </div>
               <div class="c-form-item">
                 <label for="user_cover_image" class="c-form-item-title">プロフィールカバー画像</label>
@@ -85,7 +88,7 @@
               </div>
               <div class="c-form-item">
                 <label for="introduction_text" class="c-form-item-title">自己紹介文</label>
-                <textarea name="introduction_text" id="user-intro" cols="30" rows="10">{!! nl2br(htmlspecialchars(data_get($user, 'introduction_text', ''))) !!}</textarea>
+                <textarea name="introduction_text" id="user-intro" cols="30" rows="10">{{ data_get($user, 'introduction_text', '') }}</textarea>
                 @error('introduction_text')
                 <p class="error-text">※{{ $message }}</p>
                 @enderror

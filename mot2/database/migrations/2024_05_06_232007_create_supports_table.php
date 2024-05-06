@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('supports', function (Blueprint $table) {
             $table->id()->comment('ID');
-            $table->string('text', 500)->default('')->nullable(false)->comment('本文');
+            $table->string('message', 500)->default('')->nullable(false)->comment('本文');
             $table->unsignedBigInteger('user_id')->nullable(false)->comment('投稿者(users.id)');
             $table->timestamp('created_at')->useCurrent()->comment('作成日時');
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate()->comment('更新日時');

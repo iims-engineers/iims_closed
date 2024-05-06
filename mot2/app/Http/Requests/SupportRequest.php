@@ -22,9 +22,15 @@ class SupportRequest extends FormRequest
     public function rules(): array
     {
         return [
-            // 'name'    => ['string', 'max:50'], // 氏名 任意,50文字以内
-            // 'email' => ['required', 'email', 'max:255'], // メールアドレス:必須,255文字以内
-            'message' => ['required', 'string', 'max:255'],  // 必須,255文字以内
+            'message' => ['required', 'max:400'],  // 必須,400文字以内
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'message.required' => '本文は必ず入力してください。',
+            'message.max' => '本文は400文字以内で入力してください。',
         ];
     }
 }

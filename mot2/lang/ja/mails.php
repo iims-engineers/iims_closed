@@ -25,6 +25,5 @@ return [
     /* 運営へのメッセージ */
     'support' => [
         'subject_admin' => '【MOT2】会員からメッセージが届きました。',
-        'subject_user' => '【MOT2】会員からメッセージが届きました。',
     ],
 ];

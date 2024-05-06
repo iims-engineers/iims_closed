@@ -117,7 +117,7 @@
                 <time class="c-topic-date" datetime="{{ $topic->created_at }}">{{ $topic->created_at }}</time>
               </div>
               <div class="c-button-wrap">
-                <a href="" class="c-button">
+                <a href="{{ route('topic.show.create.comment', ['topic_id' => data_get($topic, 'id')]) }}" class="c-button">
                   <img src="{{ ('/img/common/icon-reply.svg') }}" alt="">
                   <span>このトピックに回答する</span>
                 </a>

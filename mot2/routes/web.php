@@ -12,6 +12,7 @@ use \App\Http\Controllers\UserController;
 use \App\Http\Controllers\CommentController;
 use \App\Http\Controllers\SupportController;
 use \App\Http\Controllers\Admin\user\ApproveController;
+use \App\Http\Controllers\Admin\support\AdminSupportController;
 
 /* ------------------------------------------------------------------------------------------------ */
 /* ログイン状態に関わらずアクセス可能 */
@@ -192,6 +193,10 @@ Route::prefix('/admin')
         Route::get('/user/unapproved/{id}', [ApproveController::class, 'showDetail'])->name('show.detail');
         // 承認処理
         Route::post('/user/approve', [ApproveController::class, 'approve'])->name('unapprovedUser.approve');
+
+        /* サポート */
+        // メッセージ 一覧画面表示
+        Route::get('/support', [AdminSupportController::class, 'showList'])->name('show.list');
     });
 
 /* 404エラー */

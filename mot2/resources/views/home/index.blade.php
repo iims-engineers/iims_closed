@@ -125,7 +125,7 @@
                   <img src="{{ ('/img/common/icon-show-topic.svg') }}" alt="">
                   <span>このトピックを見る</span>
                 </a>
-                @if(Auth::user()->id === $topic->user_id)
+                @if($user_id === $topic->user_id)
                 <a href="{{ route('topic.show.edit', ['id' => $topic->id]) }}" class="c-button">
                   <img src="{{ ('/img/common/icon-pencil.svg') }}" alt="">
                   <span>このトピックを編集する</span>
@@ -146,20 +146,17 @@
                 MOT2を使っていただいてお気付きの点、改善してほしい点などございましたら以下より送信ください。<br>
                 MOT2は無償のプロジェクトです。あなたからのご感想や応援のメッセージがとても励みになります！<br>
               </p>
-              @if($errors->any())
-              <div class="form-error">
-                <ul>
-                  @foreach ($errors->all() as $error)
-                  <li class="error-text">・{{ $error }}</li>
-                  @endforeach
-                </ul>
+              @if(session('flash_message'))
+              <div class="flash-complete">
+                <p class="flash-text">{{ session('flash_message') }}</p>
               </div>
               @endif
             </div>
-            <form action="" method="POST" class="c-form">
+            <form action="{{ route('support.store') }}" method="POST" class="c-form">
               @csrf
               <div class="c-form-item">
                 <textarea name="message" id="message" required cols="30" rows="10"></textarea>
+                <input type="hidden" name="user_id" value="{{ $user_id }}">
               </div>
               <div class="c-form-submit c-button-wrap">
                 <button type="submit" class="c-button">送信する</button>
@@ -174,6 +171,14 @@
     </div>
   </div>
   @include('components.javascript')
+  <!-- <script>
+    // メッセージ送信完了時にフォーム部分まで移動させる
+    window.onload = function() {
+      if ($("#contact").hasClass("required")) { //#contactとrequired は任意です。
+        window.location.hash = "message"
+      }
+    };
+  </script> -->
 </body>
 
 </html>

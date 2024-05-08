@@ -47,10 +47,13 @@ class HomeController extends Controller
      */
     public function index()
     {
+        // ログインしているユーザー
+        $user_id = Auth::id();
         /* 最新のトピックを取得 */
         $topics = $this->m_topic->getTopics(self::CNT_SHOW_TOPIC);
 
         return view('home/index', [
+            'user_id' => $user_id,
             'topics' => $topics,
         ]);
     }

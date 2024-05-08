@@ -21,6 +21,17 @@ use App\Models\Comment;
  */
 class SupportController extends Controller
 {
+
+    // userモデルのインスタンス格納用
+    private $m_support;
+
+    public function __construct()
+    {
+        $this->m_support = new Support();
+        return $this->m_support;
+    }
+
+
     /**
      * Display a listing of the resource.
      */
@@ -31,19 +42,39 @@ class SupportController extends Controller
 
     /**
      * 問い合わせ内容保存
+     * 
+     * @param SupportRequest $request  入力内容
      */
-    public function store(Request $request)
+    public function store(SupportRequest $request)
     {
-        //
+        // 入力データのバリデート
+        $validated = $request->validated();
+        // 入力データを取得
+        $input = $request->only([
+            'message',
+            'user_id',
+        ]);
+
+        $this->m_support->message = data_get($input, 'message');
+        $this->m_support->user_id = data_get($input, 'user_id');
+
+        // 登録実行
+        try {
+            $this->m_support->save();
+
+            // 管理者へメール送信
+
+            // 送信成功したら成功メッセージを表示
+            session()->flash('flash_message', 'メッセージを送信しました。');
+            return to_route('home.index', '#message');
+        } catch (\Exception $e) {
+            // 登録失敗したら再度入力フォームに戻してやり直させる
+            session()->flash('flash_message', '送信に失敗しました。');
+            return back();
+        }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Support $support)
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.

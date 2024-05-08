@@ -10,6 +10,7 @@ use \App\Http\Controllers\TopicController;
 use \App\Http\Controllers\HomeController;
 use \App\Http\Controllers\UserController;
 use \App\Http\Controllers\CommentController;
+use \App\Http\Controllers\SupportController;
 use \App\Http\Controllers\Admin\user\ApproveController;
 
 /* ------------------------------------------------------------------------------------------------ */
@@ -164,6 +165,16 @@ Route::middleware('auth')
                 Route::post('/store', [CommentController::class, 'store'])->name('store');
                 // コメント編集画面の表示
                 Route::get('/edit/{comment_id}', [CommentController::class, 'showEdit'])->name('show.edit');
+            });
+
+        /* サポート機能 */
+        Route::prefix('/support')
+            ->name('support.')
+            ->group(function () {
+                // メッセージの保存実行
+                Route::post('/store', [SupportController::class, 'store'])->name('store');
+                // メッセージ送信完了画面の表示
+                Route::get('/complete', [SupportController::class, 'showComplete'])->name('show.complete');
             });
     });
 /* ------------------------------------------------------------------------------------------------ */

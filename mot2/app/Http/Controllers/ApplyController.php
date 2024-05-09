@@ -39,7 +39,7 @@ class ApplyController extends Controller
      * 
      * @param ApplyRequest $request 入力データ
      */
-    public function applyCheck(ApplyRequest $request)
+    public function check(ApplyRequest $request)
     {
         // 入力データのバリデート
         $validated = $request->validated();

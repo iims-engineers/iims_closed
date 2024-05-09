@@ -27,7 +27,7 @@ Route::prefix('/apply')
         // 新規登録申請画面の表示
         Route::get('', [ApplyController::class, 'showForm'])->name('form');
         // 入力データのバリデーション
-        Route::post('/check', [ApplyController::class, 'applyCheck'])->name('check');
+        Route::post('/check', [ApplyController::class, 'check'])->name('check');
         // 確認画面の表示
         Route::get('/confirm', [ApplyController::class, 'showConfirm'])->name('show.confirm');
         // 登録処理

@@ -58,7 +58,8 @@ class UserIdentifierController extends Controller
         // 既にユーザーIDが登録されている場合は完了画面に遷移
         $identifier = data_get($user, 'user_identifier');
         if (!empty($identifier)) {
-            return to_route('login.show.form')->with('flash_message', 'ユーザーIDは既に登録されています。以下よりログインしてください。');
+            session()->flash('flash_failed', __('users.fail.duplicate_identifier'));
+            return to_route('login.show.form');
         }
 
         // 入力データのバリデート
@@ -73,10 +74,9 @@ class UserIdentifierController extends Controller
 
             // 登録成功したら完了画面に遷移
             return view('identifier/complete/index');
-        } catch (\Exception $e) {;
-            return back()->withErrors([
-                'failed_store_identifier' => __('auth.failed_store_identifier'),
-            ]);
+        } catch (\Exception $e) {
+            session()->flash('flash_failed', __('users.fail.duplicate_identifier'));
+            return back();
         }
     }
 

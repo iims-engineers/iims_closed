@@ -171,7 +171,7 @@ class UserController extends Controller
                 $flg_pass = $this->m_user->checkUserIdentifier($target_user->id, $input['user_identifier']);
                 if (!$flg_pass) {
                     /* 別のユーザーに登録されている場合はエラーメッセージを表示 */
-                    session()->flash('flash_message', 'このユーザーIDは既に使用されています。別のユーザーIDを入力してください。');
+                    session()->flash('flash_failed', __('users.fail.duplicate_identifier'));
                     return back();
                 }
                 $target_user->user_identifier = data_get($input, 'user_identifier');

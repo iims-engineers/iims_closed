@@ -50,8 +50,8 @@
                 @error('user_identifier')
                 <p class="error-text">※{{ $message }}</p>
                 @enderror
-                @if(session('flash_message'))
-                <p class="error-text">※{{ session('flash_message') }}</p>
+                @if(session('flash_failed'))
+                <p class="error-text">※{{ session('flash_failed') }}</p>
                 @endif
               </div>
               <div class="c-form-item">

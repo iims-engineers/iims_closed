@@ -185,7 +185,7 @@ class TopicController extends Controller
             $result = $this->m_topic->deleteTopic((int)$post['topic-id']);
             if ($result) {
                 // 完了したらトピック一覧画面に遷移する
-                session()->flash('flash_message', __('topics.success.delete'));
+                session()->flash('flash_success', __('topics.success.delete'));
                 return to_route('topic.show.list');
             } else {
                 // 失敗したらエラーメッセージ

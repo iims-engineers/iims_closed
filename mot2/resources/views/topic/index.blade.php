@@ -18,9 +18,9 @@
       <main class="l-main">
         <section class="p-sub__section">
           <h1 class="p-sub__head01">トピック一覧　(全{{ $total_cnt }}件)</h1>
-          @if(session('flash_message'))
+          @if(session('flash_success'))
           <div class="flash-complete">
-            <p class="flash-text">{{ session('flash_message') }}</p>
+            <p class="flash-text">{{ session('flash_success') }}</p>
           </div>
           @endif
           @if(session('flash_failed'))

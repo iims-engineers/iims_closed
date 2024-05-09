@@ -41,9 +41,8 @@ class LoginController extends Controller
             $request->session()->regenerate();
             return redirect()->intended('home');
         } else {
-            return back()->withErrors([
-                'failed_login' => __('auth.failed_login'),
-            ]);
+            session()->flash('flash_failed', __('auth.failed_login'));
+            return back();
         }
     }
 

@@ -65,11 +65,11 @@ class SupportController extends Controller
             // 管理者へメール送信
 
             // 送信成功したら成功メッセージを表示
-            session()->flash('flash_message', 'メッセージを送信しました。');
+            session()->flash('flash_success', __('supports.success.complete'));
             return to_route('home.index', '#message');
         } catch (\Exception $e) {
             // 登録失敗したら再度入力フォームに戻してやり直させる
-            session()->flash('flash_message', '送信に失敗しました。');
+            session()->flash('flash_failed', __('supports.fail.failed'));
             return back();
         }
     }

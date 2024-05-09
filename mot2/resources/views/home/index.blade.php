@@ -146,9 +146,14 @@
                 MOT2を使っていただいてお気付きの点、改善してほしい点などございましたら以下より送信ください。<br>
                 MOT2は無償のプロジェクトです。あなたからのご感想や応援のメッセージがとても励みになります！<br>
               </p>
-              @if(session('flash_message'))
+              @if(session('flash_success'))
               <div class="flash-complete">
-                <p class="flash-text">{{ session('flash_message') }}</p>
+                <p class="flash-text">{{ session('flash_success') }}</p>
+              </div>
+              @endif
+              @if(session('flash_failed'))
+              <div class="form-error">
+                <p class="error-text">{{ session('flash_failed') }}</p>
               </div>
               @endif
             </div>

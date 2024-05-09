@@ -71,7 +71,7 @@ class CommentController extends Controller
     /**
      * コメント保存
      * 
-     * @param int|string $comment_id
+     * @param CommentRequest $request
      */
     public function store(CommentRequest $request)
     {
@@ -83,7 +83,7 @@ class CommentController extends Controller
         $topic = $this->m_topic->getTopicById(data_get($input, 'topic_id'));
         if (!isset($topic)) {
             /* 不正なIDもしくはトピックが存在しない場合は一覧に戻す */
-            session()->flash('flash_message', 'トピックが存在しません。');
+            session()->flash('flash_failed', __('comments.fail.not_exist'));
             return to_route('topic.show.list');
         }
 
@@ -104,10 +104,11 @@ class CommentController extends Controller
                     // 更新実行
                     $m_comment->save();
                     // 保存完了したらトピック詳細画面に遷移する
+                    session()->flash('flash_success', __('comments.success.complete_edit'));
                     return to_route('topic.show.detail', ['id' => $topic->id]);
                 } catch (\Exception $e) {
                     // 失敗したら入力画面に戻す
-                    session()->flash('flash_message', 'コメントの編集に失敗しました。');
+                    session()->flash('flash_failed', __('comments.fail.failed_edit'));
                     return back();
                 }
             } else {
@@ -127,10 +128,11 @@ class CommentController extends Controller
                 // 更新実行
                 $this->m_comment->save();
                 // 保存完了したらトピック詳細画面に遷移する
+                session()->flash('flash_success', __('comments.success.complete_comment'));
                 return to_route('topic.show.detail', ['id' => $topic->id]);
             } catch (\Exception $e) {
                 // 失敗したら入力画面に戻す
-                session()->flash('flash_message', 'コメントに失敗しました。');
+                session()->flash('flash_failed', __('comments.fail.failed_comment'));
                 return to_route('topic.show.detail', ['id' => $topic->id]);
             }
         }
@@ -156,7 +158,7 @@ class CommentController extends Controller
         $topic = $this->m_topic->getTopicById((int)$target_comment->topic_id);
         if (!isset($topic)) {
             /* トピックが存在しない場合は一覧に戻す */
-            session()->flash('flash_message', 'トピックが存在しません。');
+            session()->flash('flash_failed', __('comments.fail.not_exist'));
             return to_route('topic.show.list');
         }
 
@@ -179,29 +181,5 @@ class CommentController extends Controller
             'target_comment' => $target_comment,
             'user_id' => $user_id,
         ]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Comment $comment)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Comment $comment)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Comment $comment)
-    {
-        //
     }
 }

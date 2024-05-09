@@ -18,6 +18,11 @@
       <main class="l-main">
         <section class="p-sub__section">
           <h1 class="p-sub__head01">このトピックの詳細</h1>
+          @if(session('flash_success'))
+          <div class="flash-complete">
+            <p class="flash-text">{{ session('flash_success') }}</p>
+          </div>
+          @endif
           <div class="p-sub__inner">
             <div class="c-user no-link">
               <div class="c-user-icon">

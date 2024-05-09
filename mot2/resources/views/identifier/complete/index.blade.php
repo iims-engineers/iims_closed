@@ -30,11 +30,6 @@
                         </ul>
                     </div>
                     @endif
-                    @if(session('flash_message'))
-                    <div class="form-error">
-                        <p class="error-text">{{ session('flash_message') }}</p>
-                    </div>
-                    @endif
                     <div class="p-top-btn">
                         <a href="{{ route('login.show.form') }}" class="c-button--large">
                             <img src="{{ ('/img/common/icon-enter-white.svg') }}" alt="">

@@ -185,10 +185,11 @@ class TopicController extends Controller
             $result = $this->m_topic->deleteTopic((int)$post['topic-id']);
             if ($result) {
                 // 完了したらトピック一覧画面に遷移する
+                session()->flash('flash_message', __('topics.success.delete'));
                 return to_route('topic.show.list');
             } else {
                 // 失敗したらエラーメッセージ
-                session()->flash('flash_message', __('topics.failed_delete'));
+                session()->flash('flash_failed', __('topics.fail.failed_delete'));
                 return back();
             }
         } else {
@@ -221,7 +222,7 @@ class TopicController extends Controller
                 return to_route('topic.show.list');
             } catch (\Exception $e) {
                 // 失敗したら入力画面に戻す
-                session()->flash('flash_message', __('topics.failed'));
+                session()->flash('flash_failed', __('topics.fail.failed'));
                 return back();
             }
         }

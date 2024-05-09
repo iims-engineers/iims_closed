@@ -27,9 +27,9 @@
             </ul>
           </div>
           @endif
-          @if(session('flash_message'))
+          @if(session('flash_failed'))
           <div class="form-error">
-            <p class="error-text">{{ session('flash_message') }}</p>
+            <p class="error-text">{{ session('flash_failed') }}</p>
           </div>
           @endif
           <div class="p-sub__inner">

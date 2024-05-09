@@ -19,9 +19,14 @@
         <section class="p-sub__section">
           <h1 class="p-sub__head01">トピック一覧　(全{{ $total_cnt }}件)</h1>
           @if(session('flash_message'))
+          <div class="flash-complete">
+            <p class="flash-text">{{ session('flash_message') }}</p>
+          </div>
+          @endif
+          @if(session('flash_failed'))
           {{-- ユーザーIDが登録だった場合、フラッシュメッセージを表示する --}}
           <div class="form-error">
-            <p class="error-text">{{ session('flash_message') }}</p>
+            <p class="error-text">{{ session('flash_failed') }}</p>
           </div>
           @endif
           @if(empty($topics))

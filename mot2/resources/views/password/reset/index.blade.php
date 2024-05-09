@@ -27,9 +27,9 @@
             </ul>
           </div>
           @endif
-          @if(session('flash_message'))
+          @if(session('flash_failed'))
           <div class="form-error">
-            <p class="error-text">{{ session('flash_message') }}</p>
+            <p class="error-text">{{ session('flash_failed') }}</p>
           </div>
           @endif
           <form action="{{ route('password.reset.store') }}" method="POST" class="c-form">

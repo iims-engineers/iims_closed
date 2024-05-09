@@ -85,7 +85,7 @@ class PasswordController extends Controller
             return to_route('identifier.show.form', ['token' => $user->verify_token]);
         } catch (\Exception $e) {
             // 登録失敗したら再度入力フォームに戻してやり直させる
-            session()->flash('flash_message', __('passwords.failed_regist_reset'));
+            session()->flash('flash_failed', __('passwords.failed_regist_reset'));
             return back();
         }
     }
@@ -133,7 +133,7 @@ class PasswordController extends Controller
                 return to_route('password.reset.show.send');
             } catch (\Exception $e) {
                 // 処理に失敗したらエラーメッセージを表示
-                session()->flash('flash_message', __('passwords.failed_send'));
+                session()->flash('flash_failed', __('passwords.failed_send'));
                 return back();
             }
         }
@@ -196,7 +196,7 @@ class PasswordController extends Controller
                 return to_route('password.reset.show.complete');
             } catch (\Exception $e) {
                 // 処理に失敗したらエラーメッセージを表示
-                session()->flash('flash_message', __('passwords.failed_send'));
+                session()->flash('flash_failed', __('passwords.failed_send'));
                 return back();
             }
         }

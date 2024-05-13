@@ -26,8 +26,11 @@
           <div class="p-sub__inner">
             <div class="c-user no-link">
               <div class="c-user-icon">
-                <!-- <img src="{{ data_get($topic, 'user_icon') }}" alt=""> -->
+                @if(!empty(data_get($topic, 'user_icon')))
+                <img src="{{ asset('storage/'. data_get($topic, 'user_icon')) }}" alt="">
+                @else
                 <img src="/img/common/dummy_icon.png" alt="">
+                @endif
               </div>
               <div class="c-user-info">
                 <div class="c-user-name">{{ data_get($topic, 'name') }}</div>
@@ -49,8 +52,11 @@
               <div class="c-reply c-reply--has-detail">
                 <div class="c-user no-link">
                   <div class="c-user-icon">
-                    <!-- <img src="{{ data_get($comment, 'user_icon', '') }}" alt=""> -->
+                    @if(!empty(data_get($comment, 'user_icon')))
+                    <img src="{{ asset('storage/'. data_get($comment, 'user_icon')) }}" alt="">
+                    @else
                     <img src="/img/common/dummy_icon.png" alt="">
+                    @endif
                   </div>
                   <div class="c-user-info">
                     <div class="c-user-name">{{ data_get($comment, 'username') }}</div>

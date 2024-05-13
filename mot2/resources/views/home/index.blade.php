@@ -35,7 +35,7 @@
             <a href="/topic/show/topicID/" class="c-topic-title">高崎に集まれる人募集！</a>
             <div class="p-sub__inner">
               <div class="c-user">
-                <a href="/user/show/user-id/">
+                <a href="">
                   <div class="c-user-icon">
                     <img src="{{ ('/img/common/dummy_icon.png') }}" alt="">
                   </div>
@@ -100,12 +100,16 @@
           <h2 class="p-sub__head02">トピック一覧</h2>
           @forelse($topics as $topic)
           <div class="c-topic-wrap">
-            <a href="/topic/show/topicID/" class="c-topic-title js-accordion-topic">{{ $topic->title }}</a>
+            <a href="{{ route('topic.show.detail', ['id' => data_get($topic, 'id')]) }}" class="c-topic-title js-accordion-topic">{{ $topic->title }}</a>
             <div class="p-sub__inner">
               <div class="c-user">
                 <a href="{{ route('user.show.detail', ['id' => $topic->user_id]) }}">
                   <div class="c-user-icon">
-                    <img src="{{ ('/img/common/dummy_icon.png') }}" alt="">
+                    @if(!empty(data_get($topic, 'user_icon')))
+                    <img src="{{ asset('storage/'. data_get($topic, 'user_icon')) }}" alt="">
+                    @else
+                    <img src="/img/common/dummy_icon.png" alt="">
+                    @endif
                   </div>
                   <div class="c-user-info">
                     <div class="c-user-name">{{ $topic->name }}</div>

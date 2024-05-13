@@ -74,4 +74,23 @@ class Comment extends Model
 
         return $comments;
     }
+
+    /**
+     * IDをもとにコメントを取得
+     * 
+     * @param int|string $comment_id  トピックID
+     */
+    public function getCommentsByID(int|string $comment_id)
+    {
+        // 古いコメントを上位に表示するため作成日時順に取得
+        $comments = DB::table($this->table)
+            ->join('users', 'comments.user_id', '=', 'users.id')
+            ->join('topics', 'comments.topic_id', '=', 'topics.id')
+            ->select($this->columns)
+            ->where('comments.id', $comment_id)
+            ->whereNull('comments.deleted_at')
+            ->first();
+
+        return $comments;
+    }
 }

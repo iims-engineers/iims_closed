@@ -146,9 +146,7 @@ class CommentController extends Controller
     public function showEdit(int|string $comment_id)
     {
         // 編集するコメント情報を取得
-        $target_comment = $this->m_comment::where('id', $comment_id)
-            ->whereNull('deleted_at')
-            ->first();
+        $target_comment = $this->m_comment->getCommentsByID($comment_id);
         if (!isset($target_comment)) {
             /* 編集するコメントが存在しない場合は404 */
             return to_route('404');
@@ -174,7 +172,6 @@ class CommentController extends Controller
 
         // トピックIDから紐づくコメントを取得
         $comments = $this->m_comment->getCommentsByTopicID($topic->id);
-
         return view('comment/edit/index', [
             'topic' => $topic,
             'comments' => $comments,

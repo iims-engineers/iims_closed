@@ -873,6 +873,7 @@ body.is-top .l-header .l-header__btn-item button span {
 
 .c-topic-title.js-accordion-topic~.p-sub__inner {
   display: none;
+  margin-bottom: 20px;
 }
 
 .c-topic-detail {

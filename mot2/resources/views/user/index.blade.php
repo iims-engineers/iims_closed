@@ -27,8 +27,11 @@
               <div class="c-user has-button">
                 <a href="{{ route('user.show.detail', ['id' => data_get($user, 'id')]) }}">
                   <div class="c-user-icon">
-                    <!-- <img src="{{ data_get($user, 'user_icon', '') }}" alt=""> -->
+                    @if(!empty(data_get($user, 'user_icon')))
+                    <img src="{{ asset('storage/'. data_get($user, 'user_icon')) }}" alt="">
+                    @else
                     <img src="/img/common/dummy_icon.png" alt="">
+                    @endif
                   </div>
                   <div class="c-user-info">
                     <div class="c-user-name">{{ data_get($user, 'name') }}</div>

@@ -26,15 +26,18 @@
           <div class="p-sub__inner is-user-info">
             <div class="c-user-info__cover">
               @if(!empty(data_get($user, 'user_cover_image')))
-              <img src="{{ Storage::url(data_get($user, 'user_cover_image', '')) }}" alt="">
+              <img src="{{ asset('storage/'. data_get($user, 'user_cover_image')) }}" alt="">
               @else
               <img src="/img/common/dummy.png" alt="">
               @endif
             </div>
             <div class="c-user-info__head">
               <div class="c-user-icon">
-                <!-- <img src="{{ data_get($user, 'user_icon', '') }}" alt=""> -->
-                <img src="/img/common/dummy.png" alt="">
+                @if(!empty(data_get($user, 'user_icon')))
+                <img src="{{ asset('storage/'. data_get($user, 'user_icon')) }}" alt="">
+                @else
+                <img src="/img/common/dummy_icon.png" alt="">
+                @endif
               </div>
               <div class="c-user-info">
                 <div class="c-user-name">{{ data_get($user, 'name') }}</div>

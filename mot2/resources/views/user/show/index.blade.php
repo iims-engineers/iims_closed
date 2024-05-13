@@ -18,10 +18,18 @@
       <main class="l-main">
         <section class="p-sub__section">
           <h1 class="p-sub__head01">{{ data_get($user, 'name') }}さんのページ</h1>
+          @if(session('flash_success'))
+          <div class="flash-complete">
+            <p class="flash-text">{{ session('flash_success') }}</p>
+          </div>
+          @endif
           <div class="p-sub__inner is-user-info">
             <div class="c-user-info__cover">
-              <!-- <img src="{{ data_get($user, 'user_cover_image', '') }}" alt=""> -->
+              @if(!empty(data_get($user, 'user_cover_image')))
+              <img src="{{ Storage::url(data_get($user, 'user_cover_image', '')) }}" alt="">
+              @else
               <img src="/img/common/dummy.png" alt="">
+              @endif
             </div>
             <div class="c-user-info__head">
               <div class="c-user-icon">

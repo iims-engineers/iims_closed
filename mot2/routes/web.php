@@ -196,7 +196,7 @@ Route::prefix('/admin')
 
         /* サポート */
         // メッセージ 一覧画面表示
-        Route::get('/support', [AdminSupportController::class, 'showList'])->name('show.list');
+        Route::get('/support', [AdminSupportController::class, 'showList'])->name('support.show.list');
     });
 
 /* 404エラー */

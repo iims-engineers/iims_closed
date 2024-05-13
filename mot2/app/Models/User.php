@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -113,10 +114,9 @@ class User extends Authenticatable implements MustVerifyEmail
     public function getUserById(int $id)
     {
         // IDを元に承認済みのユーザー情報を取得
-        $user = $this->where([
-            ['id', '=', $id],
-            ['is_approved', '=', 1],
-        ])
+        $user = DB::table('users')
+            ->where('id', $id)
+            ->where('is_approved', 1)
             ->whereNull('deleted_at')
             ->first();
 
@@ -251,5 +251,97 @@ class User extends Authenticatable implements MustVerifyEmail
             ->first();
 
         return $user;
+    }
+
+    /**
+     * ユーザー情報更新
+     * 
+     * @param array $input  ユーザー情報編集画面で入力された内容
+     * @return string       エラーがある場合はエラーメッセージを返す
+     */
+    public function saveUser(array $input): string
+    {
+
+        // 返却用のエラーメッセージ格納用
+        $error = '';
+        // 更新するユーザーを取得
+        $user = $this->find($input['user_id']);
+
+        /* 更新内容をセット */
+        // 名前
+        if (!empty($input['name'])) {
+            $user->name = data_get($input, 'name');
+        }
+
+        // ユーザーID
+        if (!empty($input['user_identifier'])) {
+            // 指定されたユーザーIDが別のユーザーに登録されていないかをチェック
+            if (!$this->checkUserIdentifier($user->id, $input['user_identifier'])) {
+                /* 別のユーザーに登録されている場合はエラーメッセージを表示 */
+                $error = __('users.fail.duplicate_identifier');
+                return $error;
+            }
+            $user->user_identifier = data_get($input, 'user_identifier');
+        }
+
+        // X(twitter)のURL
+        if (!empty($input['sns_x'])) {
+            $user->sns_x = data_get($input, 'sns_x');
+        }
+
+        // FacebookのURL
+        if (!empty($input['sns_facebook'])) {
+            $user->sns_facebook = data_get($input, 'sns_facebook');
+        }
+
+        // InstagramのURL
+        if (!empty($input['sns_instagram'])) {
+            $user->sns_instagram = data_get($input, 'sns_instagram');
+        }
+
+        // 自己紹介テキスト
+        if (!empty($input['introduction_text'])) {
+            $user->introduction_text = data_get($input, 'introduction_text');
+        }
+
+        /* 
+         * 画像保存場所
+         * アイコン：/storage/app/public/icon
+         * カバー画像：/storage/app/public/cover
+         */
+        // ユーザーアイコン(プロフィール画像)
+        if (!empty($input['user_icon'])) {
+            if (!empty($user->user_icon)) {
+                /* 現在の画像を削除 */
+                $old_icon_path = data_get($user, 'user_icon');
+                Storage::disk('public')->delete('icon/', $old_icon_path);
+            }
+            // 新しい画像を保存 (DB保存するのはファイル名のみ)
+            $path_icon = data_get($input, 'user_icon')->store('icon');
+            $user->user_icon = str_replace('public/icon/', '', $path_icon);
+        }
+
+        // カバー画像
+        if (!empty($input['user_cover_image'])) {
+            if (!empty($user->user_cover_image)) {
+                /* 現在の画像を削除 */
+                $old_cover_path = data_get($user, 'user_cover_image');
+                Storage::disk('public')->delete('cover/', $old_cover_path);
+            }
+            // 新しい画像を保存 (DB保存するのはファイル名のみ)
+            $path_cover = data_get($input, 'user_cover_image')->store('cover');
+            $user->user_cover_image = str_replace('public/cover/', '', $path_cover);
+        }
+
+        try {
+            // データベースに保存
+            $user->save();
+        } catch (\Exception $e) {
+            // 登録失敗
+            $error = __('users.fail.failed_update');
+        }
+
+        // 正常に更新成功なら、空文字を返す
+        return $error;
     }
 }

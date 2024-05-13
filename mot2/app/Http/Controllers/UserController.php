@@ -97,10 +97,8 @@ class UserController extends Controller
         $user = '';
         if (!empty($id)) {
             // ユーザーIDをstring→intにキャスト
-            $user_id = intval($id);
-            $tmp_user = $this->m_user->getUserById($user_id);
-            // 扱いやすいようにobject→arrayに変換
-            $user = $tmp_user->attributesToArray();
+            $user_id = (int)$id;
+            $user = $this->m_user->getUserById($user_id);
         } else {
             /* URLにユーザーIDが含まれない場合は前の画面に戻す */
             return to_route('user.show.list');
@@ -108,7 +106,6 @@ class UserController extends Controller
 
         /* ユーザーIDをもとにそのユーザーが作成したトピックを取得 */
         $topics = $this->m_topic->getTopicByUser($user_id);
-
         return view('user/show/index', [
             'user' => $user,
             'topics' => $topics,
@@ -160,65 +157,17 @@ class UserController extends Controller
                 return to_route('404');
             }
 
-            /* 更新された情報をセット */
-            // ユーザー氏名
-            if (!empty($input['name'])) {
-                $target_user->name = data_get($input, 'name');
+            // 更新実行
+            $error = $this->m_user->saveUser($input);
+            if (empty($error)) {
+                /* エラーメッセージがなければ更新成功 */
+                session()->flash('flash_success', __('users.success.updated'));
+                return to_route('user.show.detail', ['id' => $input['user_id']]);
+            } else {
+                /* 更新失敗 */
+                session()->flash('flash_failed', $error);
+                return back();
             }
-            // ユーザーID
-            if (!empty($input['user_identifier'])) {
-                // 指定されたユーザーIDが別のユーザーに登録されていないかをチェック
-                $flg_pass = $this->m_user->checkUserIdentifier($target_user->id, $input['user_identifier']);
-                if (!$flg_pass) {
-                    /* 別のユーザーに登録されている場合はエラーメッセージを表示 */
-                    session()->flash('flash_failed', __('users.fail.duplicate_identifier'));
-                    return back();
-                }
-                $target_user->user_identifier = data_get($input, 'user_identifier');
-            }
-            // X(twitter)のURL
-            if (!empty($input['sns_x'])) {
-                $target_user->sns_x = data_get($input, 'sns_x');
-            }
-            // FacebookのURL
-            if (!empty($input['sns_facebook'])) {
-                $target_user->sns_facebook = data_get($input, 'sns_facebook');
-            }
-            // InstagramのURL
-            if (!empty($input['sns_instagram'])) {
-                $target_user->sns_instagram = data_get($input, 'sns_instagram');
-            }
-            // 自己紹介テキスト
-            if (!empty($input['introduction_text'])) {
-                $target_user->introduction_text = data_get($input, 'introduction_text');
-            }
-            /* 画像は更新がある場合のみ`/storage/app/public/profiles`に保存する */
-            // ユーザーアイコン(プロフィール画像)
-            if (!empty($input['user_icon'])) {
-                // 現在の画像を削除する処理
-                $old_icon_path = $target_user->user_icon;
-                Storage::disk('public')->delete('icon/', $old_icon_path);
-                // 新しい画像を保存
-                $target_user->user_icon = data_get($input, 'user_icon')->store('public/icon');
-            }
-            if (!empty($input['user_cover_image'])) {
-                // 現在の画像を削除する処理
-                $old_cover_path = $target_user->user_cover_image;
-                Storage::disk('public')->delete('cover/', $old_cover_path);
-                // 新しい画像を保存
-                $target_user->user_cover_image = data_get($input, 'user_cover_image')->store('public/cover');
-            }
-
-            // 登録実行
-            // try {
-            // データベースに保存
-            $target_user->save();
-            // 詳細画面に遷移
-            return to_route('user.show.detail', ['id' => data_get($target_user, 'id')]);
-            // } catch (\Exception $e) {
-            //     // 登録失敗したら404を表示
-            //     return to_route('404');
-            // }
         }
     }
 }

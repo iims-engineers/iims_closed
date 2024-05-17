@@ -60,7 +60,7 @@
               <div class="c-form-item">
                 <label for="user_cover_image" class="c-form-item-title">プロフィールカバー画像</label>
                 <div class="c-form__cover-preview">
-                  @if(!empty(data_get($user, 'user_cover_image'))s)
+                  @if(!empty(data_get($user, 'user_cover_image')))
                   <img src="{{ asset('storage/'. data_get($user, 'user_cover_image')) }}" alt="">
                   @else
                   <img src="/img/common/dummy.png" alt="">

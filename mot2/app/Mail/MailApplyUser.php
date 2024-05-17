@@ -48,7 +48,6 @@ class MailApplyUser extends Mailable
      */
     public function content(): Content
     {
-        // テキストメールなので 'text': 'メールviewファイルのパス' の形式で設定
         return new Content(
             view: 'mails.apply.user',
             with: [

@@ -17,12 +17,17 @@ class MailSupportAdmin extends Mailable
 {
     use Queueable, SerializesModels;
 
+    // サポートインスタンス格納用
+    private $m_support;
+    // メッセージデータ格納用
+    private $message;
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($tmp_message)
     {
-        //
+        $this->m_support = new Support();
+        $this->message = $tmp_message;
     }
 
     /**
@@ -41,8 +46,13 @@ class MailSupportAdmin extends Mailable
      */
     public function content(): Content
     {
+        $message = $this->m_support->getMessageById($this->message->id);
+
         return new Content(
-            view: 'view.name',
+            view: 'mails.support.admin',
+            with: [
+                'message' => data_get($message, 'message'),
+            ],
         );
     }
 
@@ -51,8 +61,8 @@ class MailSupportAdmin extends Mailable
      *
      * @return array<int, \Illuminate\Mail\Mailables\Attachment>
      */
-    public function attachments(): array
-    {
-        return [];
-    }
+    // public function attachments(): array
+    // {
+    //     return [];
+    // }
 }

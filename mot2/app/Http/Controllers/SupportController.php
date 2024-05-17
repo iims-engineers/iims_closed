@@ -10,7 +10,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\MailSupportUser;
 use App\Mail\MailSupportAdmin;
 use App\Models\User;
 use App\Models\Topic;
@@ -57,12 +56,12 @@ class SupportController extends Controller
 
         $this->m_support->message = data_get($input, 'message');
         $this->m_support->user_id = data_get($input, 'user_id');
-
         // 登録実行
         try {
             $this->m_support->save();
 
             // 管理者へメール送信
+            Mail::to('admin@test.test')->send(new MailSupportAdmin($this->m_support));
 
             // 送信成功したら成功メッセージを表示
             session()->flash('flash_success', __('supports.success.complete'));

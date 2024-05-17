@@ -4,13 +4,13 @@
 </p>
 <p>
     ============================<br>
-    <a href="{{ route('admin.show.list') }}">会員登録申請のご確認はこちら</a><br>
+    <a href="{{ route('admin.support.show.list') }}">メッセージの一覧はこちら</a><br>
     ============================
 </p>
-<p>
+<!-- <p>
     【送信内容】<br>
-    {!! nl2br(htmlspecialchars(Arr::get($support, 'message'))) !!}
-</p>
+    メッセージ：{!! nl2br(htmlspecialchars(data_get($message, 'message'))) !!}
+</p> -->
 <br>
 <br>
 <p>

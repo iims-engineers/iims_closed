@@ -50,10 +50,19 @@ class HomeController extends Controller
         // ログインしているユーザー
         $user_id = Auth::id();
         /* 最新のトピックを取得 */
-        $topics = $this->m_topic->getTopics(self::CNT_SHOW_TOPIC);
+        // $topics = $this->m_topic->getTopics(self::CNT_SHOW_TOPIC);
+        /* ※暫定対応 最新順で6件取得して、1件はおすすめトピックとして表示 */
+        $topics = $this->m_topic->getTopics(6);
+        $recc_topic = data_get($topics, 0);
+        $comment_recc_topics = $this->m_comment->getCommentsByTopicID(data_get($recc_topic, 'id'));
+        // 抜き出した最新の1件は削除
+        Arr::except($topics, 0);
+
 
         return view('home/index', [
             'user_id' => $user_id,
+            'recc_topic' => $recc_topic,
+            'comment_recc_topics' => $comment_recc_topics,
             'topics' => $topics,
         ]);
     }

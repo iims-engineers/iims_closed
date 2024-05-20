@@ -32,62 +32,64 @@
         <section class="p-sub__section">
           <h2 class="p-sub__head02">今盛り上がっているおすすめトピック</h2>
           <div class="c-topic-wrap">
-            <a href="/topic/show/topicID/" class="c-topic-title">高崎に集まれる人募集！</a>
+            <a href="{{ route('topic.show.detail', ['id' => data_get($recc_topic, 'id')]) }}" class="c-topic-title">{{ data_get($recc_topic, 'title') }}</a>
             <div class="p-sub__inner">
               <div class="c-user">
                 <a href="">
                   <div class="c-user-icon">
-                    <img src="{{ ('/img/common/dummy_icon.png') }}" alt="">
+                    @if(!empty(data_get($recc_topic, 'user_icon')))
+                    <img src="{{ asset('storage/'. data_get($recc_topic, 'user_icon')) }}" alt="">
+                    @else
+                    <img src="/img/common/dummy_icon.png" alt="">
+                    @endif
                   </div>
                   <div class="c-user-info">
-                    <div class="c-user-name">もっと太郎</div>
-                    <div class="c-user-id">@username</div>
+                    <div class="c-user-name">{{ data_get($recc_topic, 'name') }}</div>
+                    <div class="c-user-id">@ {{ data_get($recc_topic, 'user_identifier') }}</div>
                   </div>
                 </a>
               </div>
               <div class="c-topic-detail">
                 <p>
-                  高崎来たら、まさかのまつんぼと遭遇！笑<br>
-                  めっちゃ急なんですけど誰か集まれる人いませんか〜？一緒に飲みに行きましょ！
+                  {!! nl2br(htmlspecialchars(data_get($recc_topic, 'comment'))) !!}
                 </p>
-                <time class="c-topic-date" datetime="2024-11-11T15:00:33">2024/11/11 15:00:33</time>
+                <time class="c-topic-date" datetime="{{ data_get($recc_topic, 'created_at') }}">{{ data_get($recc_topic, 'created_at') }}</time>
               </div>
               <div class="c-button-wrap">
-                <a href="" class="c-button">
+                <a href="{{ route('topic.show.create.comment', ['topic_id' => data_get($recc_topic, 'id')]) }}" class="c-button">
                   <img src="{{ ('/img/common/icon-reply.svg') }}" alt="">
-                  <span>このトピックにコメントする</span>
+                  <span>このトピックに回答する</span>
                 </a>
-                <a href="" class="c-button">
+                {{-- 編集できるのは作成者のみ --}}
+                @if(data_get($recc_topic, 'user_id') === Auth::id())
+                <a href="{{ route('topic.show.edit', ['id' => data_get($recc_topic, 'id')]) }}" class="c-button">
                   <img src="{{ ('/img/common/icon-pencil.svg') }}" alt="">
                   <span>このトピックを編集する</span>
                 </a>
+                @endif
               </div>
               <div class="c-reply-wrap">
+                @if(!empty($comment_recc_topics))
+                @foreach($comment_recc_topics as $comment_recc_topic)
                 <div class="c-reply">
                   <div class="c-user-icon">
-                    <img src="{{ ('/img/common/dummy_icon.png') }}" alt="">
+                    @if(!empty(data_get($comment_recc_topic, 'user_icon')))
+                    <img src="{{ asset('storage/'. data_get($comment_recc_topic, 'user_icon')) }}" alt="">
+                    @else
+                    <img src="/img/common/dummy_icon.png" alt="">
+                    @endif
                   </div>
                   <div class="c-reply-detail">
                     <p>
-                      まじで俺もビックリだわ〜笑<br>
-                      username終電までいる予定だって！
+                      {!! nl2br(htmlspecialchars(data_get($comment_recc_topic, 'comment'))) !!}
                     </p>
                   </div>
                 </div>
-                <div class="c-reply">
-                  <div class="c-user-icon">
-                    <img src="{{ ('/img/common/dummy_icon.png') }}" alt="">
-                  </div>
-                  <div class="c-reply-detail">
-                    <p>
-                      まじで俺もビックリだわ〜笑<br>
-                      username終電までいる予定だって！
-                    </p>
-                  </div>
-                </div>
+                @endforeach
+                @endif
               </div>
               <div class="c-button-wrap">
-                <a href="" class="c-button">
+                <a href="{{ route('topic.show.detail', ['id' => data_get($recc_topic, 'id')]) }}" class="c-button">
                   <img src="{{ ('/img/common/icon-show-topic.svg') }}" alt="">
                   <span>このトピックを見る</span>
                 </a>
@@ -97,7 +99,7 @@
         </section>
         {{-- 最新のトピックを5件表示 --}}
         <section class="p-sub__section">
-          <h2 class="p-sub__head02">トピック一覧</h2>
+          <h2 class="p-sub__head02">その他のトピック</h2>
           @forelse($topics as $topic)
           <div class="c-topic-wrap">
             <a href="{{ route('topic.show.detail', ['id' => data_get($topic, 'id')]) }}" class="c-topic-title js-accordion-topic">{{ $topic->title }}</a>

@@ -32,6 +32,9 @@
         <section class="p-sub__section">
           <h2 class="p-sub__head02">今盛り上がっているおすすめトピック</h2>
           <div class="c-topic-wrap">
+            @if(empty($recc_topic))
+            <p>現在表示できるトピックはありません。</p>
+            @else
             <a href="{{ route('topic.show.detail', ['id' => data_get($recc_topic, 'id')]) }}" class="c-topic-title">{{ data_get($recc_topic, 'title') }}</a>
             <div class="p-sub__inner">
               <div class="c-user">
@@ -95,6 +98,7 @@
                 </a>
               </div>
             </div>
+            @endif
           </div>
         </section>
         {{-- 最新のトピックを5件表示 --}}

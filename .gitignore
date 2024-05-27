@@ -24,3 +24,4 @@ Homestead.json
 
 # documentsディレクトリ配下は管理外
 documents/
+*.bkp

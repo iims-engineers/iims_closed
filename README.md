@@ -1,2 +1,3 @@
 # iims_closed
-IIMSクローズドコンテンツ
+
+IIMS クローズドコンテンツ

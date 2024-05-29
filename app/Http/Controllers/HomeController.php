@@ -53,10 +53,16 @@ class HomeController extends Controller
         // $topics = $this->m_topic->getTopics(self::CNT_SHOW_TOPIC);
         /* ※暫定対応 最新順で6件取得して、1件はおすすめトピックとして表示 */
         $topics = $this->m_topic->getTopics(6);
-        $recc_topic = data_get($topics, 0);
-        $comment_recc_topics = $this->m_comment->getCommentsByTopicID(data_get($recc_topic, 'id'));
-        // 抜き出した最新の1件は削除
-        Arr::except($topics, 0);
+        if (!$topics->isEmpty()) {
+            $recc_topic = data_get($topics, 0);
+            $comment_recc_topics = $this->m_comment->getCommentsByTopicID(data_get($recc_topic, 'id'));
+            // 抜き出した最新の1件は削除
+            Arr::except($topics, 0);
+        } else {
+            /* トピックが1件も存在しない場合はエラー回避のため空配列を作成 */
+            $recc_topic = [];
+            $comment_recc_topics = [];
+        }
 
 
         return view('home/index', [

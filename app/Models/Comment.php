@@ -58,9 +58,9 @@ class Comment extends Model
     /**
      * トピックに紐づくコメントを取得
      * 
-     * @param int|string $topic_id  トピックID
+     * @param int $topic_id  トピックID
      */
-    public function getCommentsByTopicID(int|string $topic_id)
+    public function getCommentsByTopicID(int $topic_id = 0)
     {
         // 古いコメントを上位に表示するため作成日時順に取得
         $comments = DB::table($this->table)

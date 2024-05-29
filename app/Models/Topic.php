@@ -59,11 +59,10 @@ class Topic extends Model
     /**
      * トピック情報一括取得(投稿日時が新しい順)
      * 
-     * @param int|null $limit   取得件数
-     * @param int|null $offset  取得開始レコード数
+     * @param int $limit   取得件数
      * @param bool|null $flg_cnt    全件数を取得するかのフラグ
      */
-    public function getTopics(int|null $limit = null)
+    public function getTopics(int $limit = 0)
     {
         // 削除されていないトピックを作成日時が新しい順に取得
         $query = DB::table($this->table)

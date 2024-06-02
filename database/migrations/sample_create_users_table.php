@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('name')->default('')->nullable(false)->comment('ニックネーム');
             $table->string('nationality')->default('')->nullable()->comment('国籍');
             $table->string('introduction_text', 500)->default('')->nullable()->comment('自己紹介');
-            $table->string('past_join')->default('')->nullable()->comment('活動参加歴');
+            $table->string('past_join')->default('')->nullable()->comment('IIMS活動参加歴');
+            $table->string('past_join_tabunka', 500)->default('')->nullable()->comment('多文化交流参加歴(アーカイブ紐付け用)');
             $table->string('user_identifier', 50)->default('')->nullable()->comment('表示用ユーザーID');
             $table->string('user_icon')->default('')->nullable()->comment('アイコン画像');
             $table->string('user_cover_image')->default('')->nullable()->comment('アイコン画像');

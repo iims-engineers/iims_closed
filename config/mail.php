@@ -107,9 +107,23 @@ return [
     |
     */
 
+    // 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        // 開発環境
+        'local' => [
+            'address' => env('MAIL_FROM_ADDRESS', 'local-mot2@iims-japan.org'),
+            'name' => env('MAIL_FROM_NAME', 'Example'),
+        ],
+        // 検証環境
+        'dev' => [
+            'address' => env('MAIL_FROM_ADDRESS', 'dev-mot2@iims-japan.org'),
+            'name' => env('MAIL_FROM_NAME', 'DEV-MOT2'),
+        ],
+        // 本番環境
+        'production' => [
+            'address' => env('MAIL_FROM_ADDRESS', 'mot2@iims-japan.org'),
+            'name' => env('MAIL_FROM_NAME', 'MOT2'),
+        ],
     ],
 
     /*

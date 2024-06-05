@@ -3,6 +3,7 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Support\Facades\App;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
@@ -36,8 +37,11 @@ class MailApplyAdmin extends Mailable
      */
     public function envelope(): Envelope
     {
+        // 環境ごとに送信元を設定
+        $from = config('mail.from')[App::environment()]['address'];
+
         return new Envelope(
-            from: env('MAIL_FROM_ADDRESS'),
+            from: $from,
             subject: __('mails.apply.admin.subject'),
         );
     }

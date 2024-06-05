@@ -3,6 +3,7 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Support\Facades\App;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
@@ -33,8 +34,11 @@ class MailPasswordResetMailCheck extends Mailable
      */
     public function envelope(): Envelope
     {
+        // 環境ごとに送信元を設定
+        $from = config('mail.from')[App::environment()]['address'];
+
         return new Envelope(
-            from: env('MAIL_FROM_ADDRESS'),
+            from: $from,
             subject: __('mails.password_reset_mail_check.subject'),
         );
     }

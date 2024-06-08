@@ -74,14 +74,14 @@ class ApproveController extends Controller
                 Mail::to($user->email)->send(new MailApprovedUser($user));
 
                 // 処理が完了したら承認待ちユーザー一覧画面に遷移
-                return to_route('admin.show.list');
+                return to_route('admin.show.unapproved.list');
             } catch (\Exception $e) {
                 // 登録失敗したら404
                 return to_route('404');
             }
         } else {
             /* ユーザー情報が取得できなかった場合は承認待ちユーザー一覧に戻す */
-            return to_route('admin.show.list');
+            return to_route('admin.show.unapproved.list');
         }
     }
 }

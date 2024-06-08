@@ -4,7 +4,7 @@
 </p>
 <p>
     ============================<br>
-    <a href="{{ route('admin.show.list') }}">会員登録申請のご確認はこちら</a><br>
+    <a href="{{ route('admin.show.unapproved.list') }}">会員登録申請のご確認はこちら</a><br>
     ============================
 </p>
 <p>

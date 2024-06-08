@@ -107,7 +107,7 @@ return [
     |
     */
 
-    // 
+    // MOT2からの送信元アドレス
     'from' => [
         // 開発環境
         'local' => [
@@ -123,6 +123,21 @@ return [
         'production' => [
             'address' => env('MAIL_FROM_ADDRESS', 'no-reply@mot2.iims-japan.org'),
             'name' => env('MAIL_FROM_NAME', 'MOT2'),
+        ],
+    ],
+    // MOT2から管理者宛へ送信するアドレス(メーリス)
+    'to_admin' => [
+        // 開発環境
+        'local' => [
+            'address' => 'admin_local-mot2@iims-japan.org',
+        ],
+        // 検証環境
+        'dev' => [
+            'address' => 'admin_dev-mot2@iims-japan.org',
+        ],
+        // 本番環境
+        'production' => [
+            'address' => 'admin_mot2@iims-japan.org',,
         ],
     ],
 

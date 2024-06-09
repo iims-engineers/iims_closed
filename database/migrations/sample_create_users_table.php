@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('sns_x')->default('')->nullable()->comment('X(Twitter)アカウントURL');
             $table->string('sns_facebook')->default('')->nullable()->comment('FacebookアカウントURL');
             $table->string('sns_instagram')->default('')->nullable()->comment('InstagramアカウントURL');
-            $table->string('email')->unique()->default('')->nullable(false)->comment('メールアドレス');
+            $table->string('email')->default('')->nullable(false)->comment('メールアドレス');
             $table->timestamp('email_verified_at')->nullable(); // 使用しないが無いとエラーになりそう
             $table->string('password')->nullable()->comment('パスワード');
             $table->rememberToken(); // 使用しないが無いとエラーになりそう

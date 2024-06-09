@@ -47,7 +47,7 @@ class ApplyController extends Controller
         $input = $request->only($this->formApply);
         // メールアドレスの重複確認
         $m_user = new User();
-        $res = $m_user->checkMail($input['mail']);
+        $res = $m_user->checkMail($input['email']);
         if (!$res) {
             // エラーメッセージを表示
             session()->flash('flash_failed', __('users.fail.duplicate_mail'));

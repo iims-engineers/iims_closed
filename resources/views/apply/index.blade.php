@@ -31,12 +31,16 @@
               運営が申請内容を確認でき次第、メールにてお知らせいたしますので、しばらくお待ちください。
             </p>
           </div>
-          @if($errors->any())
+          @if($errors->any() || session('flash_failed'))
           <div class="form-error">
             <ul>
               @foreach ($errors->all() as $error)
               <li class="error-text">・{{ $error }}</li>
               @endforeach
+              @if(session('flash_failed'))
+              {{-- 重複チェックエラー --}}
+              <li class="error-text">・{{ session('flash_failed') }}</li>
+              @endif
             </ul>
           </div>
           @endif
@@ -58,9 +62,7 @@
               @enderror
               @if(session('flash_failed'))
               {{-- 重複チェックエラー --}}
-              <div class="form-error">
-                <p class="error-text">{{ session('flash_failed') }}</p>
-              </div>
+              <p class="error-text">{{ session('flash_failed') }}</p>
               @endif
             </div>
             <div class="c-form-item c-form-item--register">

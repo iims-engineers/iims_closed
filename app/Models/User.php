@@ -153,7 +153,7 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         $res = false;
         $ret = DB::table('users')
-            ->where('mail', $mail)
+            ->where('email', $mail)
             ->whereNull('deleted_at')
             ->first();
 

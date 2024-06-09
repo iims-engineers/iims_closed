@@ -137,7 +137,7 @@ return [
         ],
         // 本番環境
         'production' => [
-            'address' => 'admin_mot2@iims-japan.org',,
+            'address' => 'admin_mot2@iims-japan.org',
         ],
     ],
 

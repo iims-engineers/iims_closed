@@ -143,6 +143,29 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+     * メールアドレスの重複チェック
+     * 活きユーザーの中で同じメールアドレスが登録されていたらfalseを返す
+     * 
+     * @param string $mail メールアドレス
+     * @return bool  true:重複なし、false:重複あり
+     */
+    public function checkMail(string $mail = ''): bool
+    {
+        $res = false;
+        $ret = DB::table('users')
+            ->where('mail', $mail)
+            ->whereNull('deleted_at')
+            ->first();
+
+        if (empty($ret)) {
+            /* ユーザーIDが別のユーザーに登録されていなければtrueを返却 */
+            $res = true;
+        }
+
+        return $res;
+    }
+
+    /**
      * ユーザーID(user_identifier)の重複チェック
      * 指定のユーザーIDが別のユーザーに登録されていたらfalseを返す
      * 

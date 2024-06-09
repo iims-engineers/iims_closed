@@ -23,7 +23,7 @@ class ApplyRequest extends FormRequest
     {
         return [
             'name' => ['required', 'max:50'],  // 氏名:必須,50文字以内
-            'email' => ['required', 'unique:users', 'email', 'max:255'], // メールアドレス:必須,ユニーク,255文字以内
+            'email' => ['required', 'email', 'max:255'], // メールアドレス:必須,(重複確認はコントローラで行う),255文字以内
             'past-join' => ['max:255'],        // 過去の活動参加歴:255文字以内
         ];
     }

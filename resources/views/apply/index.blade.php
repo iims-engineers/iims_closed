@@ -56,6 +56,12 @@
               @error('email')
               <p class="error-text">※{{ $message }}</p>
               @enderror
+              @if(session('flash_failed'))
+              {{-- 重複チェックエラー --}}
+              <div class="form-error">
+                <p class="error-text">{{ session('flash_failed') }}</p>
+              </div>
+              @endif
             </div>
             <div class="c-form-item c-form-item--register">
               <label for="past-join" class="c-form-item-title">過去のIIMS活動参加歴</label>

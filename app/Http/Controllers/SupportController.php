@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Support;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use App\Http\Requests\SupportRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
@@ -61,7 +62,7 @@ class SupportController extends Controller
             $this->m_support->save();
 
             // 管理者へメール送信
-            Mail::to('admin@test.test')->send(new MailSupportAdmin($this->m_support));
+            Mail::to(config('mail.to_admin')[App::environment()]['address'])->send(new MailSupportAdmin($this->m_support));
 
             // 送信成功したら成功メッセージを表示
             session()->flash('flash_success', __('supports.success.complete'));

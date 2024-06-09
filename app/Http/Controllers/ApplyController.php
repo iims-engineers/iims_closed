@@ -45,6 +45,14 @@ class ApplyController extends Controller
         // 入力データのバリデート
         $validated = $request->validated();
         $input = $request->only($this->formApply);
+        // メールアドレスの重複確認
+        $m_user = new User();
+        $res = $m_user->checkMail($input['mail']);
+        if (!$res) {
+            // エラーメッセージを表示
+            session()->flash('flash_failed', __('users.fail.duplicate_mail'));
+            return to_route('apply.form');
+        }
 
         // 活動参加歴が未入力の場合は空文字を登録する
         if (!isset($input['past-join'])) {
@@ -114,7 +122,7 @@ class ApplyController extends Controller
             // 完了メール送信(ユーザー側)
             Mail::to($user->email)->send(new MailApplyUser($form_input));
             // 完了メール送信(管理者側)
-            Mail::to('admin@test.test')->send(new MailApplyAdmin($form_input));
+            Mail::to(config('mail.to_admin')[App::environment()]['address'])->send(new MailApplyAdmin($form_input));
 
             // 申請完了画面に遷移
             return to_route('apply.show.complete');

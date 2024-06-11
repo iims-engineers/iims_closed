@@ -33,6 +33,11 @@
             <p class="error-text">{{ session('flash_failed') }}</p>
           </div>
           @endif
+          @if(session('complete_regist'))
+          <div class="form-error">
+            <p class="error-text">{{ session('complete_regist') }}</p>
+          </div>
+          @endif
           <form action="{{ route('login') }}" method='POST' class="c-form">
             @csrf
             <div class="c-form-item">

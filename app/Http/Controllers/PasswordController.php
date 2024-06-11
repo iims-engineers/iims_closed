@@ -49,6 +49,19 @@ class PasswordController extends Controller
             return to_route('top');
         }
 
+        if (!empty($user->password)) {
+            /* 既にパスワード登録を完了している場合 */
+
+            if (!empty($user->user_identifier)) {
+                /* ユーザーIDの登録まで完了している場合はHOME画面に飛ばす */
+                session()->flash('complete_regist', __('users.fail.complete_regist'));
+                return to_route('login.show.form');
+            } else {
+                /* ユーザーID未登録の場合は入力画面に飛ばす */
+                return to_route('identifier.show.form', ['token' => $user->verify_token]);
+            }
+        }
+
         // セッションにユーザー情報をセット
         if (session()->has('user_data')) {
             /* すでにセッションにユーザー情報がある場合は削除してから保存する */

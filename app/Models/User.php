@@ -48,6 +48,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'id' => 'integer',
         'email_verified_at' => 'datetime',
+        'password' => 'hashed',
         'verify_token' => 'string',
         'is_admin' => 'integer',
         'is_approved' => 'integer',

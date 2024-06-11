@@ -78,7 +78,8 @@ class PasswordController extends Controller
 
         // 登録実行
         try {
-            $user->password = Hash::make($input['password']);
+            // パスワードはモデル側でキャストするため、ここではHashは使用しない
+            $user->password = $input['password'];
             $user->save();
 
             // 登録成功したらユーザーID設定画面に遷移

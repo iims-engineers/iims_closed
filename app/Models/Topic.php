@@ -166,14 +166,36 @@ class Topic extends Model
             return false;
         }
 
-        /* 紐づくコメントも削除する */
-        $comments = DB::table('comments')
+        /* 紐づくコメント削除用にトピックIDを取得しておく */
+        $obj_comment_id = [];
+        $comment_ids = [];
+        $obj_comment_id = DB::table('comments')
+            ->select('id')
             ->where('topic_id', $topic_id)
             ->whereNull('deleted_at')
-            ->get();
+            ->get()
+            ->toArray();
 
+        if (!empty($obj_comment_id)) {
+            // obj → arrayへ変換
+            foreach ($obj_comment_id as $id) {
+                $comment_ids[] = get_object_vars($id)['id'];
+            }
+        }
         // 削除日時を取得しておく
         $deleted_time = now();
+
+        /* 先にコメント削除実行 */
+        if (!empty($comment_ids)) {
+            $m_comment = new Comment();
+            foreach ($comment_ids as $id) {
+                try {
+                    $m_comment->deleteComments($id);
+                } catch (\Exception $e) {
+                    return false;
+                }
+            }
+        }
 
         /* トピック削除実行 */
         try {
@@ -183,20 +205,6 @@ class Topic extends Model
             $topic->save();
         } catch (\Exception $e) {
             return false;
-        }
-
-        if ($comments->isNotEmpty()) {
-            /* コメント削除実行 */
-            foreach ($comments as $comment) {
-                try {
-                    // 削除日時
-                    $comment->deleted_at = $deleted_time;
-                    // 論理削除実行
-                    $comment->save();
-                } catch (\Exception $e) {
-                    return false;
-                }
-            }
         }
 
         return true;

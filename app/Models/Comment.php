@@ -93,4 +93,28 @@ class Comment extends Model
 
         return $comments;
     }
+
+    /**
+     * トピックに紐づくコメントを削除
+     * 
+     * @param int|string $comment_id  トピックID
+     */
+    public function deleteComments(int|string $comment_id)
+    {
+        // 削除対象のコメント取得
+        $comment = self::find($comment_id);
+
+        if (!empty($comment)) {
+            // 削除日時
+            $delete_time = now();
+            $comment->deleted_at = $delete_time;
+            try {
+                $comment->save();
+            } catch (\Exception $e) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }

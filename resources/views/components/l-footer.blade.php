@@ -1,3 +1,8 @@
+<?php
+// ログイン中のユーザー
+$user = Auth::user();
+?>
+
 <!--include START-->
 <footer class="l-footer">
   <!-- <div class="l-pagetop"><button type="button" class="pagetop-btn"><span>PAGE TOP</span></button></div> -->
@@ -22,9 +27,12 @@
       </a>
     </div>
     <div class="l-footer__btn-item">
-      <a href="{{ route('user.show.edit', ['id' => Auth::user()->id]) }}">
-        <img src="{{ asset('/img/common/dummy_icon.png') }}" alt="">
-        <!-- <img src="/img/common/icon-accessibility.svg" alt=""> -->
+      <a href="{{ route('user.show.edit', ['id' => $user->id]) }}">
+        @if(!empty($user->user_icon))
+        <img src="{{ asset('storage/'. $user->user_icon) }}" alt="">
+        @else
+        <img src="/img/common/dummy_icon.png" alt="">
+        @endif
         <span>個人設定</span>
       </a>
     </div>

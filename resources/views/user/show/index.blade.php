@@ -87,8 +87,11 @@
               <div class="c-user">
                 <a href="{{ route('user.show.detail', ['id' => data_get($topic, 'user_id')]) }}">
                   <div class="c-user-icon">
-                    <!-- <img src="{{ data_get($topic, 'user_icon') }}" alt=""> -->
+                    @if(!empty($topic->user_icon))
+                    <img src="{{ asset('storage/'. $topic->user_icon) }}" alt="">
+                    @else
                     <img src="/img/common/dummy_icon.png" alt="">
+                    @endif
                   </div>
                   <div class="c-user-info">
                     <div class="c-user-name">{{ data_get($topic, 'name') }}</div>

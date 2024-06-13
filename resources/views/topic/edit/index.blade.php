@@ -35,7 +35,7 @@
                     <div class="c-user-id">@ {{ data_get($topic, 'user_identifier') }}</div>
                   </div>
                 </div>
-                <textarea name="topic-detail" id="topic-detail" cols="30" rows="10">{!! nl2br(htmlspecialchars(data_get($topic, 'content'))) !!}</textarea>
+                <textarea name="topic-detail" id="topic-detail" cols="30" rows="10">{{ data_get($topic, 'content') }}</textarea>
                 @error('topic-detail')
                 <p class="error-text">※{{ $message }}</p>
                 @enderror

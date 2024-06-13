@@ -4,7 +4,7 @@
 </p>
 <p>
     ============================<br>
-    <a href="{{ route('admin.support.show.list') }}">メッセージの一覧はこちら</a><br>
+    <a href="{{ route('admin.show.support.list') }}">メッセージの一覧はこちら</a><br>
     ============================
 </p>
 <!-- <p>

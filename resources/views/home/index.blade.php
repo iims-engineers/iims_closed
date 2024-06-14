@@ -54,7 +54,7 @@
               </div>
               <div class="c-topic-detail">
                 <p>
-                  {!! nl2br(htmlspecialchars(data_get($recc_topic, 'comment'))) !!}
+                  {!! nl2br(htmlspecialchars(data_get($recc_topic, 'content'))) !!}
                 </p>
                 <time class="c-topic-date" datetime="{{ data_get($recc_topic, 'created_at') }}">{{ data_get($recc_topic, 'created_at') }}</time>
               </div>

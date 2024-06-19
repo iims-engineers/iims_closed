@@ -65,13 +65,33 @@
               <p class="error-text">{{ session('flash_failed') }}</p>
               @endif
             </div>
-            <div class="c-form-item c-form-item--register">
+            <div class="c-form-item--register iims_activity">
+              <p class="c-form-item-title">過去のIIMS活動参加歴</p>
+              @foreach($activity_list as $category => $list)
+              <dl class="toggle_contents">
+                <dt class="toggle_title">{{ $category }}<span class="toggle_btn">開く</span></dt>
+                <dd>
+                  <ul>
+                    @foreach($list as $key => $val)
+                    <li>
+                      <label for="past-join">
+                        <input type="checkbox" name="past-join[]" value="{{ $key }}">{{ $val }}
+                      </label>
+                    </li>
+                    @endforeach
+                  </ul>
+                </dd>
+              </dl>
+              @endforeach
+              </ul>
+            </div>
+            <!-- <div class="c-form-item c-form-item--register">
               <label for="past-join" class="c-form-item-title">過去のIIMS活動参加歴</label>
               <textarea name="past-join" id="past-join" cols="30" rows="3" value="{{ old('past-join') }}"></textarea>
               @error('past-join')
               <p class="error-text">※{{ $message }}</p>
               @enderror
-            </div>
+            </div> -->
             <div class="c-form-submit c-button-wrap">
               <button type="submit" class="c-button">確認画面へ</button>
             </div>
@@ -84,6 +104,14 @@
     </div>
   </div>
   @include('components.javascript')
+  <script>
+    $(function() {
+      $('.toggle_title').click(function() {
+        $(this).toggleClass('selected');
+        $(this).next().slideToggle();
+      });
+    });
+  </script>
 </body>
 
 </html>

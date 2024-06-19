@@ -32,7 +32,11 @@ class ApplyController extends Controller
      */
     public function showForm()
     {
-        return view('apply/index');
+        // IIMS活動情報
+        $activity_list = __('iims_activity');
+        return view('apply/index', [
+            'activity_list' => $activity_list,
+        ]);
     }
 
     /**

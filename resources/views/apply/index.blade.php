@@ -66,7 +66,7 @@
               @endif
             </div>
             <div class="c-form-item--register iims_activity">
-              <p class="c-form-item-title">過去のIIMS活動参加歴</p>
+              <p class="c-form-item-title">過去のIIMS活動参加歴 (複数選択可)</p>
               @foreach($activity_list as $category => $list)
               <dl class="toggle_contents">
                 <dt class="toggle_title">{{ $category }}<span class="toggle_btn">開く</span></dt>

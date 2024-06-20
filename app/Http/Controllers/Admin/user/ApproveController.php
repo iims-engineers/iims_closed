@@ -44,6 +44,23 @@ class ApproveController extends Controller
     {
         // IDを元にユーザー情報を取得
         $unapproved_user = $this->m_user->getUnapprovedUser($id);
+        // 活動参加歴を表示用に調整
+        $activity_list = __('iims_activity');
+        if (!empty($unapproved_user->past_join)) {
+            $key_past_join = explode(',', data_get($unapproved_user, 'past_join'));
+            $text_past_join = [];
+            foreach ($activity_list as $category => $list) {
+                foreach ($key_past_join as $key) {
+                    $res = '';
+                    $res = Arr::get($list, $key);
+                    if (!empty($res)) {
+                        $text_past_join[] = $res;
+                        continue;
+                    }
+                }
+            }
+            $unapproved_user->past_join = $text_past_join;
+        }
 
         if (!empty($unapproved_user)) {
             return view('admin/user/unapproved/detail', [

@@ -24,9 +24,16 @@
                                 <img src="{{ ('/img/common/dummy_icon.png') }}" alt="">
                             </div>
                             <div class="c-user-info">
-                                <div class="c-user-name">氏名：{{ $user->name }}</div>
-                                <div class="c-user-email">メールアドレス：{{ $user->email }}</div>
-                                <div class="c-user-past-join">過去のIIMS活動参加歴：{!! nl2br(htmlspecialchars($user->past_join)) !!}</div>
+                                <div class="c-user-name">【氏名】{{ $user->name }}</div>
+                                <div class="c-user-email">【メールアドレス】{{ $user->email }}</div>
+                                <div class="c-user-past-join">【過去のIIMS活動参加歴】</div>
+                                @if(!empty($user->past_join))
+                                @foreach($user->past_join as $key => $val)
+                                <p>・{{ $val }}</p>
+                                @endforeach
+                                @else
+                                <p>選択されていません</p>
+                                @endif
                                 <form action="{{ route('admin.unapprovedUser.approve') }}" method="POST">
                                     @csrf
                                     <input type="hidden" name="id" value="{{ $user->id }}">

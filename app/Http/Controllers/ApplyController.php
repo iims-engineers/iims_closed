@@ -58,16 +58,27 @@ class ApplyController extends Controller
             return to_route('apply.form');
         }
 
-        // 活動参加歴が未入力の場合は空文字を登録する
-        if (!isset($input['past-join'])) {
-            $input['past-join'] = '';
+        $text_past_join = [];
+        if (isset($input['past-join'])) {
+            /* 確認画面表示用にIIMS活動情報を取得 */
+            $activity_list = __('iims_activity');
+            foreach ($activity_list as $category => $list) {
+                foreach (Arr::get($input, 'past-join') as $key) {
+                    $res = '';
+                    $res = Arr::get($list, $key);
+                    if (!empty($res)) {
+                        $text_past_join[$key] = $res;
+                        continue;
+                    }
+                }
+            }
         }
 
         // 入力データをセッションに保存
         $request->session()->put(['form_input' => [
             'name' => Arr::get($input, 'name'),
             'email' => Arr::get($input, 'email'),
-            'past-join' => Arr::get($input, 'past-join'),
+            'past-join' => $text_past_join,
         ]]);
 
         // バリデートにエラーがエラーが無い場合のみ確認画面に遷移
@@ -106,16 +117,20 @@ class ApplyController extends Controller
             /* 入力データがセッションに存在しない場合は404 */
             return to_route('404');
         }
-
+        if (!empty($form_input['past-join'])) {
+            $past_join = implode(',', array_keys(Arr::get($form_input, 'past-join')));
+        } else {
+            $past_join = '';
+        }
         // メールアドレスから認証用トークンを生成
         $token = base64_encode($form_input['email']);
 
-        // Userモデルのインスタンスを生成
-        $user = new User();
         // 入力データをUserモデルのインスタンスにセット
+        $user = new User();
         $user->name = Arr::get($form_input, 'name');
         $user->email = Arr::get($form_input, 'email');
-        $user->past_join = Arr::get($form_input, 'past-join');
+        // 活動参加歴はカンマ区切りで保存する
+        $user->past_join = $past_join;
         $user->verify_token = $token;
 
         // 登録実行

@@ -28,6 +28,11 @@ class MailApplyAdmin extends Mailable
      */
     public function __construct(array $user_data)
     {
+        if (!empty($user_data['past-join'])) {
+            $user_data['past-join'] = implode(',', $user_data['past-join']);
+        } else {
+            $user_data['past-join'] = '';
+        }
         $this->user = $user_data;
     }
 

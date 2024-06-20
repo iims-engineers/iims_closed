@@ -36,7 +36,13 @@
             </div>
             <div class="c-form-item c-form-item--register">
               <p class="c-form-item-title">過去に参加された多文化交流</p>
-              <p>{!! nl2br(htmlspecialchars(Arr::get($form_input, 'past-join', ''))) !!}</p>
+              @if(!empty($form_input['past-join']))
+              @foreach($form_input['past-join'] as $key => $val)
+              <p>・{{ $val }}</p>
+              @endforeach
+              @else
+              <p>未選択</p>
+              @endif
             </div>
             <div class="c-form-submit c-button-wrap">
               <button type="submit" class="c-button">申請する</button>

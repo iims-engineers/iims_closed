@@ -103,6 +103,23 @@ class UserController extends Controller
             /* URLにユーザーIDが含まれない場合は前の画面に戻す */
             return to_route('user.show.list');
         }
+        if (!empty($user->past_join)) {
+            /* 活動参加歴を表示用に変換 ※初期段階では表示無し */
+            $key_past_join = explode(',', $user->past_join);
+            $activity_list = __('iims_activity');
+            $text_past_join = [];
+            foreach ($activity_list as $category => $list) {
+                foreach ($key_past_join as $key) {
+                    $res = '';
+                    $res = Arr::get($list, $key);
+                    if (!empty($res)) {
+                        $text_past_join[] = $res;
+                        continue;
+                    }
+                }
+            }
+            $user->past_join = $text_past_join;
+        }
 
         /* ユーザーIDをもとにそのユーザーが作成したトピックを取得 */
         $topics = $this->m_topic->getTopicByUser($user_id);
@@ -130,8 +147,12 @@ class UserController extends Controller
             return to_route('user.show.list');
         }
 
+        // IIMS活動参加歴
+        $activity_list = __('iims_activity');
+
         return view('user/edit/index', [
             'user' => $user,
+            'activity_list' => $activity_list,
         ]);
     }
 

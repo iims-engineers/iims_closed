@@ -328,6 +328,12 @@ class User extends Authenticatable implements MustVerifyEmail
             $user->introduction_text = data_get($input, 'introduction_text');
         }
 
+        // 活動参加歴
+        if (!empty($input['past-join'])) {
+            $past_join = implode(',', $input['past-join']);
+            $user->past_join = $past_join;
+        }
+
         /* 
          * 画像保存場所
          * アイコン：/storage/app/public/icon

@@ -99,6 +99,26 @@
                 <p class="error-text">※{{ $message }}</p>
                 @enderror
               </div>
+              <div class="iims_activity">
+                <p class="c-form-item-title">過去のIIMS活動参加歴 (複数選択可)</p>
+                @foreach($activity_list as $category => $list)
+                <dl class="toggle_contents">
+                  <dt class="toggle_title">{{ $category }}<span class="toggle_btn">開く</span></dt>
+                  <dd>
+                    <ul>
+                      @foreach($list as $key => $val)
+                      <li>
+                        <label for="past-join">
+                          <input type="checkbox" name="past-join[]" value="{{ $key }}">{{ $val }}
+                        </label>
+                      </li>
+                      @endforeach
+                    </ul>
+                  </dd>
+                </dl>
+                @endforeach
+                </ul>
+              </div>
               <div class="c-form-submit c-button-wrap">
                 <button type="submit" class="c-button">更新する</button>
                 <input type="hidden" name="user_id" value="{{ data_get($user, 'id') }}">
@@ -113,6 +133,14 @@
     </div>
   </div>
   @include('components.javascript')
+  <script>
+    $(function() {
+      $('.toggle_title').click(function() {
+        $(this).toggleClass('selected');
+        $(this).next().slideToggle();
+      });
+    });
+  </script>
 </body>
 
 </html>

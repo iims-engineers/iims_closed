@@ -85,13 +85,6 @@
               @endforeach
               </ul>
             </div>
-            <!-- <div class="c-form-item c-form-item--register">
-              <label for="past-join" class="c-form-item-title">過去のIIMS活動参加歴</label>
-              <textarea name="past-join" id="past-join" cols="30" rows="3" value="{{ old('past-join') }}"></textarea>
-              @error('past-join')
-              <p class="error-text">※{{ $message }}</p>
-              @enderror
-            </div> -->
             <div class="c-form-submit c-button-wrap">
               <button type="submit" class="c-button">確認画面へ</button>
             </div>

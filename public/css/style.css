@@ -1152,6 +1152,10 @@ screen and (min-width: 482px) and (max-width: 768px) {
   display: none;
 }
 
+label, input[type='checkbox'] {
+    cursor: pointer;
+}
+
 /* エラー関連 */
 .form-error {
   padding: 20px 0;

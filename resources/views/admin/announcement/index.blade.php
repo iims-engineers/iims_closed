@@ -18,6 +18,7 @@
             <main class="l-main">
                 <section class="p-sub__section">
                     <h1 class="p-sub__head01">お知らせ一覧</h1>
+                    <a href="{{ route('admin.show.announcement.create') }}">★新規作成はこちら★</a>
                     <div class="p-sub__inner">
                         @if(!empty($announcement_list))
                         @foreach($announcement_list as $announcement)

@@ -21,7 +21,6 @@
     <div class="l-container">
 
         <!-- l-header START -->
-        @include('components.l-header')
         <!-- l-header END -->
 
         <div class="l-contents">

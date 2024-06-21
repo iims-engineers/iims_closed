@@ -1,3 +1,11 @@
+<?php
+// ユーザーID取得
+$user_id = Auth::id();
+// お知らせ取得
+$m_announcement = new App\Models\Announcement();
+$announcement_info = $m_announcement->getStatusRead($user_id);
+
+?>
 <!--include START-->
 <header class="l-header">
   <div class="l-header__logo">
@@ -10,22 +18,31 @@
       <button type="button" class="l-header__info-btn">
         <img src="{{ asset('/img/common/icon-bell.svg') }}" alt="">
         <span>お知らせ</span>
-        <span class="attention-num">1</span>
+        @if($announcement_info['unread_count'] > 0)
+        {{-- 未読が1件以上ある場合のみ未読数のバッジを表示 --}}
+        <span class="attention-num">{{ data_get($announcement_info, 'unread_count') }}</span>
+        @endif
       </button>
       <div class="l-header__info">
         <div class="l-header__info-list">
+          @if(!empty($announcement_info['announcement']))
+          @foreach(data_get($announcement_info, 'announcement', []) as $key => $val)
+          <?php
+          // 未読の場合のclass属性
+          $unread = '';
+          if (!isset($val->pub_status)) {
+            $unread = 'unread';
+          }
+          ?>
+          <div class="l-header__info-list-item {{ $unread }}">
+            <a href="{{ route('show.detail.announcement', ['id' => data_get($val, 'id')]) }}">{{ data_get($val, 'title') }}</a>
+          </div>
+          @endforeach
+          @else
           <div class="l-header__info-list-item unread">
-            リンクなしお知らせリンクなしお知らせリンクなしお知らせ
+            ※現在表示できるお知らせはありません。
           </div>
-          <div class="l-header__info-list-item unread">
-            <a href="">リンクありお知らせリンクありお知らせリンクありお知らせリンクありお知らせ</a>
-          </div>
-          <div class="l-header__info-list-item">
-            <a href="">リンクありお知らせ</a>
-          </div>
-          <div class="l-header__info-list-item">
-            リンクなしお知らせ
-          </div>
+          @endif
         </div>
       </div>
     </div>

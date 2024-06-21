@@ -124,6 +124,9 @@ Route::middleware('auth')
         // ホーム画面の表示
         Route::get('/home', [HomeController::class, 'index'])->name('home.index');
 
+        // お知らせ詳細画面の表示
+        Route::get('/announcement/detail/{id}', [AnnouncementController::class, 'showDetail'])->name('show.detail.announcement');
+
         // ログアウト処理
         Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 

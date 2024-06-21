@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Models\Topic;
 use App\Models\Comment;
 use App\Models\Support;
+use App\Models\Announcement;
 
 /**
  * ログイン後のTOP画面

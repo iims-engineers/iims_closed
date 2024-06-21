@@ -21,7 +21,7 @@ class AnnouncementController extends Controller
     {
         // お知らせ取得
         $m_announcement = new Announcement();
-        $announcement_list = $m_announcement->get_announcements();
+        $announcement_list = $m_announcement->getAnnouncements();
 
         foreach ($announcement_list as $key => $val) {
             if ($val->is_public === '1') {
@@ -38,10 +38,30 @@ class AnnouncementController extends Controller
     /**
      * お知らせ - 詳細画面の表示
      * 
-     * @param string|null $id  トピックID
+     * @param string|null $id  お知らせID
      */
     public function showDetail(string|null $id)
     {
+        if (empty($id)) {
+            return to_route('404');
+        }
+
+        // お知らせ取得
+        $m_announcement = new Announcement();
+        $announcement = $m_announcement->getAnnouncements(false, $id);
+
+        // 表示したお知らせを既読にする
+        $m_announcement_read = new AnnouncementRead();
+        $res = $m_announcement_read->storeReadStatus($id);
+
+        if ($res === false) {
+            /* DB更新失敗したらとりあえずHOME画面に戻す */
+            return back();
+        }
+
+        return view('announcement/detail/index', [
+            'announcement' => data_get($announcement, 0, []),
+        ]);
     }
 
     /**

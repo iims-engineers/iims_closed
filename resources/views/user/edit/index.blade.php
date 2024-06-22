@@ -107,9 +107,16 @@
                   <dd>
                     <ul>
                       @foreach($list as $key => $val)
+                      <?php
+                      $checked = '';
+                      $arr_past_join = explode(',', $user->past_join);
+                      if (in_array($key, $arr_past_join)) {
+                        $checked = 'checked';
+                      }
+                      ?>
                       <li>
                         <label for="past-join_{{ $key }}">
-                          <input type="checkbox" id="past-join_{{ $key }}" name="past-join[]" value="{{ $key }}">{{ $val }}
+                          <input type="checkbox" id="past-join_{{ $key }}" name="past-join[]" value="{{ $key }}" {{ $checked }}>{{ $val }}
                         </label>
                       </li>
                       @endforeach

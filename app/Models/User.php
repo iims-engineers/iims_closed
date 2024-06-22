@@ -374,4 +374,33 @@ class User extends Authenticatable implements MustVerifyEmail
         // 正常に更新成功なら、空文字を返す
         return $error;
     }
+
+    /**
+     * 活動参加歴キーを表示用テキストに変換
+     * 
+     * @param string $key 活動参加歴のキー
+     * @return string $ret
+     */
+    public function convertPastJoinToText(string $key): string
+    {
+        $arr_ret = [];
+        // 活動参加歴情報を取得
+        $activity_list = __('iims_activity');
+        // CSV → 配列に変換
+        $arr_past_join = explode(',', $key);
+
+        foreach ($activity_list as $category => $list) {
+            foreach ($arr_past_join as $key) {
+                $view_text = '';
+                $view_text = Arr::get($list, $key);
+                if (!empty($view_text)) {
+                    $arr_ret[] = $view_text;
+                    continue;
+                }
+            }
+        }
+        $ret = implode(',', $arr_ret);
+
+        return $ret;
+    }
 }

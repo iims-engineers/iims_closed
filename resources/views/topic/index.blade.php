@@ -20,7 +20,7 @@
           <h1 class="p-sub__head01">トピック一覧　(全{{ $total_cnt }}件)</h1>
           @if(session('flash_success'))
           <div class="flash-complete">
-            <p class="flash-text">{{ session('flash_success') }}</p>
+            <p class="flash-text">・{{ session('flash_success') }}</p>
           </div>
           @endif
           @if(session('flash_failed'))
@@ -56,6 +56,7 @@
                   {!! nl2br(htmlspecialchars(data_get($topic, 'content'))) !!}
                 </p>
                 <time class="c-topic-date" datetime="{{ data_get($topic, 'created_at') }}">{{ data_get($topic, 'created_at') }}</time>
+                <time class="c-topic-date" datetime="{{ data_get($topic, 'updated_at') }}">（更新：{{ data_get($topic, 'updated_at') }}）</time>
               </div>
               <div class="c-button-wrap">
                 <a href="{{ route('topic.show.create.comment', ['topic_id' => data_get($topic, 'id')]) }}" class="c-button">

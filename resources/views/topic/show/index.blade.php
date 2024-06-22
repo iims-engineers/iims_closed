@@ -20,7 +20,7 @@
           <h1 class="p-sub__head01">このトピックの詳細</h1>
           @if(session('flash_success'))
           <div class="flash-complete">
-            <p class="flash-text">{{ session('flash_success') }}</p>
+            <p class="flash-text">・{{ session('flash_success') }}</p>
           </div>
           @endif
           <div class="p-sub__inner">
@@ -42,6 +42,7 @@
                 {!! nl2br(htmlspecialchars(data_get($topic, 'content'))) !!}
               </p>
               <time class="c-topic-date" datetime="{{ data_get($topic, 'created_at') }}">{{ data_get($topic, 'created_at') }}</time>
+              <time class="c-topic-date" datetime="{{ data_get($topic, 'updated_at') }}">（更新：{{ data_get($topic, 'updated_at') }}）</time>
             </div>
 
             <?php // ここからコメント 
@@ -68,6 +69,7 @@
                     {!! nl2br(htmlspecialchars(data_get($comment, 'comment'))) !!}
                   </p>
                   <time class="c-reply-date" datetime="{{ data_get($comment, 'created_at') }}">{{ data_get($comment, 'created_at') }}</time>
+                  <time class="c-reply-date" datetime="{{ data_get($comment, 'updated_at') }}">（更新：{{ data_get($comment, 'updated_at') }}）</time>
                   @if(data_get($comment, 'user_id') === $user_id)
                   <div class="c-reply-edit">
                     <a href="{{ route('comment.show.edit', ['comment_id' => data_get($comment, 'id')]) }}" class="c-button--mini">

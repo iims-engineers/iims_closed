@@ -1089,6 +1089,7 @@ screen and (min-width: 482px) and (max-width: 768px) {
   background-color: rgb(251, 230, 209);
   border: 2px solid rgb(255, 123, 0);
   border-radius: 10px;
+  margin-bottom: 10px;
 }
 .flash-text {
   color: rgb(241, 117, 0);

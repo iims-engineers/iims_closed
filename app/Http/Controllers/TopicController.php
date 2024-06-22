@@ -200,10 +200,13 @@ class TopicController extends Controller
             // バリデートOKの場合、取得
             $input = $request->all();
 
+            $message = '';
             try {
                 if (isset($input['topic-id'])) {
                     /* 編集の場合はトピック情報を取得 */
                     $topic = $this->m_topic::find((int)$input['topic-id']);
+                    // 更新完了メッセージ
+                    $message = __('topics.success.update');
                 } else {
                     /* 新規作成の場合は投稿者のユーザーIDも保存する */
                     $topic = $this->m_topic;
@@ -212,12 +215,15 @@ class TopicController extends Controller
                     $topic->user_id = $user->id;
                     // タイトル
                     $topic->title = Arr::get($input, 'topic-title');
+                    // 作成完了メッセージ
+                    $message = __('topics.success.create');
                 }
                 // 本文
                 $topic->content = Arr::get($input, 'topic-detail');
                 // 保存実行
                 $topic->save();
 
+                session()->flash('flash_success', $message);
                 // 保存完了したらトピック一覧画面に遷移する
                 return to_route('topic.show.list');
             } catch (\Exception $e) {

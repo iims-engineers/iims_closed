@@ -48,6 +48,7 @@ class Comment extends Model
         'comments.id',
         'comments.comment',
         'comments.created_at',
+        'comments.updated_at',
         'topics.id as topic_id',
         'users.id as user_id',
         'users.name as username',

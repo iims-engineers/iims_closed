@@ -55,7 +55,7 @@ class LoginController extends Controller
     /*
      * ログアウト処理
      */
-    public function logout(Request $request): RedirectResponse
+    public function logout(Request $request)
     {
         // ログアウト処理
         Auth::logout();
@@ -65,6 +65,6 @@ class LoginController extends Controller
         $request->session()->regenerateToken();
 
         // TOPにリダイレクト
-        return to_route('top');
+        return view('logout/index');
     }
 }

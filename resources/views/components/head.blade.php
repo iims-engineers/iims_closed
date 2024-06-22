@@ -2,14 +2,6 @@
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
-<meta property="og:site_name" content="">
-<meta property="og:title" content="">
-<meta property="og:type" content="">
-<meta property="og:image" content="">
-<meta property="og:url" content="">
-<meta property="og:description" content="">
-<meta property="og:locale" content="ja_JP">
-
 <meta property="fb:app_id" content="288016516859845">
 <meta name="twitter:card" content="summary_large_image">
 

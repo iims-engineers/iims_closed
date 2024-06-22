@@ -165,12 +165,23 @@ class UserController extends Controller
     {
         // 入力内容をバリデート
         $validated = $request->validated();
-
         $input = $request->all();
+
         if (empty($input)) {
-            /* 入力情報が無い場合 ※張デートがあるため通常操作ではこの処理は通らない想定 */
+            /* 入力情報が無い場合 ※バリデートがあるため通常操作ではこの処理は通らない想定 */
             return back();
         } else {
+            // メールアドレスの重複確認
+            if (!empty($input['email'])) {
+                $m_user = new User();
+                $res = $m_user->checkMail($input['email']);
+                if (!$res) {
+                    // エラーメッセージを表示
+                    session()->flash('flash_failed_email', __('users.fail.duplicate_mail'));
+                    return back();
+                }
+            }
+
             // 更新対象のユーザーを取得
             $target_user = $this->m_user->getUserById(data_get($input, 'user_id'));
             if (empty($target_user)) {

@@ -308,6 +308,11 @@ class User extends Authenticatable implements MustVerifyEmail
             $user->user_identifier = data_get($input, 'user_identifier');
         }
 
+        // メールアドレス
+        if (!empty($input['email'])) {
+            $user->email = data_get($input, 'email');
+        }
+
         // X(twitter)のURL
         if (!empty($input['sns_x'])) {
             $user->sns_x = data_get($input, 'sns_x');

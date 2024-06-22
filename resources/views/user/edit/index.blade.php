@@ -58,6 +58,17 @@
                 @endif
               </div>
               <div class="c-form-item">
+                <label for="email" class="c-form-item-title">メールアドレス</label>
+                <input type="email" name="email" id="email" value="{{ old('email') }}">
+                @error('email')
+                <p class="error-text">※{{ $message }}</p>
+                @enderror
+                @if(session('flash_failed_email'))
+                {{-- 重複チェックエラー --}}
+                <p class="error-text">{{ session('flash_failed_email') }}</p>
+                @endif
+              </div>
+              <div class="c-form-item">
                 <label for="user_cover_image" class="c-form-item-title">プロフィールカバー画像</label>
                 <div class="c-form__cover-preview">
                   @if(!empty(data_get($user, 'user_cover_image')))

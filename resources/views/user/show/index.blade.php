@@ -20,7 +20,7 @@
           <h1 class="p-sub__head01">{{ data_get($user, 'name') }}さんのページ</h1>
           @if(session('flash_success'))
           <div class="flash-complete">
-            <p class="flash-text">{{ session('flash_success') }}</p>
+            <p class="flash-text">・{{ session('flash_success') }}</p>
           </div>
           @endif
           <div class="p-sub__inner is-user-info">

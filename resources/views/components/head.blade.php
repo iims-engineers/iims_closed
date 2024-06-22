@@ -16,6 +16,7 @@
 <link rel="shortcut icon" href="/favicon.ico">
 <link rel="apple-touch-icon" type="image/png" href="/apple-touch-icon-180x180.png">
 <link rel="icon" type="image/png" href="/icon-192x192.png">
+<link rel="shortcut icon" type="image/x-icon" href="{{ asset('/img/common/favicon.ico') }}">
 <meta name="theme-color" content="#ffffff">
 <link rel="manifest" href="/manifest.json">
 <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="">

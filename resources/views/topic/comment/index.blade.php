@@ -50,7 +50,7 @@
                 <div class="c-user no-link">
                   <div class="c-user-icon">
                     @if(!empty(data_get($comment, 'user_icon')))
-                    <img src="{{ asset('storage/'. data_get($user, 'user_icon')) }}" alt="">
+                    <img src="{{ asset('storage/'. data_get($comment, 'user_icon')) }}" alt="">
                     @else
                     <img src="/img/common/dummy_icon.png" alt="">
                     @endif

@@ -266,6 +266,7 @@
       bottom: -13px;
       right: 50%;
       transform: rotate(180deg) translateX(-50%);
+      z-index: 1;
     }
     &.js-accordion-topic {
       ~ .p-sub__inner {

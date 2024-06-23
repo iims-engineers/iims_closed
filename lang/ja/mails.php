@@ -26,4 +26,8 @@ return [
     'support' => [
         'subject_admin' => '【MOT2】会員からメッセージが届きました。',
     ],
+    /* メールアドレス変更 */
+    'change_email' => [
+        'subject' => '【MOT2】メールアドレスが変更されました。',
+    ],
 ];

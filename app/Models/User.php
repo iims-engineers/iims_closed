@@ -12,6 +12,8 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\MailChangeEmail;
 use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -290,6 +292,8 @@ class User extends Authenticatable implements MustVerifyEmail
         $error = '';
         // 更新するユーザーを取得
         $user = $this->find($input['user_id']);
+        // メールアドレスが変更された場合に通知をするかどうかのフラグ
+        $changed_email = false;
 
         /* 更新内容をセット */
         // 名前
@@ -310,7 +314,10 @@ class User extends Authenticatable implements MustVerifyEmail
 
         // メールアドレス
         if (!empty($input['email'])) {
+            // メール通知で使用するため旧アドレスを保持しておく
+            $old_email = $user->email;
             $user->email = data_get($input, 'email');
+            $changed_email = true;
         }
 
         // X(twitter)のURL
@@ -371,6 +378,10 @@ class User extends Authenticatable implements MustVerifyEmail
         try {
             // データベースに保存
             $user->save();
+            // メールアドレスが変更された場合は新アドレス宛にメール通知
+            if ($changed_email === true) {
+                Mail::to($user->email)->send(new MailChangeEmail($user, $old_email));
+            }
         } catch (\Exception $e) {
             // 登録失敗
             $error = __('users.fail.failed_update');

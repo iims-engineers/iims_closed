@@ -37,7 +37,9 @@
                 {!! nl2br(htmlspecialchars(data_get($topic, 'content'))) !!}
               </p>
               <time class="c-topic-date" datetime="{{ data_get($topic, 'created_at') }}">{{ data_get($topic, 'created_at') }}</time>
+              @if(strtotime(data_get($topic, 'created_at')) !== strtotime(data_get($topic, 'updated_at')))
               <time class="c-topic-date" datetime="{{ data_get($topic, 'updated_at') }}">（更新：{{ data_get($topic, 'updated_at') }}）</time>
+              @endif
             </div>
             {{-- トピックここまで --}}
             {{-- ここからコメント --}}
@@ -63,7 +65,9 @@
                     {!! nl2br(htmlspecialchars(data_get($comment, 'comment'))) !!}
                   </p>
                   <time class="c-reply-date" datetime="{{ data_get($comment, 'created_at') }}">{{ data_get($comment, 'created_at') }}</time>
+                  @if(strtotime(data_get($comment, 'created_at')) !== strtotime(data_get($comment, 'updated_at')))
                   <time class="c-reply-date" datetime="{{ data_get($comment, 'updated_at') }}">（更新：{{ data_get($comment, 'updated_at') }}）</time>
+                  @endif
                   @if(data_get($comment, 'user_id') === data_get($user, 'id'))
                   <div class="c-reply-edit">
                     <a href="{{ route('comment.show.edit', ['comment_id' => data_get($comment, 'id')]) }}" class="c-button--mini">

@@ -57,7 +57,9 @@
                   {!! nl2br(htmlspecialchars(data_get($recc_topic, 'content'))) !!}
                 </p>
                 <time class="c-topic-date" datetime="{{ data_get($recc_topic, 'created_at') }}">{{ data_get($recc_topic, 'created_at') }}</time>
+                @if(strtotime(data_get($recc_topic, 'created_at')) !== strtotime(data_get($recc_topic, 'updated_at')))
                 <time class="c-topic-date" datetime="{{ data_get($recc_topic, 'updated_at') }}">（更新：{{ data_get($recc_topic, 'updated_at') }}）</time>
+                @endif
               </div>
               <div class="c-button-wrap">
                 <a href="{{ route('topic.show.create.comment', ['topic_id' => data_get($recc_topic, 'id')]) }}" class="c-button">

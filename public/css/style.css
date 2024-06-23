@@ -1157,6 +1157,10 @@ label, input[type='checkbox'] {
     cursor: pointer;
 }
 
+.now-email{
+  padding: 5px 0 0 0;
+  font-size: 12px;
+}
 /* エラー関連 */
 .form-error {
   padding: 20px 0;

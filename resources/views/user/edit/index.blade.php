@@ -58,8 +58,9 @@
                 @endif
               </div>
               <div class="c-form-item">
-                <label for="email" class="c-form-item-title">メールアドレス （現在のメールアドレス：{{ $user->email }}）</label>
+                <label for="email" class="c-form-item-title">メールアドレス</label>
                 <input type="email" name="email" id="email" value="{{ old('email') }}">
+                <p class="now-email">(現在のメールアドレス：{{ $user->email }})</p>
                 @error('email')
                 <p class="error-text">※{{ $message }}</p>
                 @enderror

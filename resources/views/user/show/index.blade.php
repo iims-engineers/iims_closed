@@ -83,7 +83,7 @@
             @else
             @foreach($topics as $topic)
             <a href="/topic/show/topicID/" class="c-topic-title js-accordion-topic">{{ data_get($topic, 'title') }}</a>
-            <div class="p-sub__inner">
+            <div class="p-sub__inner user-topic">
               <div class="c-user">
                 <a href="{{ route('user.show.detail', ['id' => data_get($topic, 'user_id')]) }}">
                   <div class="c-user-icon">

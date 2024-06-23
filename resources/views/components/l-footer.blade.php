@@ -29,9 +29,13 @@ $user = Auth::user();
     <div class="l-footer__btn-item">
       <a href="{{ route('user.show.edit', ['id' => $user->id]) }}">
         @if(!empty($user->user_icon))
-        <img src="{{ asset('storage/'. $user->user_icon) }}" alt="">
+        <span class="l-footer__user-icon">
+          <img src="{{ asset('storage/'. $user->user_icon) }}" alt="">
+        </span>
         @else
-        <img src="/img/common/dummy_icon.png" alt="">
+        <span class="l-footer__user-icon">
+          <img src="/img/common/dummy_icon.png" alt="">
+        </span>
         @endif
         <span>個人設定</span>
       </a>

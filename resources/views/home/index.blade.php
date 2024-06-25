@@ -38,7 +38,7 @@
             <a href="{{ route('topic.show.detail', ['id' => data_get($recc_topic, 'id')]) }}" class="c-topic-title">{{ data_get($recc_topic, 'title') }}</a>
             <div class="p-sub__inner">
               <div class="c-user">
-                <a href="">
+                <a href="{{ route('user.show.detail', ['id' => data_get($recc_topic, 'user_id')]) }}">
                   <div class="c-user-icon">
                     @if(!empty(data_get($recc_topic, 'user_icon')))
                     <img src="{{ asset('storage/'. data_get($recc_topic, 'user_icon')) }}" alt="">

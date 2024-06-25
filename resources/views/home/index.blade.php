@@ -62,7 +62,7 @@
                 @endif
               </div>
               <div class="c-button-wrap">
-                <a href="{{ route('topic.show.create.comment', ['topic_id' => data_get($recc_topic, 'id')]) }}" class="c-button">
+                <a href="{{ route('topic.show.create.comment', ['topic_id' => data_get($recc_topic, 'id')]) }}/#comment" class="c-button">
                   <img src="{{ ('/img/common/icon-reply.svg') }}" alt="">
                   <span>このトピックに回答する</span>
                 </a>
@@ -131,7 +131,7 @@
                 <time class="c-topic-date" datetime="{{ $topic->updated_at }}">（更新：{{ $topic->updated_at }}）</time>
               </div>
               <div class="c-button-wrap">
-                <a href="{{ route('topic.show.create.comment', ['topic_id' => data_get($topic, 'id')]) }}" class="c-button">
+                <a href="{{ route('topic.show.create.comment', ['topic_id' => data_get($topic, 'id')]) }}/#comment" class="c-button">
                   <img src="{{ ('/img/common/icon-reply.svg') }}" alt="">
                   <span>このトピックに回答する</span>
                 </a>

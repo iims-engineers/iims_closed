@@ -30,4 +30,8 @@ return [
     'change_email' => [
         'subject' => '【MOT2】メールアドレスが変更されました。',
     ],
+    /* コメント */
+    'comment' => [
+        'subject' => '【MOT2】投稿したトピックに回答されました。',
+    ],
 ];

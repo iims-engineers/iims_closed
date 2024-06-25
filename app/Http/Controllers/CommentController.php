@@ -9,6 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\MailComment;
 use App\Models\Comment;
 use App\Models\User;
 use App\Models\Topic;
@@ -88,7 +89,8 @@ class CommentController extends Controller
         }
 
         // コメント主(ユーザー)
-        $user_id = Auth::id();
+        $user_info = Auth::user();
+        $user_id = $user_info->id;
         // コメント本文
         $comment = data_get($input, 'comment');
         if (isset($input['comment_id'])) {
@@ -103,6 +105,7 @@ class CommentController extends Controller
                 try {
                     // 更新実行
                     $m_comment->save();
+
                     // 保存完了したらトピック詳細画面に遷移する
                     session()->flash('flash_success', __('comments.success.complete_edit'));
                     return to_route('topic.show.detail', ['id' => $topic->id]);
@@ -127,6 +130,13 @@ class CommentController extends Controller
             try {
                 // 更新実行
                 $this->m_comment->save();
+                // コメント先のトピック作成者にメール送信
+                if ($user_id !== $topic->user_id) {
+                    /* コメント主がトピック作成者では無い場合のみ送信 */
+                    // トピック作成者情報
+                    $topic_author = $this->m_user->getUserById((int)$topic->user_id);
+                    Mail::to($user_info->email)->send(new MailComment($topic_author, $user_info, $topic->id));
+                }
                 // 保存完了したらトピック詳細画面に遷移する
                 session()->flash('flash_success', __('comments.success.complete_comment'));
                 return to_route('topic.show.detail', ['id' => $topic->id]);

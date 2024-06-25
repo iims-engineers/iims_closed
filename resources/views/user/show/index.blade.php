@@ -114,10 +114,13 @@
                   <img src="/img/common/icon-show-topic.svg" alt="">
                   <span>このトピックを見る</span>
                 </a>
+                {{-- 編集できるのは作成者のみ --}}
+                @if(data_get($topic, 'user_id') === $user_id)
                 <a href="" class="c-button">
                   <img src="/img/common/icon-pencil.svg" alt="">
                   <span>このトピックを編集する</span>
                 </a>
+                @endif
               </div>
             </div>
             @endforeach

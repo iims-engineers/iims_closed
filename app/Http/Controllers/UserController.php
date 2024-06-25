@@ -126,6 +126,7 @@ class UserController extends Controller
         return view('user/show/index', [
             'user' => $user,
             'topics' => $topics,
+            'user_id' => Auth::id(),
         ]);
     }
 

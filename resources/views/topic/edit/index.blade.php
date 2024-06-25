@@ -18,6 +18,7 @@
       <main class="l-main">
         <section class="p-sub__section">
           <h1 class="p-sub__head01">このトピックを編集</h1>
+          <p class="c-topic-title">{{ data_get($topic, 'title') }}</p>
           <div class="p-sub__inner">
             <form action="{{ route('topic.store') }}" method="POST" class="c-form" style="margin: 0;">
               @csrf

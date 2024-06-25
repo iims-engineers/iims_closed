@@ -23,6 +23,7 @@
             <p class="flash-text">・{{ session('flash_success') }}</p>
           </div>
           @endif
+          <p class="c-topic-title">{{ data_get($topic, 'title') }}</p>
           <div class="p-sub__inner">
             <div class="c-user no-link">
               <div class="c-user-icon">

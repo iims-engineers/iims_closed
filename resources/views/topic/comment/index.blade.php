@@ -18,6 +18,7 @@
       <main class="l-main">
         <section class="p-sub__section">
           <h1 class="p-sub__head01">このトピックに回答</h1>
+          <p class="c-topic-title">{{ data_get($topic, 'title') }}</p>
           <div class="p-sub__inner">
             <div class="c-user no-link">
               <div class="c-user-icon">

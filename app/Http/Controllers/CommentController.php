@@ -135,7 +135,7 @@ class CommentController extends Controller
                     /* コメント主がトピック作成者では無い場合のみ送信 */
                     // トピック作成者情報
                     $topic_author = $this->m_user->getUserById((int)$topic->user_id);
-                    Mail::to($user_info->email)->send(new MailComment($topic_author, $user_info, $topic->id));
+                    Mail::to($topic_author->email)->send(new MailComment($topic_author, $user_info, $topic->id));
                 }
                 // 保存完了したらトピック詳細画面に遷移する
                 session()->flash('flash_success', __('comments.success.complete_comment'));

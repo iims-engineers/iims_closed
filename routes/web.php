@@ -181,42 +181,44 @@ Route::middleware('auth')
                 // メッセージ送信完了画面の表示
                 Route::get('/complete', [SupportController::class, 'showComplete'])->name('show.complete');
             });
-    });
 
-/*
+
+        /*
  * 管理者側
  * 管理者権限チェックはログイン認証時に行っている
 */
-Route::prefix('/admin')
-    ->name('admin.')
-    ->group(function () {
-        /* 管理画面TOP */
-        Route::get('', function () {
-            return view('admin/index');
-        })->name('show.index');
+        Route::prefix('/admin')
+            ->name('admin.')
+            ->group(function () {
+                /* 管理画面TOP */
+                Route::get('', function () {
+                    return view('admin/index');
+                })->name('show.index');
 
-        /* 承認待ちユーザー関連 */
-        // 承認待ちユーザー 一覧画面の表示
-        Route::get('/user/unapproved', [ApproveController::class, 'showList'])->name('show.unapproved.list');
-        // 承認待ちユーザー 詳細画面の表示
-        Route::get('/user/unapproved/{id}', [ApproveController::class, 'showDetail'])->name('show.detail');
-        // 承認処理
-        Route::post('/user/approve', [ApproveController::class, 'approve'])->name('unapprovedUser.approve');
+                /* 承認待ちユーザー関連 */
+                // 承認待ちユーザー 一覧画面の表示
+                Route::get('/user/unapproved', [ApproveController::class, 'showList'])->name('show.unapproved.list');
+                // 承認待ちユーザー 詳細画面の表示
+                Route::get('/user/unapproved/{id}', [ApproveController::class, 'showDetail'])->name('show.detail');
+                // 承認処理
+                Route::post('/user/approve', [ApproveController::class, 'approve'])->name('unapprovedUser.approve');
 
-        /* サポート */
-        // メッセージ 一覧画面表示
-        Route::get('/support', [AdminSupportController::class, 'showList'])->name('show.support.list');
+                /* サポート */
+                // メッセージ 一覧画面表示
+                Route::get('/support', [AdminSupportController::class, 'showList'])->name('show.support.list');
 
-        /* お知らせ */
-        // お知らせ 一覧画面表示
-        Route::get('/announcement', [AnnouncementController::class, 'showList'])->name('show.announcement.list');
-        // お知らせ 新規作成画面表示
-        Route::get('/announcement/new', [AnnouncementController::class, 'showCreate'])->name('show.announcement.create');
-        // お知らせ 編集画面表示
-        Route::get('/announcement/edit/{id}', [AnnouncementController::class, 'showEdit'])->name('show.announcement.edit');
-        // お知らせ 保存実行
-        Route::post('/announcement/store', [AnnouncementController::class, 'store'])->name('announcement.store');
+                /* お知らせ */
+                // お知らせ 一覧画面表示
+                Route::get('/announcement', [AnnouncementController::class, 'showList'])->name('show.announcement.list');
+                // お知らせ 新規作成画面表示
+                Route::get('/announcement/new', [AnnouncementController::class, 'showCreate'])->name('show.announcement.create');
+                // お知らせ 編集画面表示
+                Route::get('/announcement/edit/{id}', [AnnouncementController::class, 'showEdit'])->name('show.announcement.edit');
+                // お知らせ 保存実行
+                Route::post('/announcement/store', [AnnouncementController::class, 'store'])->name('announcement.store');
+            });
     });
+
 
 /* ------------------------------------------------------------------------------------------------ */
 

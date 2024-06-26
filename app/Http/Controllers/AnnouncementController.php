@@ -127,7 +127,7 @@ class AnnouncementController extends Controller
         $validated = $request->validated();
         $input = $request->all();
 
-        if (strtotime(Arr::get($input, 'pub-start')) > strtotime(Arr::get($input, 'pub-end'))) {
+        if (!empty(Arr::get($input, 'pub-end')) && strtotime(Arr::get($input, 'pub-start')) > strtotime(Arr::get($input, 'pub-end'))) {
             session()->flash('pub-start', '日付の選択が正しくありません');
             return back();
         }

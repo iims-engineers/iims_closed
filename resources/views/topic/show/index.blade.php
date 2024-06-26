@@ -26,17 +26,19 @@
           <p class="c-topic-title">{{ data_get($topic, 'title') }}</p>
           <div class="p-sub__inner">
             <div class="c-user no-link">
-              <div class="c-user-icon">
-                @if(!empty(data_get($topic, 'user_icon')))
-                <img src="{{ asset('storage/'. data_get($topic, 'user_icon')) }}" alt="">
-                @else
-                <img src="/img/common/dummy_icon.png" alt="">
-                @endif
-              </div>
-              <div class="c-user-info">
-                <div class="c-user-name">{{ data_get($topic, 'name') }}</div>
-                <div class="c-user-id">@ {{ data_get($topic, 'user_identifier') }}</div>
-              </div>
+              <a href="{{ route('user.show.detail', ['id' => data_get($topic, 'user_id')]) }}">
+                <div class="c-user-icon">
+                  @if(!empty(data_get($topic, 'user_icon')))
+                  <img src="{{ asset('storage/'. data_get($topic, 'user_icon')) }}" alt="">
+                  @else
+                  <img src="/img/common/dummy_icon.png" alt="">
+                  @endif
+                </div>
+                <div class="c-user-info">
+                  <div class="c-user-name">{{ data_get($topic, 'name') }}</div>
+                  <div class="c-user-id">@ {{ data_get($topic, 'user_identifier') }}</div>
+                </div>
+              </a>
             </div>
             <div class="c-topic-detail">
               <p>

@@ -37,7 +37,7 @@
             <a href="{{ route('topic.show.detail', ['id' => data_get($topic, 'id')]) }}" class="c-topic-title js-accordion-topic">{{ data_get($topic, 'title') }}</a>
             <div class="p-sub__inner">
               <div class="c-user">
-                <a href="/user/show/user-id/">
+                <a href="{{ route('user.show.detail', ['id' => data_get($topic, 'user_id')]) }}">
                   <div class="c-user-icon">
                     @if(!empty(data_get($topic, 'user_icon')))
                     <img src="{{ asset('storage/'. data_get($topic, 'user_icon')) }}" alt="">

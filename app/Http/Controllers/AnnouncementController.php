@@ -24,7 +24,7 @@ class AnnouncementController extends Controller
         $announcement_list = $m_announcement->getAnnouncements();
 
         foreach ($announcement_list as $key => $val) {
-            if ($val->is_public === '1') {
+            if ($val->is_public === 1) {
                 $announcement_list[$key]->pub_status = '公開中';
             } else {
                 $announcement_list[$key]->pub_status = '非公開';
@@ -36,7 +36,7 @@ class AnnouncementController extends Controller
     }
 
     /**
-     * お知らせ - 詳細画面の表示
+     * お知らせ - 詳細画面の表示(表層側)
      * 
      * @param string|null $id  お知らせID
      */
@@ -50,7 +50,7 @@ class AnnouncementController extends Controller
         $m_announcement = new Announcement();
         $announcement = $m_announcement->getAnnouncements(false, $id);
 
-        // 表示したお知らせを既読にする
+        // 表層側で表示されたお知らせは既読にする
         $m_announcement_read = new AnnouncementRead();
         $res = $m_announcement_read->storeReadStatus($id);
 
@@ -78,6 +78,29 @@ class AnnouncementController extends Controller
     }
 
     /**
+     * お知らせ - 編集画面の表示
+     * 
+     * @param string|int $id  お知らせID
+     */
+    public function showEdit(string|int $id)
+    {
+        if (empty($id)) {
+            return to_route('404');
+        }
+
+        // お知らせ取得
+        $m_announcement = new Announcement();
+        $announcement = $m_announcement->getAnnouncements(false, $id);
+        if (empty($announcement)) {
+            return to_route('404');
+        }
+
+        return view('admin/announcement/edit/index', [
+            'announcement' => data_get($announcement, 0, []),
+        ]);
+    }
+
+    /**
      * お知らせ - 保存
      */
     public function store(AnnouncementRequest $request)
@@ -86,6 +109,10 @@ class AnnouncementController extends Controller
         $validated = $request->validated();
         $input = $request->all();
 
+        if (strtotime(Arr::get($input, 'pub-start')) > strtotime(Arr::get($input, 'pub-end'))) {
+            session()->flash('pub-start', '日付の選択が正しくありません');
+            return back();
+        }
         // 公開ステータスの確認 1:公開中
         if (strtotime('now') >= strtotime(Arr::get($input, 'pub-start'))) {
             $flg_public = 1;
@@ -94,19 +121,24 @@ class AnnouncementController extends Controller
         }
 
         $m_announcements = new Announcement();
+        if (!empty(Arr::get($input, 'announcement_id'))) {
+            /* 更新の場合は更新対象のお知らせを取得 */
+            $m_announcements = $m_announcements::find(Arr::get($input, 'announcement_id'));
+        } else {
+            /* 新規作成時のみ作成者のIDを保存 */
+            $m_announcements->user_id = Arr::get($input, 'user_id');
+        }
         $m_announcements->title = Arr::get($input, 'announcement-title');
         $m_announcements->content = Arr::get($input, 'announcement-detail');
-        $m_announcements->user_id = Arr::get($input, 'user_id');
         $m_announcements->pub_start_at = Arr::get($input, 'pub-start');
         $m_announcements->pub_end_at = Arr::get($input, 'pub-end');
         $m_announcements->is_public = $flg_public;
-
         // 登録実行
         try {
             // データベースに保存
             $m_announcements->save();
 
-            // 申請完了画面に遷移
+            // 一覧画面に遷移
             return to_route('admin.show.announcement.list');
         } catch (\Exception $e) {
             // 登録失敗したら入力画面に戻る

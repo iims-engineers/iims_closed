@@ -5,6 +5,16 @@
     <meta charset="utf-8">
     <title>お知らせ一覧</title>
     @include('components.head')
+    <style>
+        .edit-announcement {
+            font-weight: bold;
+            margin-top: 10px;
+            padding: 3px;
+            background-color: #FFB000;
+            border: solid 1px black;
+            border-radius: 15px;
+        }
+    </style>
 </head>
 
 <body class="is-subpage">
@@ -31,6 +41,7 @@
                             <p>【公開開始日】{{ data_get($announcement, 'pub_start_at') }}</p>
                             <p>【公開終了日】{{ data_get($announcement, 'pub_end_at') }}</p>
                             <p>【公開状況】{{ data_get($announcement, 'pub_status') }}</p>
+                            <a href="{{ route('admin.show.announcement.edit', ['id' => data_get($announcement, 'id')]) }}" class="edit-announcement">編集する</a>
                             <p>---------------------------------------</p>
                         </div>
                         @endforeach

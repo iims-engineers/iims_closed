@@ -182,10 +182,10 @@ Route::middleware('auth')
                 Route::get('/complete', [SupportController::class, 'showComplete'])->name('show.complete');
             });
     });
-/* ------------------------------------------------------------------------------------------------ */
 
 /*
  * 管理者側
+ * 管理者権限チェックはログイン認証時に行っている
 */
 Route::prefix('/admin')
     ->name('admin.')
@@ -212,9 +212,13 @@ Route::prefix('/admin')
         Route::get('/announcement', [AnnouncementController::class, 'showList'])->name('show.announcement.list');
         // お知らせ 新規作成画面表示
         Route::get('/announcement/new', [AnnouncementController::class, 'showCreate'])->name('show.announcement.create');
+        // お知らせ 編集画面表示
+        Route::get('/announcement/edit/{id}', [AnnouncementController::class, 'showEdit'])->name('show.announcement.edit');
         // お知らせ 保存実行
         Route::post('/announcement/store', [AnnouncementController::class, 'store'])->name('announcement.store');
     });
+
+/* ------------------------------------------------------------------------------------------------ */
 
 /* 404エラー */
 Route::get('/error', function () {

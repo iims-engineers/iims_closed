@@ -39,6 +39,13 @@ class LoginController extends Controller
             'deleted_at' => null,
         ];
 
+        /*  管理者画面アクセス時は、管理者権限チェックを追加する */
+        // 現在のURL取得
+        $url = url()->current();
+        if (!empty(strpos($url, '/admin'))) {
+            $credentials = Arr::add($credentials, 'is_admin', 1);
+        }
+
         /* バリデーションOKの場合 */
         // ログイン情報が正しいか確認
         if (Auth::attempt($credentials, true)) {

@@ -35,8 +35,8 @@ class Announcement extends Model
     /**
      * お知らせ取得
      * 
-     * @param  array  $target 取得したいお知らせID
      * @param  bool  $only_id IDのみを取得する場合はtrue
+     * @param  array  $target 取得したいお知らせID
      * @return array $res
      */
     public function getAnnouncements(bool $only_id = false, string|array $target = []): array

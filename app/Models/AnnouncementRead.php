@@ -79,15 +79,15 @@ class AnnouncementRead extends Model
      * @param string|int $announcement_id 削除するお知らせID
      * @return
      */
-    public function _delete(string|int $announcement_id)
-    {
-        try {
-            $this->where('id', $announcement_id)
-                ->delete();
-            return true;
-        } catch (\Exception $e) {
-            // 登録失敗したら入力画面に戻る
-            return to_route('404');
-        }
-    }
+    // public function _delete(string|int $announcement_id)
+    // {
+    //     try {
+    //         $this->where('id', $announcement_id)
+    //             ->delete();
+    //         return true;
+    //     } catch (\Exception $e) {
+    //         // 登録失敗したら入力画面に戻る
+    //         return to_route('404');
+    //     }
+    // }
 }

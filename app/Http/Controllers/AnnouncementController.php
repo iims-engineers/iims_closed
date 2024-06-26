@@ -113,11 +113,11 @@ class AnnouncementController extends Controller
             $m_announcements = $m_announcements::find(Arr::get($post, 'announcement_id'));
             // 削除実行
             $m_announcements->deleted_at = now();
-            $m_announcement_read = new AnnouncementRead();
+            // $m_announcement_read = new AnnouncementRead();
             try {
                 $m_announcements->save();
                 // announce_readテーブルからも削除
-                $m_announcement_read->_delete(Arr::get($post, 'announcement_id'));
+                // $m_announcement_read->_delete(Arr::get($post, 'announcement_id'));
                 return to_route('admin.show.announcement.list');
                 exit;
             } catch (\Exception $e) {

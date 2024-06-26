@@ -105,6 +105,24 @@ class AnnouncementController extends Controller
      */
     public function store(AnnouncementRequest $request)
     {
+        $post = $request->post();
+        if (isset($post['delete'])) {
+            /* 削除 */
+
+            $m_announcements = new Announcement();
+            $m_announcements = $m_announcements::find(Arr::get($post, 'announcement_id'));
+            // 削除実行
+            $m_announcements->deleted_at = now();
+            try {
+                $m_announcements->save();
+                return to_route('admin.show.announcement.list');
+                exit;
+            } catch (\Exception $e) {
+                return to_route('404');
+            }
+        }
+
+        /* 新規作成・更新 */
         // 入力データのバリデート
         $validated = $request->validated();
         $input = $request->all();

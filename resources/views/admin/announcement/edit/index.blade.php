@@ -58,6 +58,7 @@
                             </div>
                             <div class="c-form-submit c-button-wrap">
                                 <button type="submit" class="c-button">更新する</button>
+                                <button type="submit" class="c-button" name="delete" value="削除">削除する</button>
                             </div>
                         </form>
                     </div>

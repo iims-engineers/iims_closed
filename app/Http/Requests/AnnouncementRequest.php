@@ -23,7 +23,7 @@ class AnnouncementRequest extends FormRequest
     {
         return [
             'announcement-title' => ['required', 'string', 'max:50'],  // タイトル:必須,50文字以内
-            'announcement-detail' => ['required', 'string', 'max:400'], // 本文:必須 400文字以内
+            'announcement-detail' => ['required', 'string', 'max:800'], // 本文:必須 800文字以内
         ];
     }
 
@@ -33,7 +33,7 @@ class AnnouncementRequest extends FormRequest
             'announcement-title.required'  => 'タイトルは必ず入力してください。',
             'announcement-title.max'       => 'タイトルは50文字以内で入力してください。',
             'announcement-detail.required' => '本文は必ず入力してください。',
-            'announcement-detail.max'      => '本文は400文字以内で入力してください。',
+            'announcement-detail.max'      => '本文は800文字以内で入力してください。',
         ];
     }
 }

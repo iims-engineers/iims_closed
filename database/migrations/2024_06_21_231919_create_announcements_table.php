@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('announcements', function (Blueprint $table) {
             $table->id()->comment('ユーザーID');
             $table->string('title')->default('')->nullable(false)->comment('タイトル');
-            $table->string('content', 500)->default('')->nullable(false)->comment('本文');
+            $table->string('content', 1000)->default('')->nullable(false)->comment('本文');
             $table->unsignedBigInteger('user_id')->nullable(false)->comment('作成者(users.id)');
             $table->foreign('user_id')->references('id')->on('users'); // usersテーブルのidカラムに外部キー制約
             $table->date('pub_start_at')->nullable()->comment('公開開始日');

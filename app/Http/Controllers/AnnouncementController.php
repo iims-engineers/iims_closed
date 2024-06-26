@@ -113,8 +113,11 @@ class AnnouncementController extends Controller
             $m_announcements = $m_announcements::find(Arr::get($post, 'announcement_id'));
             // 削除実行
             $m_announcements->deleted_at = now();
+            $m_announcement_read = new AnnouncementRead();
             try {
                 $m_announcements->save();
+                // announce_readテーブルからも削除
+                $m_announcement_read->_delete(Arr::get($post, 'announcement_id'));
                 return to_route('admin.show.announcement.list');
                 exit;
             } catch (\Exception $e) {
@@ -151,6 +154,7 @@ class AnnouncementController extends Controller
         $m_announcements->pub_start_at = Arr::get($input, 'pub-start');
         $m_announcements->pub_end_at = Arr::get($input, 'pub-end');
         $m_announcements->is_public = $flg_public;
+
         // 登録実行
         try {
             // データベースに保存

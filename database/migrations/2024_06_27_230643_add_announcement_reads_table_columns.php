@@ -11,9 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('announcement_reads', function (Blueprint $table) {
-            $table->unsignedBigInteger('user_id')->nullable(false)->comment('users.id');
-            $table->unsignedBigInteger('announcement_id')->nullable(false)->comment('announcements.id');
+        Schema::table('announcement_reads', function (Blueprint $table) {
             $table->tinyInteger('is_public')->default(1)->nullable(false)->comment('公開フラグ 1:公開中');
         });
     }
@@ -23,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('announcement_reads');
+        Schema::table('announcement_reads', function (Blueprint $table) {
+            $table->dropColumn('is_public');
+        });
     }
 };

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('announcement_reads', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id')->nullable(false)->comment('users.id');
             $table->unsignedBigInteger('announcement_id')->nullable(false)->comment('announcements.id');
+            $table->tinyInteger('is_public')->default(1)->nullable(false)->comment('公開フラグ 1:公開中');
         });
     }
 

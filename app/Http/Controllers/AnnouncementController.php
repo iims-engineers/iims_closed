@@ -23,11 +23,17 @@ class AnnouncementController extends Controller
         $m_announcement = new Announcement();
         $announcement_list = $m_announcement->getAnnouncements();
 
+        $now = now();
         foreach ($announcement_list as $key => $val) {
             if ($val->is_public === 1) {
                 $announcement_list[$key]->pub_status = '公開中';
             } else {
-                $announcement_list[$key]->pub_status = '非公開';
+                if (strtotime($val->pub_start_at) > strtotime($now)) {
+                    $announcement_list[$key]->pub_status = '公開待ち';
+                }
+                if (strtotime($val->pub_end_at) > strtotime($now)) {
+                    $announcement_list[$key]->pub_status = '公開終了';
+                }
             }
         }
         return view('admin/announcement/index', [
@@ -113,11 +119,11 @@ class AnnouncementController extends Controller
             $m_announcements = $m_announcements::find(Arr::get($post, 'announcement_id'));
             // 削除実行
             $m_announcements->deleted_at = now();
-            // $m_announcement_read = new AnnouncementRead();
+            $m_announcement_read = new AnnouncementRead();
             try {
                 $m_announcements->save();
                 // announce_readテーブルからも削除
-                // $m_announcement_read->_delete(Arr::get($post, 'announcement_id'));
+                $m_announcement_read->_update(Arr::get($post, 'announcement_id'), 0);
                 return to_route('admin.show.announcement.list');
                 exit;
             } catch (\Exception $e) {
@@ -135,10 +141,12 @@ class AnnouncementController extends Controller
             return back();
         }
         // 公開ステータスの確認 1:公開中
-        if (strtotime('now') >= strtotime(Arr::get($input, 'pub-start'))) {
-            $flg_public = 1;
-        } else {
+        //  現在時刻を取得
+        $now = strtotime('now');
+        if ($now < strtotime(Arr::get($input, 'pub-start')) || $now > strtotime(Arr::get($input, 'pub-end'))) {
             $flg_public = 0;
+        } else {
+            $flg_public = 1;
         }
 
         $m_announcements = new Announcement();
@@ -159,12 +167,29 @@ class AnnouncementController extends Controller
         try {
             // データベースに保存
             $m_announcements->save();
-
-            // 一覧画面に遷移
-            return to_route('admin.show.announcement.list');
         } catch (\Exception $e) {
             // 登録失敗したら入力画面に戻る
             return back();
         }
+
+        // 更新後の公開状況によってannouncement_readsテーブルを更新する
+        $now = strtotime(date('Y-m-d'));
+        if (strtotime($m_announcements->pub_start_at) > $now) {
+            /* 公開前 */
+            $flg = 0;
+        } elseif (!empty($m_announcements->pub_end_at) && (strtotime($m_announcements->pub_end_at) < $now)) {
+            /* 公開終了 */
+            $flg = 0;
+        } else {
+            /* 公開中 */
+            $flg = 1;
+        }
+        if (isset($flg)) {
+            $m_announcement_reads = new AnnouncementRead();
+            $m_announcement_reads->_update($m_announcements->id, $flg);
+        }
+
+        // 一覧画面に遷移
+        return to_route('admin.show.announcement.list');
     }
 }

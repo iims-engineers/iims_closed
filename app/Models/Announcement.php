@@ -52,6 +52,7 @@ class Announcement extends Model
             $query->where('id', $target);
         }
         $res = $query->whereNull('deleted_at')
+            ->where('is_public', 1)
             ->get()
             ->toArray();
         return $res;

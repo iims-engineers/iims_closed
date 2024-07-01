@@ -17,6 +17,9 @@ class AnnouncementRead extends Model
 {
     use HasFactory;
 
+    const NOT_PUBLIC = 0;
+    const IS_PUBLIC = 1;
+
     // テーブル名の定義
     protected $table = 'announcement_reads';
 
@@ -30,6 +33,7 @@ class AnnouncementRead extends Model
         $res['id'] = DB::table($this->table)
             ->select('announcement_id')
             ->where('user_id', $user_id)
+            ->where('is_public', 1)
             ->get()
             ->toArray();
 
@@ -74,20 +78,39 @@ class AnnouncementRead extends Model
     }
 
     /**
-     * お知らせ削除時のDB削除
+     * お知らせ公開状況によってis_publicカラムを更新
      * 
      * @param string|int $announcement_id 削除するお知らせID
+     * @param int $flg 1:公開中に変更する
      * @return
      */
-    // public function _delete(string|int $announcement_id)
-    // {
-    //     try {
-    //         $this->where('id', $announcement_id)
-    //             ->delete();
-    //         return true;
-    //     } catch (\Exception $e) {
-    //         // 登録失敗したら入力画面に戻る
-    //         return to_route('404');
-    //     }
-    // }
+    public function _update(string|int $announcement_id, int $flg)
+    {
+        $ret = DB::table($this->table)
+            ->where('announcement_id', $announcement_id)
+            ->limit(1)
+            ->get()
+            ->toArray();
+
+        if ($flg === self::IS_PUBLIC) {
+            $from_public = self::NOT_PUBLIC;
+            $to_public = self::IS_PUBLIC;
+        }
+        if ($flg === self::NOT_PUBLIC) {
+            $from_public = self::IS_PUBLIC;
+            $to_public = self::NOT_PUBLIC;
+        }
+        if (!empty($ret)) {
+            try {
+                DB::table($this->table)
+                    ->where('announcement_id', $announcement_id)
+                    ->where('is_public', $from_public)
+                    ->update(['is_public' => $to_public]);
+            } catch (\Exception $e) {
+                // 登録失敗したら入力画面に戻る
+                return to_route('404');
+            }
+        }
+        return;
+    }
 }

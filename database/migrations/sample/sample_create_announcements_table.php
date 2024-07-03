@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('announcements', function (Blueprint $table) {
-            $table->id()->comment('ユーザーID');
+            $table->id()->comment('ID');
             $table->string('title')->default('')->nullable(false)->comment('タイトル');
             $table->string('content', 1000)->default('')->nullable(false)->comment('本文');
             $table->unsignedBigInteger('user_id')->nullable(false)->comment('作成者(users.id)');

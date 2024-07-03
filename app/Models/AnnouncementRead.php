@@ -26,14 +26,15 @@ class AnnouncementRead extends Model
     /**
      * お知らせIDをもとに、既読のお知らせIDと数を取得
      */
-    public function getCount(string|int $user_id)
+    public function getCount(string|int $user_id, array $announcement_id = [])
     {
         $res = [];
         // 既読のお知らせID
         $res['id'] = DB::table($this->table)
-            ->select('announcement_id')
-            ->where('user_id', $user_id)
-            ->where('is_public', 1)
+            ->join('announcements', 'announcement_reads.announcement_id', '=', 'announcements.id')
+            ->where('announcement_reads.user_id', $user_id)
+            ->whereIn('announcement_reads.announcement_id', $announcement_id)
+            ->whereNull('announcements.deleted_at')
             ->get()
             ->toArray();
 

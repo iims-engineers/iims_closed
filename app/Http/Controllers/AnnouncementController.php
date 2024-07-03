@@ -15,7 +15,7 @@ use App\Models\AnnouncementRead;
 class AnnouncementController extends Controller
 {
     /**
-     * お知らせ - 一覧画面の表示
+     * お知らせ - 一覧画面の表示(管理者側)
      */
     public function showList($page = 1)
     {
@@ -23,16 +23,17 @@ class AnnouncementController extends Controller
         $m_announcement = new Announcement();
         $announcement_list = $m_announcement->getAnnouncements();
 
-        $now = now();
+        $now = strtotime('now');
         foreach ($announcement_list as $key => $val) {
-            if ($val->is_public === 1) {
-                $announcement_list[$key]->pub_status = '公開中';
+            if (!empty($val->pub_end_at) && strtotime(data_get($val, 'pub_end_at', '')) < $now) {
+                $announcement_list[$key]->pub_status = '公開終了';
             } else {
-                if (strtotime($val->pub_start_at) > strtotime($now)) {
-                    $announcement_list[$key]->pub_status = '公開待ち';
-                }
-                if (strtotime($val->pub_end_at) > strtotime($now)) {
-                    $announcement_list[$key]->pub_status = '公開終了';
+                if (strtotime($val->pub_start_at) <= $now) {
+                    /* 公開期間内 */
+                    $announcement_list[$key]->pub_status = '公開中';
+                } else {
+                    /* 公開期間終了 */
+                    $announcement_list[$key]->pub_status = '公開前';
                 }
             }
         }
@@ -54,7 +55,7 @@ class AnnouncementController extends Controller
 
         // お知らせ取得
         $m_announcement = new Announcement();
-        $announcement = $m_announcement->getAnnouncements(false, $id);
+        $announcement = $m_announcement->getPublicAnnouncements();
 
         // 表層側で表示されたお知らせは既読にする
         $m_announcement_read = new AnnouncementRead();
@@ -96,7 +97,7 @@ class AnnouncementController extends Controller
 
         // お知らせ取得
         $m_announcement = new Announcement();
-        $announcement = $m_announcement->getAnnouncements(false, $id);
+        $announcement = $m_announcement->getAnnouncements(false, (array)$id);
         if (empty($announcement)) {
             return to_route('404');
         }

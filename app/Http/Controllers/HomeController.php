@@ -49,7 +49,9 @@ class HomeController extends Controller
     public function index()
     {
         // ログインしているユーザー
-        $user_id = Auth::id();
+        $user_info = Auth::user();
+        $user_id = $user_info->id;
+
         /* 最新のトピックを取得 */
         // $topics = $this->m_topic->getTopics(self::CNT_SHOW_TOPIC);
         /* ※暫定対応 最新順で6件取得して、1件はおすすめトピックとして表示 */
@@ -68,6 +70,7 @@ class HomeController extends Controller
 
         return view('home/index', [
             'user_id' => $user_id,
+            'user_info' => $user_info,
             'recc_topic' => $recc_topic,
             'comment_recc_topics' => $comment_recc_topics,
             'topics' => $topics,

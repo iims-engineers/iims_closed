@@ -183,6 +183,9 @@
             </form>
           </div>
         </section>
+        @if(!empty($user_info->is_admin))
+        <a href="{{ route('admin.show.index') }}">管理者画面はこちら</a>
+        @endif
       </main>
       <!-- l-footer START -->
       @include('components.l-footer')

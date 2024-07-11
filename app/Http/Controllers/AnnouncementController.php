@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\AnnouncementRequest;
 use Illuminate\Support\Arr;
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Announcement;
 use App\Models\AnnouncementRead;
@@ -23,12 +24,13 @@ class AnnouncementController extends Controller
         $m_announcement = new Announcement();
         $announcement_list = $m_announcement->getAnnouncements();
 
-        $now = strtotime('now');
+        // 今日の日付
+        $today = new Carbon(date('Y-m-d'));
         foreach ($announcement_list as $key => $val) {
-            if (!empty($val->pub_end_at) && strtotime(data_get($val, 'pub_end_at', '')) < $now) {
+            if (!empty($val->pub_end_at) && new Carbon($val->pub_end_at) < $today) {
                 $announcement_list[$key]->pub_status = '公開終了';
             } else {
-                if (strtotime($val->pub_start_at) <= $now) {
+                if (new Carbon($val->pub_start_at) <= $today) {
                     /* 公開期間内 */
                     $announcement_list[$key]->pub_status = '公開中';
                 } else {
@@ -55,7 +57,7 @@ class AnnouncementController extends Controller
 
         // お知らせ取得
         $m_announcement = new Announcement();
-        $announcement = $m_announcement->getPublicAnnouncements();
+        $announcement = $m_announcement->getAnnouncements(false, array($id));
 
         // 表層側で表示されたお知らせは既読にする
         $m_announcement_read = new AnnouncementRead();

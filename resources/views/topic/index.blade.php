@@ -17,6 +17,12 @@
     <div class="l-contents">
       <main class="l-main">
         <section class="p-sub__section">
+          <div class="p-sub__btns" style="margin-bottom: 20px;">
+            <a href="{{ route('topic.show.create') }}" class="c-button--large">
+              <img src="{{ ('/img/common/icon-topic.svg') }}" alt="">
+              <span>トピックを新規作成する</span>
+            </a>
+          </div>
           <h1 class="p-sub__head01">トピック一覧　(全{{ $total_cnt }}件)</h1>
           @if(session('flash_success'))
           <div class="flash-complete">

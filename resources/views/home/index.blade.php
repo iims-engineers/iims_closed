@@ -77,7 +77,7 @@
               <div class="c-reply-wrap">
                 @if(!empty($comment_recc_topics))
                 @foreach($comment_recc_topics as $comment_recc_topic)
-                <div class="c-reply">
+                <div class="c-reply c-reply--has-detail">
                   <div class="c-user-icon">
                     @if(!empty(data_get($comment_recc_topic, 'user_icon')))
                     <img src="{{ asset('storage/'. data_get($comment_recc_topic, 'user_icon')) }}" alt="">
@@ -85,10 +85,18 @@
                     <img src="/img/common/dummy_icon.png" alt="">
                     @endif
                   </div>
+                  <div class="c-user-info">
+                    <div class="c-user-name">{{ data_get($comment_recc_topic, 'username') }}</div>
+                    <div class="c-user-id">@ {{ data_get($comment_recc_topic, 'user_identifier') }}</div>
+                  </div>
                   <div class="c-reply-detail">
                     <p>
                       {!! nl2br(htmlspecialchars(data_get($comment_recc_topic, 'comment'))) !!}
                     </p>
+                    <time class="c-reply-date" datetime="{{ data_get($comment_recc_topic, 'created_at') }}">{{ data_get($comment_recc_topic, 'created_at') }}</time>
+                    @if(strtotime(data_get($comment_recc_topic, 'created_at')) !== strtotime(data_get($comment_recc_topic, 'updated_at')))
+                    <time class="c-reply-date" datetime="{{ data_get($comment_recc_topic, 'updated_at') }}">（更新：{{ data_get($comment_recc_topic, 'updated_at') }}）</time>
+                    @endif
                   </div>
                 </div>
                 @endforeach

@@ -23,10 +23,6 @@
               <img src="{{ ('/img/common/icon-topic.svg') }}" alt="">
               <span>トピックを新規作成する</span>
             </a>
-            <!-- <a href="/archives/" class="c-button--large">
-              <img src="{{ ('/img/common/icon-archive.svg') }}" alt="">
-              <span>多文化交流アーカイブ</span>
-            </a> -->
           </div>
         </section>
         <section class="p-sub__section">

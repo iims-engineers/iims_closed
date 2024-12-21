@@ -101,7 +101,7 @@
               </div>
               <div class="c-topic-detail">
                 <p>
-                  {!! nl2br(htmlspecialchars(data_get($topic, 'content'))) !!}
+                  {!! nl2br(data_get($topic, 'content')) !!}
                 </p>
                 <time class="c-topic-date" datetime="{{ data_get($topic, 'created_at') }}">{{ data_get($topic, 'created_at') }}</time>
               </div>

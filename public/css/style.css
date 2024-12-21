@@ -1152,6 +1152,9 @@ screen and (min-width: 482px) and (max-width: 768px) {
   margin-bottom: 20px;
 }
 
+.content-link {
+  color: rgb(39, 3, 198);
+}
 
 /* フラッシュメッセージ - 成功 */
 .flash-complete {

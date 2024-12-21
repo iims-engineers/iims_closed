@@ -54,7 +54,7 @@
               </div>
               <div class="c-topic-detail">
                 <p>
-                  {!! nl2br(htmlspecialchars(data_get($recc_topic, 'content'))) !!}
+                  {!! nl2br(data_get($recc_topic, 'content')) !!}
                 </p>
                 <time class="c-topic-date" datetime="{{ data_get($recc_topic, 'created_at') }}">{{ data_get($recc_topic, 'created_at') }}</time>
                 @if(strtotime(data_get($recc_topic, 'created_at')) !== strtotime(data_get($recc_topic, 'updated_at')))

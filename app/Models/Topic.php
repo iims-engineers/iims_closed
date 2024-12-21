@@ -76,6 +76,12 @@ class Topic extends Model
         }
 
         $topics = $query->get();
+        if ($topics->isNotEmpty()) {
+            // 本文内のURLをリンクにする
+            foreach ($topics as $topic) {
+                $topic->content = self::makeLink(data_get($topic, 'content', ''));
+            }
+        }
 
         return $topics;
     }
@@ -104,6 +110,12 @@ class Topic extends Model
             $query = $query->offset($offset);
         }
         $topic_info['topics'] = $query->get()->toArray();
+        if (!empty($topic_info['topics'])) {
+            // 本文内のURLをリンクにする
+            foreach ($topic_info['topics'] as $topic) {
+                $topic->content = self::makeLink(data_get($topic, 'content', ''));
+            }
+        }
         // 件数取得
         $topic_info['cnt'] = DB::table('topics')
             ->join('users', 'topics.user_id', '=', 'users.id')
@@ -118,8 +130,9 @@ class Topic extends Model
      * IDをもとにトピック情報を取得
      * 
      * @param int|string $id  トピックID
+     * @param bool $flg_link  true:本文内のURLをリンクにする
      */
-    public function getTopicById(int|string $topic_id)
+    public function getTopicById(int|string $topic_id, bool $flg_link = true)
     {
         $topic = DB::table($this->table)
             ->join('users', 'topics.user_id', '=', 'users.id')
@@ -127,6 +140,10 @@ class Topic extends Model
             ->where('topics.id', $topic_id)
             ->whereNull('topics.deleted_at')
             ->first();
+
+        if ($flg_link === true && !empty($topic->content)) {
+            $topic->content = self::makeLink($topic->content);
+        }
 
         return $topic;
     }
@@ -144,6 +161,13 @@ class Topic extends Model
             ->where('topics.user_id', $user_id)
             ->whereNull('topics.deleted_at')
             ->get();
+
+        if ($topic->isNotEmpty()) {
+            // 本文内にURLがある場合はリンク化
+            foreach ($topic as $t) {
+                $t->content = self::makeLink(data_get($t, 'content', ''));
+            }
+        }
 
         return $topic;
     }
@@ -208,5 +232,21 @@ class Topic extends Model
         }
 
         return true;
+    }
+
+    /**
+     * 本文内にURLがある場合リンク化する
+     * → トピック・コメントで使用
+     * 
+     * @param string $content 本文
+     * @return string
+     */
+    public static function makeLink(string $content = ''): string
+    {
+        $ret = '';
+        if (!empty($content)) {
+            $ret = mb_ereg_replace("(https?)(://[[:alnum:]\+\$\;\?\.%,!#~*/:@&=_-]+)", '<a class="content-link" href="\1\2">\1\2</a>', $content);
+        }
+        return $ret;
     }
 }

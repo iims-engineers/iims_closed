@@ -154,7 +154,7 @@ class TopicController extends Controller
         // ログインしているユーザー情報を取得
         $user = Auth::user();
         // トピックIDを元にトピック情報を取得
-        $topic = $this->m_topic->getTopicById((int)$topic_id);
+        $topic = $this->m_topic->getTopicById((int)$topic_id, false);
 
         /* 不正アクセス対策 */
         if (empty($topic)) {
